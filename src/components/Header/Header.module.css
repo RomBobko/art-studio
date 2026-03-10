@@ -12,27 +12,6 @@
   gap: 24px;
 }
 
-.brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.brandText {
-  font-size: 28px;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
-  margin-right: 115px;
-
-}
-
-.logo {
-  height: 42px;
-  width: auto;
-  display: block;
-}
-
 .actions {
   display: flex;
   align-items: center;

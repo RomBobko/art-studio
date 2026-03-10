@@ -1,5 +1,4 @@
 import styles from "./Header.module.css";
-import logo from "../../assets/logo.svg";
 import {
   BsSearch,
   BsPersonFill,
@@ -7,17 +6,15 @@ import {
   BsCartFill,
 } from "react-icons/bs";
 import Navigation from "../Navigation/Navigation";
-import { Link } from "react-router-dom";
+import Logo from "../Logo/Logo";
 
 const Header = () => {
   return (
     <header className={styles.header}>
       <div className="container">
         <div className={styles.inner}>
-          <Link className={styles.brand} href="/">
-            <img className={styles.logo} src={logo} alt="ArtStudio" />
-            <span className={styles.brandText}>ArtStudio</span>
-          </Link>
+
+          <Logo />
 
           <Navigation />
 
