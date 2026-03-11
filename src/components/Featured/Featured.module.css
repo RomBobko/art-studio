@@ -1,0 +1,82 @@
+.featured {
+  /* padding: 80px 0P */
+  background: #f5f5f5;
+}
+
+/* ---------- heading ---------- */
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 56px;
+}
+
+.title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.line {
+  width: 140px;
+  height: 1px;
+  background: #bfbfbf;
+}
+
+/* ---------- list ---------- */
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+.item {
+  /* поки пусто */
+}
+
+/* ---------- card ---------- */
+
+/* .card {
+  text-align: center;
+} */
+
+/* бежевий блок */
+/* .media {
+  font-weight: 600;
+  background: #cfc7bc;
+  padding: 46px 43px;
+  margin-bottom: 21px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+} */
+
+/* білий квадрат */
+.frame {
+  background: #ffffff;
+  padding: 24px;
+  margin-bottom: 21px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* заглушка замість картинки */
+.placeholder {
+  width: 150px;
+  height: 150px;
+  background: #e3e3e3;
+}
+
+/* текст під карткою */
+.cardTitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+}
