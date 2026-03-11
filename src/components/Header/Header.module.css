@@ -1,5 +1,5 @@
 .header {
-  background: var(--bg-secondary);
+  background: var(--color-page-bg);
   position: relative;
   z-index: 10;
 }
@@ -23,9 +23,9 @@
   border: 0;
   padding: 6px;
   cursor: pointer;
-  color: var(--text-primary);
+  color: var(--color-black);
 }
 
 .iconBtn:hover {
-  color: var(--brand-primary);
+  color: var(--color-button-secondary);
 }

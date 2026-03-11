@@ -1,0 +1,51 @@
+:root {
+  --font-family-main: "Inter", sans-serif;
+
+  /* Brand / Buttons */
+  --color-button-primary: #826939;
+  --color-button-secondary: #685740;
+  --color-button-border: #947b5b;
+  --color-button-disabled: #b39e83;
+
+  /* Input / Controls */
+  --color-input-bg: #b49d7e;
+  --color-control-bg: #d9d9d9;
+  --color-placeholder: #999696;
+
+  /* Backgrounds / Surfaces */
+  --color-page-bg: #e9e3db;
+  --color-footer-bg: #ded7cd;
+  --color-surface: #fffbfb;
+
+  /* Text / Links */
+  /* --color-text-primary: #242525; */
+  --color-text-secondary: #363d47;
+  --color-link-artist: #094e71;
+
+  /* Base */
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semi-bold: 600;
+  --fw-bold: 700;
+  --fw-extra-bold: 800;
+
+  --fs-15: 15px;
+  --fs-16: 16px;
+  --fs-18: 18px;
+  --fs-20: 20px;
+  --fs-24: 24px;
+  --fs-25: 25px;
+  --fs-28: 28px;
+  --fs-30: 30px;
+  --fs-32: 32px;
+  --fs-38: 38px;
+  --fs-40: 40px;
+  --fs-42: 42px;
+  --fs-45: 45px;
+  --fs-55: 55px;
+  --fs-60: 60px;
+  --fs-100: 100px;
+}
