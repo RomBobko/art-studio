@@ -16,7 +16,7 @@ const Hero = ({
   const [isImageError, setIsImageError] = useState(false);
 
   return (
-    <section className={styles.hero}>
+    <section className={styles.section}>
       <div className={`container ${styles.inner}`}>
         <div className={styles.content}>
           <h1 className={styles.title}>

@@ -1,6 +1,6 @@
-import styles from "./FeaturedCard.module.css";
+import styles from "./ArtworkCard.module.css";
 
-const FeaturedCard = ({ image, alt, title }) => {
+const ArtworkCard = ({ image, alt, title, name }) => {
   return (
     <article className={styles.card}>
       <div className={styles.media}>
@@ -8,8 +8,9 @@ const FeaturedCard = ({ image, alt, title }) => {
       </div>
 
       <h3 className={styles.title}>{title}</h3>
+      <p className={styles.name}>{name}</p>
     </article>
   );
 };
 
-export default FeaturedCard;
+export default ArtworkCard;

@@ -4,7 +4,7 @@ import FeaturedCard from "./FeaturedCard";
 
 const Featured = () => {
   return (
-    <section className={styles.featured}>
+    <section className={styles.section}>
       <div className="container">
         <div className={styles.heading}>
           <span className={styles.line}></span>

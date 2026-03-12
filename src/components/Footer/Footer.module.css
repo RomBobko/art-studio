@@ -48,6 +48,10 @@
 .contact a {
   font-size: 13px;
   color: var(--color-black);
+}
+
+.contact a:hover,
+.contact a:focus {
   text-decoration: underline;
   text-underline-offset: 3px;
 }

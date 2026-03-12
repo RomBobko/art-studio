@@ -4,7 +4,7 @@ import Artist from "../../assets/images/artist.webp";
 
 const ArtistSpotlight = () => {
   return (
-    <section className={styles.spotlight}>
+    <section className={styles.section}>
       <div className={`container ${styles.inner}`}>
         <div className={styles.imageWrapper}>
           <img className={styles.image} src={Artist} alt="name" />

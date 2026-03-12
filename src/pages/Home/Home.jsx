@@ -1,6 +1,7 @@
 import Hero from "../../components/Hero/Hero";
 import Featured from "../../components/Featured/Featured";
 import ArtistSpotlight from "../../components/ArtistSpotlight/ArtistSpotlight";
+import CuratedArtworks from "../../components/CuratedArtworks/CuratedArtworks";
 
 const Home = () => {
   return (
@@ -8,6 +9,7 @@ const Home = () => {
       <Hero />
       <Featured />
       <ArtistSpotlight />
+      <CuratedArtworks />
     </>
   );
 };

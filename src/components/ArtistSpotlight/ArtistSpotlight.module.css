@@ -1,4 +1,4 @@
-.spotlight {
+.section {
     margin-bottom: 109px;
 }
 
@@ -23,7 +23,6 @@
 .content {
   display: block;
   max-width: 874px;
-  /* padding: 108px 58px; */
 }
 
 .title {
