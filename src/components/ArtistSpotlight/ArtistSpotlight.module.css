@@ -1,5 +1,5 @@
 .section {
-    margin-bottom: 109px;
+  margin-bottom: 109px;
 }
 
 .inner {
@@ -50,4 +50,25 @@
 }
 
 .link {
+    display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 272px;
+  height: 64px;
+  padding: 0 20px;
+  border-radius: 10px;
+
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: 250ms ease;
+  border: 1px solid #b79d79;
+  color: #9a7a50;
+  background-color: transparent;
+}
+
+.link:hover,
+.link:focus {
+  background-color: rgba(154, 122, 80, 0.08);
 }

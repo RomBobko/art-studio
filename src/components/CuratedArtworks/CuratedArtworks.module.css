@@ -1,3 +1,7 @@
+.section {
+  margin-bottom: 124px;
+}
+
 .title {
   margin-bottom: 59px;
 
@@ -6,6 +10,9 @@
   line-height: 51px;
 }
 
-.artworkCard {
-    
+.list {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 65px;
 }
