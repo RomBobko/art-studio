@@ -1,0 +1,54 @@
+.spotlight {
+    margin-bottom: 109px;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: 128px;
+}
+
+.imageWrapper {
+  width: 656px;
+  height: auto;
+  border-radius: 44px;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+}
+
+.content {
+  display: block;
+  max-width: 874px;
+  /* padding: 108px 58px; */
+}
+
+.title {
+  font-size: 55px;
+  font-weight: 700;
+  line-height: 150px;
+  letter-spacing: -0.6;
+}
+
+.name {
+  margin-bottom: 18px;
+
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 51px;
+}
+
+.description {
+  margin-bottom: 52px;
+
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 37.5px;
+  letter-spacing: -0.275px;
+}
+
+.link {
+}

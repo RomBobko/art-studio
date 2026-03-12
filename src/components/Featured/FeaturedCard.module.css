@@ -1,38 +1,39 @@
 .card {
-  background-color: #f4eee9;
-  border-radius: 12px;
-  padding: 20px;
-  width: 260px;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 21px;
 
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  padding: 46px 43px 18px;
+  width: 355px;
+
+  background-color: var(--color-page-bg);
+
+  box-shadow: 4px 4px 20px 4px rgba(0, 0, 0, 0.25);
 }
 
 .media {
-  background-color: #ffffff;
-  border-radius: 8px;
-  padding: 20px;
-  width: 100%;
-
   display: flex;
   justify-content: center;
   align-items: center;
+
+  width: 100%;
+
+  background-color: #ffffff;
 }
 
 .image {
+  display: block;
   max-width: 100%;
   height: auto;
-  display: block;
 }
 
 .title {
   margin: 0;
-  font-size: 16px;
+  color: var(--color-black);
+
+  font-size: 24px;
   font-weight: 600;
   text-align: center;
-  color: #111;
+  line-height: 51px;
 }
