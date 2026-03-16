@@ -1,6 +1,6 @@
 import styles from "./Featured.module.css";
-import featuredCategories from "../../data/featuredCategories.js";
-import FeaturedCard from "./FeaturedCard";
+import featuredCategories from "../../data/FeaturedCategories.js";
+import FeaturedCard from "./FeaturedCard.jsx";
 
 const Featured = () => {
   return (

@@ -18,4 +18,4 @@ const NewsletterSignup = () => {
   );
 };
 
-export default NewsletterSignup;
+export default NewsletterSignup
