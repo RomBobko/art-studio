@@ -1,5 +1,11 @@
+import DiscoverHero from "../../components/DiscoverHero/DiscoverHero";
+
 const Discover = () => {
- return (<div>Discover</div>)
-}
+  return (
+    <>
+      <DiscoverHero />
+    </>
+  );
+};
 
 export default Discover;

@@ -9,13 +9,15 @@
   gap: 60px;
 
   padding: 67px 262px;
-
   border-radius: 53px;
+
   color: var(--color-white);
   background-color: black;
-  background-image: url(../../assets/images/newsletterBg.webp);
+  background-image: url("../../assets/images/newsletterBg.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
-
 
 .title {
   margin-bottom: -10px;
@@ -34,43 +36,56 @@
 
 .form {
   display: flex;
-  justify-content: space-between;
-  gap: 26px;
+  align-items: center;
+  gap: 20px;
 
-  width: 1196px;
-  height: 118px;
+  width: 100%;
+  max-width: 1196px;
+  min-height: 118px;
   padding: 12px;
+
   background-color: var(--color-white);
   border-radius: 23px;
 }
 
 .input {
-    width: 100%;
-    margin-left: 26px;
-    border: none;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0 26px;
+
+  font-size: 25px;
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--color-black);
+
+  border: none;
+  outline: none;
+  background-color: transparent;
 }
 
 .input::placeholder {
   font-size: 25px;
   font-weight: 300;
-  line-height: 150px;
-  letter-spacing: -0.3px;
+  line-height: 1.4;
   color: var(--color-black);
 }
 
 .button {
-    padding: 20px 108px;
-    border-radius: 14px;
+  flex-shrink: 0;
+  padding: 20px 48px;
+  border: none;
+  border-radius: 14px;
 
-    font-size: 30px;
-    font-weight: 600;
-    line-height: 1.4;
-    letter-spacing: -0.35;
-    color: var(--color-white);
-    background-color: var(--color-button-secondary);
-    border: none;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.35px;
+  color: var(--color-white);
+  background-color: var(--color-button-secondary);
+  cursor: pointer;
 }
 
 .button:disabled {
-    background-color: var(--color-button-disabled);
+  background-color: var(--color-button-disabled);
 }
