@@ -1,5 +1,5 @@
+import categories from "../../data/categories";
 import styles from "./BrowseCategories.module.css";
-import categories from "../../data/BrowseCategories";
 import { Link } from "react-router-dom";
 
 const BrowseCategories = () => {
@@ -13,11 +13,11 @@ const BrowseCategories = () => {
         </div>
 
         <ul className={styles.list}>
-          {categories.map(({ title, slug, image }) => (
-            <li className={styles.item} key={slug}>
-              <Link className={styles.card} to={``}>
-                <img className={styles.image} src={image} alt="title" />
-                <span className={styles.label}>{title}</span>
+          {categories.map(({ id, name, slug, image }) => (
+            <li className={styles.item} key={id}>
+              <Link className={styles.card} to={`/categories/${slug}`}>
+                <img className={styles.image} src={image} alt={name} />
+                <span className={styles.label}>{name}</span>
               </Link>
             </li>
           ))}

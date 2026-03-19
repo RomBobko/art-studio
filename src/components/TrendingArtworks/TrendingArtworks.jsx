@@ -1,6 +1,7 @@
 import styles from "./TrendingArtworks.module.css";
-import trendingArtworks from "../../data/TrendingArtworks";
+// import trendingArtworks from "../../data/TrendingArtworks";
 import ArtworkCard from "./ArtworkCard";
+import artworks from "../../data/artworks";
 
 const TrendingArtworks = () => {
   return (
@@ -9,7 +10,7 @@ const TrendingArtworks = () => {
         <h2 className={styles.title}>Trending Artworks</h2>
 
         <ul className={styles.list}>
-          {trendingArtworks.map(({ id, ...restProps }) => (
+          {artworks.map(({ id, ...restProps }) => (
             <li className={styles.item} key={id}>
               <ArtworkCard {...restProps}/>
             </li>
