@@ -1,0 +1,21 @@
+.section {
+  padding: 45px 0px 43px;
+
+  background-color: var(--color-page-bg);
+}
+
+.title {
+  margin-bottom: 5px;
+
+  font-size: 42px;
+  font-weight: 600;
+  line-height: 51px;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 53px 65px;
+
+  padding: 50px;
+}

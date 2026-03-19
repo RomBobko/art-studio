@@ -1,8 +1,8 @@
-import styles from "./BrowseCaregories.module.css";
+import styles from "./BrowseCategories.module.css";
 import categories from "../../data/BrowseCategories";
 import { Link } from "react-router-dom";
 
-const BrowseCaregories = () => {
+const BrowseCategories = () => {
   return (
     <section className={styles.section}>
       <div className={`container ${styles.inner}`}>
@@ -27,4 +27,4 @@ const BrowseCaregories = () => {
   );
 };
 
-export default BrowseCaregories;
+export default BrowseCategories;

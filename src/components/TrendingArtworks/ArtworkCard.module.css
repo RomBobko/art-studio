@@ -1,0 +1,56 @@
+.card {
+  max-width: 355px;
+  height: 100%;
+}
+
+.image {
+  max-width: 355px;
+  height: auto;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  margin-bottom: 17px;
+  border-radius: 38px;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 150%;
+  letter-spacing: -0.35px;
+  text-decoration: underline;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 36px;
+  letter-spacing: -0.3px;
+}
+
+.type {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 30px;
+  letter-spacing: -0.2px;
+}
+
+.author {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.2px;
+}

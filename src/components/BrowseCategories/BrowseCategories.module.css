@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: center;
   gap: 59px;
-  margin-bottom: 56px;
+  margin-bottom: 6px;
 }
 
 .title {
@@ -28,10 +28,7 @@
   gap: 66px 76px;
 
   justify-items: center;
-}
-
-.item {
-  list-style: none;
+  padding: 100px;
 }
 
 .card {
@@ -40,6 +37,7 @@
   width: 328px;
   overflow: hidden;
   border-radius: 39px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .card::after {
