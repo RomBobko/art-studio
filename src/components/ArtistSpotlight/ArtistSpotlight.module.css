@@ -50,19 +50,20 @@
 }
 
 .link {
-    display: inline-flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
 
   min-width: 272px;
   height: 64px;
-  padding: 0 20px;
-  border-radius: 10px;
+  padding: 13px 71px;
+  border-radius: 18px;
 
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 25px;
+  font-weight: 400;
   text-decoration: none;
   transition: 250ms ease;
+
   border: 1px solid #b79d79;
   color: #9a7a50;
   background-color: transparent;

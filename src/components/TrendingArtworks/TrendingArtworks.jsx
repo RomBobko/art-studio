@@ -1,5 +1,4 @@
 import styles from "./TrendingArtworks.module.css";
-// import trendingArtworks from "../../data/TrendingArtworks";
 import ArtworkCard from "./ArtworkCard";
 import artworks from "../../data/artworks";
 

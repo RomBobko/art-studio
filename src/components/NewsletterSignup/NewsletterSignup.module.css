@@ -73,7 +73,8 @@
 
 .button {
   flex-shrink: 0;
-  padding: 20px 48px;
+  padding: 20px 088px;
+  max-width: 361px;
   border: none;
   border-radius: 14px;
 

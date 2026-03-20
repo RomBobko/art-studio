@@ -19,7 +19,6 @@
 .content {
   margin-top: 30px;
   margin-left: 35px;
-
 }
 
 .title {
@@ -72,15 +71,15 @@
   background-color: #9a7a50;
 }
 
-.primary:hover,
-.primary:focus {
-  background-color: #876845;
-}
-
 .secondary {
   border: 1px solid #b79d79;
   color: #9a7a50;
   background-color: transparent;
+}
+
+.primary:hover,
+.primary:focus {
+  background-color: #876845;
 }
 
 .secondary:hover,

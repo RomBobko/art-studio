@@ -1,61 +1,69 @@
-import aishaAvatar from "../assets/images/artists/aisha-mehta.webp";
-import ethanAvatar from "../assets/images/artists/ethan-walker.webp";
-import harperAvatar from "../assets/images/artists/harper-liu.webp";
-import raviAvatar from "../assets/images/artists/ravi-kapoor.webp";
-import mayaAvatar from "../assets/images/artists/maya-fernandes.webp";
-import zaraAvatar from "../assets/images/artists/zara-collins.webp";
-import anjaliAvatar from "../assets/images/artists/anjali-mehta.webp";
-import kwameAvatar from "../assets/images/artists/kwame-adeyemi.webp";
+import elenaAvatar from "../assets/images/artists/elena-novak.webp";
+import lucasAvatar from "../assets/images/artists/lucas-bennett.webp";
+import sophieAvatar from "../assets/images/artists/sophie-laurent.webp";
+// import matteoAvatar from "../assets/images/artists/matteo-ricci.webp";
+// import claraAvatar from "../assets/images/artists/clara-moreau.webp";
+// import ameliaAvatar from "../assets/images/artists/amelia-brooks.webp";
+// import evaAvatar from "../assets/images/artists/eva-muller.webp";
+// import danielAvatar from "../assets/images/artists/daniel-kovac.webp";
 
 const artists = [
   {
     id: 1,
-    name: "Aisha Mehta",
-    avatar: aishaAvatar,
+    name: "Elena Novak",
+    slug: "elena-novak",
+    avatar: elenaAvatar,
     bio: "Contemporary artist working with acrylic painting and expressive color compositions.",
   },
   {
     id: 2,
-    name: "Ethan Walker",
-    avatar: ethanAvatar,
+    name: "Lucas Bennett",
+    slug: "lucas-bennett",
+    avatar: lucasAvatar,
     bio: "Digital artist creating atmospheric landscapes and stylized visual stories.",
   },
   {
     id: 3,
-    name: "Harper Liu",
-    avatar: harperAvatar,
+    name: "Sophie Laurent",
+    slug: "sophie-laurent",
+    avatar: sophieAvatar,
     bio: "Textile and embroidery artist focused on floral forms and decorative hand-crafted details.",
   },
-  {
-    id: 4,
-    name: "Ravi Kapoor",
-    avatar: raviAvatar,
-    bio: "Sketch artist specializing in charcoal portraiture and calm spiritual compositions.",
-  },
-  {
-    id: 5,
-    name: "Maya Fernandes",
-    avatar: mayaAvatar,
-    bio: "Traditional artist inspired by symbolic geometry, ornament, and meditative forms.",
-  },
-  {
-    id: 6,
-    name: "Zara Collins",
-    avatar: zaraAvatar,
-    bio: "Graphite illustrator focused on emotion-driven portrait sketches and expressive faces.",
-  },
-  {
-    id: 7,
-    name: "Anjali Mehta",
-    avatar: anjaliAvatar,
-    bio: "Traditional miniature artist combining cultural motifs, animals, and decorative storytelling.",
-  },
-  {
-    id: 8,
-    name: "Kwame Adeyemi",
-    avatar: kwameAvatar,
-    bio: "Painter creating spiritual and reflective artworks with bold acrylic techniques.",
-  },
+  // {
+  //   id: 4,
+  //   name: "Matteo Ricci",
+  //   slug: "matteo-ricci",
+  //   avatar: matteoAvatar,
+  //   bio: "Sketch artist specializing in charcoal portraiture and calm spiritual compositions.",
+  // },
+  // {
+  //   id: 5,
+  //   name: "Clara Moreau",
+  //   slug: "clara-moreau",
+  //   avatar: claraAvatar,
+  //   bio: "Traditional artist inspired by symbolic geometry, ornament, and meditative forms.",
+  // },
+  // {
+  //   id: 6,
+  //   name: "Amelia Brooks",
+  //   slug: "amelia-brooks",
+  //   avatar: ameliaAvatar,
+  //   bio: "Graphite illustrator focused on emotion-driven portrait sketches and expressive faces.",
+  // },
+  // {
+  //   id: 7,
+  //   name: "Eva Müller",
+  //   slug: "eva-muller",
+  //   avatar: evaAvatar,
+  //   bio: "Traditional miniature artist combining cultural motifs, animals, and decorative storytelling.",
+  // },
+  // {
+  //   id: 8,
+  //   name: "Daniel Kovac",
+  //   slug: "daniel-kovac",
+  //   avatar: danielAvatar,
+  //   bio: "Painter creating spiritual and reflective artworks with bold acrylic techniques.",
+  // },
 ];
 
 export default artists;

@@ -1,6 +1,7 @@
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi2";
 import styles from "./FeaturedArtists.module.css";
-import FeaturedArtistCard from "./FeaturedArtistCard";
+import FeaturedArtistCard from "./FeaturedArtistCard.jsx";
+import artists from "../../data/artists";
 
 const FeaturedArtists = () => {
   return (
@@ -17,13 +18,13 @@ const FeaturedArtists = () => {
             <HiOutlineChevronLeft className={styles.icon} />
           </button>
 
-          {/* <ul className={styles.list}>
-            {featuredArtists.map(({ id, ...restProps }) => (
+          <ul className={styles.list}>
+            {artists.map(({ id, ...restProps }) => (
               <li key={id}>
                 <FeaturedArtistCard {...restProps} />
               </li>
             ))}
-          </ul> */}
+          </ul>
 
           <button
             className={styles.arrowButton}

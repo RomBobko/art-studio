@@ -28,7 +28,18 @@
   background: transparent;
 }
 
+/* .arrowButton::hover,
+.arrowButton::focus {
+  background-color: rgba(154, 122, 80, 0.08);
+} */
+
 .icon {
   width: 70px;
   height: 70px;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 84px;
 }

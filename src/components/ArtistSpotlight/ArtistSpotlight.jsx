@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./ArtistSpotlight.module.css";
-import Artist from "../../assets/images/artist.webp";
+import Artist from "../../assets/images/artists/elena-novak.webp";
 
 const ArtistSpotlight = () => {
   return (
