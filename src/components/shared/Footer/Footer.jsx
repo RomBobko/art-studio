@@ -1,5 +1,5 @@
 import styles from "./Footer.module.css";
-import logo from "../../assets/logo.svg";
+import logo from "../../../assets/logo.svg";
 import {
   BsInstagram,
   BsPinterest,

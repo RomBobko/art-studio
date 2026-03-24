@@ -5,15 +5,14 @@ import {
   BsHeartFill,
   BsCartFill,
 } from "react-icons/bs";
-import Navigation from "../Navigation/Navigation";
-import Logo from "../Logo/Logo";
+import Navigation from "../Navigation";
+import Logo from "../Logo";
 
 const Header = () => {
   return (
     <header className={styles.header}>
       <div className="container">
         <div className={styles.inner}>
-
           <Logo />
 
           <Navigation />
