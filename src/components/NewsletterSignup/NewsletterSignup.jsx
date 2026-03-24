@@ -11,7 +11,7 @@ const NewsletterSignup = () => {
         </p>
         <form className={styles.form}>
           <input className={styles.input} type="text" placeholder="Email..." />
-          <button className={styles.button} type="button" disabled>Subsctibe</button>
+          <button className={styles.button} type="button" disabled>Subscribe</button>
         </form>
       </div>
     </section>
