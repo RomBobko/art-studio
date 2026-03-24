@@ -1,5 +1,5 @@
 import styles from "./CuratedArtworks.module.css";
-import curatedArtworks from "../../data/CuratedArtworks.js";
+import curatedArtworks from "../../../../data/CuratedArtworks.js";
 import CuratedArtworkCard from "./CuratedArtworkCard.jsx";
 
 const CuratedArtworks = () => {

@@ -1,4 +1,4 @@
-import categories from "../../data/categories";
+import categories from "../../../../data/categories";
 import styles from "./BrowseCategories.module.css";
 import { Link } from "react-router-dom";
 

@@ -1,7 +1,7 @@
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi2";
 import styles from "./FeaturedArtists.module.css";
 import FeaturedArtistCard from "./FeaturedArtistCard.jsx";
-import artists from "../../data/artists";
+import artists from "../../../../data/artists";
 
 const FeaturedArtists = () => {
   return (

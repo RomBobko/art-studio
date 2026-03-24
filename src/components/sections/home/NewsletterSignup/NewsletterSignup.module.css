@@ -13,7 +13,7 @@
 
   color: var(--color-white);
   background-color: black;
-  background-image: url("../../assets/images/newsletterBg.webp");
+  background-image: url("../../../../assets/images/newsletterBg.webp");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
