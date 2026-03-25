@@ -11,6 +11,7 @@ const artworks = [
   {
     id: 1,
     title: "Vision in Color",
+    slug: "vision-in-color",
     image: artwork1,
     artistId: 1,
     categoryIds: [1],
@@ -23,6 +24,7 @@ const artworks = [
   {
     id: 2,
     title: "Moonlit Peaks",
+    slug: "moonlit-peaks",
     image: artwork2,
     artistId: 2,
     categoryIds: [2],
@@ -35,6 +37,7 @@ const artworks = [
   {
     id: 3,
     title: "Blossom Hoops",
+    slug: "blossom-hoops",
     image: artwork3,
     artistId: 3,
     categoryIds: [3],
@@ -47,6 +50,7 @@ const artworks = [
   {
     id: 4,
     title: "Sacred Serenity",
+    slug: "sacred-serenity",
     image: artwork4,
     artistId: 4,
     categoryIds: [4],
@@ -59,6 +63,7 @@ const artworks = [
   {
     id: 5,
     title: "Infinite Mandala",
+    slug: "infinite-mandala",
     image: artwork5,
     artistId: 5,
     categoryIds: [6],
@@ -71,6 +76,7 @@ const artworks = [
   {
     id: 6,
     title: "Eyes of Emotion",
+    slug: "eyes-of-emotion",
     image: artwork6,
     artistId: 6,
     categoryIds: [4, 8],
@@ -83,6 +89,7 @@ const artworks = [
   {
     id: 7,
     title: "Divine Cow",
+    slug: "divine-cow",
     image: artwork7,
     artistId: 7,
     categoryIds: [6],
@@ -95,6 +102,7 @@ const artworks = [
   {
     id: 8,
     title: "Peaceful Enlightenment",
+    slug: "peaceful-enlightenment",
     image: artwork8,
     artistId: 8,
     categoryIds: [1],

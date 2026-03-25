@@ -19,7 +19,9 @@ const ArtistSpotlight = () => {
             nature, emotions, and everyday life through bold colors and delicate
             details.
           </p>
-          <Link className={styles.link}>View Profile</Link>
+          <Link to="/artists/elena-novak" className={styles.link}>
+            View Profile
+          </Link>
         </div>
       </div>
     </section>
