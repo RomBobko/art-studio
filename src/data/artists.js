@@ -1,11 +1,11 @@
 import elenaAvatar from "../assets/images/artists/elena-novak.webp";
 import lucasAvatar from "../assets/images/artists/lucas-bennett.webp";
 import sophieAvatar from "../assets/images/artists/sophie-laurent.webp";
-// import matteoAvatar from "../assets/images/artists/matteo-ricci.webp";
-// import claraAvatar from "../assets/images/artists/clara-moreau.webp";
-// import ameliaAvatar from "../assets/images/artists/amelia-brooks.webp";
-// import evaAvatar from "../assets/images/artists/eva-muller.webp";
-// import danielAvatar from "../assets/images/artists/daniel-kovac.webp";
+import matteoAvatar from "../assets/images/artists/matteo-ricci.webp";
+import claraAvatar from "../assets/images/artists/clara-moreau.webp";
+import ameliaAvatar from "../assets/images/artists/amelia-brooks.webp";
+import evaAvatar from "../assets/images/artists/eva-muller.webp";
+import danielAvatar from "../assets/images/artists/daniel-kovac.webp";
 
 const artists = [
   {
@@ -29,41 +29,41 @@ const artists = [
     avatar: sophieAvatar,
     bio: "Textile and embroidery artist focused on floral forms and decorative hand-crafted details.",
   },
-  // {
-  //   id: 4,
-  //   name: "Matteo Ricci",
-  //   slug: "matteo-ricci",
-  //   avatar: matteoAvatar,
-  //   bio: "Sketch artist specializing in charcoal portraiture and calm spiritual compositions.",
-  // },
-  // {
-  //   id: 5,
-  //   name: "Clara Moreau",
-  //   slug: "clara-moreau",
-  //   avatar: claraAvatar,
-  //   bio: "Traditional artist inspired by symbolic geometry, ornament, and meditative forms.",
-  // },
-  // {
-  //   id: 6,
-  //   name: "Amelia Brooks",
-  //   slug: "amelia-brooks",
-  //   avatar: ameliaAvatar,
-  //   bio: "Graphite illustrator focused on emotion-driven portrait sketches and expressive faces.",
-  // },
-  // {
-  //   id: 7,
-  //   name: "Eva Müller",
-  //   slug: "eva-muller",
-  //   avatar: evaAvatar,
-  //   bio: "Traditional miniature artist combining cultural motifs, animals, and decorative storytelling.",
-  // },
-  // {
-  //   id: 8,
-  //   name: "Daniel Kovac",
-  //   slug: "daniel-kovac",
-  //   avatar: danielAvatar,
-  //   bio: "Painter creating spiritual and reflective artworks with bold acrylic techniques.",
-  // },
+  {
+    id: 4,
+    name: "Matteo Ricci",
+    slug: "matteo-ricci",
+    avatar: matteoAvatar,
+    bio: "Sketch artist specializing in charcoal portraiture and calm spiritual compositions.",
+  },
+  {
+    id: 5,
+    name: "Clara Moreau",
+    slug: "clara-moreau",
+    avatar: claraAvatar,
+    bio: "Traditional artist inspired by symbolic geometry, ornament, and meditative forms.",
+  },
+  {
+    id: 6,
+    name: "Amelia Brooks",
+    slug: "amelia-brooks",
+    avatar: ameliaAvatar,
+    bio: "Graphite illustrator focused on emotion-driven portrait sketches and expressive faces.",
+  },
+  {
+    id: 7,
+    name: "Eva Müller",
+    slug: "eva-muller",
+    avatar: evaAvatar,
+    bio: "Traditional miniature artist combining cultural motifs, animals, and decorative storytelling.",
+  },
+  {
+    id: 8,
+    name: "Daniel Kovac",
+    slug: "daniel-kovac",
+    avatar: danielAvatar,
+    bio: "Painter creating spiritual and reflective artworks with bold acrylic techniques.",
+  },
 ];
 
 export default artists;

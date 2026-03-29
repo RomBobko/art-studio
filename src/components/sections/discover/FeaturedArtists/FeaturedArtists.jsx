@@ -4,6 +4,8 @@ import FeaturedArtistCard from "./FeaturedArtistCard.jsx";
 import artists from "../../../../data/artists";
 
 const FeaturedArtists = () => {
+  const visibleArtists = artists.slice(0, 3);
+  
   return (
     <section className={styles.section}>
       <div className="container">
@@ -19,7 +21,7 @@ const FeaturedArtists = () => {
           </button>
 
           <ul className={styles.list}>
-            {artists.map(({ id, ...restProps }) => (
+            {visibleArtists.map(({ id, ...restProps }) => (
               <li key={id}>
                 <FeaturedArtistCard {...restProps} />
               </li>
