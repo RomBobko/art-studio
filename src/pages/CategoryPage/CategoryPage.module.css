@@ -1,0 +1,222 @@
+.hero {
+  min-height: 725px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.overlay {
+  min-height: 725px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  text-align: center;
+  color: var(--color-white);
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.catalog {
+  padding: 64px 0 80px;
+}
+
+.catalogLayout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.sidebar {
+  align-self: start;
+}
+
+.sidebarTitle {
+  margin-bottom: 24px;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.filtersForm {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.filterGroup {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.filterLegend {
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.filterOption {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.content {
+  min-width: 0;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.resultsCount {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.sortBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sortBox label {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.sortBox select {
+  min-width: 120px;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  background-color: #fff;
+  font-size: 14px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px 24px;
+}
+
+.card {
+  height: 100%;
+}
+
+.cardLink {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.cardImage {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 18px;
+  margin-bottom: 14px;
+}
+
+.cardBody {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "title price"
+    "meta meta";
+  gap: 4px 12px;
+}
+
+.cardTitle {
+  grid-area: title;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.cardPrice {
+  grid-area: price;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.cardMeta {
+  grid-area: meta;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #555;
+}
+
+.loadMore {
+  display: block;
+  min-width: 140px;
+  margin: 40px auto 0;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 10px;
+  background-color: #a88a63;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.loadMore:hover {
+  opacity: 0.9;
+}
+
+/* @media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .catalogLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .catalog {
+    padding: 40px 0 56px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebarTitle {
+    font-size: 26px;
+  }
+} */

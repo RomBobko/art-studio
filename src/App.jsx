@@ -5,7 +5,7 @@ import HomePage from "./pages/HomePage";
 import DiscoverPage from "./pages/DiscoverPage";
 import LearnPage from "./pages/LearnPage";
 import ChallengesPage from "./pages/ChallengesPage";
-import CategoryPage from "./pages/CategoryPage";
+import CategoryPage from "./pages/CategoryPage/CategoryPage";
 import ArtworkPage from "./pages/ArtworkPage";
 import ArtistPage from "./pages/ArtistPage";
 
