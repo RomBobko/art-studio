@@ -1,0 +1,276 @@
+.page {
+  padding: 48px 0 120px;
+}
+
+.artworkSection {
+  padding: 56px 0 88px;
+}
+
+.layout {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 76px;
+  margin: 0 auto;
+}
+
+.media {
+  margin: 0;
+  width: 722px;
+  height: 722px;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 38px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content {
+  width: 100%;
+  padding-top: 31px;
+}
+
+.title {
+  margin: 0 0 11px;
+  font-size: 60px;
+  line-height: 150%;
+  font-weight: 500;
+  letter-spacing: -0.66px;
+  color: #111111;
+}
+
+.artistLink {
+  display: inline-block;
+  margin-bottom: 35px;
+  font-size: 45px;
+  line-height: 150%;
+  letter-spacing: -0.495px;
+  font-weight: 400;
+  color: #094e71;
+  text-decoration: none;
+}
+
+.artistLink:hover {
+  text-decoration: underline;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 27px;
+  margin-bottom: 18px;
+}
+
+.metaMedium {
+  font-size: 35px;
+  line-height: 150%;
+  letter-spacing: -0.385px;
+}
+
+.metaText {
+  font-size: 30px;
+  line-height: 150%;
+  letter-spacing: -0.33px;
+  color: #222222;
+}
+
+.description {
+  margin-bottom: 34px;
+  font-size: 25px;
+  line-height: 150%;
+  letter-spacing: -0.275px;
+  color: #333333;
+}
+
+.price {
+  margin: 0 0 27px;
+  font-size: 30px;
+  line-height: 150%;
+  letter-spacing: -0.33px;
+  font-weight: 400;
+  color: #111111;
+}
+
+.button {
+  max-width: 231px;
+  width: 100%;
+  min-height: 56px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 6px;
+  background-color: #7b6648;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: -0.22px;
+  cursor: pointer;
+}
+
+
+.relatedArtworksHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 65px;
+}
+
+.relatedArtworksTitle {
+  margin: 0;
+  font-size: 42px;
+  font-weight: 600;
+  line-height: 51px;
+  color: #111111;
+}
+
+.relatedArtworksLink {
+  display: inline-block;
+  max-height: 46px;
+  margin-right: 28px;
+  padding: 11px 42px;
+  font-size: 16px;
+  line-height: 150%;
+  letter-spacing: -0.176px;
+  font-weight: 500;
+  color: var(--color-button-border);
+  border-radius: 16px;
+  border: 1px solid var(--color-button-border);
+  text-decoration: none;
+  text-align: center;
+  transition: opacity 0.2s ease;
+}
+
+.relatedArtworksLink:hover {
+  opacity: 0.7;
+}
+
+.relatedArtworksGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 80px 61px;
+  justify-items: center;
+  align-items: start;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* .relatedArtworksGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  justify-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+} */
+
+.relatedArtworksItem {
+  width: 100%;
+  max-width: 355px;
+}
+
+.relatedArtworkLink {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 28px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.relatedArtworkImage {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.relatedArtworksEmpty {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #7a7a7a;
+}
+
+/* @media (max-width: 1200px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
+    gap: 32px;
+    max-width: 940px;
+  }
+
+  .content {
+    max-width: 340px;
+  }
+}
+
+@media (max-width: 900px) {
+  .page {
+    padding: 40px 0 96px;
+  }
+
+  .media {
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+    max-width: 100%;
+  }
+
+  .content {
+    max-width: 100%;
+    padding-top: 0;
+  }
+
+  .relatedArtworksGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 32px 0 80px;
+  }
+
+  .artworkSection {
+    margin-bottom: 72px;
+  }
+
+  .media {
+    padding: 16px;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+
+  .descriptionTitle {
+    font-size: 22px;
+  }
+
+  .price {
+    font-size: 32px;
+  }
+
+  .relatedArtworksHeader {
+    align-items: flex-start;
+    flex-direction: column;
+    margin-bottom: 24px;
+  }
+
+  .relatedArtworksGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+} */

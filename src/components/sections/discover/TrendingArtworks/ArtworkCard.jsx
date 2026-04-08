@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const ArtworkCard = ({ title, slug, price, type, author, image }) => {
   return (
     <article className={styles.card}>
-      <Link to={`/artworks/${slug}`}>
+      <Link className={styles.imageLink} to={`/artworks/${slug}`}>
         <img className={styles.image} src={image} alt={title} />
       </Link>
       

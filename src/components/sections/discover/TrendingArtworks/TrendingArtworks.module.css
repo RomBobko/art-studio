@@ -19,3 +19,8 @@
 
   padding: 50px;
 }
+
+.artworkItem {
+  max-width: 355px;
+  height: 350px;
+}

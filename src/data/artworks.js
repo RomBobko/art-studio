@@ -99,7 +99,7 @@ const artworks = [
     isTrending: true,
     type: "Traditional Miniature Art",
   },
-  {
+  { 
     id: 8,
     title: "Peaceful Enlightenment",
     slug: "peaceful-enlightenment",

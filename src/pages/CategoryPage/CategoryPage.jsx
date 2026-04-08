@@ -1,8 +1,9 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styles from "./CategoryPage.module.css";
 import categories from "../../data/categories";
-// import artworks from "../data/artworks";
-import artworks from "../../data/artworks-Temporary";
+import artworks from "../../data/artworks";
+// import artworks from "../../data/artworks-Temporary";
+import ArtworkCard from "../../components/sections/discover/TrendingArtworks/ArtworkCard";
 
 const CategoryPage = () => {
   const { categorySlug } = useParams();
@@ -87,25 +88,9 @@ const CategoryPage = () => {
             </div>
 
             <ul className={styles.grid}>
-              {categoryArtworks.map((artwork) => (
-                <li key={artwork.id}>
-                  <article className={styles.card}>
-                    <Link
-                      to={`/artworks/${artwork.slug}`}
-                      className={styles.cardLink}
-                    >
-                      <img
-                        className={styles.cardImage}
-                        src={artwork.image}
-                        alt={artwork.title}
-                      />
-                      <div className={styles.cardBody}>
-                        <h3 className={styles.cardTitle}>{artwork.title}</h3>
-                        <p className={styles.cardMeta}>{artwork.type}</p>
-                        <p className={styles.cardPrice}>${artwork.price}</p>
-                      </div>
-                    </Link>
-                  </article>
+              {categoryArtworks.map(({id, ...restProps}) => (
+                <li className={styles.artworkItem} key={id}>
+                  <ArtworkCard {...restProps}/>
                 </li>
               ))}
             </ul>

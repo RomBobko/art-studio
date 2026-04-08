@@ -1,6 +1,7 @@
 import styles from "./TrendingArtworks.module.css";
 import ArtworkCard from "./ArtworkCard";
-import artworks from "../../../../data/artworks";
+// import artworks from "../../../../data/artworks";
+import artworks from "../../../../data/artworks"
 
 const TrendingArtworks = () => {
   return (
