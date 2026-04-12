@@ -49,14 +49,14 @@
   font-weight: 400;
   letter-spacing: -0.176px;
   text-decoration: none;
-  transition: 250ms ease;
+  transition: var(--transition-base);
 
-  border: 1px solid #b79d79;
-  color: #9a7a50;
+  border: 1px solid var(--color-button-border);
+  color: var(--color-button-primary);
   background-color: transparent;
 }
 
 .link:hover,
 .link:focus {
-  background-color: rgba(154, 122, 80, 0.08);
+  background-color: var(--color-accent-ghost);
 }

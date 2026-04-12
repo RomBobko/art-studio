@@ -38,7 +38,7 @@
   line-height: 150%;
   font-weight: 500;
   letter-spacing: -0.66px;
-  color: #111111;
+  color: var(--color-text-strong);
 }
 
 .description {
@@ -47,7 +47,7 @@
   font-size: 22px;
   line-height: 1.5;
   letter-spacing: -0.24px;
-  color: #333333;
+  color: var(--color-text-secondary);
 }
 
 .actions {
@@ -62,9 +62,9 @@
   padding: 12px 28px;
   margin-bottom: 15px;
   border: none;
-  border-radius: 8px;
-  background-color: #7b6648;
-  color: #ffffff;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-button-secondary);
+  color: var(--color-white);
   font-size: 20px;
   font-weight: 400;
   line-height: 1.5;
@@ -90,9 +90,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #111111;
+  color: var(--color-text-strong);
   text-decoration: none;
-  transition: opacity 0.2s ease;
+  transition: opacity var(--transition-fast);
 }
 
 .socialsLink:hover {
@@ -129,11 +129,11 @@
   font-weight: 500;
   color: white;
   background-color: var(--color-button-disabled);
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
   border: 1px solid var(--color-button-disabled);
   text-decoration: none;
   text-align: center;
-  transition: opacity 0.2s ease;
+  transition: opacity var(--transition-fast);
 }
 
 .artistArtworksLink:hover {
@@ -149,7 +149,7 @@
   font-size: 42px;
   line-height: 1.2;
   font-weight: 600;
-  color: #111111;
+  color: var(--color-text-strong);
 }
 
 .backLink {
