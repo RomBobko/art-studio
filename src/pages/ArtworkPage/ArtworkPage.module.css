@@ -153,23 +153,13 @@
 .relatedArtworksGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 80px 61px;
+  gap: 80px 60px;
   justify-items: center;
   align-items: start;
   margin: 0;
   padding: 0;
   list-style: none;
 }
-
-/* .relatedArtworksGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  justify-items: center;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-} */
 
 .relatedArtworksItem {
   width: 100%;

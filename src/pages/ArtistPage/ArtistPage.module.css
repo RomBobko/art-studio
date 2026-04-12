@@ -1,0 +1,206 @@
+.artistSection {
+  padding: 100px 150px 125px;
+}
+
+.layout {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 77px;
+  max-width: 1420px;
+  margin: 0 auto;
+}
+
+.media {
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.avatar {
+  display: block;
+  width: 344px;
+  height: 344px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 999px;
+  width: 100%;
+}
+
+.title {
+  margin: 0 0 15px;
+  font-size: 60px;
+  line-height: 150%;
+  font-weight: 500;
+  letter-spacing: -0.66px;
+  color: #111111;
+}
+
+.description {
+  margin: 0 0 18px;
+  max-width: 760px;
+  font-size: 22px;
+  line-height: 1.5;
+  letter-spacing: -0.24px;
+  color: #333333;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button {
+  min-width: 170px;
+  min-height: 52px;
+  padding: 12px 28px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: #7b6648;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.22px;
+  cursor: pointer;
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.socialsItem {
+  list-style: none;
+}
+
+.socialsLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #111111;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.socialsLink:hover {
+  opacity: 0.7;
+}
+
+.socialIcon {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.artistArtworksTitle {
+  margin-bottom: 60px;
+  font-size: 42px;
+  font-weight: 600;
+  line-height: 51px;
+  color: #111111;
+}
+
+.artistTitleName {
+  text-decoration: underline;
+}
+
+.artistArtworksGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 80px 60px;
+  justify-items: center;
+  align-items: start;
+  margin-bottom: 70px;
+  padding: 0;
+  list-style: none;
+}
+
+.artistArtworksItem {
+  width: 100%;
+  max-width: 355px;
+}
+
+.artistArtworksActions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.artistArtworksLink {
+  display: inline-block;
+  max-height: 46px;
+  margin-bottom: 80px;
+  padding: 11px 34px;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.176px;
+  font-weight: 500;
+  color: white;
+  background-color: var(--color-button-disabled);
+  border-radius: 16px;
+  border: 1px solid var(--color-button-disabled);
+  text-decoration: none;
+  text-align: center;
+  transition: opacity 0.2s ease;
+}
+
+.artistArtworksLink:hover {
+  opacity: 0.7;
+}
+
+.artistArtworksEmpty {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #7a7a7a;
+}
+
+.notFound {
+  padding: 120px 0;
+}
+
+.notFoundTitle {
+  margin: 0 0 24px;
+  font-size: 42px;
+  line-height: 1.2;
+  font-weight: 600;
+  color: #111111;
+}
+
+.backLink {
+  display: inline-block;
+  font-size: 18px;
+  color: #094e71;
+  text-decoration: none;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+.artistArtworkLink {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 28px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.artistArtworkImage {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}

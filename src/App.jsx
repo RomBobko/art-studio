@@ -7,7 +7,7 @@ import LearnPage from "./pages/LearnPage";
 import ChallengesPage from "./pages/ChallengesPage";
 import CategoryPage from "./pages/CategoryPage/CategoryPage";
 import ArtworkPage from "./pages/ArtworkPage/ArtworkPage";
-import ArtistPage from "./pages/ArtistPage";
+import ArtistPage from "./pages/ArtistPage/ArtistPage";
 
 const App = () => {
   return (
