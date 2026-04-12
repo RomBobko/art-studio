@@ -14,7 +14,7 @@ const DiscoverHero = () => {
 
         <form className={styles.form}>
           <label className={styles.field}>
-            <span className="visually-hidden">Search artworks</span>
+            <span className={styles.visuallyHidden}>Search artworks</span>
             <input
               className={styles.input}
               type="search"

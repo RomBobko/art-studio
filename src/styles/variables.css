@@ -1,9 +1,9 @@
 :root {
   /* page + containers */
   --page-max: 1920px;
-  --container-wide: 1600px;
-  --container-main: 1440px;
-  --container-narrow: 1240px;
+  --container-wide: 1720px;
+  --container-main: 1560px;
+  --container-narrow: 1440px;
 
   /* spacing */
   --space-8: 8px;

@@ -21,6 +21,10 @@ body {
   font-family: var(--font-family-main);
 }
 
+main {
+  background-color: var(--color-white);
+}
+
 img,
 picture {
   display: block;
