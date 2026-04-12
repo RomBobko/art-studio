@@ -3,7 +3,8 @@ import { FaInstagram, FaTwitter } from "react-icons/fa";
 import { RiGlobalLine } from "react-icons/ri";
 import styles from "./ArtistPage.module.css";
 import artists from "../../data/artists";
-import temporaryArtworks from "../../data/artworks-Temporary";
+import artworks from "../../data/artworks";
+import ArtworkThumbnailGrid from "../../components/shared/ArtworkThumbnailGrid";
 
 const ArtistPage = () => {
   const { artistSlug } = useParams();
@@ -23,9 +24,11 @@ const ArtistPage = () => {
     );
   }
 
-  const artistArtworks = temporaryArtworks.filter(
-    (item) => item.artistId === artist.id,
-  );
+  const artistArtworks = artworks.filter((item) => item.artistId === artist.id);
+  const artistArtworksActionsClassName =
+    artistArtworks.length > 0
+      ? `${styles.artistArtworksActions} ${styles.artistArtworksActionsWithGrid}`
+      : styles.artistArtworksActions;
 
   return (
     <>
@@ -93,43 +96,23 @@ const ArtistPage = () => {
         </div>
       </section>
 
-      <section
-        aria-labelledby="artist-artworks-title"
-      >
-        <div className="container">
-          <h2 id="artist-artworks-title" className={styles.artistArtworksTitle}>
+      <ArtworkThumbnailGrid
+        titleId="artist-artworks-title"
+        title={
+          <>
             Artworks by{" "}
             <span className={styles.artistTitleName}>{artist.name}</span>
-          </h2>
-
-          {artistArtworks.length > 0 ? (
-            <ul className={styles.artistArtworksGrid}>
-              {artistArtworks.map((item) => (
-                <li key={item.id} className={styles.artistArtworksItem}>
-                  <Link
-                    to={`/artworks/${item.slug}`}
-                    className={styles.artistArtworkLink}
-                  >
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className={styles.artistArtworkImage}
-                    />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className={styles.artistArtworksEmpty}>No artworks found.</p>
-          )}
-
-          <div className={styles.artistArtworksActions}>
+          </>
+        }
+        artworks={artistArtworks}
+        footerAction={
+          <div className={artistArtworksActionsClassName}>
             <Link to="/discover" className={styles.artistArtworksLink}>
               View More
             </Link>
           </div>
-        </div>
-      </section>
+        }
+      />
     </>
   );
 };

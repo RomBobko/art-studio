@@ -1,0 +1,60 @@
+.section {
+  width: 100%;
+}
+
+.header {
+  margin-bottom: 60px;
+}
+
+.headerWithAction {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 65px;
+}
+
+.title {
+  margin: 0;
+  font-size: 42px;
+  font-weight: 600;
+  line-height: 51px;
+  color: #111111;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 80px 60px;
+  justify-items: center;
+  align-items: start;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.item {
+  width: 100%;
+  max-width: 355px;
+}
+
+.link {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 28px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.empty {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #7a7a7a;
+}

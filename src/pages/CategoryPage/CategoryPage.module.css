@@ -31,50 +31,11 @@
   align-items: start;
 }
 
-.sidebar {
-  align-self: start;
-}
-
-.sidebarTitle {
-  margin-bottom: 24px;
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-.filtersForm {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.filterGroup {
-  margin: 0;
-  padding: 0;
-  border: none;
-}
-
-.filterLegend {
-  margin-bottom: 12px;
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.filterOption {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-  font-size: 14px;
-  line-height: 1.4;
-  cursor: pointer;
-}
-
 .content {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 87px;
+  gap: 47px;
 }
 
 .toolbar {
@@ -120,7 +81,6 @@
 
 .artworkItem {
   max-width: 318px;
-  height: 312px;
 }
 
 

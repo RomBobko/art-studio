@@ -2,8 +2,28 @@ import { useParams } from "react-router-dom";
 import styles from "./CategoryPage.module.css";
 import categories from "../../data/categories";
 import artworks from "../../data/artworks";
-// import artworks from "../../data/artworks-Temporary";
 import ArtworkCard from "../../components/sections/discover/TrendingArtworks/ArtworkCard";
+import { toArtworkCardProps } from "../../data/artworkPreview";
+import CategoryFilter from "./CategoryFilter";
+
+const filterGroups = [
+  {
+    name: "medium",
+    label: "Mediums",
+    options: [
+      { value: "oil", label: "Oil" },
+      { value: "acrylic", label: "Acrylic" },
+    ],
+  },
+  {
+    name: "style",
+    label: "Style",
+    options: [
+      { value: "abstract", label: "Abstract" },
+      { value: "realism", label: "Realism" },
+    ],
+  },
+];
 
 const CategoryPage = () => {
   const { categorySlug } = useParams();
@@ -36,41 +56,7 @@ const CategoryPage = () => {
 
       <section className={styles.catalog} aria-labelledby="artworks-heading">
         <div className={`container ${styles.catalogLayout}`}>
-          <aside className={styles.sidebar} aria-labelledby="filters-title">
-            <h2 id="filters-title" className={styles.sidebarTitle}>
-              Filters
-            </h2>
-
-            <form className={styles.filtersForm}>
-              <fieldset className={styles.filterGroup}>
-                <legend className={styles.filterLegend}>Mediums</legend>
-
-                <label className={styles.filterOption}>
-                  <input type="checkbox" name="medium" value="oil" />
-                  <span>Oil</span>
-                </label>
-
-                <label className={styles.filterOption}>
-                  <input type="checkbox" name="medium" value="acrylic" />
-                  <span>Acrylic</span>
-                </label>
-              </fieldset>
-
-              <fieldset className={styles.filterGroup}>
-                <legend className={styles.filterLegend}>Style</legend>
-
-                <label className={styles.filterOption}>
-                  <input type="checkbox" name="style" value="abstract" />
-                  <span>Abstract</span>
-                </label>
-
-                <label className={styles.filterOption}>
-                  <input type="checkbox" name="style" value="realism" />
-                  <span>Realism</span>
-                </label>
-              </fieldset>
-            </form>
-          </aside>
+          <CategoryFilter groups={filterGroups} />
 
           <div className={styles.content}>
             <div className={styles.toolbar}>
@@ -88,9 +74,9 @@ const CategoryPage = () => {
             </div>
 
             <ul className={styles.grid}>
-              {categoryArtworks.map(({id, ...restProps}) => (
-                <li className={styles.artworkItem} key={id}>
-                  <ArtworkCard {...restProps}/>
+              {categoryArtworks.map((artwork) => (
+                <li className={styles.artworkItem} key={artwork.id}>
+                  <ArtworkCard {...toArtworkCardProps(artwork)} />
                 </li>
               ))}
             </ul>

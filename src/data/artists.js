@@ -33,14 +33,14 @@ const artists = [
     id: 4,
     name: "Matteo Ricci",
     slug: "matteo-ricci",
-    avatar: matteoAvatar,
+    avatar: claraAvatar,
     bio: "Sketch artist specializing in charcoal portraiture and calm spiritual compositions.",
   },
   {
     id: 5,
     name: "Clara Moreau",
     slug: "clara-moreau",
-    avatar: claraAvatar,
+    avatar: matteoAvatar,
     bio: "Traditional artist inspired by symbolic geometry, ornament, and meditative forms.",
   },
   {
@@ -54,14 +54,14 @@ const artists = [
     id: 7,
     name: "Eva Müller",
     slug: "eva-muller",
-    avatar: evaAvatar,
+    avatar: danielAvatar,
     bio: "Traditional miniature artist combining cultural motifs, animals, and decorative storytelling.",
   },
   {
     id: 8,
     name: "Daniel Kovac",
     slug: "daniel-kovac",
-    avatar: danielAvatar,
+    avatar: evaAvatar,
     bio: "Painter creating spiritual and reflective artworks with bold acrylic techniques.",
   },
 ];

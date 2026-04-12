@@ -1,26 +1,16 @@
 import { Link, useParams } from "react-router-dom";
 import styles from "./ArtworkPage.module.css";
 import artworks from "../../data/artworks";
-import temporaryArtworks from "../../data/artworks-Temporary";
 import artists from "../../data/artists";
-import ArtworkCard from "../../components/sections/discover/TrendingArtworks/ArtworkCard";
-
-const getArtworkReference = (artworkId) =>
-  artworks.find((item) => item.id === artworkId) ??
-  artworks[(artworkId - 1) % artworks.length];
+import ArtworkThumbnailGrid from "../../components/shared/ArtworkThumbnailGrid";
 
 const getArtworkDetails = (item) => {
   const artist = artists.find((entry) => entry.id === item.artistId);
-  const imageReference = getArtworkReference(item.id);
-  const medium =
-    item.medium ||
-    (item.type !== "Temporary Artwork" ? item.type : imageReference?.type) ||
-    "Medium available on request";
+  const medium = item.medium || "Medium available on request";
 
   return {
     ...item,
     artist,
-    image: imageReference?.image || item.image,
     medium,
     size: item.size || "Dimensions available on request",
     description:
@@ -34,11 +24,7 @@ const getArtworkDetails = (item) => {
 const ArtworkPage = () => {
   const { artworkSlug } = useParams();
 
-  const temporaryArtwork = temporaryArtworks.find(
-    (item) => item.slug === artworkSlug,
-  );
-  const libraryArtwork = artworks.find((item) => item.slug === artworkSlug);
-  const artworkSource = temporaryArtwork || libraryArtwork;
+  const artworkSource = artworks.find((item) => item.slug === artworkSlug);
 
   if (!artworkSource) {
     return (
@@ -54,8 +40,7 @@ const ArtworkPage = () => {
   }
 
   const artwork = getArtworkDetails(artworkSource);
-  const artworkCollection = temporaryArtwork ? temporaryArtworks : artworks;
-  const relatedArtworks = artworkCollection
+  const relatedArtworks = artworks
     .filter(
       (item) =>
         item.id !== artwork.id &&
@@ -108,48 +93,16 @@ const ArtworkPage = () => {
         </div>
       </section>
 
-      <section
-        className={styles.relatedArtworks}
-        aria-labelledby="related-artworks-title"
-      >
-        <div className="container">
-          <div className={styles.relatedArtworksHeader}>
-            <h2
-              id="related-artworks-title"
-              className={styles.relatedArtworksTitle}
-            >
-              Related Artworks
-            </h2>
-
-            <Link to="/discover" className={styles.relatedArtworksLink}>
-              View All
-            </Link>
-          </div>
-
-          {relatedArtworks.length > 0 ? (
-            <ul className={styles.relatedArtworksGrid}>
-              {relatedArtworks.map((item) => (
-                <li key={item.id} className={styles.relatedArtworksItem}>
-                  <Link
-                    to={`/artworks/${item.slug}`}
-                    className={styles.relatedArtworkLink}
-                  >
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className={styles.relatedArtworkImage}
-                    />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className={styles.relatedArtworksEmpty}>
-              No related artworks found.
-            </p>
-          )}
-        </div>
-      </section>
+      <ArtworkThumbnailGrid
+        titleId="related-artworks-title"
+        title="Related Artworks"
+        artworks={relatedArtworks}
+        headerAction={
+          <Link to="/discover" className={styles.relatedArtworksLink}>
+            View All
+          </Link>
+        }
+      />
     </div>
   );
 };

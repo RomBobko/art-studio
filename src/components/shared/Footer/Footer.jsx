@@ -1,11 +1,25 @@
+import { Link } from "react-router-dom";
 import styles from "./Footer.module.css";
 import logo from "../../../assets/logo.svg";
+import { primarySiteLinks } from "../../../data/siteLinks";
 import {
   BsInstagram,
   BsPinterest,
   BsBehance,
   BsTwitterX,
 } from "react-icons/bs";
+
+const communityLinks = [
+  { to: "/discover", label: "Explore Art" },
+  { to: "/discover", label: "Meet Artists" },
+  { to: "/learn", label: "Learn Skills" },
+  { to: "/challenges", label: "Join Challenges" },
+];
+
+const supportLinks = [
+  { href: "mailto:info@artora.com", label: "Email Us" },
+  { href: "tel:+15551234567", label: "Call Us" },
+];
 
 const Footer = () => {
   return (
@@ -14,10 +28,10 @@ const Footer = () => {
         <div className={styles.top}>
           {/* col 1 */}
           <div className={styles.brandCol}>
-            <a className={styles.brand} href="#">
+            <Link className={styles.brand} to="/">
               <img className={styles.logo} src={logo} alt="ArtStudio" />
               <span className={styles.brandText}>ArtStudio</span>
-            </a>
+            </Link>
 
             <p className={styles.desc}>
               Discover unique art, create with passion, and share your world
@@ -49,24 +63,11 @@ const Footer = () => {
           <div className={styles.col}>
             <h3 className={styles.title}>Quick Links</h3>
             <ul className={styles.list}>
-              <li>
-                <a href="#">Home</a>
-              </li>
-              <li>
-                <a href="#">About</a>
-              </li>
-              <li>
-                <a href="#">Explore Art</a>
-              </li>
-              <li>
-                <a href="#">Artists</a>
-              </li>
-              <li>
-                <a href="#">Challenges</a>
-              </li>
-              <li>
-                <a href="#">Shop</a>
-              </li>
+              {primarySiteLinks.map(({ to, label }) => (
+                <li key={label}>
+                  <Link to={to}>{label}</Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -74,21 +75,11 @@ const Footer = () => {
           <div className={styles.col}>
             <h3 className={styles.title}>Community</h3>
             <ul className={styles.list}>
-              <li>
-                <a href="#">Artora Blog</a>
-              </li>
-              <li>
-                <a href="#">Explore Art</a>
-              </li>
-              <li>
-                <a href="#">Join as an Artist</a>
-              </li>
-              <li>
-                <a href="#">Events / Challenges</a>
-              </li>
-              <li>
-                <a href="#">Newsletter Signup</a>
-              </li>
+              {communityLinks.map(({ to, label }) => (
+                <li key={label}>
+                  <Link to={to}>{label}</Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -96,18 +87,11 @@ const Footer = () => {
           <div className={styles.col}>
             <h3 className={styles.title}>Support / Help</h3>
             <ul className={styles.list}>
-              <li>
-                <a href="#">FAQs</a>
-              </li>
-              <li>
-                <a href="#">Contact Us</a>
-              </li>
-              <li>
-                <a href="#">Privacy Policy</a>
-              </li>
-              <li>
-                <a href="#">Terms &amp; Conditions</a>
-              </li>
+              {supportLinks.map(({ href, label }) => (
+                <li key={label}>
+                  <a href={href}>{label}</a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

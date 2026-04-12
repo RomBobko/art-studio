@@ -1,7 +1,7 @@
 import styles from "./ArtworkCard.module.css";
 import { Link } from "react-router-dom";
 
-const ArtworkCard = ({ title, slug, price, type, author, image }) => {
+const ArtworkCard = ({ title, slug, price, type, artistName, image }) => {
   return (
     <article className={styles.card}>
       <Link className={styles.imageLink} to={`/artworks/${slug}`}>
@@ -15,7 +15,7 @@ const ArtworkCard = ({ title, slug, price, type, author, image }) => {
         </div>
 
         <p className={styles.type}>{type}</p>
-        <p className={styles.author}>{author}</p>
+        <p className={styles.author}>{artistName}</p>
       </div>
     </article>
   );
