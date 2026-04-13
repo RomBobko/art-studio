@@ -47,43 +47,47 @@ const CategoryPage = () => {
           backgroundImage: `linear-gradient(rgba(255,255,255,0.15), rgba(255,255,255,0.15)), url(${category.image})`,
         }}
       >
-        <div className={`container ${styles.overlay}`}>
-          <h1 id="category-title" className={styles.title}>
-            {category.name}
-          </h1>
+        <div className="container-wide">
+          <div className={styles.overlay}>
+            <h1 id="category-title" className={styles.title}>
+              {category.name}
+            </h1>
+          </div>
         </div>
       </section>
 
       <section className={styles.catalog} aria-labelledby="artworks-heading">
-        <div className={`container ${styles.catalogLayout}`}>
-          <CategoryFilter groups={filterGroups} />
+        <div className="container">
+          <div className={styles.catalogLayout}>
+            <CategoryFilter groups={filterGroups} />
 
-          <div className={styles.content}>
-            <div className={styles.toolbar}>
-              <p className={styles.resultsCount}>
-                Showing {categoryArtworks.length} artworks
-              </p>
+            <div className={styles.content}>
+              <div className={styles.toolbar}>
+                <p className={styles.resultsCount}>
+                  Showing {categoryArtworks.length} artworks
+                </p>
 
-              <div className={styles.sortBox}>
-                <label htmlFor="sort">Sort by</label>
-                <select id="sort" name="sort">
-                  <option>Newest</option>
-                  <option>Popular</option>
-                </select>
+                <div className={styles.sortBox}>
+                  <label htmlFor="sort">Sort by</label>
+                  <select id="sort" name="sort">
+                    <option>Newest</option>
+                    <option>Popular</option>
+                  </select>
+                </div>
               </div>
+
+              <ul className={styles.grid}>
+                {categoryArtworks.map((artwork) => (
+                  <li className={styles.artworkItem} key={artwork.id}>
+                    <ArtworkCard {...toArtworkCardProps(artwork)} />
+                  </li>
+                ))}
+              </ul>
+
+              <button type="button" className={styles.loadMore}>
+                Load More
+              </button>
             </div>
-
-            <ul className={styles.grid}>
-              {categoryArtworks.map((artwork) => (
-                <li className={styles.artworkItem} key={artwork.id}>
-                  <ArtworkCard {...toArtworkCardProps(artwork)} />
-                </li>
-              ))}
-            </ul>
-
-            <button type="button" className={styles.loadMore}>
-              Load More
-            </button>
           </div>
         </div>
       </section>

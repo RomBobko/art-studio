@@ -10,6 +10,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
   margin-bottom: 65px;
 }
 
@@ -23,9 +25,8 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 80px 60px;
-  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 60px 32px;
   align-items: start;
   margin: 0;
   padding: 0;
@@ -34,7 +35,6 @@
 
 .item {
   width: 100%;
-  max-width: 355px;
 }
 
 .link {

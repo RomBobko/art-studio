@@ -14,7 +14,7 @@ const Featured = () => {
 
         <ul className={styles.list}>
           {featuredCategories.map(({ id, image, alt, title }) => (
-            <li key={id}>
+            <li className={styles.item} key={id}>
               <FeaturedCard image={image} alt={alt} title={title} />
             </li>
           ))}

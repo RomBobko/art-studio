@@ -10,7 +10,7 @@ const CuratedArtworks = () => {
 
         <ul className={styles.list}>
           {curatedArtworks.map(({ title, image, author }) => (
-            <li key={title}>
+            <li className={styles.item} key={title}>
               <CuratedArtworkCard image={image} title={title} author={author} />
             </li>
           ))}

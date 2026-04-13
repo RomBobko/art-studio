@@ -1,6 +1,9 @@
 .card {
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
 }
 
 .avatarWrapper {
@@ -22,11 +25,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 0;
 }
 
 .name {
-  margin-left: 15px;
-  margin-bottom: 5px;
+  margin: 0 0 5px;
 
   font-size: 25px;
   font-weight: 600;
@@ -41,7 +44,6 @@
 
   min-width: 169px;
   height: 46px;
-  margin-left: 13px;
   padding: 11px 38px;
   border-radius: 18px;
 
@@ -59,4 +61,11 @@
 .link:hover,
 .link:focus {
   background-color: var(--color-accent-ghost);
+}
+
+@media (max-width: 700px) {
+  .card {
+    flex-direction: column;
+    text-align: center;
+  }
 }

@@ -4,7 +4,7 @@ import styles from "./Logo.module.css";
 
 const Logo = () => {
   return (
-    <Link className={styles.brand} href="/">
+    <Link className={styles.brand} to="/">
       <img className={styles.logo} src={logo} alt="ArtStudio" />
       <span className={styles.brandText}>ArtStudio</span>
     </Link>

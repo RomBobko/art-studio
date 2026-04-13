@@ -22,7 +22,7 @@ const FeaturedArtists = () => {
 
           <ul className={styles.list}>
             {visibleArtists.map(({ id, ...restProps }) => (
-              <li key={id}>
+              <li className={styles.item} key={id}>
                 <FeaturedArtistCard {...restProps} />
               </li>
             ))}

@@ -11,8 +11,13 @@
 }
 
 .list {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  gap: 65px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+  gap: 40px;
+  max-width: var(--container-narrow);
+  margin-inline: auto;
+}
+
+.item {
+  width: 100%;
 }

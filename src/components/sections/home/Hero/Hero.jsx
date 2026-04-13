@@ -17,38 +17,41 @@ const Hero = ({
 
   return (
     <section className={styles.section}>
-      <div className={`container ${styles.inner}`}>
-        <div className={styles.content}>
-          <h1 className={styles.title}>
-            {titleLines.map((titleLine) => (
-              <span key={titleLine} className={styles.titleLine}>
-                {titleLine}
-              </span>
-            ))}
-          </h1>
+      <div className="container">
+        <div className={styles.inner}>
+          <div className={styles.content}>
+            <h1 className={styles.title}>
+              {titleLines.map((titleLine) => (
+                <span key={titleLine} className={styles.titleLine}>
+                  {titleLine}
+                </span>
+              ))}
+            </h1>
 
-          <p className={styles.text}>{text}</p>
+            <p className={styles.text}>{text}</p>
 
-          <div className={styles.actions}>
-            <Link to={primaryTo} className={styles.primary}>
-              {primaryText}
-            </Link>
-            <Link to={secondaryTo} className={styles.secondary}>
-              {secondaryText}
-            </Link>
+            <div className={styles.actions}>
+              <Link to={primaryTo} className={styles.primary}>
+                {primaryText}
+              </Link>
+              <Link to={secondaryTo} className={styles.secondary}>
+                {secondaryText}
+              </Link>
+            </div>
           </div>
-        </div>
-        <div className={styles.visual}>
-          {imageSrc && !isImageError ? (
-            <img
-              className={styles.image}
-              src={imageSrc}
-              alt={imageAlt}
-              onError={() => setIsImageError(true)}
-            />
-          ) : (
-            <div className={styles.imageShadow} />
-          )}
+
+          <div className={styles.visual}>
+            {imageSrc && !isImageError ? (
+              <img
+                className={styles.image}
+                src={imageSrc}
+                alt={imageAlt}
+                onError={() => setIsImageError(true)}
+              />
+            ) : (
+              <div className={styles.imageShadow} />
+            )}
+          </div>
         </div>
       </div>
     </section>

@@ -15,20 +15,20 @@
   align-items: center;
   gap: 38px;
 
-  margin: 0 auto;
-  padding: 90px 22px 59px;
+  padding: 90px 0 59px;
 }
 
 .title {
-  font-size: 100px;
+  font-size: clamp(56px, 8vw, 100px);
   font-weight: 700;
-  line-height: 150px;
+  line-height: 1.1;
   letter-spacing: -1.1px;
+  text-align: center;
   color: var(--color-white);
 }
 
 .text {
-  max-width: 1676px;
+  max-width: var(--container-narrow);
 
   font-size: 40px;
   font-weight: 400;
@@ -111,4 +111,16 @@
   width: 40px;
   height: 40px;
   fill: var(--color-white);
+}
+
+@media (max-width: 900px) {
+  .form {
+    gap: 16px;
+    min-height: auto;
+    padding: 16px 20px;
+  }
+
+  .button {
+    padding: 16px 18px;
+  }
 }

@@ -7,18 +7,16 @@
 }
 
 .layout {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(320px, 722px) minmax(0, 1fr);
   align-items: flex-start;
-  justify-content: center;
-  gap: 76px;
-  margin: 0 auto;
+  gap: clamp(40px, 5vw, 72px);
 }
 
 .media {
   margin: 0;
-  width: 722px;
-  height: 722px;
-  flex-shrink: 0;
+  width: 100%;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 38px;
   box-shadow: var(--shadow-media);
@@ -33,6 +31,7 @@
 
 .content {
   width: 100%;
+  max-width: 760px;
   padding-top: 31px;
 }
 
@@ -98,8 +97,7 @@
 }
 
 .button {
-  max-width: 231px;
-  width: 100%;
+  width: min(100%, 231px);
   min-height: 56px;
   padding: 12px 28px;
   border: none;
@@ -135,44 +133,19 @@
   opacity: 0.7;
 }
 
-/* @media (max-width: 1200px) {
-  .layout {
-    grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
-    gap: 32px;
-    max-width: 940px;
-  }
-
-  .content {
-    max-width: 340px;
-  }
-}
-
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .page {
     padding: 40px 0 96px;
-  }
-
-  .media {
-    padding: 20px;
-  }
-
-  .title {
-    font-size: 36px;
   }
 
   .layout {
     grid-template-columns: minmax(0, 1fr);
     gap: 32px;
-    max-width: 100%;
   }
 
   .content {
     max-width: 100%;
     padding-top: 0;
-  }
-
-  .relatedArtworksGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -183,10 +156,6 @@
 
   .artworkSection {
     margin-bottom: 72px;
-  }
-
-  .media {
-    padding: 16px;
   }
 
   .title {
@@ -206,8 +175,4 @@
     flex-direction: column;
     margin-bottom: 24px;
   }
-
-  .relatedArtworksGrid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-} */
+}

@@ -24,7 +24,7 @@ const supportLinks = [
 const Footer = () => {
   return (
     <footer className={styles.footer}>
-      <div className="container">
+      <div className="container-main">
         <div className={styles.top}>
           {/* col 1 */}
           <div className={styles.brandCol}>
@@ -96,7 +96,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className={styles.bottom}>© 2025 Artora. All Rights Reserved.</div>
+        <div className={styles.bottom}>&copy; 2025 Artora. All Rights Reserved.</div>
       </div>
     </footer>
   );

@@ -3,13 +3,15 @@
 }
 
 .inner {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(320px, 656px) minmax(0, 1fr);
   align-items: center;
-  gap: 128px;
+  gap: clamp(32px, 5vw, 96px);
 }
 
 .imageWrapper {
-  width: 656px;
+  width: 100%;
+  max-width: 656px;
   height: auto;
   border-radius: 44px;
   overflow: hidden;
@@ -23,6 +25,7 @@
 .content {
   display: block;
   max-width: 874px;
+  min-width: 0;
 }
 
 .title {
@@ -72,4 +75,14 @@
 .link:hover,
 .link:focus {
   background-color: var(--color-accent-ghost);
+}
+
+@media (max-width: 1080px) {
+  .inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .imageWrapper {
+    max-width: 520px;
+  }
 }

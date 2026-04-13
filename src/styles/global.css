@@ -22,6 +22,7 @@ body {
 }
 
 main {
+  display: flow-root;
   background-color: var(--color-white);
 }
 
@@ -78,34 +79,35 @@ blockquote {
 
 /* page wrapper */
 .page {
-  width: 100%;
-  max-width: var(--page-max);
-  margin: 0 auto;
+  width: min(var(--page-max), calc(100% - (var(--page-gutter) * 2)));
+  margin-inline: auto;
 }
 
 /* containers */
+.page-shell,
 .container-wide,
 .container-main,
 .container-narrow,
 .container {
-  width: 100%;
-  margin: 0 auto;
+  width: min(var(--layout-max), calc(100% - (var(--page-gutter) * 2)));
+  margin-inline: auto;
 }
 
+.page-shell,
 .container-wide {
-  max-width: var(--container-wide);
+  --layout-max: var(--container-wide);
 }
 
 .container-main {
-  max-width: var(--container-main);
+  --layout-max: var(--container-main);
 }
 
 .container-narrow {
-  max-width: var(--container-narrow);
+  --layout-max: var(--container-narrow);
 }
 
 .container {
-  max-width: var(--container-main);
+  --layout-max: var(--container-main);
 }
 
 /* sections */

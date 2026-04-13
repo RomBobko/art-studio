@@ -11,7 +11,7 @@ import Logo from "../Logo";
 const Header = () => {
   return (
     <header className={styles.header}>
-      <div className="container">
+      <div className="container-main">
         <div className={styles.inner}>
           <Logo />
 

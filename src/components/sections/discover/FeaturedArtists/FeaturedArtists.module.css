@@ -12,12 +12,10 @@
 }
 
 .slider {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
-  gap: 66px;
-
-  padding: 0px 55px;
+  gap: clamp(24px, 4vw, 48px);
 }
 
 .arrowButton {
@@ -40,6 +38,20 @@
 
 .list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 84px;
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  gap: 40px;
+}
+
+.item {
+  width: 100%;
+}
+
+@media (max-width: 960px) {
+  .slider {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .arrowButton {
+    display: none;
+  }
 }

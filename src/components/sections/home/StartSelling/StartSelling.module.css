@@ -3,11 +3,12 @@
 }
 
 .inner {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 640px);
   align-items: center;
-  justify-content: space-between;
-
-  max-width: 1614px;
+  gap: 32px;
+  width: min(var(--container-narrow), 100%);
+  margin-inline: auto;
   padding: 29px 52px;
 
   background-color: var(--color-page-bg);
@@ -23,8 +24,9 @@
 }
 
 .button {
-  min-width: 639px;
-  padding: 25px 122px;
+  width: 100%;
+  min-width: 0;
+  padding: 25px 40px;
 
   font-size: 32px;
   font-weight: 500;
@@ -35,4 +37,11 @@
   background-color: var(--color-button-secondary);
 
   cursor: pointer;
+}
+
+@media (max-width: 1080px) {
+  .inner {
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+  }
 }
