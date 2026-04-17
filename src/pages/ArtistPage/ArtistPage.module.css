@@ -60,7 +60,11 @@
   min-height: 52px;
   padding: 12px 28px;
   margin-bottom: 15px;
-  border: none;
+  border: 1px solid transparent;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
   border-radius: var(--radius-sm);
   background-color: var(--color-button-secondary);
   color: var(--color-white);
@@ -69,6 +73,12 @@
   line-height: 1.5;
   letter-spacing: -0.22px;
   cursor: pointer;
+}
+
+.buttonFollowing {
+  background-color: transparent;
+  color: #111;
+  border-color: #111;
 }
 
 .socials {
@@ -171,4 +181,3 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
-

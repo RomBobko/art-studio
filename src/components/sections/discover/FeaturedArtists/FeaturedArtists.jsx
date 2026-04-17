@@ -15,7 +15,7 @@ const FeaturedArtists = () => {
           <button
             className={styles.arrowButton}
             type="button"
-            arria-label="Previous artist"
+            aria-label="Previous artist"
           >
             <HiOutlineChevronLeft className={styles.icon} />
           </button>
@@ -31,7 +31,7 @@ const FeaturedArtists = () => {
           <button
             className={styles.arrowButton}
             type="button"
-            arria-label=" Next artist"
+            aria-label="Next artist"
           >
             <HiOutlineChevronRight className={styles.icon} />
           </button>

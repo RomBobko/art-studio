@@ -82,6 +82,12 @@
   width: 100%;
 }
 
+.empty {
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+
 
 .loadMore {
   display: block;

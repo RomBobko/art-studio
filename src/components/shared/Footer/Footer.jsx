@@ -17,7 +17,7 @@ const communityLinks = [
 ];
 
 const supportLinks = [
-  { href: "mailto:info@artora.com", label: "Email Us" },
+  { href: "mailto:info@artstudio.com", label: "Email Us" },
   { href: "tel:+15551234567", label: "Call Us" },
 ];
 
@@ -35,11 +35,11 @@ const Footer = () => {
 
             <p className={styles.desc}>
               Discover unique art, create with passion, and share your world
-              with Artora.
+              with ArtStudio.
             </p>
 
             <div className={styles.contact}>
-              <a href="mailto:info@artora.com">info@artora.com</a>
+              <a href="mailto:info@artstudio.com">info@artstudio.com</a>
               <a href="tel:+15551234567">+1 (555) 123-4567</a>
             </div>
 
@@ -96,7 +96,9 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className={styles.bottom}>&copy; 2025 Artora. All Rights Reserved.</div>
+        <div className={styles.bottom}>
+          &copy; 2025 ArtStudio. All Rights Reserved.
+        </div>
       </div>
     </footer>
   );

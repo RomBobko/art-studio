@@ -1,6 +1,6 @@
 import styles from "./CategoryFilter.module.css";
 
-const CategoryFilter = ({ groups }) => {
+const CategoryFilter = ({ groups, selectedFilters, onFilterChange }) => {
   return (
     <aside className={styles.sidebar} aria-labelledby="filters-title">
       <h2 id="filters-title" className={styles.sidebarTitle}>
@@ -18,6 +18,8 @@ const CategoryFilter = ({ groups }) => {
                   type="checkbox"
                   name={group.name}
                   value={option.value}
+                  checked={selectedFilters[group.name].includes(option.value)}
+                  onChange={() => onFilterChange(group.name, option.value)}
                 />
                 <span>{option.label}</span>
               </label>

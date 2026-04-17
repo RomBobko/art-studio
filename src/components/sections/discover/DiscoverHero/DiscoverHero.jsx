@@ -1,7 +1,11 @@
 import { BsSearch } from "react-icons/bs";
 import styles from "./DiscoverHero.module.css";
 
-const DiscoverHero = () => {
+const DiscoverHero = ({ searchQuery, onSearchChange }) => {
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+  };
+
   return (
     <section className={styles.section}>
       <div className="container-wide">
@@ -13,13 +17,15 @@ const DiscoverHero = () => {
             your every moment.
           </p>
 
-          <form className={styles.form}>
+          <form className={styles.form} onSubmit={handleSubmit}>
             <label className={styles.field}>
               <span className={styles.visuallyHidden}>Search artworks</span>
               <input
                 className={styles.input}
                 type="search"
                 placeholder="Search artworks.."
+                value={searchQuery}
+                onChange={(evt) => onSearchChange(evt.target.value)}
               />
             </label>
 

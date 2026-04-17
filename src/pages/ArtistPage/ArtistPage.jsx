@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { FaInstagram, FaTwitter } from "react-icons/fa";
 import { RiGlobalLine } from "react-icons/ri";
@@ -8,6 +9,7 @@ import ArtworkThumbnailGrid from "../../components/shared/ArtworkThumbnailGrid";
 
 const ArtistPage = () => {
   const { artistSlug } = useParams();
+  const [isFollowing, setIsFollowing] = useState(false);
 
   const artist = artists.find((item) => item.slug === artistSlug);
 
@@ -25,10 +27,19 @@ const ArtistPage = () => {
   }
 
   const artistArtworks = artworks.filter((item) => item.artistId === artist.id);
+
   const artistArtworksActionsClassName =
     artistArtworks.length > 0
       ? `${styles.artistArtworksActions} ${styles.artistArtworksActionsWithGrid}`
       : styles.artistArtworksActions;
+
+  const followButtonClassName = isFollowing
+    ? `${styles.button} ${styles.buttonFollowing}`
+    : styles.button;
+
+  const handleFollowToggle = () => {
+    setIsFollowing((prevIsFollowing) => !prevIsFollowing);
+  };
 
   return (
     <>
@@ -52,8 +63,13 @@ const ArtistPage = () => {
               </p>
 
               <div className={styles.actions}>
-                <button className={styles.button} type="button">
-                  Follow
+                <button
+                  className={followButtonClassName}
+                  type="button"
+                  onClick={handleFollowToggle}
+                  aria-pressed={isFollowing}
+                >
+                  {isFollowing ? "Following" : "Follow"}
                 </button>
 
                 <ul className={styles.socials}>

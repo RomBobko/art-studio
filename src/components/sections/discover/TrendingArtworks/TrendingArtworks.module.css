@@ -21,6 +21,12 @@
   width: 100%;
 }
 
+.empty {
+  font-size: var(--fs-200);
+  line-height: var(--lh-150);
+  color: var(--color-text-muted);
+}
+
 @media (max-width: 1200px) {
   .list {
     grid-template-columns: repeat(3, minmax(0, 1fr));

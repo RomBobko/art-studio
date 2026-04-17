@@ -13,7 +13,7 @@ const AboutUs = () => {
             <h2 className={styles.title}>About Us</h2>
 
             <p className={styles.text}>
-              Artora is a creative hub where artists and art lovers come
+              ArtStudio is a creative hub where artists and art lovers come
               together. From paintings and crafts to digital and contemporary
               art, our platform celebrates diversity and creativity. Discover
               artworks that speak to your soul, learn new skills, and support
