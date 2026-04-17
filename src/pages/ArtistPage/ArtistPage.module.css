@@ -154,7 +154,7 @@
 .backLink {
   display: inline-block;
   font-size: 18px;
-  color: #094e71;
+  color: var(--color-link-artist);
   text-decoration: none;
 }
 

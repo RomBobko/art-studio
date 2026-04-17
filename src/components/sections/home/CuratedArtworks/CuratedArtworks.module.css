@@ -5,15 +5,15 @@
 .title {
   margin-bottom: 59px;
 
-  font-size: 42px;
-  font-weight: 600;
+  font-size: var(--fs-800);
+  font-weight: var(--fw-semibold);
   line-height: 51px;
 }
 
 .list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-  gap: 40px;
+  gap: var(--space-40);
   max-width: var(--container-narrow);
   margin-inline: auto;
 }

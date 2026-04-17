@@ -6,10 +6,10 @@
 
 .brandText {
   font-size: 28px;
-  font-weight: 500;
+  font-weight: var(--fw-medium);
   letter-spacing: -0.02em;
   color: var(--color-text-primary);
-  margin-right: 24px;
+  margin-right: var(--space-24);
 }
 
 .logo {

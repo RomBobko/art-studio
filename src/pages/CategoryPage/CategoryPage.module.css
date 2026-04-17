@@ -91,10 +91,10 @@
   border: none;
   border-radius: 10px;
   background-color: #a88a63;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1;
+  color: var(--color-white);
+  font-size: var(--fs-200);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-100);
   cursor: pointer;
 }
 
