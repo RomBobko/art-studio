@@ -51,7 +51,7 @@
   line-height: 150%;
   letter-spacing: -0.495px;
   font-weight: 400;
-  color: #094e71;
+  color: var(--color-link-artist);
   text-decoration: none;
 }
 

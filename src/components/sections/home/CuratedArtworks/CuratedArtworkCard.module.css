@@ -25,14 +25,14 @@
 .title {
   margin-bottom: -6px;
 
-  font-size: 30px;
-  font-weight: 600;
+  font-size: var(--fs-600);
+  font-weight: var(--fw-semibold);
   line-height: 51px;
 }
 
 .name {
-  font-size: 15px;
-  font-weight: 400;
+  font-size: var(--fs-150);
+  font-weight: var(--fw-regular);
   line-height: 22px;
   letter-spacing: -0.15px;
 }

@@ -6,30 +6,30 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 640px);
   align-items: center;
-  gap: 32px;
+  gap: var(--space-32);
   width: min(var(--container-narrow), 100%);
   margin-inline: auto;
   padding: 29px 52px;
 
   background-color: var(--color-page-bg);
-  border-radius: 16px;
+  border-radius: var(--radius-lg);
 }
 
 .title {
   max-width: 637px;
 
-  font-size: 42px;
-  font-weight: 500;
+  font-size: var(--fs-800);
+  font-weight: var(--fw-medium);
   color: var(--color-black);
 }
 
 .button {
   width: 100%;
   min-width: 0;
-  padding: 25px 40px;
+  padding: 25px var(--space-40);
 
-  font-size: 32px;
-  font-weight: 500;
+  font-size: var(--fs-650);
+  font-weight: var(--fw-medium);
   border: none;
   border-radius: 15px;
 

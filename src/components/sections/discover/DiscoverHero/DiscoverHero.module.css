@@ -20,8 +20,8 @@
 
 .title {
   font-size: clamp(56px, 8vw, 100px);
-  font-weight: 700;
-  line-height: 1.1;
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-110);
   letter-spacing: -1.1px;
   text-align: center;
   color: var(--color-white);
@@ -31,7 +31,7 @@
   max-width: var(--container-narrow);
 
   font-size: 40px;
-  font-weight: 400;
+  font-weight: var(--fw-regular);
   line-height: 69px;
   letter-spacing: -0.5px;
   text-align: center;
@@ -77,9 +77,9 @@
   height: 100%;
   padding: 10px 15px;
 
-  font-size: 25px;
+  font-size: var(--fs-550);
   font-weight: 300;
-  line-height: 1.2;
+  line-height: var(--lh-120);
   color: var(--color-white);
 
   border: none;
@@ -92,7 +92,7 @@
 .input::placeholder {
   color: rgba(255, 255, 255, 0.8);
   font-size: 28px;
-  font-weight: 400;
+  font-weight: var(--fw-regular);
   font-style: italic;
   line-height: 150px;
   letter-spacing: -0.3px;

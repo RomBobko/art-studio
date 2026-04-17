@@ -1,24 +1,24 @@
 .footer {
   background: var(--color-footer-bg);
-  padding: 48px 0 24px;
+  padding: var(--space-48) 0 var(--space-24);
 }
 
 .top {
   display: grid;
   grid-template-columns: 1.4fr 1fr 1fr 1fr;
-  gap: 48px;
+  gap: var(--space-48);
   align-items: start;
 }
 
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-12);
 }
 
 .brandText {
   font-size: 35px;
-  font-weight: 500;
+  font-weight: var(--fw-medium);
   letter-spacing: -0.02em;
   color: var(--color-black);
 }
@@ -30,19 +30,19 @@
 }
 
 .desc {
-  margin: 14px 0 16px;
+  margin: 14px 0 var(--space-16);
   max-width: 320px;
   color: var(--color-black);
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.6;
+  font-size: var(--fs-100);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-160);
 }
 
 .contact {
   display: grid;
   gap: 3px;
   margin-bottom: 25px;
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
 }
 
 .contact a {
@@ -65,7 +65,7 @@
   width: 28px;
   height: 28px;
   border: 1px solid var(--color-black);
-  border-radius: 6px;
+  border-radius: var(--radius-xs);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -74,10 +74,10 @@
 
 .title {
   margin: 0 0 34px;
-  font-family: Inter, system-ui, sans-serif;
-  font-size: 25px;
-  font-weight: 600;
-  line-height: 1.5;
+  font-family: var(--font-family-main);
+  font-size: var(--fs-550);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-150);
   letter-spacing: -0.011em;
   color: var(--color-black);
 }
@@ -92,9 +92,9 @@
 }
 
 .list a {
-  font-family: Inter, system-ui, sans-serif;
-  font-weight: 500;
-  line-height: 1.5;
+  font-family: var(--font-family-main);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-150);
   letter-spacing: -0.011em;
   color: var(--color-black);
 }
@@ -116,6 +116,6 @@
 @media (max-width: 720px) {
   .top {
     grid-template-columns: minmax(0, 1fr);
-    gap: 32px;
+    gap: var(--space-32);
   }
 }
