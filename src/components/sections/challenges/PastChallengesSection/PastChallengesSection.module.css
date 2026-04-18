@@ -1,0 +1,132 @@
+.section {
+  padding-top: var(--space-48);
+  padding-bottom: var(--section-space-lg);
+}
+
+.sectionInner {
+  display: grid;
+  gap: var(--space-32);
+}
+
+.sectionHeader {
+  display: grid;
+  gap: var(--space-16);
+  max-width: 640px;
+}
+
+.sectionTitle {
+  color: var(--color-text-strong);
+  font-size: clamp(var(--fs-650), 3vw, var(--fs-800));
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-title);
+}
+
+.sectionText {
+  color: var(--color-text-muted);
+  font-size: var(--fs-200);
+  line-height: var(--lh-160);
+}
+
+.list {
+  display: grid;
+  gap: var(--space-20);
+  max-width: 1120px;
+}
+
+.item {
+  width: 100%;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-24);
+  padding: 18px 22px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(
+    180deg,
+    rgba(236, 230, 220, 0.92),
+    rgba(255, 255, 255, 0.96)
+  );
+  box-shadow: var(--shadow-sm);
+}
+
+.thumbnailWrap {
+  overflow: hidden;
+  width: 112px;
+  border: 1px solid rgba(123, 102, 72, 0.16);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface-alt);
+  box-shadow: var(--shadow-sm);
+}
+
+.thumbnail {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.content {
+  display: grid;
+  gap: var(--space-8);
+  min-width: 0;
+}
+
+.month {
+  color: var(--color-text-muted);
+  font-size: var(--fs-150);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.04em;
+  line-height: var(--lh-150);
+  text-transform: uppercase;
+}
+
+.title {
+  color: var(--color-text-strong);
+  font-size: var(--fs-500);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-title);
+}
+
+.indicator {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(123, 102, 72, 0.12);
+  border-radius: var(--radius-pill);
+  background-color: rgba(255, 255, 255, 0.86);
+  color: var(--color-accent-strong);
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding-top: var(--space-40);
+    padding-bottom: var(--space-64);
+  }
+
+  .card {
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: var(--space-16);
+    padding: var(--space-16);
+  }
+
+  .thumbnailWrap {
+    width: 92px;
+  }
+
+  .indicator {
+    display: none;
+  }
+
+  .title {
+    font-size: var(--fs-400);
+  }
+}
