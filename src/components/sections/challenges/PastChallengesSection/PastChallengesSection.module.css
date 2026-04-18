@@ -1,11 +1,13 @@
 .section {
-  padding-top: var(--space-48);
-  padding-bottom: var(--section-space-lg);
+  padding-top: var(--space-40);
+  padding-bottom: 88px;
 }
 
 .sectionInner {
   display: grid;
-  gap: var(--space-32);
+  gap: var(--space-28);
+  max-width: 1360px;
+  margin-inline: auto;
 }
 
 .sectionHeader {
@@ -30,7 +32,7 @@
 .list {
   display: grid;
   gap: var(--space-20);
-  max-width: 1120px;
+  max-width: 1240px;
 }
 
 .item {
@@ -41,8 +43,8 @@
   display: grid;
   grid-template-columns: 112px minmax(0, 1fr) auto;
   align-items: center;
-  gap: var(--space-24);
-  padding: 18px 22px;
+  gap: 20px;
+  padding: 18px 20px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-xl);
   background: linear-gradient(
@@ -85,7 +87,7 @@
 
 .title {
   color: var(--color-text-strong);
-  font-size: var(--fs-500);
+  font-size: var(--fs-450);
   font-weight: var(--fw-semibold);
   line-height: var(--lh-title);
 }
@@ -108,8 +110,8 @@
 
 @media (max-width: 640px) {
   .section {
-    padding-top: var(--space-40);
-    padding-bottom: var(--space-64);
+    padding-top: var(--space-32);
+    padding-bottom: var(--space-56);
   }
 
   .card {

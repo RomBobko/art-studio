@@ -1,11 +1,13 @@
 .section {
-  padding-top: var(--space-48);
-  padding-bottom: var(--space-64);
+  padding-top: var(--space-40);
+  padding-bottom: 56px;
 }
 
 .sectionInner {
   display: grid;
-  gap: var(--space-32);
+  gap: var(--space-28);
+  max-width: 1360px;
+  margin-inline: auto;
 }
 
 .sectionHeader {
@@ -30,16 +32,16 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-  gap: var(--space-32) var(--space-24);
+  gap: 28px var(--space-24);
 }
 
 .card {
   display: grid;
-  gap: var(--space-16);
+  gap: 14px;
   height: 100%;
-  padding: var(--space-16);
+  padding: 14px;
   border: 1px solid rgba(123, 102, 72, 0.16);
-  border-radius: var(--radius-2xl);
+  border-radius: var(--radius-xl);
   background: linear-gradient(
     180deg,
     rgba(233, 227, 219, 0.56),
@@ -64,13 +66,13 @@
 
 .cardContent {
   display: grid;
-  gap: var(--space-8);
-  padding-inline: var(--space-8);
+  gap: 6px;
+  padding-inline: 6px;
 }
 
 .artworkTitle {
   color: var(--color-text-strong);
-  font-size: var(--fs-500);
+  font-size: var(--fs-450);
   font-weight: var(--fw-semibold);
   line-height: var(--lh-title);
 }
@@ -83,8 +85,8 @@
 
 @media (max-width: 720px) {
   .section {
-    padding-top: var(--space-40);
-    padding-bottom: var(--space-48);
+    padding-top: var(--space-32);
+    padding-bottom: var(--space-40);
   }
 
   .grid {
