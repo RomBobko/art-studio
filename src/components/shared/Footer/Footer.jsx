@@ -2,16 +2,9 @@ import { Link } from "react-router-dom";
 import styles from "./Footer.module.css";
 import logo from "../../../assets/logo.svg";
 import { primarySiteLinks } from "../../../data/siteLinks";
-import {
-  BsInstagram,
-  BsPinterest,
-  BsBehance,
-  BsTwitterX,
-} from "react-icons/bs";
 
 const communityLinks = [
   { to: "/discover", label: "Explore Art" },
-  { to: "/discover", label: "Meet Artists" },
   { to: "/learn", label: "Learn Skills" },
   { to: "/challenges", label: "Join Challenges" },
 ];
@@ -41,21 +34,6 @@ const Footer = () => {
             <div className={styles.contact}>
               <a href="mailto:info@artstudio.com">info@artstudio.com</a>
               <a href="tel:+15551234567">+1 (555) 123-4567</a>
-            </div>
-
-            <div className={styles.social}>
-              <a className={styles.socialBtn} href="#" aria-label="Instagram">
-                <BsInstagram size={18} />
-              </a>
-              <a className={styles.socialBtn} href="#" aria-label="Pinterest">
-                <BsPinterest size={18} />
-              </a>
-              <a className={styles.socialBtn} href="#" aria-label="Behance">
-                <BsBehance size={18} />
-              </a>
-              <a className={styles.socialBtn} href="#" aria-label="X">
-                <BsTwitterX size={18} />
-              </a>
             </div>
           </div>
 
@@ -97,7 +75,7 @@ const Footer = () => {
         </div>
 
         <div className={styles.bottom}>
-          &copy; 2025 ArtStudio. All Rights Reserved.
+          &copy; {new Date().getFullYear()} ArtStudio. All Rights Reserved.
         </div>
       </div>
     </footer>

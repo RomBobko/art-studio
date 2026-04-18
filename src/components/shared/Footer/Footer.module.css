@@ -56,22 +56,6 @@
   text-underline-offset: 3px;
 }
 
-.social {
-  display: flex;
-  gap: 10px;
-}
-
-.socialBtn {
-  width: 28px;
-  height: 28px;
-  border: 1px solid var(--color-black);
-  border-radius: 6px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-black);
-}
-
 .title {
   margin: 0 0 34px;
   font-family: Inter, system-ui, sans-serif;

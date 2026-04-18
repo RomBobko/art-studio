@@ -7,9 +7,7 @@ const Hero = ({
   titleLines = ["Discover", "Create", "Share Art"],
   text = "ArtStudio is a space where creativity meets community. Discover unique artworks, learn from creators, and share your own artistic journey. Every brushstroke, sketch, and idea finds its place here.",
   primaryText = "Explore Art",
-  secondaryText = "Start Selling",
   primaryTo = "/discover",
-  secondaryTo = "/discover",
   imageSrc = heroImg,
   imageAlt = "Featured artwork",
 }) => {
@@ -33,9 +31,6 @@ const Hero = ({
             <div className={styles.actions}>
               <Link to={primaryTo} className={styles.primary}>
                 {primaryText}
-              </Link>
-              <Link to={secondaryTo} className={styles.secondary}>
-                {secondaryText}
               </Link>
             </div>
           </div>

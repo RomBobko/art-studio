@@ -49,8 +49,7 @@
   gap: 18px;
 }
 
-.primary,
-.secondary {
+.primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -58,34 +57,20 @@
   min-width: 272px;
   height: 64px;
   padding: 13px 71px;
+  border: none;
   border-radius: 18px;
 
   font-size: 25px;
   font-weight: 400;
   text-decoration: none;
-  transition: var(--transition-base);
-}
-
-.primary {
-  border: none;
   color: var(--color-white);
   background-color: var(--color-button-primary);
-}
-
-.secondary {
-  border: 1px solid var(--color-button-border);
-  color: var(--color-button-primary);
-  background-color: transparent;
+  transition: var(--transition-base);
 }
 
 .primary:hover,
 .primary:focus {
   background-color: var(--color-accent-hover);
-}
-
-.secondary:hover,
-.secondary:focus {
-  background-color: var(--color-accent-ghost);
 }
 
 .visual {
