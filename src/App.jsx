@@ -11,10 +11,14 @@ import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import CategoryPage from "./pages/CategoryPage/CategoryPage";
 import ArtworkPage from "./pages/ArtworkPage/ArtworkPage";
 import ArtistPage from "./pages/ArtistPage/ArtistPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import SignUpPage from "./pages/SignUpPage/SignUpPage";
 
 const App = () => {
   return (
     <Routes>
+      <Route path="login" element={<LoginPage />} />
+      <Route path="signup" element={<SignUpPage />} />
       <Route path="/" element={<MainLayout />}>
         <Route index element={<HomePage />} />
         <Route path="discover" element={<DiscoverPage />} />
