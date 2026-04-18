@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 import {
   BsSearch,
@@ -39,9 +40,9 @@ const Header = () => {
             >
               <BsHeartFill size={22} />
             </button>
-            <button className={styles.iconBtn} type="button" aria-label="Cart">
+            <Link className={styles.iconBtn} to="/cart" aria-label="Cart">
               <BsCartFill size={22} />
-            </button>
+            </Link>
           </div>
         </div>
       </div>

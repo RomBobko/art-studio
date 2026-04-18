@@ -1,5 +1,6 @@
 import { useState } from "react";
 import imagePlaceholder from "../assets/placeholders/imagePlaceholder.webp";
+import styles from "./ChallengesPage.module.css";
 import CurrentChallengeSection from "../components/sections/challenges/CurrentChallengeSection/CurrentChallengeSection";
 import ChallengeSubmissionForm from "../components/sections/challenges/ChallengeSubmissionForm/ChallengeSubmissionForm";
 import ChallengeSubmissionsSection from "../components/sections/challenges/ChallengeSubmissionsSection/ChallengeSubmissionsSection";
@@ -131,11 +132,13 @@ const ChallengesPage = () => {
   };
 
   return (
-    <>
+    <div className={styles.page}>
       <CurrentChallengeSection
         title={currentChallenge.title}
+        theme={currentChallenge.theme}
         description={currentChallenge.description}
         deadline={currentChallenge.deadline}
+        format={currentChallenge.format}
         prize={currentChallenge.prize}
         image={currentChallenge.image}
         imageAlt={currentChallenge.imageAlt}
@@ -154,7 +157,7 @@ const ChallengesPage = () => {
       )}
       <ChallengeSubmissionsSection submissions={submissions} />
       <PastChallengesSection challenges={pastChallenges} />
-    </>
+    </div>
   );
 };
 

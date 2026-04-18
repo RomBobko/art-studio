@@ -1,0 +1,60 @@
+.page {
+  position: relative;
+  overflow: clip;
+  padding-bottom: var(--space-80);
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(154, 122, 80, 0.16),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 88% 12%,
+      rgba(183, 157, 121, 0.18),
+      transparent 18%
+    ),
+    linear-gradient(
+      180deg,
+      #faf6f1 0%,
+      #f3ede4 38%,
+      #ffffff 74%
+    );
+}
+
+.page::before,
+.page::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.page::before {
+  top: 180px;
+  right: -140px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(
+    circle,
+    rgba(183, 157, 121, 0.18),
+    rgba(183, 157, 121, 0)
+  );
+}
+
+.page::after {
+  bottom: 240px;
+  left: -140px;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(
+    circle,
+    rgba(123, 102, 72, 0.12),
+    rgba(123, 102, 72, 0)
+  );
+}
+
+@media (max-width: 720px) {
+  .page {
+    padding-bottom: var(--space-64);
+  }
+}

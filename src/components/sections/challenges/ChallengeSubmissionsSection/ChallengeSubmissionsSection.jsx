@@ -9,6 +9,7 @@ const ChallengeSubmissionsSection = ({ submissions }) => {
       <div className="container-main">
         <div className={styles.sectionInner}>
           <div className={styles.sectionHeader}>
+            <p className={styles.sectionEyebrow}>Community Gallery</p>
             <h2
               id="challenge-submissions-title"
               className={styles.sectionTitle}
@@ -34,10 +35,16 @@ const ChallengeSubmissionsSection = ({ submissions }) => {
                 </div>
 
                 <div className={styles.cardContent}>
+                  <div className={styles.cardMeta}>
+                    <p className={styles.medium}>{submission.medium}</p>
+                  </div>
                   <h3 className={styles.artworkTitle}>
                     {submission.artworkTitle}
                   </h3>
                   <p className={styles.artistName}>{submission.artistName}</p>
+                  {submission.note && (
+                    <p className={styles.note}>{submission.note}</p>
+                  )}
                 </div>
               </article>
             ))}

@@ -1,95 +1,196 @@
 .section {
-  padding-top: var(--space-40);
-  padding-bottom: 56px;
+  padding-top: var(--space-24);
+  padding-bottom: var(--space-72, 72px);
 }
 
 .sectionInner {
   display: grid;
-  gap: var(--space-28);
-  max-width: 1360px;
+  gap: clamp(var(--space-24), 3vw, 36px);
+  max-width: 1440px;
   margin-inline: auto;
 }
 
 .sectionHeader {
   display: grid;
-  gap: var(--space-16);
-  max-width: 640px;
+  gap: var(--space-12);
+  max-width: 720px;
 }
 
 .sectionTitle {
   color: var(--color-text-strong);
-  font-size: clamp(var(--fs-650), 3vw, var(--fs-800));
+  font-size: clamp(var(--fs-700), 3vw, var(--fs-850));
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.04em;
+  line-height: 0.98;
+}
+
+.sectionEyebrow {
+  display: inline-flex;
+  width: fit-content;
+  padding: 9px 14px;
+  border-radius: var(--radius-pill);
+  background-color: rgba(123, 102, 72, 0.1);
+  color: var(--color-accent-strong);
+  font-size: var(--fs-150);
   font-weight: var(--fw-semibold);
-  line-height: var(--lh-title);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .sectionText {
+  max-width: 56ch;
   color: var(--color-text-muted);
-  font-size: var(--fs-200);
+  font-size: var(--fs-300);
   line-height: var(--lh-160);
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-  gap: 28px var(--space-24);
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: clamp(var(--space-20), 2.6vw, var(--space-32));
 }
 
 .card {
+  position: relative;
   display: grid;
-  gap: 14px;
+  gap: var(--space-18, 18px);
   height: 100%;
-  padding: 14px;
-  border: 1px solid rgba(123, 102, 72, 0.16);
-  border-radius: var(--radius-xl);
+  padding: 16px;
+  border: 1px solid rgba(123, 102, 72, 0.12);
+  border-radius: 30px;
   background: linear-gradient(
     180deg,
-    rgba(233, 227, 219, 0.56),
-    rgba(255, 255, 255, 0.96)
+    rgba(255, 255, 255, 0.86),
+    rgba(242, 235, 225, 0.96)
   );
-  box-shadow: var(--shadow-sm);
+  box-shadow:
+    0 24px 40px rgba(89, 72, 50, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.76);
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at 18% 10%,
+      rgba(255, 255, 255, 0.72),
+      rgba(255, 255, 255, 0) 28%
+    ),
+    radial-gradient(
+      circle at 84% 88%,
+      rgba(154, 122, 80, 0.12),
+      rgba(154, 122, 80, 0) 30%
+    );
+  pointer-events: none;
+}
+
+.imageWrap,
+.cardContent {
+  position: relative;
+  z-index: 1;
 }
 
 .imageWrap {
   overflow: hidden;
-  border-radius: var(--radius-xl);
   border: 1px solid rgba(123, 102, 72, 0.14);
-  background-color: var(--color-surface);
-  box-shadow: var(--shadow-media);
+  border-radius: 24px;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 18px 28px rgba(89, 72, 50, 0.1);
 }
 
 .image {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
 }
 
 .cardContent {
   display: grid;
-  gap: 6px;
-  padding-inline: 6px;
+  gap: var(--space-10, 10px);
+  padding: 4px 8px 10px;
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-12);
+}
+
+.medium {
+  display: inline-flex;
+  width: fit-content;
+  padding: 7px 12px;
+  border-radius: var(--radius-pill);
+  background-color: rgba(123, 102, 72, 0.1);
+  color: var(--color-accent-strong);
+  font-size: var(--fs-150);
+  font-weight: var(--fw-semibold);
+  line-height: 1.2;
 }
 
 .artworkTitle {
   color: var(--color-text-strong);
-  font-size: var(--fs-450);
+  font-size: clamp(var(--fs-450), 2vw, 28px);
   font-weight: var(--fw-semibold);
-  line-height: var(--lh-title);
+  letter-spacing: -0.03em;
+  line-height: 1.08;
 }
 
 .artistName {
-  color: var(--color-text-muted);
+  color: var(--color-text-secondary);
   font-size: var(--fs-200);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-150);
+}
+
+.note {
+  color: var(--color-text-muted);
+  font-size: var(--fs-150);
   line-height: var(--lh-160);
 }
 
-@media (max-width: 720px) {
+@media (max-width: 960px) {
   .section {
-    padding-top: var(--space-32);
-    padding-bottom: var(--space-40);
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-56);
   }
 
   .grid {
-    gap: var(--space-24);
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding-bottom: var(--space-48);
+  }
+
+  .sectionHeader {
+    gap: var(--space-10, 10px);
+  }
+
+  .sectionTitle {
+    font-size: clamp(34px, 10vw, 46px);
+  }
+
+  .sectionText {
+    font-size: var(--fs-200);
+  }
+
+  .card {
+    padding: 14px;
+    border-radius: 24px;
+  }
+
+  .imageWrap {
+    border-radius: 20px;
+  }
+
+  .cardContent {
+    padding-inline: 4px;
   }
 }

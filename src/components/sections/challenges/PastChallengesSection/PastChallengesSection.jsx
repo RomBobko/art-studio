@@ -10,6 +10,7 @@ const PastChallengesSection = ({ challenges }) => {
       <div className="container-main">
         <div className={styles.sectionInner}>
           <div className={styles.sectionHeader}>
+            <p className={styles.sectionEyebrow}>Archive</p>
             <h2 id="past-challenges-title" className={styles.sectionTitle}>
               Past Challenges
             </h2>
@@ -32,8 +33,14 @@ const PastChallengesSection = ({ challenges }) => {
                   </div>
 
                   <div className={styles.content}>
-                    <p className={styles.month}>{challenge.month}</p>
+                    <div className={styles.contentMeta}>
+                      <p className={styles.month}>{challenge.month}</p>
+                      <p className={styles.winner}>
+                        Winner: {challenge.winnerName}
+                      </p>
+                    </div>
                     <h3 className={styles.title}>{challenge.title}</h3>
+                    <p className={styles.theme}>{challenge.theme}</p>
                   </div>
 
                   <span className={styles.indicator} aria-hidden="true">

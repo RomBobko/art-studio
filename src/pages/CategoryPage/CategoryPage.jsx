@@ -8,8 +8,8 @@ import { toArtworkCardProps } from "../../data/artworkPreview";
 import CategoryFilter from "./CategoryFilter";
 
 const DEFAULT_SORT_BY = "newest";
-const INITIAL_VISIBLE_COUNT = 6;
-const LOAD_MORE_STEP = 3;
+const INITIAL_VISIBLE_COUNT = 8;
+const LOAD_MORE_STEP = 4;
 const createInitialSelectedFilters = () => ({
   medium: [],
   year: [],

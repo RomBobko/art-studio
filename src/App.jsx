@@ -5,6 +5,8 @@ import HomePage from "./pages/HomePage";
 import DiscoverPage from "./pages/DiscoverPage";
 import LearnPage from "./pages/LearnPage";
 import ChallengesPage from "./pages/ChallengesPage";
+import CartPage from "./pages/CartPage/CartPage";
+import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import CategoryPage from "./pages/CategoryPage/CategoryPage";
 import ArtworkPage from "./pages/ArtworkPage/ArtworkPage";
 import ArtistPage from "./pages/ArtistPage/ArtistPage";
@@ -20,6 +22,8 @@ const App = () => {
         <Route path="artists/:artistSlug" element={<ArtistPage />} />
         <Route path="learn" element={<LearnPage />} />
         <Route path="challenges" element={<ChallengesPage />} />
+        <Route path="cart" element={<CartPage />} />
+        <Route path="dashboard" element={<DashboardPage />} />
       </Route>
     </Routes>
   );
