@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./CartPage.module.css";
 import blossomImage from "../../assets/images/blossom.webp";
 import cityscapeImage from "../../assets/images/cityscape.webp";
@@ -33,6 +33,7 @@ const formatPrice = (value) =>
   }).format(value);
 
 const CartPage = () => {
+  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState(initialCartItems);
 
   const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -64,6 +65,18 @@ const CartPage = () => {
     setCartItems((prevCartItems) =>
       prevCartItems.filter((item) => item.id !== itemId),
     );
+  };
+
+  const handleCheckout = () => {
+    navigate("/checkout", {
+      state: {
+        checkoutData: {
+          cartItems,
+          subtotal,
+          total,
+        },
+      },
+    });
   };
 
   return (
@@ -199,7 +212,11 @@ const CartPage = () => {
                     </div>
                   </div>
 
-                  <button className={styles.primaryButton} type="button">
+                  <button
+                    className={styles.primaryButton}
+                    type="button"
+                    onClick={handleCheckout}
+                  >
                     Checkout
                   </button>
                 </aside>

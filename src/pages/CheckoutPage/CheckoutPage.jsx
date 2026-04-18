@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import abstractImage from "../../assets/images/abstract.webp";
 import styles from "./CheckoutPage.module.css";
 
-const orderItems = [
+const fallbackOrderItems = [
   {
     id: 1,
     title: "Abstract painting",
@@ -35,10 +36,35 @@ const INITIAL_CHECKOUT_VALUES = {
 };
 
 const CheckoutPage = () => {
+  const location = useLocation();
   const [checkoutValues, setCheckoutValues] = useState(INITIAL_CHECKOUT_VALUES);
   const [checkoutErrors, setCheckoutErrors] = useState({});
   const [checkoutSuccessMessage, setCheckoutSuccessMessage] = useState("");
-  const total = orderItems.reduce((sum, item) => sum + item.price, 0);
+  const passedCheckoutData = location.state?.checkoutData;
+  const hasCartState =
+    Array.isArray(passedCheckoutData?.cartItems) &&
+    passedCheckoutData.cartItems.length > 0;
+
+  const orderItems = hasCartState
+    ? passedCheckoutData.cartItems.map((item) => ({
+        id: item.id,
+        title: `${item.title}${item.quantity > 1 ? ` x${item.quantity}` : ""}`,
+        price: item.price * item.quantity,
+      }))
+    : fallbackOrderItems;
+
+  const fallbackSubtotal = fallbackOrderItems.reduce(
+    (sum, item) => sum + item.price,
+    0,
+  );
+  const subtotal = hasCartState ? passedCheckoutData.subtotal : fallbackSubtotal;
+  const total = hasCartState ? passedCheckoutData.total : subtotal;
+  const previewImage = hasCartState
+    ? passedCheckoutData.cartItems[0]?.image || abstractImage
+    : abstractImage;
+  const previewAlt = hasCartState
+    ? `${passedCheckoutData.cartItems[0]?.title || "Artwork"} selected for checkout`
+    : "Abstract artwork selected for checkout";
   const isCardPayment = checkoutValues.paymentMethod === "Card";
 
   const handleInputChange = (event) => {
@@ -143,8 +169,8 @@ const CheckoutPage = () => {
                   <div className={styles.previewImageWrap}>
                     <img
                       className={styles.previewImage}
-                      src={abstractImage}
-                      alt="Abstract artwork selected for checkout"
+                      src={previewImage}
+                      alt={previewAlt}
                     />
                   </div>
                 </section>
@@ -351,6 +377,13 @@ const CheckoutPage = () => {
                       </span>
                     </div>
                   ))}
+
+                  <div className={styles.summaryRow}>
+                    <span className={styles.summaryLabel}>Subtotal</span>
+                    <span className={styles.summaryValue}>
+                      {formatPrice(subtotal)}
+                    </span>
+                  </div>
 
                   <div className={`${styles.summaryRow} ${styles.totalRow}`}>
                     <span className={styles.summaryLabel}>Total</span>
