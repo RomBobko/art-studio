@@ -7,25 +7,7 @@
 .inner {
   height: 84px;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr;
   align-items: center;
   gap: 24px;
-}
-
-.actions {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-
-.iconBtn {
-  background: transparent;
-  border: 0;
-  padding: 6px;
-  cursor: pointer;
-  color: var(--color-black);
-}
-
-.iconBtn:hover {
-  color: var(--color-button-secondary);
 }
