@@ -8,6 +8,7 @@ import ChallengesPage from "./pages/ChallengesPage";
 import CategoryPage from "./pages/CategoryPage/CategoryPage";
 import ArtworkPage from "./pages/ArtworkPage/ArtworkPage";
 import ArtistPage from "./pages/ArtistPage/ArtistPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="artists/:artistSlug" element={<ArtistPage />} />
         <Route path="learn" element={<LearnPage />} />
         <Route path="challenges" element={<ChallengesPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   );
