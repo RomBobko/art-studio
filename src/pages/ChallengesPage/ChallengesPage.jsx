@@ -1,15 +1,15 @@
 import { useState } from "react";
-import imagePlaceholder from "../assets/placeholders/imagePlaceholder.webp";
+import imagePlaceholder from "../../assets/placeholders/imagePlaceholder.webp";
 import styles from "./ChallengesPage.module.css";
-import CurrentChallengeSection from "../components/sections/challenges/CurrentChallengeSection/CurrentChallengeSection";
-import ChallengeSubmissionForm from "../components/sections/challenges/ChallengeSubmissionForm/ChallengeSubmissionForm";
-import ChallengeSubmissionsSection from "../components/sections/challenges/ChallengeSubmissionsSection/ChallengeSubmissionsSection";
-import PastChallengesSection from "../components/sections/challenges/PastChallengesSection/PastChallengesSection";
+import CurrentChallengeSection from "../../components/sections/challenges/CurrentChallengeSection/CurrentChallengeSection";
+import ChallengeSubmissionForm from "../../components/sections/challenges/ChallengeSubmissionForm/ChallengeSubmissionForm";
+import ChallengeSubmissionsSection from "../../components/sections/challenges/ChallengeSubmissionsSection/ChallengeSubmissionsSection";
+import PastChallengesSection from "../../components/sections/challenges/PastChallengesSection/PastChallengesSection";
 import {
   currentChallenge,
   initialSubmissions,
   pastChallenges,
-} from "../data/challenges";
+} from "../../data/challenges";
 
 const INITIAL_FORM_VALUES = {
   artworkTitle: "",

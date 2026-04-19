@@ -4,7 +4,7 @@ import MainLayout from "./layouts/MainLayout";
 import HomePage from "./pages/HomePage";
 import DiscoverPage from "./pages/DiscoverPage";
 import LearnPage from "./pages/LearnPage";
-import ChallengesPage from "./pages/ChallengesPage";
+import ChallengesPage from "./pages/ChallengesPage/ChallengesPage";
 import CartPage from "./pages/CartPage/CartPage";
 import CheckoutPage from "./pages/CheckoutPage/CheckoutPage";
 import DashboardPage from "./pages/DashboardPage/DashboardPage";

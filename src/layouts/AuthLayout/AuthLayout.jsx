@@ -1,12 +1,11 @@
 import styles from "./AuthLayout.module.css";
 
-const AuthLayout = ({ headingId, eyebrow, title, description, children }) => {
+const AuthLayout = ({ headingId, title, description, children }) => {
   return (
     <div className={styles.page}>
       <section className={styles.authSection} aria-labelledby={headingId}>
         <div className={styles.layout}>
           <div className={styles.promoPanel}>
-            <p className={styles.eyebrow}>{eyebrow}</p>
             <h1 id={headingId} className={styles.title}>
               {title}
             </h1>

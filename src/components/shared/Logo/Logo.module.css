@@ -2,6 +2,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-12);
+  flex-shrink: 0;
 }
 
 .brandText {
@@ -9,7 +10,6 @@
   font-weight: 500;
   letter-spacing: -0.02em;
   color: var(--color-text-primary);
-  margin-right: 24px;
 }
 
 .logo {

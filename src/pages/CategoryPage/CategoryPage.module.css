@@ -26,7 +26,7 @@
 
 .catalogLayout {
   display: grid;
-  grid-template-columns: minmax(200px, 220px) minmax(0, 1fr);
+  grid-template-columns: minmax(220px, 260px) minmax(0, 1fr);
   gap: 40px;
   align-items: start;
 }

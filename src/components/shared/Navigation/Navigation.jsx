@@ -4,10 +4,10 @@ import { primarySiteLinks } from "../../../data/siteLinks";
 
 const Navigation = () => {
   return (
-    <nav>
+    <nav className={styles.nav}>
       <ul className={styles.navList}>
         {primarySiteLinks.map(({ to, label, end }) => (
-          <li key={label}>
+          <li key={label} className={styles.navItem}>
             <NavLink
               to={to}
               end={end}

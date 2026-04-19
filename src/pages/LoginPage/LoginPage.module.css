@@ -1,22 +1,19 @@
 .card {
   position: relative;
   display: grid;
-  align-content: start;
-  gap: 28px;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 24px;
   height: 100%;
-  padding: 34px 36px 38px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.98),
-    rgba(248, 246, 242, 0.98)
-  );
+  padding: 36px;
 }
 
 .signUpButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  justify-self: end;
+  position: absolute;
+  top: 36px;
+  right: 36px;
   min-height: 40px;
   padding: 0 22px;
   border: none;
@@ -28,11 +25,17 @@
   text-decoration: none;
 }
 
+.mainContent {
+  display: grid;
+  align-content: center;
+  gap: 24px;
+  min-height: 0;
+}
+
 .brandBlock {
   display: grid;
   justify-items: center;
   gap: 14px;
-  margin-top: 8px;
   text-align: center;
 }
 
@@ -57,6 +60,12 @@
 .form {
   display: grid;
   gap: 16px;
+}
+
+.formActions {
+  display: grid;
+  gap: 16px;
+  margin-top: 4px;
 }
 
 .field {
@@ -85,7 +94,7 @@
 }
 
 .forgotLink {
-  justify-self: start;
+  justify-self: end;
   padding: 0;
   border: none;
   background: none;
@@ -94,8 +103,7 @@
 }
 
 .primaryButton {
-  justify-self: start;
-  min-width: 118px;
+  width: 100%;
   min-height: 48px;
   padding: 0 26px;
   border: none;
@@ -147,12 +155,16 @@
     padding: 24px 22px;
   }
 
+  .signUpButton {
+    top: 24px;
+    right: 22px;
+  }
+
   .cardTitle {
     font-size: 32px;
   }
 
   .primaryButton {
     width: 100%;
-    justify-self: stretch;
   }
 }

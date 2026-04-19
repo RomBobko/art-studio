@@ -12,34 +12,68 @@ const INITIAL_VISIBLE_COUNT = 8;
 const LOAD_MORE_STEP = 4;
 const createInitialSelectedFilters = () => ({
   medium: [],
-  year: [],
+  style: [],
 });
+const MEDIUM_FILTER_OPTIONS = [...new Set(artworks.map((artwork) => artwork.medium))]
+  .sort((firstMedium, secondMedium) => firstMedium.localeCompare(secondMedium))
+  .map((medium) => ({
+    value: medium,
+    label: medium,
+  }));
+
+const getPriceBounds = (categoryArtworks) => {
+  if (categoryArtworks.length === 0) {
+    return {
+      min: 0,
+      max: 0,
+    };
+  }
+
+  const prices = categoryArtworks.map((artwork) => artwork.price);
+
+  return {
+    min: Math.min(...prices),
+    max: Math.max(...prices),
+  };
+};
 
 const CategoryPageContent = ({ categorySlug }) => {
+  const category = categories.find((item) => item.slug === categorySlug);
+  const categoryArtworks = category
+    ? artworks.filter((artwork) => artwork.categoryIds.includes(category.id))
+    : [];
+  const priceBounds = getPriceBounds(categoryArtworks);
   const [sortBy, setSortBy] = useState(DEFAULT_SORT_BY);
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT);
   const [selectedFilters, setSelectedFilters] = useState(
     createInitialSelectedFilters,
   );
-
-  const category = categories.find((item) => item.slug === categorySlug);
+  const [selectedMaxPrice, setSelectedMaxPrice] = useState(priceBounds.max);
 
   if (!category) {
     return <h1>Category not found</h1>;
   }
 
-  const categoryArtworks = artworks.filter((artwork) =>
-    artwork.categoryIds.includes(category.id),
-  );
+  const styleOptions = categories
+    .filter((item) => item.id !== category.id)
+    .map((item) => ({
+      value: String(item.id),
+      label: item.name,
+    }));
   const filteredCategoryArtworks = categoryArtworks.filter((artwork) => {
     const matchesMedium =
       selectedFilters.medium.length === 0 ||
       selectedFilters.medium.includes(artwork.medium);
-    const matchesYear =
-      selectedFilters.year.length === 0 ||
-      selectedFilters.year.includes(String(artwork.year));
+    const matchesStyle =
+      selectedFilters.style.length === 0 ||
+      artwork.categoryIds.some(
+        (categoryId) =>
+          categoryId !== category.id &&
+          selectedFilters.style.includes(String(categoryId)),
+      );
+    const matchesPrice = artwork.price <= selectedMaxPrice;
 
-    return matchesMedium && matchesYear;
+    return matchesMedium && matchesStyle && matchesPrice;
   });
   const sortedCategoryArtworks = [...filteredCategoryArtworks].sort(
     (firstArtwork, secondArtwork) => {
@@ -64,22 +98,12 @@ const CategoryPageContent = ({ categorySlug }) => {
     {
       name: "medium",
       label: "Mediums",
-      options: [...new Set(categoryArtworks.map((artwork) => artwork.medium))].map(
-        (medium) => ({
-          value: medium,
-          label: medium,
-        }),
-      ),
+      options: MEDIUM_FILTER_OPTIONS,
     },
     {
-      name: "year",
-      label: "Years",
-      options: [...new Set(categoryArtworks.map((artwork) => artwork.year))]
-        .sort((firstYear, secondYear) => secondYear - firstYear)
-        .map((year) => ({
-          value: String(year),
-          label: String(year),
-        })),
+      name: "style",
+      label: "Style",
+      options: styleOptions,
     },
   ];
 
@@ -100,6 +124,17 @@ const CategoryPageContent = ({ categorySlug }) => {
         [groupName]: nextGroupValues,
       };
     });
+    setVisibleCount(INITIAL_VISIBLE_COUNT);
+  };
+
+  const handlePriceChange = (evt) => {
+    setSelectedMaxPrice(Number(evt.target.value));
+    setVisibleCount(INITIAL_VISIBLE_COUNT);
+  };
+
+  const handleClearAll = () => {
+    setSelectedFilters(createInitialSelectedFilters());
+    setSelectedMaxPrice(priceBounds.max);
     setVisibleCount(INITIAL_VISIBLE_COUNT);
   };
 
@@ -134,6 +169,11 @@ const CategoryPageContent = ({ categorySlug }) => {
               groups={filterGroups}
               selectedFilters={selectedFilters}
               onFilterChange={handleFilterChange}
+              minPrice={priceBounds.min}
+              maxPrice={priceBounds.max}
+              selectedMaxPrice={selectedMaxPrice}
+              onPriceChange={handlePriceChange}
+              onClearAll={handleClearAll}
             />
 
             <div className={styles.content}>

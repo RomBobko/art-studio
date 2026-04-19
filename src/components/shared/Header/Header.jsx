@@ -24,24 +24,24 @@ const Header = () => {
               type="button"
               aria-label="Search"
             >
-              <BsSearch size={22} />
+              <BsSearch className={styles.icon} />
             </button>
             <button
               className={styles.iconBtn}
               type="button"
               aria-label="Account"
             >
-              <BsPersonFill size={22} />
+              <BsPersonFill className={styles.icon} />
             </button>
             <button
               className={styles.iconBtn}
               type="button"
               aria-label="Favorites"
             >
-              <BsHeartFill size={22} />
+              <BsHeartFill className={styles.icon} />
             </button>
             <Link className={styles.iconBtn} to="/cart" aria-label="Cart">
-              <BsCartFill size={22} />
+              <BsCartFill className={styles.icon} />
             </Link>
           </div>
         </div>

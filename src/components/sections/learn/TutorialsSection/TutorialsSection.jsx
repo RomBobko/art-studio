@@ -2,6 +2,11 @@ import TutorialCard from "../TutorialCard/TutorialCard";
 import styles from "./TutorialsSection.module.css";
 
 const TutorialsSection = ({ tutorials }) => {
+  const listClassName =
+    tutorials.length === 1
+      ? `${styles.list} ${styles.singleItemList}`
+      : styles.list;
+
   return (
     <section className={styles.section}>
       <div className="container">
@@ -13,7 +18,7 @@ const TutorialsSection = ({ tutorials }) => {
         </div>
 
         {tutorials.length > 0 ? (
-          <ul className={styles.list}>
+          <ul className={listClassName}>
             {tutorials.map((tutorial) => (
               <li className={styles.item} key={tutorial.id}>
                 <TutorialCard {...tutorial} />

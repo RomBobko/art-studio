@@ -18,6 +18,7 @@
 }
 
 .text {
+  max-width: 44ch;
   font-size: var(--fs-200);
   line-height: var(--lh-150);
   color: var(--color-text-muted);
@@ -26,7 +27,14 @@
 .list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  width: 100%;
+  max-width: var(--container-narrow);
+  margin-inline: auto;
   gap: 32px;
+}
+
+.singleItemList {
+  max-width: 440px;
 }
 
 .item {
@@ -45,8 +53,6 @@
   }
 
   .header {
-    flex-direction: column;
-    align-items: flex-start;
     margin-bottom: 32px;
   }
 }
