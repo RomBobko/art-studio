@@ -96,6 +96,7 @@
     transform var(--transition-fast),
     background-color var(--transition-fast),
     box-shadow var(--transition-fast);
+  cursor: pointer;
 }
 
 .closeButton:hover,
@@ -103,6 +104,11 @@
   background-color: var(--color-white);
   box-shadow: 0 14px 24px rgba(89, 72, 50, 0.12);
   transform: translateY(-1px);
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid rgba(154, 122, 80, 0.24);
+  outline-offset: 2px;
 }
 
 .closeIcon {
@@ -275,6 +281,7 @@
     background-color var(--transition-fast),
     color var(--transition-fast),
     border-color var(--transition-fast);
+  cursor: pointer;
 }
 
 .quantityButton:hover:not(:disabled) {
@@ -285,6 +292,14 @@
 .quantityButton:disabled {
   cursor: not-allowed;
   opacity: 0.45;
+}
+
+.quantityButton:focus-visible,
+.removeButton:focus-visible,
+.secondaryButton:focus-visible,
+.primaryButton:focus-visible {
+  outline: 2px solid rgba(154, 122, 80, 0.24);
+  outline-offset: 2px;
 }
 
 .quantityValue {
@@ -333,6 +348,15 @@
   color: var(--color-accent-strong);
   font-size: 14px;
   font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.removeButton:hover {
+  background-color: rgba(123, 102, 72, 0.08);
+  border-color: rgba(123, 102, 72, 0.18);
 }
 
 .actions {
@@ -352,6 +376,8 @@
   font-size: 16px;
   font-weight: 600;
   line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
   transition:
     transform var(--transition-fast),
     box-shadow var(--transition-fast),

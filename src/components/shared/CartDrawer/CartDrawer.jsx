@@ -82,6 +82,7 @@ const CartDrawer = ({ onClose }) => {
   return (
     <div className={styles.overlay} onClick={onClose}>
       <aside
+        id="cart-drawer"
         className={styles.drawer}
         ref={drawerRef}
         role="dialog"
@@ -203,6 +204,7 @@ const CartDrawer = ({ onClose }) => {
                                 className={styles.removeButton}
                                 type="button"
                                 onClick={() => removeFromCart(item.id)}
+                                aria-label={`Remove ${item.title} from cart`}
                               >
                                 Remove
                               </button>

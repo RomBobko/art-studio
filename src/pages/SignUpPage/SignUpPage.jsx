@@ -121,6 +121,7 @@ const SignUpPage = () => {
                 placeholder="Username"
                 value={signUpValues.username}
                 onChange={handleChange}
+                autoComplete="username"
                 aria-invalid={Boolean(signUpErrors.username)}
                 aria-describedby={
                   signUpErrors.username ? "signup-username-error" : undefined
@@ -147,6 +148,7 @@ const SignUpPage = () => {
                 placeholder="Email"
                 value={signUpValues.email}
                 onChange={handleChange}
+                autoComplete="email"
                 aria-invalid={Boolean(signUpErrors.email)}
                 aria-describedby={
                   signUpErrors.email ? "signup-email-error" : undefined
@@ -173,6 +175,7 @@ const SignUpPage = () => {
                 placeholder="Password"
                 value={signUpValues.password}
                 onChange={handleChange}
+                autoComplete="new-password"
                 aria-invalid={Boolean(signUpErrors.password)}
                 aria-describedby={
                   signUpErrors.password ? "signup-password-error" : undefined
@@ -199,6 +202,7 @@ const SignUpPage = () => {
                 placeholder="Confirm password"
                 value={signUpValues.confirmPassword}
                 onChange={handleChange}
+                autoComplete="new-password"
                 aria-invalid={Boolean(signUpErrors.confirmPassword)}
                 aria-describedby={
                   signUpErrors.confirmPassword
@@ -226,7 +230,7 @@ const SignUpPage = () => {
             </button>
 
             {signUpSuccessMessage && (
-              <p className={styles.successText} aria-live="polite">
+              <p className={styles.successText} role="status" aria-live="polite">
                 {signUpSuccessMessage}
               </p>
             )}

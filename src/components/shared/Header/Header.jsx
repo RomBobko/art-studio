@@ -1,8 +1,8 @@
+import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 import {
   BsSearch,
   BsPersonFill,
-  BsHeartFill,
   BsCartFill,
 } from "react-icons/bs";
 import Navigation from "../Navigation";
@@ -21,27 +21,20 @@ const Header = ({ onCartOpen }) => {
           <Navigation />
 
           <div className={styles.actions}>
-            <button
+            <Link
               className={styles.iconBtn}
-              type="button"
-              aria-label="Search"
+              to="/discover"
+              aria-label="Browse artworks"
             >
               <BsSearch className={styles.icon} />
-            </button>
-            <button
+            </Link>
+            <Link
               className={styles.iconBtn}
-              type="button"
-              aria-label="Account"
+              to="/login"
+              aria-label="Open login page"
             >
               <BsPersonFill className={styles.icon} />
-            </button>
-            <button
-              className={styles.iconBtn}
-              type="button"
-              aria-label="Favorites"
-            >
-              <BsHeartFill className={styles.icon} />
-            </button>
+            </Link>
             <button
               className={`${styles.iconBtn} ${styles.cartButton}`}
               type="button"

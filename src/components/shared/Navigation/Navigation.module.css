@@ -43,13 +43,20 @@
 }
 
 .link:hover,
+.link:focus-visible,
 .linkActive {
   color: var(--color-text-strong);
 }
 
 .link:hover::after,
+.link:focus-visible::after,
 .linkActive::after {
   transform: scaleX(1);
+}
+
+.link:focus-visible,
+.linkActive:focus-visible {
+  outline: none;
 }
 
 @media (max-width: 900px) {

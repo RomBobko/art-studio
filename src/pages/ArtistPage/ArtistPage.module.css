@@ -81,39 +81,6 @@
   border-color: #111;
 }
 
-.socials {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.socialsItem {
-  list-style: none;
-}
-
-.socialsLink {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-text-strong);
-  text-decoration: none;
-  transition: opacity var(--transition-fast);
-}
-
-.socialsLink:hover {
-  opacity: 0.7;
-}
-
-.socialIcon {
-  display: block;
-  width: 20px;
-  height: 20px;
-}
-
 .artistTitleName {
   text-decoration: underline;
 }

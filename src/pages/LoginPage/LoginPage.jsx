@@ -4,12 +4,6 @@ import AuthLayout from "../../layouts/AuthLayout/AuthLayout";
 import logo from "../../assets/logo.svg";
 import styles from "./LoginPage.module.css";
 
-const socialProviders = [
-  { id: "google", label: "Google", symbol: "G" },
-  { id: "facebook", label: "Facebook", symbol: "f" },
-  { id: "linkedin", label: "LinkedIn", symbol: "in" },
-];
-
 const INITIAL_LOGIN_VALUES = {
   email: "",
   password: "",
@@ -114,6 +108,7 @@ const LoginPage = () => {
                 placeholder="Email"
                 value={loginValues.email}
                 onChange={handleChange}
+                autoComplete="email"
                 aria-invalid={Boolean(loginErrors.email)}
                 aria-describedby={loginErrors.email ? "login-email-error" : undefined}
               />
@@ -138,6 +133,7 @@ const LoginPage = () => {
                 placeholder="Password"
                 value={loginValues.password}
                 onChange={handleChange}
+                autoComplete="current-password"
                 aria-invalid={Boolean(loginErrors.password)}
                 aria-describedby={
                   loginErrors.password ? "login-password-error" : undefined
@@ -155,9 +151,12 @@ const LoginPage = () => {
             </div>
 
             <div className={styles.formActions}>
-              <button className={styles.forgotLink} type="button">
-                Forgot your password?
-              </button>
+              <a
+                className={styles.forgotLink}
+                href="mailto:info@artstudio.com?subject=Sign-in%20Help"
+              >
+                Need help signing in?
+              </a>
 
               <button
                 className={styles.primaryButton}
@@ -169,28 +168,11 @@ const LoginPage = () => {
             </div>
 
             {loginSuccessMessage && (
-              <p className={styles.successText} aria-live="polite">
+              <p className={styles.successText} role="status" aria-live="polite">
                 {loginSuccessMessage}
               </p>
             )}
           </form>
-        </div>
-
-        <div className={styles.socialSection}>
-          <p className={styles.socialLabel}>or sign in with</p>
-
-          <div className={styles.socialButtons}>
-            {socialProviders.map((provider) => (
-              <button
-                key={provider.id}
-                className={styles.socialButton}
-                type="button"
-                aria-label={`Sign in with ${provider.label}`}
-              >
-                {provider.symbol}
-              </button>
-            ))}
-          </div>
         </div>
       </div>
     </AuthLayout>

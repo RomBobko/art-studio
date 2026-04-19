@@ -41,7 +41,6 @@
 .contact {
   display: grid;
   gap: 3px;
-  margin-bottom: 25px;
   font-weight: 600;
 }
 
@@ -54,22 +53,6 @@
 .contact a:focus {
   text-decoration: underline;
   text-underline-offset: 3px;
-}
-
-.social {
-  display: flex;
-  gap: 10px;
-}
-
-.socialBtn {
-  width: 28px;
-  height: 28px;
-  border: 1px solid var(--color-black);
-  border-radius: 6px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-black);
 }
 
 .title {

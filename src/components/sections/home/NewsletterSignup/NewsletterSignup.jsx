@@ -47,8 +47,6 @@ const NewsletterSignup = () => {
 
     try {
       setStatus("submitting");
-
-      // Тут пізніше буде реальний запит на сервер
       console.log("Submitted email:", trimmedEmail);
 
       setStatus("success");
@@ -71,13 +69,19 @@ const NewsletterSignup = () => {
             straight to your inbox.
           </p>
 
-          <form className={styles.form} onSubmit={handleSubmit} noValidate>
+          <form
+            className={styles.form}
+            onSubmit={handleSubmit}
+            noValidate
+            aria-busy={status === "submitting"}
+          >
             <input
               className={styles.input}
               type="email"
               name="email"
               placeholder="Email..."
               aria-label="Email address"
+              autoComplete="email"
               value={email}
               onChange={handleChange}
             />
@@ -92,7 +96,11 @@ const NewsletterSignup = () => {
           </form>
 
           {status === "success" && (
-            <p className={styles.successMessage} aria-live="polite">
+            <p
+              className={styles.successMessage}
+              role="status"
+              aria-live="polite"
+            >
               Thank you for subscribing.
             </p>
           )}

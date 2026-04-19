@@ -62,6 +62,7 @@
   border: none;
   outline: none;
   background-color: transparent;
+  transition: box-shadow var(--transition-fast);
 }
 
 .input::placeholder {
@@ -69,6 +70,11 @@
   font-weight: 300;
   line-height: 1.4;
   color: var(--color-black);
+}
+
+.input:focus-visible {
+  border-radius: 14px;
+  box-shadow: 0 0 0 4px rgba(154, 122, 80, 0.14);
 }
 
 .button {
@@ -86,10 +92,38 @@
   color: var(--color-white);
   background-color: var(--color-button-secondary);
   cursor: pointer;
+  transition:
+    transform var(--transition-fast),
+    filter var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.button:hover,
+.button:focus-visible {
+  filter: brightness(0.98);
+  transform: translateY(-1px);
+}
+
+.button:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.52);
+  outline-offset: 2px;
 }
 
 .button:disabled {
   background-color: var(--color-button-disabled);
+  transform: none;
+  filter: none;
+  cursor: not-allowed;
+}
+
+.successMessage {
+  margin: 0;
+  padding: 14px 20px;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.92);
+  color: var(--color-black);
+  font-size: 18px;
+  line-height: 1.5;
 }
 
 @media (max-width: 900px) {

@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { FaInstagram, FaTwitter } from "react-icons/fa";
-import { RiGlobalLine } from "react-icons/ri";
 import styles from "./ArtistPage.module.css";
 import artists from "../../data/artists";
 import artworks from "../../data/artworks";
@@ -71,41 +69,6 @@ const ArtistPage = () => {
                 >
                   {isFollowing ? "Following" : "Follow"}
                 </button>
-
-                <ul className={styles.socials}>
-                  <li className={styles.socialsItem}>
-                    <a
-                      href="#"
-                      onClick={(e) => e.preventDefault()}
-                      className={styles.socialsLink}
-                      aria-label="Twitter"
-                    >
-                      <FaTwitter className={styles.socialIcon} />
-                    </a>
-                  </li>
-
-                  <li className={styles.socialsItem}>
-                    <a
-                      href="#"
-                      onClick={(e) => e.preventDefault()}
-                      className={styles.socialsLink}
-                      aria-label="Instagram"
-                    >
-                      <FaInstagram className={styles.socialIcon} />
-                    </a>
-                  </li>
-
-                  <li className={styles.socialsItem}>
-                    <a
-                      href="#"
-                      onClick={(e) => e.preventDefault()}
-                      className={styles.socialsLink}
-                      aria-label="Website"
-                    >
-                      <RiGlobalLine className={styles.socialIcon} />
-                    </a>
-                  </li>
-                </ul>
               </div>
             </div>
           </div>

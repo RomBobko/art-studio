@@ -24,10 +24,13 @@
 }
 
 .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   min-width: 0;
   padding: 25px 40px;
-
+  text-decoration: none;
   font-size: 32px;
   font-weight: 500;
   border: none;

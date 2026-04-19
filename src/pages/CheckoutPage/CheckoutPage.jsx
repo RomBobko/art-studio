@@ -62,7 +62,11 @@ const CheckoutPage = () => {
               </h1>
             </div>
 
-            <div className={`${styles.checkoutCard} ${styles.successCard}`}>
+            <div
+              className={`${styles.checkoutCard} ${styles.successCard}`}
+              role="status"
+              aria-live="polite"
+            >
               <h2 className={styles.successTitle}>Order placed successfully</h2>
               <p className={styles.successLead}>
                 Your order for {completedOrder.itemCount} item
@@ -236,7 +240,11 @@ const CheckoutPage = () => {
             </h1>
           </div>
 
-          <form className={styles.checkoutForm} onSubmit={handleCheckoutSubmit}>
+          <form
+            className={styles.checkoutForm}
+            onSubmit={handleCheckoutSubmit}
+            noValidate
+          >
             <div className={styles.checkoutCard}>
               <div className={styles.topRow}>
                 <section className={styles.previewBlock}>
@@ -256,6 +264,13 @@ const CheckoutPage = () => {
                     <div className={`${styles.field} ${styles.fieldFull}`}>
                       <input
                         aria-invalid={Boolean(checkoutErrors.fullName)}
+                        aria-label="Full name"
+                        aria-describedby={
+                          checkoutErrors.fullName
+                            ? "checkout-full-name-error"
+                            : undefined
+                        }
+                        autoComplete="name"
                         className={styles.input}
                         id="checkout-full-name"
                         name="fullName"
@@ -265,7 +280,11 @@ const CheckoutPage = () => {
                         value={checkoutValues.fullName}
                       />
                       {checkoutErrors.fullName && (
-                        <p className={styles.errorMessage}>
+                        <p
+                          className={styles.errorMessage}
+                          id="checkout-full-name-error"
+                          role="alert"
+                        >
                           {checkoutErrors.fullName}
                         </p>
                       )}
@@ -274,6 +293,13 @@ const CheckoutPage = () => {
                     <div className={`${styles.field} ${styles.fieldFull}`}>
                       <input
                         aria-invalid={Boolean(checkoutErrors.address)}
+                        aria-label="Address"
+                        aria-describedby={
+                          checkoutErrors.address
+                            ? "checkout-address-error"
+                            : undefined
+                        }
+                        autoComplete="street-address"
                         className={styles.input}
                         id="checkout-address"
                         name="address"
@@ -283,7 +309,11 @@ const CheckoutPage = () => {
                         value={checkoutValues.address}
                       />
                       {checkoutErrors.address && (
-                        <p className={styles.errorMessage}>
+                        <p
+                          className={styles.errorMessage}
+                          id="checkout-address-error"
+                          role="alert"
+                        >
                           {checkoutErrors.address}
                         </p>
                       )}
@@ -292,6 +322,11 @@ const CheckoutPage = () => {
                     <div className={styles.field}>
                       <input
                         aria-invalid={Boolean(checkoutErrors.city)}
+                        aria-label="City"
+                        aria-describedby={
+                          checkoutErrors.city ? "checkout-city-error" : undefined
+                        }
+                        autoComplete="address-level2"
                         className={styles.input}
                         id="checkout-city"
                         name="city"
@@ -301,7 +336,11 @@ const CheckoutPage = () => {
                         value={checkoutValues.city}
                       />
                       {checkoutErrors.city && (
-                        <p className={styles.errorMessage}>
+                        <p
+                          className={styles.errorMessage}
+                          id="checkout-city-error"
+                          role="alert"
+                        >
                           {checkoutErrors.city}
                         </p>
                       )}
@@ -310,7 +349,12 @@ const CheckoutPage = () => {
                     <div className={styles.field}>
                       <select
                         aria-invalid={Boolean(checkoutErrors.state)}
+                        aria-label="State"
+                        aria-describedby={
+                          checkoutErrors.state ? "checkout-state-error" : undefined
+                        }
                         className={styles.select}
+                        id="checkout-state"
                         name="state"
                         onChange={handleInputChange}
                         value={checkoutValues.state}
@@ -321,7 +365,11 @@ const CheckoutPage = () => {
                         <option value="Texas">Texas</option>
                       </select>
                       {checkoutErrors.state && (
-                        <p className={styles.errorMessage}>
+                        <p
+                          className={styles.errorMessage}
+                          id="checkout-state-error"
+                          role="alert"
+                        >
                           {checkoutErrors.state}
                         </p>
                       )}
@@ -330,8 +378,16 @@ const CheckoutPage = () => {
                     <div className={`${styles.field} ${styles.fieldFull}`}>
                       <input
                         aria-invalid={Boolean(checkoutErrors.zipCode)}
+                        aria-label="ZIP code"
+                        aria-describedby={
+                          checkoutErrors.zipCode
+                            ? "checkout-zip-error"
+                            : undefined
+                        }
+                        autoComplete="postal-code"
                         className={styles.input}
                         id="checkout-zip"
+                        inputMode="numeric"
                         name="zipCode"
                         onChange={handleInputChange}
                         placeholder="ZIP code"
@@ -339,7 +395,11 @@ const CheckoutPage = () => {
                         value={checkoutValues.zipCode}
                       />
                       {checkoutErrors.zipCode && (
-                        <p className={styles.errorMessage}>
+                        <p
+                          className={styles.errorMessage}
+                          id="checkout-zip-error"
+                          role="alert"
+                        >
                           {checkoutErrors.zipCode}
                         </p>
                       )}
@@ -355,6 +415,11 @@ const CheckoutPage = () => {
                   className={styles.paymentOptions}
                   role="radiogroup"
                   aria-label="Payment method"
+                  aria-describedby={
+                    checkoutErrors.paymentMethod
+                      ? "checkout-payment-method-error"
+                      : undefined
+                  }
                 >
                   {["Card", "PayPal", "UPI"].map((method) => (
                     <label className={styles.option} key={method}>
@@ -370,7 +435,11 @@ const CheckoutPage = () => {
                   ))}
                 </div>
                 {checkoutErrors.paymentMethod && (
-                  <p className={styles.errorMessage}>
+                  <p
+                    className={styles.errorMessage}
+                    id="checkout-payment-method-error"
+                    role="alert"
+                  >
                     {checkoutErrors.paymentMethod}
                   </p>
                 )}
@@ -380,8 +449,16 @@ const CheckoutPage = () => {
                     <div className={`${styles.field} ${styles.fieldFull}`}>
                       <input
                         aria-invalid={Boolean(checkoutErrors.cardNumber)}
+                        aria-label="Card number"
+                        aria-describedby={
+                          checkoutErrors.cardNumber
+                            ? "checkout-card-number-error"
+                            : undefined
+                        }
+                        autoComplete="cc-number"
                         className={styles.input}
                         id="checkout-card-number"
+                        inputMode="numeric"
                         name="cardNumber"
                         onChange={handleInputChange}
                         placeholder="1234 1234 1234 1234"
@@ -389,7 +466,11 @@ const CheckoutPage = () => {
                         value={checkoutValues.cardNumber}
                       />
                       {checkoutErrors.cardNumber && (
-                        <p className={styles.errorMessage}>
+                        <p
+                          className={styles.errorMessage}
+                          id="checkout-card-number-error"
+                          role="alert"
+                        >
                           {checkoutErrors.cardNumber}
                         </p>
                       )}
@@ -398,6 +479,13 @@ const CheckoutPage = () => {
                     <div className={styles.field}>
                       <input
                         aria-invalid={Boolean(checkoutErrors.expiry)}
+                        aria-label="Card expiry date"
+                        aria-describedby={
+                          checkoutErrors.expiry
+                            ? "checkout-expiry-error"
+                            : undefined
+                        }
+                        autoComplete="cc-exp"
                         className={styles.input}
                         id="checkout-expiry"
                         name="expiry"
@@ -407,7 +495,11 @@ const CheckoutPage = () => {
                         value={checkoutValues.expiry}
                       />
                       {checkoutErrors.expiry && (
-                        <p className={styles.errorMessage}>
+                        <p
+                          className={styles.errorMessage}
+                          id="checkout-expiry-error"
+                          role="alert"
+                        >
                           {checkoutErrors.expiry}
                         </p>
                       )}
@@ -416,8 +508,14 @@ const CheckoutPage = () => {
                     <div className={styles.field}>
                       <input
                         aria-invalid={Boolean(checkoutErrors.cvc)}
+                        aria-label="CVC"
+                        aria-describedby={
+                          checkoutErrors.cvc ? "checkout-cvc-error" : undefined
+                        }
+                        autoComplete="cc-csc"
                         className={styles.input}
                         id="checkout-cvc"
+                        inputMode="numeric"
                         name="cvc"
                         onChange={handleInputChange}
                         placeholder="CVC"
@@ -425,7 +523,11 @@ const CheckoutPage = () => {
                         value={checkoutValues.cvc}
                       />
                       {checkoutErrors.cvc && (
-                        <p className={styles.errorMessage}>
+                        <p
+                          className={styles.errorMessage}
+                          id="checkout-cvc-error"
+                          role="alert"
+                        >
                           {checkoutErrors.cvc}
                         </p>
                       )}
@@ -433,8 +535,8 @@ const CheckoutPage = () => {
                   </div>
                 ) : (
                   <p className={styles.helperText}>
-                    {checkoutValues.paymentMethod} will be handled locally in a
-                    later stage.
+                    {checkoutValues.paymentMethod} stays in demo mode for now.
+                    No real payment will be processed.
                   </p>
                 )}
               </section>

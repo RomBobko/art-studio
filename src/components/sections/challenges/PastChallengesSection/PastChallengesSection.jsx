@@ -15,7 +15,7 @@ const PastChallengesSection = ({ challenges }) => {
               Past Challenges
             </h2>
             <p className={styles.sectionText}>
-              Browse recent prompts and themes from previous Artora challenges.
+              Browse recent prompts and themes from previous ArtStudio challenges.
             </p>
           </div>
 

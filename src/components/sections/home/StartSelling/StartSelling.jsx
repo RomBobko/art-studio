@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./StartSelling.module.css";
 
 const StartSelling = () => {
@@ -8,9 +9,9 @@ const StartSelling = () => {
           <h2 className={styles.title}>
             Turn your passion into income - Start Selling Today!
           </h2>
-          <button className={styles.button} type="button">
+          <Link className={styles.button} to="/dashboard">
             Upload Your First Artwork
-          </button>
+          </Link>
         </div>
       </div>
     </section>
