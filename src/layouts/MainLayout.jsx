@@ -1,18 +1,35 @@
+import { useCallback, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "../components/shared/Header";
+import CartDrawer from "../components/shared/CartDrawer/CartDrawer";
 import Footer from "../components/shared/Footer";
+import { CartProvider } from "../context/CartContext";
 
 const MainLayout = () => {
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const handleOpenCart = () => {
+    setIsCartOpen(true);
+  };
+
+  const handleCloseCart = useCallback(() => {
+    setIsCartOpen(false);
+  }, []);
+
   return (
-    <div>
-      <Header />
+    <CartProvider>
+      <div>
+        <Header onCartOpen={handleOpenCart} />
 
-      <main>
-        <Outlet />
-      </main>
+        <main>
+          <Outlet />
+        </main>
 
-      <Footer />
-    </div>
+        {isCartOpen && <CartDrawer onClose={handleCloseCart} />}
+
+        <Footer />
+      </div>
+    </CartProvider>
   );
 };
 

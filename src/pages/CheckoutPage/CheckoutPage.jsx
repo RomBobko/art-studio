@@ -1,20 +1,7 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
-import abstractImage from "../../assets/images/abstract.webp";
 import styles from "./CheckoutPage.module.css";
-
-const fallbackOrderItems = [
-  {
-    id: 1,
-    title: "Abstract painting",
-    price: 250,
-  },
-  {
-    id: 2,
-    title: "Art print",
-    price: 25,
-  },
-];
+import { useCart } from "../../context/CartContext";
 
 const formatPrice = (value) =>
   new Intl.NumberFormat("en-US", {
@@ -35,37 +22,118 @@ const INITIAL_CHECKOUT_VALUES = {
   cvc: "",
 };
 
+const INITIAL_COMPLETED_ORDER = null;
+
 const CheckoutPage = () => {
-  const location = useLocation();
+  const {
+    cartItems,
+    itemCount,
+    subtotal: cartSubtotal,
+    total: cartTotal,
+    clearCart,
+  } = useCart();
   const [checkoutValues, setCheckoutValues] = useState(INITIAL_CHECKOUT_VALUES);
   const [checkoutErrors, setCheckoutErrors] = useState({});
-  const [checkoutSuccessMessage, setCheckoutSuccessMessage] = useState("");
-  const passedCheckoutData = location.state?.checkoutData;
-  const hasCartState =
-    Array.isArray(passedCheckoutData?.cartItems) &&
-    passedCheckoutData.cartItems.length > 0;
+  const [completedOrder, setCompletedOrder] = useState(INITIAL_COMPLETED_ORDER);
+  const hasCartItems = cartItems.length > 0;
 
-  const orderItems = hasCartState
-    ? passedCheckoutData.cartItems.map((item) => ({
-        id: item.id,
-        title: `${item.title}${item.quantity > 1 ? ` x${item.quantity}` : ""}`,
-        price: item.price * item.quantity,
-      }))
-    : fallbackOrderItems;
-
-  const fallbackSubtotal = fallbackOrderItems.reduce(
-    (sum, item) => sum + item.price,
-    0,
-  );
-  const subtotal = hasCartState ? passedCheckoutData.subtotal : fallbackSubtotal;
-  const total = hasCartState ? passedCheckoutData.total : subtotal;
-  const previewImage = hasCartState
-    ? passedCheckoutData.cartItems[0]?.image || abstractImage
-    : abstractImage;
-  const previewAlt = hasCartState
-    ? `${passedCheckoutData.cartItems[0]?.title || "Artwork"} selected for checkout`
-    : "Abstract artwork selected for checkout";
+  const orderItems = cartItems.map((item) => ({
+    id: item.id,
+    title: `${item.title}${item.quantity > 1 ? ` x${item.quantity}` : ""}`,
+    price: item.price * item.quantity,
+  }));
+  const subtotal = cartSubtotal;
+  const total = cartTotal;
+  const previewImage = cartItems[0]?.image;
+  const previewAlt = `${cartItems[0]?.title || "Artwork"} selected for checkout`;
   const isCardPayment = checkoutValues.paymentMethod === "Card";
+
+  if (completedOrder) {
+    return (
+      <div className={styles.page}>
+        <section
+          className={styles.checkoutSection}
+          aria-labelledby="checkout-page-title"
+        >
+          <div className="container-narrow">
+            <div className={styles.header}>
+              <h1 id="checkout-page-title" className={styles.title}>
+                Checkout
+              </h1>
+            </div>
+
+            <div className={`${styles.checkoutCard} ${styles.successCard}`}>
+              <h2 className={styles.successTitle}>Order placed successfully</h2>
+              <p className={styles.successLead}>
+                Your order for {completedOrder.itemCount} item
+                {completedOrder.itemCount === 1 ? "" : "s"} has been completed
+                locally.
+              </p>
+
+              <div className={styles.successSummary} aria-label="Completed order summary">
+                <div className={styles.summaryRow}>
+                  <span className={styles.summaryLabel}>Items</span>
+                  <span className={styles.summaryValue}>
+                    {completedOrder.itemCount}
+                  </span>
+                </div>
+                <div className={styles.summaryRow}>
+                  <span className={styles.summaryLabel}>Total</span>
+                  <span className={styles.summaryValue}>
+                    {formatPrice(completedOrder.total)}
+                  </span>
+                </div>
+              </div>
+
+              <p className={styles.successNote}>
+                No payment was processed. Your cart has been cleared and you can
+                continue exploring more artwork.
+              </p>
+
+              <Link
+                className={`${styles.primaryButton} ${styles.emptyAction}`}
+                to="/discover"
+              >
+                Continue Shopping
+              </Link>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  if (!hasCartItems) {
+    return (
+      <div className={styles.page}>
+        <section
+          className={styles.checkoutSection}
+          aria-labelledby="checkout-page-title"
+        >
+          <div className="container-narrow">
+            <div className={styles.header}>
+              <h1 id="checkout-page-title" className={styles.title}>
+                Checkout
+              </h1>
+            </div>
+
+            <div className={`${styles.checkoutCard} ${styles.emptyCard}`}>
+              <h2 className={styles.emptyTitle}>Your cart is empty</h2>
+              <p className={styles.emptyText}>
+                Add a few artworks before moving to checkout.
+              </p>
+              <Link
+                className={`${styles.primaryButton} ${styles.emptyAction}`}
+                to="/discover"
+              >
+                Continue Shopping
+              </Link>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -86,8 +154,6 @@ const CheckoutPage = () => {
     }));
 
     setCheckoutErrors(nextErrors);
-
-    setCheckoutSuccessMessage("");
   };
 
   const validateCheckoutValues = (values) => {
@@ -137,16 +203,24 @@ const CheckoutPage = () => {
   const handleCheckoutSubmit = (event) => {
     event.preventDefault();
 
+    if (!hasCartItems) {
+      return;
+    }
+
     const nextErrors = validateCheckoutValues(checkoutValues);
 
     if (Object.keys(nextErrors).length > 0) {
       setCheckoutErrors(nextErrors);
-      setCheckoutSuccessMessage("");
       return;
     }
 
     setCheckoutErrors({});
-    setCheckoutSuccessMessage("Order placed locally. No payment was processed.");
+    setCompletedOrder({
+      itemCount,
+      total,
+    });
+    setCheckoutValues(INITIAL_CHECKOUT_VALUES);
+    clearCart();
   };
 
   return (
@@ -398,10 +472,6 @@ const CheckoutPage = () => {
             <button className={styles.primaryButton} type="submit">
               Place Order
             </button>
-
-            {checkoutSuccessMessage && (
-              <p className={styles.successMessage}>{checkoutSuccessMessage}</p>
-            )}
           </form>
         </div>
       </section>

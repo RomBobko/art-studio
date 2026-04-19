@@ -21,6 +21,7 @@
 }
 
 .iconBtn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -55,4 +56,27 @@
   height: 18px;
   flex-shrink: 0;
   overflow: visible;
+}
+
+.cartButton {
+  margin-left: 2px;
+}
+
+.cartBadge {
+  position: absolute;
+  top: 2px;
+  right: 1px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-button-secondary);
+  box-shadow: 0 4px 10px rgba(89, 72, 50, 0.18);
+  color: var(--color-white);
+  font-size: 11px;
+  font-weight: var(--fw-semibold);
+  line-height: 1;
 }

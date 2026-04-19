@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 import {
   BsSearch,
@@ -8,8 +7,11 @@ import {
 } from "react-icons/bs";
 import Navigation from "../Navigation";
 import Logo from "../Logo";
+import { useCart } from "../../../context/CartContext";
 
-const Header = () => {
+const Header = ({ onCartOpen }) => {
+  const { itemCount } = useCart();
+
   return (
     <header className={styles.header}>
       <div className="container-main">
@@ -40,9 +42,23 @@ const Header = () => {
             >
               <BsHeartFill className={styles.icon} />
             </button>
-            <Link className={styles.iconBtn} to="/cart" aria-label="Cart">
+            <button
+              className={`${styles.iconBtn} ${styles.cartButton}`}
+              type="button"
+              aria-label={
+                itemCount > 0
+                  ? `Cart (${itemCount} item${itemCount === 1 ? "" : "s"})`
+                  : "Cart"
+              }
+              onClick={onCartOpen}
+            >
               <BsCartFill className={styles.icon} />
-            </Link>
+              {itemCount > 0 && (
+                <span className={styles.cartBadge} aria-hidden="true">
+                  {itemCount}
+                </span>
+              )}
+            </button>
           </div>
         </div>
       </div>

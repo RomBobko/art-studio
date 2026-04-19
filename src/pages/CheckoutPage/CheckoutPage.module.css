@@ -33,12 +33,53 @@
   gap: 14px;
 }
 
+.emptyCard {
+  justify-items: start;
+  gap: 18px;
+}
+
+.successCard {
+  justify-items: start;
+  gap: 18px;
+}
+
 .title {
   color: var(--color-text-strong);
   font-size: clamp(40px, 5vw, 58px);
   font-weight: var(--fw-bold);
   line-height: 1.04;
   letter-spacing: -0.045em;
+}
+
+.emptyTitle {
+  color: var(--color-text-strong);
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: var(--fw-semibold);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+
+.emptyText {
+  max-width: 40ch;
+  color: var(--color-text-muted);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.successTitle {
+  color: var(--color-text-strong);
+  font-size: clamp(30px, 4vw, 42px);
+  font-weight: var(--fw-semibold);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.successLead,
+.successNote {
+  max-width: 46ch;
+  color: var(--color-text-muted);
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 .checkoutCard {
@@ -55,6 +96,15 @@
   box-shadow:
     0 24px 52px rgba(89, 72, 50, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.78);
+}
+
+.successSummary {
+  display: grid;
+  width: min(100%, 420px);
+  border: 1px solid rgba(123, 102, 72, 0.12);
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.96);
 }
 
 .topRow {
@@ -215,8 +265,7 @@
 }
 
 .helperText,
-.errorMessage,
-.successMessage {
+.errorMessage {
   margin: 0;
   font-size: 14px;
   line-height: 1.5;
@@ -315,12 +364,10 @@
   box-shadow: 0 18px 30px rgba(123, 102, 72, 0.22);
 }
 
-.successMessage {
-  padding: 14px 16px;
-  border: 1px solid rgba(44, 107, 63, 0.18);
-  border-radius: 14px;
-  background-color: rgba(233, 245, 237, 0.92);
-  color: #2c6b3f;
+.emptyAction {
+  width: auto;
+  min-width: 220px;
+  text-decoration: none;
 }
 
 @media (max-width: 900px) {
@@ -388,5 +435,14 @@
   .primaryButton {
     min-height: 52px;
     font-size: 17px;
+  }
+
+  .emptyAction {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .successSummary {
+    width: 100%;
   }
 }

@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 import styles from "./NewsletterSignup.module.css";
 
 const NewsletterSignup = () => {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState("idle"); // idle | submitting | success | error
-  const [error, setError] = useState("");
+  const [status, setStatus] = useState("idle"); // idle | submitting | success
+  const validationToastId = "newsletter-validation-error";
+  const submitToastId = "newsletter-submit-error";
 
   const validateEmail = (value) => {
     const trimmedValue = value.trim();
@@ -25,9 +27,8 @@ const NewsletterSignup = () => {
   const handleChange = (evt) => {
     setEmail(evt.target.value);
 
-    if (status === "success" || status === "error") {
+    if (status === "success") {
       setStatus("idle");
-      setError("");
     }
   };
 
@@ -38,8 +39,9 @@ const NewsletterSignup = () => {
     const validationError = validateEmail(trimmedEmail);
 
     if (validationError) {
-      setStatus("error");
-      setError(validationError);
+      toast.error(validationError, {
+        toastId: validationToastId,
+      });
       return;
     }
 
@@ -50,11 +52,12 @@ const NewsletterSignup = () => {
       console.log("Submitted email:", trimmedEmail);
 
       setStatus("success");
-      setError("");
       setEmail("");
     } catch {
-      setStatus("error");
-      setError("Something went wrong. Please try again.");
+      setStatus("idle");
+      toast.error("Something went wrong. Please try again.", {
+        toastId: submitToastId,
+      });
     }
   };
 
@@ -87,12 +90,6 @@ const NewsletterSignup = () => {
               {status === "submitting" ? "Submitting..." : "Subscribe"}
             </button>
           </form>
-
-          {status === "error" && (
-            <p className={styles.errorMessage} role="alert">
-              {error}
-            </p>
-          )}
 
           {status === "success" && (
             <p className={styles.successMessage} aria-live="polite">

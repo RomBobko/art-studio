@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+import { HiOutlineXMark } from "react-icons/hi2";
 import styles from "./ChallengeSubmissionForm.module.css";
 
 const ChallengeSubmissionForm = ({
@@ -9,12 +11,82 @@ const ChallengeSubmissionForm = ({
   onSubmit,
   onClose,
 }) => {
+  const modalRef = useRef(null);
+  const closeButtonRef = useRef(null);
+
+  useEffect(() => {
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousFocusedElement = document.activeElement;
+
+    document.body.style.overflow = "hidden";
+    closeButtonRef.current?.focus();
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        onClose();
+        return;
+      }
+
+      if (event.key !== "Tab" || !modalRef.current) {
+        return;
+      }
+
+      const focusableElements = modalRef.current.querySelectorAll(
+        'button, [href], input, textarea, select, [tabindex]:not([tabindex="-1"])',
+      );
+
+      if (focusableElements.length === 0) {
+        return;
+      }
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousBodyOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+
+      if (previousFocusedElement instanceof HTMLElement) {
+        previousFocusedElement.focus();
+      }
+    };
+  }, [onClose]);
+
   return (
-    <section
-      className={`section-sm ${styles.section}`}
-      aria-labelledby="challenge-form-title"
-    >
-      <div className="container-main">
+    <div className={styles.overlay} onClick={onClose}>
+      <div
+        className={styles.modalShell}
+        ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="challenge-form-title"
+        aria-describedby="challenge-form-description"
+        tabIndex={-1}
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className={styles.modalHeader}>
+          <button
+            className={styles.closeButton}
+            ref={closeButtonRef}
+            type="button"
+            aria-label="Close submission form"
+            onClick={onClose}
+          >
+            <HiOutlineXMark className={styles.closeIcon} />
+          </button>
+        </div>
+
         <div className={styles.card}>
           <div className={styles.layout}>
             <div className={styles.storyPanel}>
@@ -22,7 +94,7 @@ const ChallengeSubmissionForm = ({
               <h2 id="challenge-form-title" className={styles.title}>
                 Submit Your Artwork
               </h2>
-              <p className={styles.text}>
+              <p id="challenge-form-description" className={styles.text}>
                 Share your response to this month&apos;s brief with a clear
                 title, your name, a short note, and an image.
               </p>
@@ -176,7 +248,7 @@ const ChallengeSubmissionForm = ({
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

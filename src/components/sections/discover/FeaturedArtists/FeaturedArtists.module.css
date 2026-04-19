@@ -18,6 +18,11 @@
   gap: clamp(24px, 4vw, 48px);
 }
 
+.viewport {
+  min-width: 0;
+  overflow: hidden;
+}
+
 .arrowButton {
   display: grid;
   place-items: center;
@@ -37,13 +42,29 @@
 }
 
 .list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  display: flex;
   gap: 40px;
 }
 
 .item {
-  width: 100%;
+  flex: 0 0 calc((100% - 80px) / 3);
+  min-width: 0;
+}
+
+@media (max-width: 1200px) {
+  .list {
+    gap: 24px;
+  }
+
+  .item {
+    flex: 0 0 calc((100% - 24px) / 2);
+  }
+}
+
+@media (max-width: 700px) {
+  .item {
+    flex: 0 0 100%;
+  }
 }
 
 @media (max-width: 960px) {

@@ -1,8 +1,10 @@
 import { Link, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import styles from "./ArtworkPage.module.css";
 import artworks from "../../data/artworks";
 import artists from "../../data/artists";
 import ArtworkThumbnailGrid from "../../components/shared/ArtworkThumbnailGrid";
+import { useCart } from "../../context/CartContext";
 
 const getArtworkDetails = (item) => {
   const artist = artists.find((entry) => entry.id === item.artistId);
@@ -23,6 +25,7 @@ const getArtworkDetails = (item) => {
 
 const ArtworkPage = () => {
   const { artworkSlug } = useParams();
+  const { cartItems, addToCart } = useCart();
 
   const artworkSource = artworks.find((item) => item.slug === artworkSlug);
 
@@ -49,6 +52,28 @@ const ArtworkPage = () => {
     .map((item) => getArtworkDetails(item))
     .slice(0, 4);
   const formattedPrice = new Intl.NumberFormat("en-US").format(artwork.price);
+
+  const handleAddToCart = () => {
+    const cartArtwork = {
+      id: artwork.id,
+      title: artwork.title,
+      artistName: artwork.artist?.name || "Unknown artist",
+      medium: artwork.medium,
+      price: artwork.price,
+      image: artwork.image,
+    };
+    const itemExistsInCart = cartItems.some(
+      (item) => item.id === String(cartArtwork.id),
+    );
+
+    addToCart(cartArtwork);
+
+    toast.success(
+      itemExistsInCart
+        ? `Updated quantity for ${artwork.title}.`
+        : `${artwork.title} added to cart.`,
+    );
+  };
 
   return (
     <div className={styles.page}>
@@ -85,7 +110,11 @@ const ArtworkPage = () => {
 
               <p className={styles.price}>${formattedPrice}</p>
 
-              <button className={styles.button} type="button">
+              <button
+                className={styles.button}
+                type="button"
+                onClick={handleAddToCart}
+              >
                 Add to cart
               </button>
             </div>
