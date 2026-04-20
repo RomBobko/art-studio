@@ -5,6 +5,7 @@ import TrendingArtworks from "../components/sections/discover/TrendingArtworks/T
 import FeaturedArtists from "../components/sections/discover/FeaturedArtists/FeaturedArtists";
 import artworks from "../data/artworks";
 import artists from "../data/artists";
+import categories from "../data/categories";
 
 const DiscoverPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -17,24 +18,30 @@ const DiscoverPage = () => {
   const artistNamesById = Object.fromEntries(
     artists.map((artist) => [artist.id, artist.name]),
   );
+  const categoryNamesById = Object.fromEntries(
+    categories.map((category) => [category.id, category.name]),
+  );
 
-  const defaultArtworks = artworks
+  const trendingArtworks = artworks
     .filter((artwork) => artwork.isTrending)
     .slice(0, 8);
+  const searchableArtworks = normalizedSearchQuery ? artworks : trendingArtworks;
 
   const visibleArtworks = normalizedSearchQuery
-    ? defaultArtworks.filter((artwork) => {
+    ? searchableArtworks.filter((artwork) => {
         const searchText = [
           artwork.title,
           artwork.medium,
           artistNamesById[artwork.artistId] || "",
+          categoryNamesById[artwork.categoryId] || "",
+          ...(artwork.styleTags || []),
         ]
           .join(" ")
           .toLowerCase();
 
         return searchText.includes(normalizedSearchQuery);
       })
-    : defaultArtworks;
+    : trendingArtworks;
 
   return (
     <>
@@ -44,6 +51,7 @@ const DiscoverPage = () => {
       />
       <BrowseCategories />
       <TrendingArtworks
+        title={normalizedSearchQuery ? "Search Results" : "Trending Artworks"}
         artworks={visibleArtworks}
         hasActiveSearch={Boolean(normalizedSearchQuery)}
       />

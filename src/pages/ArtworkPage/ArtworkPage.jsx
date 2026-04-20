@@ -3,18 +3,20 @@ import { toast } from "react-toastify";
 import styles from "./ArtworkPage.module.css";
 import artworks from "../../data/artworks";
 import artists from "../../data/artists";
+import categories from "../../data/categories";
 import ArtworkThumbnailGrid from "../../components/shared/ArtworkThumbnailGrid";
 import { useCart } from "../../context/CartContext";
 
 const getArtworkDetails = (item) => {
   const artist = artists.find((entry) => entry.id === item.artistId);
+  const category = categories.find((entry) => entry.id === item.categoryId);
   const medium = item.medium || "Medium available on request";
 
   return {
     ...item,
     artist,
+    category,
     medium,
-    size: item.size || "Dimensions available on request",
     description:
       item.description ||
       `${item.title} is a ${medium.toLowerCase()} piece by ${
@@ -46,12 +48,14 @@ const ArtworkPage = () => {
   const relatedArtworks = artworks
     .filter(
       (item) =>
-        item.id !== artwork.id &&
-        item.categoryId === artwork.categoryId,
+        item.id !== artwork.id && item.categoryId === artwork.categoryId,
     )
     .map((item) => getArtworkDetails(item))
     .slice(0, 4);
   const formattedPrice = new Intl.NumberFormat("en-US").format(artwork.price);
+  const relatedArtworksLink = artwork.category
+    ? `/discover/${artwork.category.slug}`
+    : "/discover";
 
   const handleAddToCart = () => {
     const cartArtwork = {
@@ -102,7 +106,9 @@ const ArtworkPage = () => {
 
               <div className={styles.meta}>
                 <p className={styles.metaMedium}>{artwork.medium}</p>
-                <p className={styles.metaText}>{artwork.size}</p>
+                {artwork.category && (
+                  <p className={styles.metaText}>{artwork.category.name}</p>
+                )}
                 <p className={styles.metaText}>{artwork.year}</p>
               </div>
 
@@ -127,7 +133,7 @@ const ArtworkPage = () => {
         title="Related Artworks"
         artworks={relatedArtworks}
         headerAction={
-          <Link to="/discover" className={styles.relatedArtworksLink}>
+          <Link to={relatedArtworksLink} className={styles.relatedArtworksLink}>
             View All
           </Link>
         }

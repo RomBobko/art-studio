@@ -64,9 +64,7 @@ const ArtistPage = () => {
             <div className={styles.content}>
               <h1 className={styles.title}>{artist.name}</h1>
               <p className={styles.description}>
-                {artist.description ||
-                  artist.bio ||
-                  "Artist description coming soon."}
+                {artist.bio || "Artist description coming soon."}
               </p>
 
               <div className={styles.actions}>

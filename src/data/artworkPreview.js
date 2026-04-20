@@ -8,7 +8,7 @@ export const toArtworkCardProps = (artwork) => ({
   title: artwork.title,
   slug: artwork.slug,
   price: artwork.price,
-  type: artwork.medium,
+  medium: artwork.medium,
   artistName: artistNamesById[artwork.artistId] || "Unknown artist",
   image: artwork.image,
 });

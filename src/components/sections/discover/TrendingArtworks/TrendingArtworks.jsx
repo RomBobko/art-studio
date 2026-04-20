@@ -2,11 +2,15 @@ import styles from "./TrendingArtworks.module.css";
 import ArtworkCard from "./ArtworkCard";
 import { toArtworkCardProps } from "../../../../data/artworkPreview";
 
-const TrendingArtworks = ({ artworks, hasActiveSearch }) => {
+const TrendingArtworks = ({
+  artworks,
+  hasActiveSearch,
+  title = "Trending Artworks",
+}) => {
   return (
     <section className={styles.section}>
       <div className="container">
-        <h2 className={styles.title}>Trending Artworks</h2>
+        <h2 className={styles.title}>{title}</h2>
 
         {artworks.length > 0 ? (
           <ul className={styles.list}>
