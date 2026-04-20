@@ -9,7 +9,6 @@ const ChallengeSubmissionsSection = ({ submissions }) => {
       <div className="container-main">
         <div className={styles.sectionInner}>
           <div className={styles.sectionHeader}>
-            <p className={styles.sectionEyebrow}>Community Gallery</p>
             <h2
               id="challenge-submissions-title"
               className={styles.sectionTitle}

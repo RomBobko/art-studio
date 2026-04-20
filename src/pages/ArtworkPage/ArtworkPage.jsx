@@ -47,7 +47,7 @@ const ArtworkPage = () => {
     .filter(
       (item) =>
         item.id !== artwork.id &&
-        item.categoryIds.some((id) => artwork.categoryIds.includes(id)),
+        item.categoryId === artwork.categoryId,
     )
     .map((item) => getArtworkDetails(item))
     .slice(0, 4);

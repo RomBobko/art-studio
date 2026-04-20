@@ -53,35 +53,6 @@
   gap: var(--space-24);
 }
 
-.topRow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-12);
-  align-items: center;
-}
-
-.eyebrow,
-.status {
-  display: inline-flex;
-  width: fit-content;
-  padding: 9px 14px;
-  border-radius: var(--radius-pill);
-  font-size: var(--fs-150);
-  font-weight: var(--fw-semibold);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.eyebrow {
-  background-color: rgba(255, 255, 255, 0.72);
-  color: var(--color-accent-strong);
-}
-
-.status {
-  color: #6c5d44;
-  background-color: rgba(123, 102, 72, 0.1);
-}
-
 .headingGroup {
   display: grid;
   gap: var(--space-32);
@@ -276,10 +247,6 @@
 @media (max-width: 640px) {
   .section {
     padding-top: var(--space-48);
-  }
-
-  .topRow {
-    gap: var(--space-8);
   }
 
   .title {

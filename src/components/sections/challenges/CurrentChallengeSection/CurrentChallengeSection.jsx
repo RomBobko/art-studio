@@ -20,11 +20,6 @@ const CurrentChallengeSection = ({
         <div className={styles.shell}>
           <div className={styles.card}>
             <div className={styles.content}>
-              <div className={styles.topRow}>
-                <p className={styles.eyebrow}>ArtStudio Challenges</p>
-                <p className={styles.status}>Open for submissions</p>
-              </div>
-
               <div className={styles.headingGroup}>
                 <h1 id="current-challenge-title" className={styles.title}>
                   {title}

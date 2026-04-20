@@ -25,20 +25,6 @@
   margin-bottom: 40px;
 }
 
-.eyebrow {
-  display: inline-flex;
-  width: fit-content;
-  padding: 8px 14px;
-  border-radius: var(--radius-pill);
-  background-color: rgba(123, 102, 72, 0.1);
-  color: var(--color-accent-strong);
-  font-size: 15px;
-  font-weight: var(--fw-semibold);
-  letter-spacing: 0.04em;
-  line-height: 1.2;
-  text-transform: uppercase;
-}
-
 .title {
   color: var(--color-text-strong);
   font-size: clamp(42px, 5vw, 62px);

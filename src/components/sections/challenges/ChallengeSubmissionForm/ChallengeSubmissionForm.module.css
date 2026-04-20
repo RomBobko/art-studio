@@ -92,19 +92,6 @@
   gap: var(--space-20);
 }
 
-.eyebrow {
-  display: inline-flex;
-  width: fit-content;
-  padding: 10px 14px;
-  border-radius: var(--radius-pill);
-  background-color: rgba(123, 102, 72, 0.1);
-  color: var(--color-accent-strong);
-  font-size: var(--fs-150);
-  font-weight: var(--fw-semibold);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
 .title {
   color: var(--color-text-strong);
   font-size: clamp(36px, 4vw, 52px);

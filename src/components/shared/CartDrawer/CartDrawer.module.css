@@ -39,30 +39,10 @@
   gap: 16px;
 }
 
-.headerBadgeGroup {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-}
-
 .headerContent {
   display: grid;
   gap: 10px;
   min-width: 0;
-}
-
-.eyebrow {
-  display: inline-flex;
-  width: fit-content;
-  padding: 8px 14px;
-  border-radius: var(--radius-pill);
-  background-color: rgba(123, 102, 72, 0.1);
-  color: var(--color-accent-strong);
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
 }
 
 .headerCount {

@@ -1,68 +1,52 @@
 import elenaAvatar from "../assets/images/artists/elena-novak.webp";
+import danielAvatar from "../assets/images/artists/daniel-kovac.webp";
 import lucasAvatar from "../assets/images/artists/lucas-bennett.webp";
 import sophieAvatar from "../assets/images/artists/sophie-laurent.webp";
 import matteoAvatar from "../assets/images/artists/matteo-ricci.webp";
 import claraAvatar from "../assets/images/artists/clara-moreau.webp";
-import ameliaAvatar from "../assets/images/artists/amelia-brooks.webp";
-import evaAvatar from "../assets/images/artists/eva-muller.webp";
-import danielAvatar from "../assets/images/artists/daniel-kovac.webp";
 
 const artists = [
   {
     id: 1,
-    name: "Elena Novak",
     slug: "elena-novak",
+    name: "Elena Novak",
     avatar: elenaAvatar,
-    bio: "Contemporary artist working with acrylic painting and expressive color compositions.",
+    bio: "Acrylic painter known for floral studies, warm color transitions, and calm landscape compositions.",
   },
   {
     id: 2,
-    name: "Lucas Bennett",
-    slug: "lucas-bennett",
-    avatar: lucasAvatar,
-    bio: "Digital artist creating atmospheric landscapes and stylized visual stories.",
+    slug: "daniel-kovac",
+    name: "Daniel Kovac",
+    avatar: danielAvatar,
+    bio: "Contemporary painter building reflective abstract works with layered brushwork and rich earth tones.",
   },
   {
     id: 3,
-    name: "Sophie Laurent",
-    slug: "sophie-laurent",
-    avatar: sophieAvatar,
-    bio: "Textile and embroidery artist focused on floral forms and decorative hand-crafted details.",
+    slug: "lucas-bennett",
+    name: "Lucas Bennett",
+    avatar: lucasAvatar,
+    bio: "Digital artist creating cinematic city scenes, atmospheric gradients, and stylized environment studies.",
   },
   {
     id: 4,
-    name: "Matteo Ricci",
-    slug: "matteo-ricci",
-    avatar: matteoAvatar,
-    bio: "Sketch artist specializing in charcoal portraiture and calm spiritual compositions.",
+    slug: "sophie-laurent",
+    name: "Sophie Laurent",
+    avatar: sophieAvatar,
+    bio: "Textile artist focused on embroidery, decorative surface work, and handmade botanical details.",
   },
   {
     id: 5,
-    name: "Clara Moreau",
-    slug: "clara-moreau",
-    avatar: claraAvatar,
-    bio: "Traditional artist inspired by symbolic geometry, ornament, and meditative forms.",
+    slug: "matteo-ricci",
+    name: "Matteo Ricci",
+    avatar: matteoAvatar,
+    bio: "Sketch artist specializing in charcoal portraits, figure studies, and quiet monochrome compositions.",
   },
   {
     id: 6,
-    name: "Amelia Brooks",
-    slug: "amelia-brooks",
-    avatar: ameliaAvatar,
-    bio: "Graphite illustrator focused on emotion-driven portrait sketches and expressive faces.",
-  },
-  {
-    id: 7,
-    name: "Eva Muller",
-    slug: "eva-muller",
-    avatar: evaAvatar,
-    bio: "Traditional miniature artist combining cultural motifs, animals, and decorative storytelling.",
-  },
-  {
-    id: 8,
-    name: "Daniel Kovac",
-    slug: "daniel-kovac",
-    avatar: danielAvatar,
-    bio: "Painter creating spiritual and reflective artworks with bold acrylic techniques.",
+    slug: "clara-moreau",
+    name: "Clara Moreau",
+    avatar: claraAvatar,
+    bio: "Traditional mixed-media artist inspired by ornament, geometry, and symbolic handmade pattern work.",
   },
 ];
 

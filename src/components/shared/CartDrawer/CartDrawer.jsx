@@ -94,12 +94,9 @@ const CartDrawer = ({ onClose }) => {
       >
         <div className={styles.header}>
           <div className={styles.headerTopRow}>
-            <div className={styles.headerBadgeGroup}>
-              <p className={styles.eyebrow}>Cart</p>
-              <p className={styles.headerCount}>
-                {itemCount} item{itemCount === 1 ? "" : "s"}
-              </p>
-            </div>
+            <p className={styles.headerCount}>
+              {itemCount} item{itemCount === 1 ? "" : "s"}
+            </p>
 
             <button
               className={styles.closeButton}

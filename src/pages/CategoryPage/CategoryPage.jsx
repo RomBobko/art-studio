@@ -14,12 +14,6 @@ const createInitialSelectedFilters = () => ({
   medium: [],
   style: [],
 });
-const MEDIUM_FILTER_OPTIONS = [...new Set(artworks.map((artwork) => artwork.medium))]
-  .sort((firstMedium, secondMedium) => firstMedium.localeCompare(secondMedium))
-  .map((medium) => ({
-    value: medium,
-    label: medium,
-  }));
 
 const getPriceBounds = (categoryArtworks) => {
   if (categoryArtworks.length === 0) {
@@ -40,9 +34,25 @@ const getPriceBounds = (categoryArtworks) => {
 const CategoryPageContent = ({ categorySlug }) => {
   const category = categories.find((item) => item.slug === categorySlug);
   const categoryArtworks = category
-    ? artworks.filter((artwork) => artwork.categoryIds.includes(category.id))
+    ? artworks.filter((artwork) => artwork.categoryId === category.id)
     : [];
   const priceBounds = getPriceBounds(categoryArtworks);
+  const mediumOptions = [...new Set(categoryArtworks.map((artwork) => artwork.medium))]
+    .sort((firstMedium, secondMedium) => firstMedium.localeCompare(secondMedium))
+    .map((medium) => ({
+      value: medium,
+      label: medium,
+    }));
+  const styleOptions = [
+    ...new Set(
+      categoryArtworks.flatMap((artwork) => artwork.styleTags || []),
+    ),
+  ]
+    .sort((firstTag, secondTag) => firstTag.localeCompare(secondTag))
+    .map((tag) => ({
+      value: tag,
+      label: tag,
+    }));
   const [sortBy, setSortBy] = useState(DEFAULT_SORT_BY);
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT);
   const [selectedFilters, setSelectedFilters] = useState(
@@ -54,22 +64,14 @@ const CategoryPageContent = ({ categorySlug }) => {
     return <h1>Category not found</h1>;
   }
 
-  const styleOptions = categories
-    .filter((item) => item.id !== category.id)
-    .map((item) => ({
-      value: String(item.id),
-      label: item.name,
-    }));
   const filteredCategoryArtworks = categoryArtworks.filter((artwork) => {
     const matchesMedium =
       selectedFilters.medium.length === 0 ||
       selectedFilters.medium.includes(artwork.medium);
     const matchesStyle =
       selectedFilters.style.length === 0 ||
-      artwork.categoryIds.some(
-        (categoryId) =>
-          categoryId !== category.id &&
-          selectedFilters.style.includes(String(categoryId)),
+      (artwork.styleTags || []).some((tag) =>
+        selectedFilters.style.includes(tag),
       );
     const matchesPrice = artwork.price <= selectedMaxPrice;
 
@@ -98,13 +100,17 @@ const CategoryPageContent = ({ categorySlug }) => {
     {
       name: "medium",
       label: "Mediums",
-      options: MEDIUM_FILTER_OPTIONS,
+      options: mediumOptions,
     },
-    {
-      name: "style",
-      label: "Style",
-      options: styleOptions,
-    },
+    ...(styleOptions.length > 0
+      ? [
+          {
+            name: "style",
+            label: "Styles",
+            options: styleOptions,
+          },
+        ]
+      : []),
   ];
 
   const handleSortChange = (evt) => {

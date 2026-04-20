@@ -10,7 +10,6 @@ const PastChallengesSection = ({ challenges }) => {
       <div className="container-main">
         <div className={styles.sectionInner}>
           <div className={styles.sectionHeader}>
-            <p className={styles.sectionEyebrow}>Archive</p>
             <h2 id="past-challenges-title" className={styles.sectionTitle}>
               Past Challenges
             </h2>

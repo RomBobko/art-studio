@@ -193,7 +193,6 @@ const DashboardPage = () => {
       >
         <div className="container-narrow">
           <div className={styles.header}>
-            <p className={styles.eyebrow}>Artist Dashboard</p>
             <h1 id="dashboard-page-title" className={styles.title}>
               Sell Your Art
             </h1>

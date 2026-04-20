@@ -24,19 +24,6 @@
   line-height: 0.98;
 }
 
-.sectionEyebrow {
-  display: inline-flex;
-  width: fit-content;
-  padding: 9px 14px;
-  border-radius: var(--radius-pill);
-  background-color: rgba(123, 102, 72, 0.1);
-  color: var(--color-accent-strong);
-  font-size: var(--fs-150);
-  font-weight: var(--fw-semibold);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
 .sectionText {
   max-width: 56ch;
   color: var(--color-text-muted);

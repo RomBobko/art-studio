@@ -90,7 +90,6 @@ const ChallengeSubmissionForm = ({
         <div className={styles.card}>
           <div className={styles.layout}>
             <div className={styles.storyPanel}>
-              <p className={styles.eyebrow}>Submission Studio</p>
               <h2 id="challenge-form-title" className={styles.title}>
                 Submit Your Artwork
               </h2>
