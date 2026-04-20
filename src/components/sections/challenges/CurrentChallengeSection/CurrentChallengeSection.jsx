@@ -1,16 +1,42 @@
 import styles from "./CurrentChallengeSection.module.css";
 
+const parseDateString = (value) => {
+  const [year, month, day] = value.split("-").map(Number);
+
+  return new Date(year, month - 1, day);
+};
+
+const formatDisplayDate = (value) =>
+  new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  }).format(parseDateString(value));
+
+const getStatusLabel = (status) => {
+  switch (status) {
+    case "active":
+      return "Open for submissions";
+    case "closed":
+      return "Challenge closed";
+    default:
+      return "Status coming soon";
+  }
+};
+
 const CurrentChallengeSection = ({
   title,
   theme,
-  description,
+  brief,
   deadline,
-  format,
+  status,
+  allowedMedia,
   prize,
-  image,
-  imageAlt,
+  coverImage,
   onParticipate,
 }) => {
+  const formattedDeadline = formatDisplayDate(deadline);
+
   return (
     <section
       className={`section-lg ${styles.section}`}
@@ -27,7 +53,7 @@ const CurrentChallengeSection = ({
                 <p className={styles.theme}>{theme}</p>
               </div>
 
-              <p className={styles.description}>{description}</p>
+              <p className={styles.description}>{brief}</p>
 
               <div className={styles.actions}>
                 <button
@@ -38,19 +64,19 @@ const CurrentChallengeSection = ({
                   Participate
                 </button>
                 <p className={styles.actionNote}>
-                  Share your piece before {deadline} to join this round.
+                  Share your piece before {formattedDeadline} to join this round.
                 </p>
               </div>
 
               <div className={styles.metaGrid}>
                 <article className={styles.metaCard}>
                   <p className={styles.metaLabel}>Deadline</p>
-                  <p className={styles.metaValue}>{deadline}</p>
+                  <p className={styles.metaValue}>{formattedDeadline}</p>
                 </article>
 
                 <article className={styles.metaCard}>
-                  <p className={styles.metaLabel}>Format</p>
-                  <p className={styles.metaValue}>{format}</p>
+                  <p className={styles.metaLabel}>Allowed media</p>
+                  <p className={styles.metaValue}>{allowedMedia}</p>
                 </article>
 
                 <article className={styles.metaCard}>
@@ -63,15 +89,17 @@ const CurrentChallengeSection = ({
             <div className={styles.visual}>
               <div className={styles.visualFrame}>
                 <div className={styles.imageWrap}>
-                  <img className={styles.image} src={image} alt={imageAlt} />
+                  <img
+                    className={styles.image}
+                    src={coverImage}
+                    alt={`${title} challenge cover`}
+                  />
                 </div>
               </div>
 
               <div className={styles.overlayCard}>
-                <p className={styles.overlayLabel}>Creative brief</p>
-                <p className={styles.overlayText}>
-                  Focus on softness, atmosphere, and the first light of spring.
-                </p>
+                <p className={styles.overlayLabel}>Challenge status</p>
+                <p className={styles.overlayText}>{getStatusLabel(status)}</p>
               </div>
             </div>
           </div>

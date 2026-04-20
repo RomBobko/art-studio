@@ -5,17 +5,15 @@ import CurrentChallengeSection from "../../components/sections/challenges/Curren
 import ChallengeSubmissionForm from "../../components/sections/challenges/ChallengeSubmissionForm/ChallengeSubmissionForm";
 import ChallengeSubmissionsSection from "../../components/sections/challenges/ChallengeSubmissionsSection/ChallengeSubmissionsSection";
 import PastChallengesSection from "../../components/sections/challenges/PastChallengesSection/PastChallengesSection";
-import {
-  currentChallenge,
-  initialSubmissions,
-  pastChallenges,
-} from "../../data/challenges";
+import { currentChallenge, pastChallenges } from "../../data/challenges";
+import initialChallengeSubmissions from "../../data/challengeSubmissions";
 
 const INITIAL_FORM_VALUES = {
   artworkTitle: "",
   artistName: "",
-  artworkNote: "",
-  artworkFileName: "",
+  medium: "",
+  note: "",
+  imageFileName: "",
 };
 
 const validateFormValues = (values) => {
@@ -29,15 +27,22 @@ const validateFormValues = (values) => {
     errors.artistName = "Please enter your name.";
   }
 
+  if (!values.medium.trim()) {
+    errors.medium = "Please enter the medium used for your artwork.";
+  }
+
   return errors;
 };
 
 const ChallengesPage = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [submissions, setSubmissions] = useState(initialSubmissions);
+  const [submissions, setSubmissions] = useState(initialChallengeSubmissions);
   const [formValues, setFormValues] = useState(INITIAL_FORM_VALUES);
   const [formErrors, setFormErrors] = useState({});
   const [imagePreview, setImagePreview] = useState("");
+  const currentChallengeSubmissions = submissions.filter(
+    (submission) => submission.challengeId === currentChallenge.id,
+  );
 
   const resetFormState = () => {
     setFormValues(INITIAL_FORM_VALUES);
@@ -75,7 +80,7 @@ const ChallengesPage = () => {
 
     setFormValues((prevFormValues) => ({
       ...prevFormValues,
-      artworkFileName: selectedFile ? selectedFile.name : "",
+      imageFileName: selectedFile ? selectedFile.name : "",
     }));
 
     if (!selectedFile || !selectedFile.type.startsWith("image/")) {
@@ -104,7 +109,8 @@ const ChallengesPage = () => {
 
     const trimmedArtworkTitle = formValues.artworkTitle.trim();
     const trimmedArtistName = formValues.artistName.trim();
-    const trimmedArtworkNote = formValues.artworkNote.trim();
+    const trimmedMedium = formValues.medium.trim();
+    const trimmedNote = formValues.note.trim();
 
     setSubmissions((prevSubmissions) => {
       const nextId =
@@ -114,14 +120,13 @@ const ChallengesPage = () => {
 
       const newSubmission = {
         id: nextId,
+        challengeId: currentChallenge.id,
         artistName: trimmedArtistName,
         artworkTitle: trimmedArtworkTitle,
         image: imagePreview || imagePlaceholder,
-        imageAlt: imagePreview
-          ? `${trimmedArtworkTitle} uploaded preview`
-          : `${trimmedArtworkTitle} submission placeholder image`,
-        medium: formValues.artworkFileName || "Uploaded artwork",
-        note: trimmedArtworkNote,
+        medium: trimmedMedium,
+        submittedAt: new Date().toISOString().split("T")[0],
+        note: trimmedNote,
       };
 
       return [newSubmission, ...prevSubmissions];
@@ -136,12 +141,12 @@ const ChallengesPage = () => {
       <CurrentChallengeSection
         title={currentChallenge.title}
         theme={currentChallenge.theme}
-        description={currentChallenge.description}
+        brief={currentChallenge.brief}
         deadline={currentChallenge.deadline}
-        format={currentChallenge.format}
+        status={currentChallenge.status}
+        allowedMedia={currentChallenge.allowedMedia}
         prize={currentChallenge.prize}
-        image={currentChallenge.image}
-        imageAlt={currentChallenge.imageAlt}
+        coverImage={currentChallenge.coverImage}
         onParticipate={handleOpenForm}
       />
       {isFormOpen && (
@@ -155,7 +160,7 @@ const ChallengesPage = () => {
           onClose={handleCloseForm}
         />
       )}
-      <ChallengeSubmissionsSection submissions={submissions} />
+      <ChallengeSubmissionsSection submissions={currentChallengeSubmissions} />
       <PastChallengesSection challenges={pastChallenges} />
     </div>
   );

@@ -1,5 +1,18 @@
 import styles from "./ChallengeSubmissionsSection.module.css";
 
+const parseDateString = (value) => {
+  const [year, month, day] = value.split("-").map(Number);
+
+  return new Date(year, month - 1, day);
+};
+
+const formatSubmittedDate = (value) =>
+  new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  }).format(parseDateString(value));
+
 const ChallengeSubmissionsSection = ({ submissions }) => {
   return (
     <section
@@ -28,7 +41,7 @@ const ChallengeSubmissionsSection = ({ submissions }) => {
                   <img
                     className={styles.image}
                     src={submission.image}
-                    alt={submission.imageAlt}
+                    alt={`${submission.artworkTitle} by ${submission.artistName}`}
                     loading="lazy"
                   />
                 </div>
@@ -36,6 +49,9 @@ const ChallengeSubmissionsSection = ({ submissions }) => {
                 <div className={styles.cardContent}>
                   <div className={styles.cardMeta}>
                     <p className={styles.medium}>{submission.medium}</p>
+                    <p className={styles.submittedAt}>
+                      {formatSubmittedDate(submission.submittedAt)}
+                    </p>
                   </div>
                   <h3 className={styles.artworkTitle}>
                     {submission.artworkTitle}

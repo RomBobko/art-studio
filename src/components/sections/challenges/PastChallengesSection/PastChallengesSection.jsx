@@ -1,7 +1,24 @@
 import { HiOutlineArrowRight } from "react-icons/hi2";
+import artists from "../../../../data/artists";
 import styles from "./PastChallengesSection.module.css";
 
+const parseDateString = (value) => {
+  const [year, month, day] = value.split("-").map(Number);
+
+  return new Date(year, month - 1, day);
+};
+
+const formatChallengeMonth = (value) =>
+  new Intl.DateTimeFormat("en-US", {
+    month: "long",
+    year: "numeric",
+  }).format(parseDateString(value));
+
 const PastChallengesSection = ({ challenges }) => {
+  const artistNamesById = Object.fromEntries(
+    artists.map((artist) => [artist.id, artist.name]),
+  );
+
   return (
     <section
       className={`section ${styles.section}`}
@@ -25,21 +42,30 @@ const PastChallengesSection = ({ challenges }) => {
                   <div className={styles.thumbnailWrap}>
                     <img
                       className={styles.thumbnail}
-                      src={challenge.image}
-                      alt={challenge.imageAlt}
+                      src={challenge.coverImage}
+                      alt={`${challenge.title} challenge cover`}
                       loading="lazy"
                     />
                   </div>
 
                   <div className={styles.content}>
                     <div className={styles.contentMeta}>
-                      <p className={styles.month}>{challenge.month}</p>
+                      <p className={styles.month}>
+                        {formatChallengeMonth(challenge.deadline)}
+                      </p>
                       <p className={styles.winner}>
-                        Winner: {challenge.winnerName}
+                        Winner:{" "}
+                        {artistNamesById[challenge.winnerArtistId] ||
+                          "To be announced"}
                       </p>
                     </div>
                     <h3 className={styles.title}>{challenge.title}</h3>
                     <p className={styles.theme}>{challenge.theme}</p>
+                    {challenge.winningArtworkTitle && (
+                      <p className={styles.winner}>
+                        Winning artwork: {challenge.winningArtworkTitle}
+                      </p>
+                    )}
                   </div>
 
                   <span className={styles.indicator} aria-hidden="true">

@@ -95,7 +95,7 @@ const ChallengeSubmissionForm = ({
               </h2>
               <p id="challenge-form-description" className={styles.text}>
                 Share your response to this month&apos;s brief with a clear
-                title, your name, a short note, and an image.
+                title, medium, your name, a short note, and an image.
               </p>
 
               <div className={styles.previewCard}>
@@ -113,7 +113,7 @@ const ChallengeSubmissionForm = ({
                       src={previewImage}
                       alt={
                         values.artworkTitle ||
-                        values.artworkFileName ||
+                        values.imageFileName ||
                         "Selected artwork preview"
                       }
                     />
@@ -195,16 +195,44 @@ const ChallengeSubmissionForm = ({
               </div>
 
               <div className={styles.field}>
+                <label className={styles.label} htmlFor="artwork-medium">
+                  Medium
+                </label>
+                <input
+                  className={`${styles.input} ${
+                    errors.medium ? styles.inputError : ""
+                  }`}
+                  id="artwork-medium"
+                  name="medium"
+                  type="text"
+                  placeholder="Example: Acrylic on canvas"
+                  value={values.medium}
+                  onChange={onChange}
+                  aria-invalid={Boolean(errors.medium)}
+                  aria-describedby={errors.medium ? "artwork-medium-error" : undefined}
+                />
+                {errors.medium && (
+                  <p
+                    className={styles.errorText}
+                    id="artwork-medium-error"
+                    role="alert"
+                  >
+                    {errors.medium}
+                  </p>
+                )}
+              </div>
+
+              <div className={styles.field}>
                 <label className={styles.label} htmlFor="artwork-note">
                   Short description
                 </label>
                 <textarea
                   className={styles.textarea}
                   id="artwork-note"
-                  name="artworkNote"
+                  name="note"
                   placeholder="Tell a little about your artwork"
                   rows="5"
-                  value={values.artworkNote}
+                  value={values.note}
                   onChange={onChange}
                 />
               </div>
@@ -216,8 +244,8 @@ const ChallengeSubmissionForm = ({
                     Select an image for your submission
                   </span>
                   <span className={styles.uploadText}>
-                    {values.artworkFileName
-                      ? `Selected file: ${values.artworkFileName}`
+                    {values.imageFileName
+                      ? `Selected file: ${values.imageFileName}`
                       : "PNG, JPG, or WEBP works well here."}
                   </span>
                   <input
