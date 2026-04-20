@@ -3,11 +3,14 @@ import { Link, useParams } from "react-router-dom";
 import styles from "./ArtistPage.module.css";
 import artists from "../../data/artists";
 import artworks from "../../data/artworks";
+import currentUser from "../../data/currentUser";
 import ArtworkThumbnailGrid from "../../components/shared/ArtworkThumbnailGrid";
 
 const ArtistPage = () => {
   const { artistSlug } = useParams();
-  const [isFollowing, setIsFollowing] = useState(false);
+  const [followedArtistIds, setFollowedArtistIds] = useState(
+    () => currentUser.followedArtistIds || [],
+  );
 
   const artist = artists.find((item) => item.slug === artistSlug);
 
@@ -25,6 +28,8 @@ const ArtistPage = () => {
   }
 
   const artistArtworks = artworks.filter((item) => item.artistId === artist.id);
+  const isOwnArtistPage = currentUser.artistId === artist.id;
+  const isFollowing = followedArtistIds.includes(artist.id);
 
   const artistArtworksActionsClassName =
     artistArtworks.length > 0
@@ -36,7 +41,11 @@ const ArtistPage = () => {
     : styles.button;
 
   const handleFollowToggle = () => {
-    setIsFollowing((prevIsFollowing) => !prevIsFollowing);
+    setFollowedArtistIds((prevFollowedArtistIds) =>
+      prevFollowedArtistIds.includes(artist.id)
+        ? prevFollowedArtistIds.filter((artistId) => artistId !== artist.id)
+        : [...prevFollowedArtistIds, artist.id],
+    );
   };
 
   return (
@@ -61,14 +70,18 @@ const ArtistPage = () => {
               </p>
 
               <div className={styles.actions}>
-                <button
-                  className={followButtonClassName}
-                  type="button"
-                  onClick={handleFollowToggle}
-                  aria-pressed={isFollowing}
-                >
-                  {isFollowing ? "Following" : "Follow"}
-                </button>
+                {isOwnArtistPage ? (
+                  <p className={styles.helperText}>This is your public artist profile.</p>
+                ) : (
+                  <button
+                    className={followButtonClassName}
+                    type="button"
+                    onClick={handleFollowToggle}
+                    aria-pressed={isFollowing}
+                  >
+                    {isFollowing ? "Following" : "Follow"}
+                  </button>
+                )}
               </div>
             </div>
           </div>

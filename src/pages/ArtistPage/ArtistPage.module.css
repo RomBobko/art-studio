@@ -55,6 +55,13 @@
   align-items: flex-start;
 }
 
+.helperText {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
 .button {
   min-width: 170px;
   min-height: 52px;

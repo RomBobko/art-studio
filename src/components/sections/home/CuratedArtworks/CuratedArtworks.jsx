@@ -9,11 +9,19 @@ const CuratedArtworks = () => {
         <h2 className={styles.title}>Curated Artworks</h2>
 
         <ul className={styles.list}>
-          {curatedArtworks.map(({ title, image, author }) => (
-            <li className={styles.item} key={title}>
-              <CuratedArtworkCard image={image} title={title} author={author} />
-            </li>
-          ))}
+          {curatedArtworks.map(
+            ({ id, slug, title, image, artistName, artistSlug }) => (
+              <li className={styles.item} key={id}>
+                <CuratedArtworkCard
+                  slug={slug}
+                  image={image}
+                  title={title}
+                  artistName={artistName}
+                  artistSlug={artistSlug}
+                />
+              </li>
+            ),
+          )}
         </ul>
       </div>
     </section>

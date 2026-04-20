@@ -1,14 +1,22 @@
+import { Link } from "react-router-dom";
 import styles from "./CuratedArtworkCard.module.css";
 
-const CuratedArtworkCard = ({ image, title, author }) => {
+const CuratedArtworkCard = ({ slug, image, title, artistName, artistSlug }) => {
   return (
     <article className={styles.card}>
-      <div className={styles.media}>
-        <img className={styles.image} src={image} alt={title} loading="lazy" />
-      </div>
+      <Link className={styles.mediaLink} to={`/artworks/${slug}`}>
+        <div className={styles.media}>
+          <img className={styles.image} src={image} alt={title} loading="lazy" />
+        </div>
+      </Link>
 
-      <h3 className={styles.title}>{title}</h3>
-      <p className={styles.name}>{author}</p>
+      <Link className={styles.titleLink} to={`/artworks/${slug}`}>
+        <h3 className={styles.title}>{title}</h3>
+      </Link>
+
+      <Link className={styles.authorLink} to={`/artists/${artistSlug}`}>
+        <p className={styles.name}>{artistName}</p>
+      </Link>
     </article>
   );
 };

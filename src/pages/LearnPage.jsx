@@ -3,15 +3,36 @@ import LearnHero from "../components/sections/learn/LearnHero/LearnHero";
 import TutorialsSection from "../components/sections/learn/TutorialsSection/TutorialsSection";
 import FeaturedTutorialsSection from "../components/sections/learn/FeaturedTutorialsSection/FeaturedTutorialsSection";
 import tutorials from "../data/tutorials";
+import artists from "../data/artists";
+import categories from "../data/categories";
 
 const LearnPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const artistsById = Object.fromEntries(
+    artists.map((artist) => [artist.id, artist]),
+  );
+  const categoriesById = Object.fromEntries(
+    categories.map((category) => [category.id, category]),
+  );
+  const tutorialsWithDetails = tutorials.map((tutorial) => ({
+    ...tutorial,
+    category: categoriesById[tutorial.categoryId]?.name || "Uncategorized",
+    authorName: artistsById[tutorial.authorId]?.name || "Unknown artist",
+    authorAvatar: artistsById[tutorial.authorId]?.avatar,
+  }));
+  const availableCategories = categories
+    .filter((category) =>
+      tutorials.some((tutorial) => tutorial.categoryId === category.id),
+    )
+    .map((category) => category.name);
 
-  const categories = ["All", ...new Set(tutorials.map((tutorial) => tutorial.category))];
+  const categoryOptions = ["All", ...availableCategories];
   const filteredTutorials =
     selectedCategory === "All"
-      ? tutorials
-      : tutorials.filter((tutorial) => tutorial.category === selectedCategory);
+      ? tutorialsWithDetails
+      : tutorialsWithDetails.filter(
+          (tutorial) => tutorial.category === selectedCategory,
+        );
 
   const visibleTutorials = filteredTutorials.filter(
     (tutorial) => !tutorial.isFeatured,
@@ -23,7 +44,7 @@ const LearnPage = () => {
   return (
     <>
       <LearnHero
-        categories={categories}
+        categories={categoryOptions}
         selectedCategory={selectedCategory}
         onSelectCategory={setSelectedCategory}
       />

@@ -6,14 +6,6 @@ import traditionalArtImage from "../assets/images/traditionalArt.webp";
 import illustrationImage from "../assets/images/illustration.webp";
 import resinArtImage from "../assets/images/resinArt.webp";
 
-import elenaAvatar from "../assets/images/artists/elena-novak.webp";
-import lucasAvatar from "../assets/images/artists/lucas-bennett.webp";
-import sophieAvatar from "../assets/images/artists/sophie-laurent.webp";
-import claraAvatar from "../assets/images/artists/clara-moreau.webp";
-import ameliaAvatar from "../assets/images/artists/amelia-brooks.webp";
-import evaAvatar from "../assets/images/artists/eva-muller.webp";
-import danielAvatar from "../assets/images/artists/daniel-kovac.webp";
-
 const tutorials = [
   {
     id: 1,
@@ -21,11 +13,10 @@ const tutorials = [
     title: "Mandala Wall Hanging Basics",
     description:
       "Learn how to build a clean wall-hanging design with simple shapes, mirrored details, and beginner-friendly finishing steps.",
-    category: "Lippan Art",
+    categoryId: 7,
     level: "Beginner",
     image: lippanArtImage,
-    authorName: "Clara Moreau",
-    authorAvatar: claraAvatar,
+    authorId: 6,
     duration: "42 min",
     lessonsCount: 6,
     isFeatured: false,
@@ -36,11 +27,10 @@ const tutorials = [
     title: "Handmade Home Decor Patterns",
     description:
       "Practice repeatable decorative motifs and learn how to turn them into polished craft pieces for walls and shelves.",
-    category: "Crafts",
+    categoryId: 3,
     level: "Beginner",
     image: craftsImage,
-    authorName: "Sophie Laurent",
-    authorAvatar: sophieAvatar,
+    authorId: 4,
     duration: "36 min",
     lessonsCount: 5,
     isFeatured: false,
@@ -51,11 +41,10 @@ const tutorials = [
     title: "Sketching Light and Shadow",
     description:
       "Build stronger pencil studies by blocking shapes first and adding light, contrast, and texture in simple stages.",
-    category: "Sketch",
+    categoryId: 4,
     level: "Beginner",
     image: sketchImage,
-    authorName: "Amelia Brooks",
-    authorAvatar: ameliaAvatar,
+    authorId: 5,
     duration: "54 min",
     lessonsCount: 7,
     isFeatured: false,
@@ -66,11 +55,10 @@ const tutorials = [
     title: "Acrylic Color Foundations",
     description:
       "Start with a limited palette and learn how to mix balanced colors for landscapes, studies, and expressive painting work.",
-    category: "Paintings",
+    categoryId: 1,
     level: "Intermediate",
     image: paintingsImage,
-    authorName: "Daniel Kovac",
-    authorAvatar: danielAvatar,
+    authorId: 2,
     duration: "58 min",
     lessonsCount: 8,
     isFeatured: false,
@@ -81,11 +69,10 @@ const tutorials = [
     title: "Folk Ornament Composition",
     description:
       "Arrange symbolic patterns with stronger rhythm and spacing so your decorative pieces feel complete and intentional.",
-    category: "Traditional Art",
+    categoryId: 5,
     level: "Beginner",
     image: traditionalArtImage,
-    authorName: "Elena Novak",
-    authorAvatar: elenaAvatar,
+    authorId: 6,
     duration: "47 min",
     lessonsCount: 6,
     isFeatured: true,
@@ -96,11 +83,10 @@ const tutorials = [
     title: "Illustrated Character Posters",
     description:
       "Combine character sketching, layout, and texture overlays to create a simple poster with a finished digital look.",
-    category: "Illustration",
+    categoryId: 8,
     level: "Intermediate",
     image: illustrationImage,
-    authorName: "Lucas Bennett",
-    authorAvatar: lucasAvatar,
+    authorId: 3,
     duration: "65 min",
     lessonsCount: 9,
     isFeatured: true,
@@ -111,11 +97,10 @@ const tutorials = [
     title: "Resin Textures for Beginners",
     description:
       "Understand the basics of layering, flow, and texture so your resin work looks more controlled and visually rich.",
-    category: "Resin Art",
+    categoryId: 6,
     level: "Beginner",
     image: resinArtImage,
-    authorName: "Eva Muller",
-    authorAvatar: evaAvatar,
+    authorId: 6,
     duration: "39 min",
     lessonsCount: 5,
     isFeatured: true,
