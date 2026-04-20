@@ -123,6 +123,13 @@
   letter-spacing: -0.03em;
 }
 
+.sectionText {
+  margin-bottom: 18px;
+  color: var(--color-text-muted);
+  font-size: var(--fs-150);
+  line-height: var(--lh-160);
+}
+
 .uploadForm,
 .profileForm {
   display: grid;
@@ -288,66 +295,35 @@
   line-height: var(--lh-150);
 }
 
-.analyticsLabel {
-  margin-bottom: 14px;
-  color: var(--color-text-secondary);
-  font-size: var(--fs-300);
-  font-weight: var(--fw-medium);
-  line-height: var(--lh-150);
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
 }
 
-.analyticsContent {
+.summaryCard {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 18px;
-  align-items: end;
+  gap: 8px;
+  min-height: 110px;
   padding: 18px;
   border: 1px solid rgba(123, 102, 72, 0.1);
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.82);
 }
 
-.analyticsScale {
-  display: grid;
-  gap: 28px;
-  padding-bottom: 20px;
+.summaryLabel {
   color: var(--color-text-muted);
   font-size: var(--fs-100);
-  line-height: 1;
+  line-height: var(--lh-150);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
-.chartWrap {
-  display: grid;
-  gap: 10px;
-}
-
-.chart {
-  width: 100%;
-  height: auto;
-}
-
-.chart line {
-  stroke: rgba(123, 102, 72, 0.14);
-  stroke-width: 1;
-}
-
-.chart polyline {
-  stroke: #9d9d9d;
-  stroke-width: 4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.chart circle {
-  fill: #9d9d9d;
-}
-
-.monthLabels {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 8px;
-  color: var(--color-text-muted);
-  font-size: var(--fs-100);
+.summaryValue {
+  color: var(--color-text-strong);
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: var(--fw-semibold);
+  line-height: 1.1;
 }
 
 .topSellingList {
@@ -373,10 +349,83 @@
   flex-shrink: 0;
 }
 
-.topSellingTitle {
+.topSellingContent {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
+}
+
+.topSellingLink {
   color: var(--color-text-primary);
   font-size: var(--fs-200);
   line-height: var(--lh-140);
+  text-decoration: none;
+}
+
+.topSellingLink:hover {
+  text-decoration: underline;
+}
+
+.topSellingMeta {
+  color: var(--color-text-muted);
+  font-size: var(--fs-100);
+  line-height: var(--lh-150);
+}
+
+.topSellingPrice {
+  color: var(--color-text-strong);
+  font-size: var(--fs-150);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-140);
+}
+
+.profileSummary {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 18px;
+  padding: 16px 18px;
+  border: 1px solid rgba(123, 102, 72, 0.12);
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.82);
+}
+
+.profileAvatar {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.profileSummaryContent {
+  display: grid;
+  gap: 6px;
+}
+
+.profileName {
+  color: var(--color-text-strong);
+  font-size: var(--fs-350);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-140);
+}
+
+.profileMeta {
+  color: var(--color-text-muted);
+  font-size: var(--fs-150);
+  line-height: var(--lh-150);
+}
+
+.profileLink {
+  color: #094e71;
+  font-size: var(--fs-150);
+  line-height: var(--lh-150);
+  text-decoration: none;
+}
+
+.profileLink:hover {
+  text-decoration: underline;
 }
 
 .socialGrid {
@@ -449,19 +498,16 @@
     min-height: 180px;
   }
 
-  .analyticsContent {
+  .summaryGrid {
     grid-template-columns: 1fr;
-    padding: 16px;
-  }
-
-  .analyticsScale {
-    grid-auto-flow: column;
-    justify-content: space-between;
-    padding-bottom: 0;
-    gap: 12px;
   }
 
   .socialGrid {
     grid-template-columns: 1fr;
+  }
+
+  .profileSummary {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }

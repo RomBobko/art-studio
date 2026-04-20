@@ -1,27 +1,10 @@
 import { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { BsImage } from "react-icons/bs";
 import styles from "./DashboardPage.module.css";
-import blossomImage from "../../assets/images/blossom.webp";
-import sunsetImage from "../../assets/images/sunset.webp";
-import cityscapeImage from "../../assets/images/cityscape.webp";
-
-const topSellingArtworks = [
-  {
-    id: 1,
-    title: "Midnight Swirl",
-    image: blossomImage,
-  },
-  {
-    id: 2,
-    title: "Wine and Woman",
-    image: sunsetImage,
-  },
-  {
-    id: 3,
-    title: "Inner World",
-    image: cityscapeImage,
-  },
-];
+import currentUser from "../../data/currentUser";
+import artists from "../../data/artists";
+import artworks from "../../data/artworks";
 
 const INITIAL_UPLOAD_VALUES = {
   artworkTitle: "",
@@ -29,19 +12,41 @@ const INITIAL_UPLOAD_VALUES = {
   artworkFileName: "",
 };
 
-const INITIAL_PROFILE_VALUES = {
-  profileBio: "",
-  profileWebsite: "",
-  profileTwitter: "",
-};
+const formatPrice = (value) => `$${new Intl.NumberFormat("en-US").format(value)}`;
 
 const DashboardPage = () => {
+  const dashboardArtist = artists.find(
+    (artist) => artist.id === currentUser.artistId,
+  );
+  const dashboardArtworks = artworks.filter(
+    (artwork) => artwork.artistId === currentUser.artistId,
+  );
+  const recentArtworks = [...dashboardArtworks]
+    .sort(
+      (firstArtwork, secondArtwork) =>
+        secondArtwork.year - firstArtwork.year ||
+        secondArtwork.price - firstArtwork.price,
+    )
+    .slice(0, 3);
+  const listedArtworksCount = dashboardArtworks.length;
+  const trendingArtworksCount = dashboardArtworks.filter(
+    (artwork) => artwork.isTrending,
+  ).length;
+  const totalPortfolioValue = dashboardArtworks.reduce(
+    (sum, artwork) => sum + artwork.price,
+    0,
+  );
+  const dashboardArtistName = dashboardArtist?.name || currentUser.displayName;
   const artworkFileInputRef = useRef(null);
   const [uploadValues, setUploadValues] = useState(INITIAL_UPLOAD_VALUES);
   const [uploadErrors, setUploadErrors] = useState({});
   const [uploadPreview, setUploadPreview] = useState("");
   const [uploadSuccessMessage, setUploadSuccessMessage] = useState("");
-  const [profileValues, setProfileValues] = useState(INITIAL_PROFILE_VALUES);
+  const [profileValues, setProfileValues] = useState(() => ({
+    profileBio: currentUser.bio || dashboardArtist?.bio || "",
+    profileWebsite: currentUser.website || "",
+    profileInstagram: currentUser.socialLinks?.instagram || "",
+  }));
   const [profileErrors, setProfileErrors] = useState({});
   const [profileSuccessMessage, setProfileSuccessMessage] = useState("");
 
@@ -194,11 +199,12 @@ const DashboardPage = () => {
         <div className="container-narrow">
           <div className={styles.header}>
             <h1 id="dashboard-page-title" className={styles.title}>
-              Sell Your Art
+              Artist Dashboard
             </h1>
             <p className={styles.description}>
-              A simple workspace for uploading artwork, checking sales, and
-              keeping your profile details in one place.
+              Manage the artworks currently shown on {dashboardArtistName}
+              &apos;s public profile, preview local upload drafts, and keep your
+              artist details in one place.
             </p>
           </div>
 
@@ -206,6 +212,11 @@ const DashboardPage = () => {
             <div className={styles.layout}>
               <section className={styles.uploadBlock}>
                 <h2 className={styles.blockTitle}>Upload Art</h2>
+                <p className={styles.sectionText}>
+                  You currently have {listedArtworksCount} artwork
+                  {listedArtworksCount === 1 ? "" : "s"} listed on your public
+                  profile.
+                </p>
 
                 <form className={styles.uploadForm} onSubmit={handleUploadSubmit}>
                   <label
@@ -305,62 +316,59 @@ const DashboardPage = () => {
 
               <div className={styles.insightsColumn}>
                 <section className={styles.analyticsBlock}>
-                  <h2 className={styles.blockTitle}>Sales Analytics</h2>
-                  <p className={styles.analyticsLabel}>Total Earnings</p>
+                  <h2 className={styles.blockTitle}>Portfolio Snapshot</h2>
+                  <p className={styles.sectionText}>
+                    These summary cards are based on the artworks currently tied
+                    to your artist profile.
+                  </p>
 
-                  <div className={styles.analyticsContent}>
-                    <div className={styles.analyticsScale}>
-                      <span>$2,000</span>
-                      <span>$2,000</span>
-                      <span>$0</span>
-                    </div>
+                  <div className={styles.summaryGrid}>
+                    <article className={styles.summaryCard}>
+                      <p className={styles.summaryLabel}>Listed artworks</p>
+                      <p className={styles.summaryValue}>{listedArtworksCount}</p>
+                    </article>
 
-                    <div className={styles.chartWrap}>
-                      <svg
-                        className={styles.chart}
-                        viewBox="0 0 220 120"
-                        aria-hidden="true"
-                      >
-                        <line x1="0" y1="100" x2="220" y2="100" />
-                        <line x1="0" y1="70" x2="220" y2="70" />
-                        <line x1="0" y1="40" x2="220" y2="40" />
-                        <polyline
-                          points="18,82 60,48 98,58 142,28 176,42 208,18"
-                          fill="none"
-                        />
-                        <circle cx="18" cy="82" r="5" />
-                        <circle cx="60" cy="48" r="5" />
-                        <circle cx="98" cy="58" r="5" />
-                        <circle cx="142" cy="28" r="5" />
-                        <circle cx="176" cy="42" r="5" />
-                        <circle cx="208" cy="18" r="5" />
-                      </svg>
+                    <article className={styles.summaryCard}>
+                      <p className={styles.summaryLabel}>Trending pieces</p>
+                      <p className={styles.summaryValue}>{trendingArtworksCount}</p>
+                    </article>
 
-                      <div className={styles.monthLabels}>
-                        <span>Jan</span>
-                        <span>Mar</span>
-                        <span>Aug</span>
-                        <span>Oct</span>
-                        <span>Nov</span>
-                        <span>Dec</span>
-                      </div>
-                    </div>
+                    <article className={styles.summaryCard}>
+                      <p className={styles.summaryLabel}>Total listed value</p>
+                      <p className={styles.summaryValue}>
+                        {formatPrice(totalPortfolioValue)}
+                      </p>
+                    </article>
                   </div>
                 </section>
 
                 <section className={styles.topSellingBlock}>
-                  <h2 className={styles.blockTitle}>Top Selling</h2>
+                  <h2 className={styles.blockTitle}>Your Artworks</h2>
+                  <p className={styles.sectionText}>
+                    Recent artworks connected to your artist page.
+                  </p>
 
                   <ul className={styles.topSellingList}>
-                    {topSellingArtworks.map((artwork) => (
+                    {recentArtworks.map((artwork) => (
                       <li key={artwork.id} className={styles.topSellingItem}>
                         <img
                           className={styles.topSellingImage}
                           src={artwork.image}
                           alt={artwork.title}
                         />
-                        <span className={styles.topSellingTitle}>
-                          {artwork.title}
+                        <div className={styles.topSellingContent}>
+                          <Link
+                            to={`/artworks/${artwork.slug}`}
+                            className={styles.topSellingLink}
+                          >
+                            {artwork.title}
+                          </Link>
+                          <span className={styles.topSellingMeta}>
+                            {artwork.medium} | {artwork.year}
+                          </span>
+                        </div>
+                        <span className={styles.topSellingPrice}>
+                          {formatPrice(artwork.price)}
                         </span>
                       </li>
                     ))}
@@ -370,6 +378,30 @@ const DashboardPage = () => {
 
               <section className={styles.profileBlock}>
                 <h2 className={styles.blockTitle}>Profile Management</h2>
+                <div className={styles.profileSummary}>
+                  {dashboardArtist?.avatar && (
+                    <img
+                      className={styles.profileAvatar}
+                      src={dashboardArtist.avatar}
+                      alt={dashboardArtistName}
+                    />
+                  )}
+
+                  <div className={styles.profileSummaryContent}>
+                    <p className={styles.profileName}>{dashboardArtistName}</p>
+                    <p className={styles.profileMeta}>
+                      Signed in as @{currentUser.username} | {currentUser.email}
+                    </p>
+                    {dashboardArtist && (
+                      <Link
+                        to={`/artists/${dashboardArtist.slug}`}
+                        className={styles.profileLink}
+                      >
+                        View public artist page
+                      </Link>
+                    )}
+                  </div>
+                </div>
 
                 <form className={styles.profileForm} onSubmit={handleProfileSubmit}>
                   <div className={styles.field}>
@@ -396,7 +428,7 @@ const DashboardPage = () => {
 
                   <div className={styles.field}>
                     <label className={styles.label} htmlFor="dashboard-website">
-                      Social Links
+                      Profile Links
                     </label>
 
                     <div className={styles.socialGrid}>
@@ -413,11 +445,11 @@ const DashboardPage = () => {
                       />
                       <input
                         className={styles.input}
-                        id="dashboard-twitter"
-                        name="profileTwitter"
+                        id="dashboard-instagram"
+                        name="profileInstagram"
                         type="text"
-                        placeholder="Twitter"
-                        value={profileValues.profileTwitter}
+                        placeholder="Instagram"
+                        value={profileValues.profileInstagram}
                         onChange={handleProfileChange}
                       />
                     </div>
