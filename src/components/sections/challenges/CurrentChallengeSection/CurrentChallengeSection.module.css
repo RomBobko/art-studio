@@ -1,6 +1,6 @@
 .section {
-  padding-top: var(--space-80);
-  padding-bottom: var(--space-48);
+  padding-top: var(--space-96, 96px);
+  padding-bottom: var(--space-56, 56px);
 }
 
 .shell {
@@ -15,16 +15,16 @@
   align-items: center;
   gap: clamp(var(--space-32), 4vw, 56px);
   padding: clamp(var(--space-32), 4vw, 56px);
-  border: 1px solid rgba(123, 102, 72, 0.14);
-  border-radius: 36px;
+  border: 1px solid rgba(198, 164, 110, 0.28);
+  border-radius: 38px;
   background: linear-gradient(
     145deg,
-    rgba(253, 250, 245, 0.94),
-    rgba(234, 226, 214, 0.94)
+    rgba(255, 250, 242, 0.98),
+    rgba(234, 223, 206, 0.94)
   );
   box-shadow:
-    0 24px 64px rgba(89, 72, 50, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    0 28px 70px rgba(71, 54, 33, 0.14),
+    inset 0 1px 0 rgba(255, 250, 242, 0.8);
   overflow: hidden;
 }
 
@@ -35,13 +35,13 @@
   background:
     radial-gradient(
       circle at 18% 18%,
-      rgba(255, 255, 255, 0.68),
-      rgba(255, 255, 255, 0) 30%
+      rgba(255, 250, 242, 0.72),
+      rgba(255, 250, 242, 0) 30%
     ),
     radial-gradient(
       circle at 86% 84%,
-      rgba(154, 122, 80, 0.12),
-      rgba(154, 122, 80, 0) 24%
+      rgba(167, 119, 50, 0.12),
+      rgba(167, 119, 50, 0) 24%
     );
   pointer-events: none;
 }
@@ -63,7 +63,7 @@
   color: var(--color-text-strong);
   font-size: clamp(48px, 6vw, 82px);
   font-weight: var(--fw-extrabold);
-  letter-spacing: -0.05em;
+  letter-spacing: 0;
   line-height: 0.96;
 }
 
@@ -98,7 +98,7 @@
   border: none;
   border-radius: var(--radius-pill);
   background: linear-gradient(
-    180deg,
+    135deg,
     var(--color-accent),
     var(--color-button-secondary)
   );
@@ -107,6 +107,15 @@
   font-weight: var(--fw-semibold);
   line-height: 1;
   box-shadow: 0 14px 28px rgba(123, 102, 72, 0.22);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.button:hover,
+.button:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 34px rgba(111, 75, 34, 0.24);
 }
 
 .actionNote {
@@ -128,10 +137,10 @@
   gap: var(--space-8);
   min-height: 112px;
   padding: var(--space-20);
-  border: 1px solid rgba(123, 102, 72, 0.12);
+  border: 1px solid rgba(198, 164, 110, 0.22);
   border-radius: 22px;
-  background-color: rgba(255, 255, 255, 0.82);
-  box-shadow: 0 10px 22px rgba(123, 102, 72, 0.08);
+  background-color: rgba(255, 250, 242, 0.82);
+  box-shadow: 0 10px 22px rgba(71, 54, 33, 0.07);
 }
 
 .metaLabel {
@@ -162,17 +171,17 @@
   border-radius: 32px;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.72),
-    rgba(255, 255, 255, 0.36)
+    rgba(255, 250, 242, 0.82),
+    rgba(255, 250, 242, 0.42)
   );
-  border: 1px solid rgba(255, 255, 255, 0.48);
-  box-shadow: 0 28px 40px rgba(89, 72, 50, 0.16);
+  border: 1px solid rgba(255, 250, 242, 0.62);
+  box-shadow: 0 28px 46px rgba(71, 54, 33, 0.16);
 }
 
 .imageWrap {
   overflow: hidden;
   width: 100%;
-  border: 1px solid rgba(123, 102, 72, 0.16);
+  border: 1px solid rgba(198, 164, 110, 0.26);
   border-radius: 28px;
   background-color: var(--color-surface-alt);
   box-shadow: var(--shadow-lg);
@@ -191,10 +200,10 @@
   bottom: 24px;
   max-width: 260px;
   padding: var(--space-20);
-  border: 1px solid rgba(123, 102, 72, 0.12);
+  border: 1px solid rgba(198, 164, 110, 0.24);
   border-radius: 22px;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 18px 32px rgba(89, 72, 50, 0.12);
+  background: rgba(255, 250, 242, 0.92);
+  box-shadow: 0 18px 32px rgba(71, 54, 33, 0.12);
   backdrop-filter: blur(12px);
 }
 

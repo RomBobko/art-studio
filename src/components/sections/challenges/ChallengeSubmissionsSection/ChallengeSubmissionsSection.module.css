@@ -1,5 +1,5 @@
 .section {
-  padding-top: var(--space-24);
+  padding-top: var(--space-32);
   padding-bottom: var(--space-72, 72px);
 }
 
@@ -20,7 +20,7 @@
   color: var(--color-text-strong);
   font-size: clamp(var(--fs-700), 3vw, var(--fs-850));
   font-weight: var(--fw-bold);
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
   line-height: 0.98;
 }
 
@@ -43,17 +43,27 @@
   gap: var(--space-18, 18px);
   height: 100%;
   padding: 16px;
-  border: 1px solid rgba(123, 102, 72, 0.12);
+  border: 1px solid rgba(198, 164, 110, 0.22);
   border-radius: 30px;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.86),
-    rgba(242, 235, 225, 0.96)
+    rgba(255, 250, 242, 0.92),
+    rgba(244, 234, 220, 0.96)
   );
   box-shadow:
-    0 24px 40px rgba(89, 72, 50, 0.09),
-    inset 0 1px 0 rgba(255, 255, 255, 0.76);
+    0 20px 38px rgba(71, 54, 33, 0.08),
+    inset 0 1px 0 rgba(255, 250, 242, 0.8);
   overflow: hidden;
+  transition:
+    transform var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(198, 164, 110, 0.42);
+  box-shadow: var(--shadow-md);
 }
 
 .card::before {
@@ -63,13 +73,13 @@
   background:
     radial-gradient(
       circle at 18% 10%,
-      rgba(255, 255, 255, 0.72),
-      rgba(255, 255, 255, 0) 28%
+      rgba(255, 250, 242, 0.72),
+      rgba(255, 250, 242, 0) 28%
     ),
     radial-gradient(
       circle at 84% 88%,
-      rgba(154, 122, 80, 0.12),
-      rgba(154, 122, 80, 0) 30%
+      rgba(167, 119, 50, 0.12),
+      rgba(167, 119, 50, 0) 30%
     );
   pointer-events: none;
 }
@@ -82,16 +92,21 @@
 
 .imageWrap {
   overflow: hidden;
-  border: 1px solid rgba(123, 102, 72, 0.14);
+  border: 1px solid rgba(198, 164, 110, 0.24);
   border-radius: 24px;
-  background-color: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 18px 28px rgba(89, 72, 50, 0.1);
+  background-color: rgba(255, 250, 242, 0.82);
+  box-shadow: 0 16px 26px rgba(71, 54, 33, 0.1);
 }
 
 .image {
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
+  transition: transform var(--transition-base);
+}
+
+.card:hover .image {
+  transform: scale(1.03);
 }
 
 .cardContent {
@@ -112,7 +127,8 @@
   width: fit-content;
   padding: 7px 12px;
   border-radius: var(--radius-pill);
-  background-color: rgba(123, 102, 72, 0.1);
+  background-color: rgba(167, 119, 50, 0.12);
+  border: 1px solid rgba(198, 164, 110, 0.24);
   color: var(--color-accent-strong);
   font-size: var(--fs-150);
   font-weight: var(--fw-semibold);
@@ -129,7 +145,7 @@
   color: var(--color-text-strong);
   font-size: clamp(var(--fs-450), 2vw, 28px);
   font-weight: var(--fw-semibold);
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   line-height: 1.08;
 }
 

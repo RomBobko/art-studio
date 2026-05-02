@@ -1,20 +1,21 @@
 .section {
   position: relative;
   margin: 0 auto;
-  padding: 200px 0 155px;
+  padding: 168px 0 128px;
   background-image:
-    linear-gradient(rgba(23, 17, 12, 0.5), rgba(23, 17, 12, 0.36)),
+    linear-gradient(rgba(23, 17, 12, 0.56), rgba(23, 17, 12, 0.34)),
     url("../../../../assets/images/learnHero-bg.webp");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  border-bottom: 1px solid rgba(198, 164, 110, 0.22);
 }
 
 .inner {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 26px;
   width: min(var(--container-narrow), 100%);
   margin-inline: auto;
   text-align: center;
@@ -25,11 +26,12 @@
   font-size: clamp(52px, 7vw, 90px);
   line-height: var(--lh-110);
   font-weight: var(--fw-bold);
+  letter-spacing: 0;
   color: var(--color-white);
 }
 
 .text {
-  max-width: 980px;
+  max-width: 860px;
   font-size: clamp(18px, 2vw, 24px);
   line-height: var(--lh-160);
   color: rgba(255, 255, 255, 0.92);
@@ -40,7 +42,8 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 14px;
-  margin-top: 8px;
+  max-width: 1040px;
+  margin-top: 10px;
 }
 
 .categoryChip {
@@ -59,15 +62,26 @@
   box-shadow: var(--shadow-sm);
   cursor: pointer;
   transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
     background-color var(--transition-fast),
     color var(--transition-fast),
     border-color var(--transition-fast);
+}
+
+.categoryChip:hover,
+.categoryChip:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(198, 164, 110, 0.52);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-md);
 }
 
 .categoryChipActive {
   background: linear-gradient(135deg, var(--color-accent), var(--color-accent-strong));
   color: var(--color-white);
   border-color: var(--color-accent-strong);
+  box-shadow: 0 14px 26px rgba(111, 75, 34, 0.2);
 }
 
 @media (max-width: 768px) {

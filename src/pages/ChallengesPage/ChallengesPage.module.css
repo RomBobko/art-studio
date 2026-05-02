@@ -5,18 +5,18 @@
   background:
     radial-gradient(
       circle at top left,
-      rgba(154, 122, 80, 0.16),
+      rgba(198, 164, 110, 0.2),
       transparent 26%
     ),
     radial-gradient(
       circle at 88% 12%,
-      rgba(183, 157, 121, 0.18),
+      rgba(167, 119, 50, 0.12),
       transparent 18%
     ),
     linear-gradient(
       180deg,
-      #faf6f1 0%,
-      #f3ede4 38%,
+      var(--color-surface) 0%,
+      var(--color-page-bg) 40%,
       var(--color-bg) 74%
     );
 }
