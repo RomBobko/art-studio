@@ -1,6 +1,7 @@
 .section {
   padding: 64px 0;
   background-color: var(--color-page-bg);
+  border-block: 1px solid rgba(198, 164, 110, 0.18);
 }
 
 .title {
@@ -9,6 +10,7 @@
   font-size: 42px;
   font-weight: 600;
   line-height: 51px;
+  color: var(--color-text-strong);
 }
 
 .list {

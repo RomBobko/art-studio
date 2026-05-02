@@ -17,7 +17,7 @@
       180deg,
       #faf6f1 0%,
       #f3ede4 38%,
-      #ffffff 74%
+      var(--color-bg) 74%
     );
 }
 

@@ -440,7 +440,7 @@
 }
 
 .profileLink {
-  color: #094e71;
+  color: var(--color-link-artist);
   font-size: var(--fs-150);
   line-height: var(--lh-150);
   text-decoration: none;

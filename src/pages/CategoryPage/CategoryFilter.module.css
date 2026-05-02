@@ -3,10 +3,10 @@
   position: sticky;
   top: 80px;
   padding: 24px 22px 20px;
-  background-color: var(--color-white);
-  border: 1px solid rgba(123, 102, 72, 0.14);
+  background-color: var(--color-surface);
+  border: 1px solid rgba(198, 164, 110, 0.24);
   border-radius: 18px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-sm);
 }
 
 .sidebarTitle {
@@ -63,7 +63,7 @@
   flex-shrink: 0;
   border: 1px solid rgba(31, 31, 31, 0.55);
   border-radius: 3px;
-  background-color: var(--color-white);
+  background-color: var(--color-bg);
   transition:
     border-color var(--transition-fast),
     background-color var(--transition-fast);

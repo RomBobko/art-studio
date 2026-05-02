@@ -4,10 +4,10 @@
   background:
     radial-gradient(
       circle at top right,
-      rgba(154, 122, 80, 0.12),
-      rgba(154, 122, 80, 0) 28%
+      rgba(198, 164, 110, 0.18),
+      rgba(198, 164, 110, 0) 28%
     ),
-    linear-gradient(180deg, #686564, #5c5858);
+    linear-gradient(180deg, #463728, #2a2119);
 }
 
 .authSection {
@@ -23,10 +23,10 @@
   width: min(1100px, 100%);
   min-height: var(--auth-shell-height);
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 250, 242, 0.16);
   border-radius: 30px;
-  background-color: rgba(255, 255, 255, 0.04);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.18);
+  background-color: rgba(255, 250, 242, 0.05);
+  box-shadow: 0 24px 54px rgba(23, 17, 12, 0.2);
 }
 
 .promoPanel {
@@ -37,8 +37,8 @@
   padding: clamp(32px, 5vw, 52px);
   color: var(--color-white);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0)),
-    linear-gradient(160deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.08));
+    linear-gradient(180deg, rgba(255, 250, 242, 0.04), rgba(255, 250, 242, 0)),
+    linear-gradient(160deg, rgba(255, 250, 242, 0.03), rgba(23, 17, 12, 0.12));
 }
 
 .title {
@@ -46,7 +46,7 @@
   font-size: clamp(46px, 6vw, 68px);
   font-weight: var(--fw-bold);
   line-height: 1.05;
-  letter-spacing: -0.05em;
+  letter-spacing: 0;
 }
 
 .description {
@@ -62,8 +62,8 @@
   min-height: var(--auth-shell-height);
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.98),
-    rgba(248, 246, 242, 0.98)
+    rgba(255, 250, 242, 0.98),
+    rgba(247, 241, 232, 0.98)
   );
 }
 

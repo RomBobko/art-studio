@@ -12,8 +12,10 @@
   border-radius: 53px;
 
   color: var(--color-white);
-  background-color: black;
-  background-image: url("../../../../assets/images/newsletterBg.webp");
+  background-color: var(--color-text-strong);
+  background-image:
+    linear-gradient(rgba(23, 17, 12, 0.58), rgba(23, 17, 12, 0.46)),
+    url("../../../../assets/images/newsletterBg.webp");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -24,14 +26,14 @@
   font-size: 45px;
   font-weight: 600;
   line-height: 1.5;
-  letter-spacing: -0.5px;
+  letter-spacing: 0;
 }
 
 .text {
   font-size: 30px;
   font-weight: 400;
   line-height: 1.4;
-  letter-spacing: -0.3px;
+  letter-spacing: 0;
 }
 
 .form {
@@ -44,8 +46,10 @@
   min-height: 118px;
   padding: 12px;
 
-  background-color: var(--color-white);
+  background-color: rgba(255, 250, 242, 0.96);
+  border: 1px solid rgba(255, 250, 242, 0.36);
   border-radius: 23px;
+  box-shadow: 0 18px 38px rgba(23, 17, 12, 0.16);
 }
 
 .input {
@@ -69,7 +73,7 @@
   font-size: 25px;
   font-weight: 300;
   line-height: 1.4;
-  color: var(--color-black);
+  color: var(--color-text-primary);
 }
 
 .input:focus-visible {
@@ -88,9 +92,9 @@
   font-size: 30px;
   font-weight: 600;
   line-height: 1.4;
-  letter-spacing: -0.35px;
+  letter-spacing: 0;
   color: var(--color-white);
-  background-color: var(--color-button-secondary);
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-strong));
   cursor: pointer;
   transition:
     transform var(--transition-fast),
@@ -121,7 +125,7 @@
   padding: 14px 20px;
   border-radius: 16px;
   background-color: rgba(255, 255, 255, 0.92);
-  color: var(--color-black);
+  color: var(--color-text-strong);
   font-size: 18px;
   line-height: 1.5;
 }

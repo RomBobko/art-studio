@@ -1,6 +1,6 @@
 .section {
   margin-bottom: 123px;
-  background: #fff;
+  background: var(--color-bg);
 }
 
 .heading {
@@ -17,12 +17,13 @@
   font-size: 42px;
   font-weight: 600;
   line-height: 51px;
+  color: var(--color-text-strong);
 }
 
 .line {
   width: 248px;
   height: 1px;
-  background: #bfbfbf;
+  background: var(--color-accent-border);
 }
 
 .list {

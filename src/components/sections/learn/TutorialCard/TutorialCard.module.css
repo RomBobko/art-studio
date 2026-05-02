@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  background-color: var(--color-white);
+  background-color: var(--color-surface);
+  border: 1px solid rgba(198, 164, 110, 0.2);
   border-radius: var(--radius-xl);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
@@ -28,7 +29,7 @@
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.92);
+  background-color: rgba(255, 250, 242, 0.92);
   transform: translate(-50%, -50%);
   box-shadow: var(--shadow-md);
 }
@@ -45,7 +46,7 @@
   flex: 1;
   gap: 14px;
   padding: 22px 22px 24px;
-  background-color: #f8f4ee;
+  background-color: var(--color-surface);
 }
 
 .badges {
@@ -69,14 +70,14 @@
 }
 
 .badge {
-  background-color: rgba(154, 122, 80, 0.14);
-  border-color: rgba(154, 122, 80, 0.18);
+  background-color: rgba(167, 119, 50, 0.14);
+  border-color: rgba(167, 119, 50, 0.2);
   color: var(--color-accent-strong);
 }
 
 .badgeMuted {
-  background-color: rgba(255, 255, 255, 0.9);
-  border-color: rgba(183, 157, 121, 0.28);
+  background-color: rgba(255, 250, 242, 0.86);
+  border-color: rgba(198, 164, 110, 0.3);
   color: var(--color-text-secondary);
 }
 
@@ -110,7 +111,7 @@
   height: 4px;
   margin: 0 10px 2px 0;
   border-radius: 50%;
-  background-color: rgba(95, 95, 95, 0.5);
+  background-color: rgba(116, 104, 90, 0.5);
   vertical-align: middle;
 }
 

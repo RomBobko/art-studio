@@ -8,7 +8,8 @@
   height: 100%;
   padding: 46px 32px 24px;
 
-  background-color: var(--color-page-bg);
+  background-color: var(--color-surface);
+  border: 1px solid rgba(198, 164, 110, 0.2);
   box-shadow: var(--shadow-card);
 }
 
@@ -18,7 +19,7 @@
   align-items: center;
   width: 100%;
 
-  background-color: #ffffff;
+  background-color: rgba(247, 241, 232, 0.72);
 }
 
 .image {
@@ -29,7 +30,7 @@
 
 .title {
   margin: 0;
-  color: var(--color-black);
+  color: var(--color-text-strong);
 
   font-size: 24px;
   font-weight: 600;

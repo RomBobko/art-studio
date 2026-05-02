@@ -20,7 +20,7 @@
   font-size: 42px;
   font-weight: 600;
   line-height: 51px;
-  color: #111111;
+  color: var(--color-text-strong);
 }
 
 .grid {
@@ -42,7 +42,17 @@
   width: 100%;
   overflow: hidden;
   border-radius: 28px;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(198, 164, 110, 0.2);
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.link:hover,
+.link:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
 }
 
 .image {
@@ -56,5 +66,5 @@
   margin: 0;
   font-size: 16px;
   line-height: 1.6;
-  color: #7a7a7a;
+  color: var(--color-text-muted);
 }

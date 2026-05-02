@@ -1,5 +1,7 @@
 .header {
-  background: var(--color-page-bg);
+  background: rgba(255, 250, 242, 0.92);
+  border-bottom: 1px solid rgba(198, 164, 110, 0.22);
+  box-shadow: 0 8px 24px rgba(71, 54, 33, 0.04);
   position: relative;
   z-index: 10;
 }
@@ -34,7 +36,7 @@
   padding: 0;
   border-radius: 50%;
   cursor: pointer;
-  color: var(--color-black);
+  color: var(--color-text-primary);
   line-height: 1;
   flex-shrink: 0;
   text-decoration: none;

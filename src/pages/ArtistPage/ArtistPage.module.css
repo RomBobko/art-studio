@@ -20,6 +20,8 @@
   height: clamp(260px, 24vw, 344px);
   object-fit: cover;
   border-radius: 50%;
+  border: 1px solid rgba(198, 164, 110, 0.28);
+  box-shadow: var(--shadow-media);
 }
 
 .content {
@@ -36,7 +38,7 @@
   font-size: 60px;
   line-height: 150%;
   font-weight: 500;
-  letter-spacing: -0.66px;
+  letter-spacing: 0;
   color: var(--color-text-strong);
 }
 
@@ -45,7 +47,7 @@
   max-width: 760px;
   font-size: 22px;
   line-height: 1.5;
-  letter-spacing: -0.24px;
+  letter-spacing: 0;
   color: var(--color-text-secondary);
 }
 
@@ -78,14 +80,14 @@
   font-size: 20px;
   font-weight: 400;
   line-height: 1.5;
-  letter-spacing: -0.22px;
+  letter-spacing: 0;
   cursor: pointer;
 }
 
 .buttonFollowing {
-  background-color: transparent;
-  color: #111;
-  border-color: #111;
+  background-color: rgba(255, 250, 242, 0.72);
+  color: var(--color-accent-strong);
+  border-color: var(--color-accent-border);
 }
 
 .artistTitleName {
@@ -108,12 +110,12 @@
   padding: 11px 34px;
   font-size: 16px;
   line-height: 1.5;
-  letter-spacing: -0.176px;
+  letter-spacing: 0;
   font-weight: 500;
-  color: white;
-  background-color: var(--color-button-disabled);
+  color: var(--color-white);
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-strong));
   border-radius: var(--radius-lg);
-  border: 1px solid var(--color-button-disabled);
+  border: 1px solid var(--color-accent-strong);
   text-decoration: none;
   text-align: center;
   transition: opacity var(--transition-fast);
@@ -138,7 +140,7 @@
 .backLink {
   display: inline-block;
   font-size: 18px;
-  color: #094e71;
+  color: var(--color-link-artist);
   text-decoration: none;
 }
 

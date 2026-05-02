@@ -9,6 +9,7 @@
   font-size: 42px;
   font-weight: 600;
   line-height: 51px;
+  color: var(--color-text-strong);
 }
 
 .slider {
@@ -27,14 +28,20 @@
   display: grid;
   place-items: center;
   padding: 0;
-  border: none;
-  background: transparent;
+  border: 1px solid rgba(198, 164, 110, 0.24);
+  border-radius: 50%;
+  background: rgba(255, 250, 242, 0.72);
+  color: var(--color-accent-strong);
+  transition:
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
 }
 
-/* .arrowButton::hover,
-.arrowButton::focus {
-  background-color: rgba(154, 122, 80, 0.08);
-} */
+.arrowButton:hover,
+.arrowButton:focus-visible {
+  background-color: var(--color-accent-ghost);
+  transform: translateY(-1px);
+}
 
 .icon {
   width: 70px;
