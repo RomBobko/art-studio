@@ -54,11 +54,20 @@
   background: linear-gradient(to top, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.08));
 }
 
+.abstractFacesCard {
+  aspect-ratio: 3 / 2;
+}
+
 .image {
   display: block;
   width: 100%;
   height: auto;
   object-fit: cover;
+}
+
+.abstractFacesCard .image {
+  height: 100%;
+  object-position: center 42%;
 }
 
 .label {

@@ -1,21 +1,21 @@
-import lippanArtImage from "../assets/images/lippanArt.webp";
-import craftsImage from "../assets/images/crafts.webp";
-import sketchImage from "../assets/images/sketch.webp";
-import paintingsImage from "../assets/images/paintings.webp";
-import traditionalArtImage from "../assets/images/traditionalArt.webp";
-import illustrationImage from "../assets/images/illustration.webp";
-import resinArtImage from "../assets/images/resinArt.webp";
+import colorStormImage from "../assets/images/artworks/abstract/color-storm.webp";
+import fracturedGazeImage from "../assets/images/artworks/abstract-faces/fractured-gaze.webp";
+import goodVibeStonesImage from "../assets/images/artworks/crafts/good-vibe-stones.webp";
+import softCharacterImage from "../assets/images/artworks/illustration/soft-character.webp";
+import rainyNightImage from "../assets/images/artworks/paintings/rainy-night.webp";
+import workshopPourImage from "../assets/images/artworks/resin-art/workshop-pour.webp";
+import koreanGirlStudyImage from "../assets/images/artworks/sketch/korean-girl-study.webp";
 
 const tutorials = [
   {
     id: 1,
-    slug: "mandala-wall-hanging-basics",
-    title: "Mandala Wall Hanging Basics",
+    slug: "abstract-composition-basics",
+    title: "Abstract Composition Basics",
     description:
-      "Learn how to build a clean wall-hanging design with simple shapes, mirrored details, and beginner-friendly finishing steps.",
+      "Learn how to arrange simple shapes, color blocks, and layered marks into a balanced abstract artwork.",
     categoryId: 7,
     level: "Beginner",
-    image: lippanArtImage,
+    image: colorStormImage,
     authorId: 6,
     duration: "42 min",
     lessonsCount: 6,
@@ -29,7 +29,7 @@ const tutorials = [
       "Practice repeatable decorative motifs and learn how to turn them into polished craft pieces for walls and shelves.",
     categoryId: 3,
     level: "Beginner",
-    image: craftsImage,
+    image: goodVibeStonesImage,
     authorId: 4,
     duration: "36 min",
     lessonsCount: 5,
@@ -43,7 +43,7 @@ const tutorials = [
       "Build stronger pencil studies by blocking shapes first and adding light, contrast, and texture in simple stages.",
     categoryId: 4,
     level: "Beginner",
-    image: sketchImage,
+    image: koreanGirlStudyImage,
     authorId: 5,
     duration: "54 min",
     lessonsCount: 7,
@@ -57,7 +57,7 @@ const tutorials = [
       "Start with a limited palette and learn how to mix balanced colors for landscapes, studies, and expressive painting work.",
     categoryId: 1,
     level: "Intermediate",
-    image: paintingsImage,
+    image: rainyNightImage,
     authorId: 2,
     duration: "58 min",
     lessonsCount: 8,
@@ -65,13 +65,13 @@ const tutorials = [
   },
   {
     id: 5,
-    slug: "folk-ornament-composition",
-    title: "Folk Ornament Composition",
+    slug: "expressive-abstract-faces",
+    title: "Expressive Abstract Faces",
     description:
-      "Arrange symbolic patterns with stronger rhythm and spacing so your decorative pieces feel complete and intentional.",
+      "Practice distorted face shapes, bold acrylic texture, and rough brush strokes for expressive figurative artwork.",
     categoryId: 5,
     level: "Beginner",
-    image: traditionalArtImage,
+    image: fracturedGazeImage,
     authorId: 6,
     duration: "47 min",
     lessonsCount: 6,
@@ -85,7 +85,7 @@ const tutorials = [
       "Combine character sketching, layout, and texture overlays to create a simple poster with a finished digital look.",
     categoryId: 8,
     level: "Intermediate",
-    image: illustrationImage,
+    image: softCharacterImage,
     authorId: 3,
     duration: "65 min",
     lessonsCount: 9,
@@ -99,7 +99,7 @@ const tutorials = [
       "Understand the basics of layering, flow, and texture so your resin work looks more controlled and visually rich.",
     categoryId: 6,
     level: "Beginner",
-    image: resinArtImage,
+    image: workshopPourImage,
     authorId: 6,
     duration: "39 min",
     lessonsCount: 5,

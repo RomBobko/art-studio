@@ -8,7 +8,8 @@ import artworks from "../../data/artworks";
 
 const INITIAL_UPLOAD_VALUES = {
   artworkTitle: "",
-  artworkDescription: "",
+  artworkMedium: "",
+  artworkPrice: "",
   artworkFileName: "",
 };
 
@@ -21,6 +22,20 @@ const DashboardPage = () => {
   const dashboardArtworks = artworks.filter(
     (artwork) => artwork.artistId === currentUser.artistId,
   );
+  const dashboardArtistName = dashboardArtist?.name || currentUser.displayName;
+  const artworkFileInputRef = useRef(null);
+  const [uploadValues, setUploadValues] = useState(INITIAL_UPLOAD_VALUES);
+  const [uploadErrors, setUploadErrors] = useState({});
+  const [uploadPreview, setUploadPreview] = useState("");
+  const [uploadSuccessMessage, setUploadSuccessMessage] = useState("");
+  const [draftArtworks, setDraftArtworks] = useState([]);
+  const [profileValues, setProfileValues] = useState(() => ({
+    profileBio: currentUser.bio || dashboardArtist?.bio || "",
+    profileWebsite: currentUser.website || "",
+    profileInstagram: currentUser.socialLinks?.instagram || "",
+  }));
+  const [profileErrors, setProfileErrors] = useState({});
+  const [profileSuccessMessage, setProfileSuccessMessage] = useState("");
   const recentArtworks = [...dashboardArtworks]
     .sort(
       (firstArtwork, secondArtwork) =>
@@ -29,6 +44,7 @@ const DashboardPage = () => {
     )
     .slice(0, 3);
   const listedArtworksCount = dashboardArtworks.length;
+  const draftArtworksCount = draftArtworks.length;
   const trendingArtworksCount = dashboardArtworks.filter(
     (artwork) => artwork.isTrending,
   ).length;
@@ -36,19 +52,6 @@ const DashboardPage = () => {
     (sum, artwork) => sum + artwork.price,
     0,
   );
-  const dashboardArtistName = dashboardArtist?.name || currentUser.displayName;
-  const artworkFileInputRef = useRef(null);
-  const [uploadValues, setUploadValues] = useState(INITIAL_UPLOAD_VALUES);
-  const [uploadErrors, setUploadErrors] = useState({});
-  const [uploadPreview, setUploadPreview] = useState("");
-  const [uploadSuccessMessage, setUploadSuccessMessage] = useState("");
-  const [profileValues, setProfileValues] = useState(() => ({
-    profileBio: currentUser.bio || dashboardArtist?.bio || "",
-    profileWebsite: currentUser.website || "",
-    profileInstagram: currentUser.socialLinks?.instagram || "",
-  }));
-  const [profileErrors, setProfileErrors] = useState({});
-  const [profileSuccessMessage, setProfileSuccessMessage] = useState("");
 
   const handleUploadChange = (event) => {
     const { name, value } = event.target;
@@ -121,9 +124,23 @@ const DashboardPage = () => {
     event.preventDefault();
 
     const nextErrors = {};
+    const trimmedTitle = uploadValues.artworkTitle.trim();
+    const trimmedMedium = uploadValues.artworkMedium.trim();
+    const trimmedPrice = uploadValues.artworkPrice.trim();
+    const draftPrice = Number(trimmedPrice);
 
-    if (!uploadValues.artworkTitle.trim()) {
+    if (!trimmedTitle) {
       nextErrors.artworkTitle = "Please enter an artwork title.";
+    }
+
+    if (!trimmedMedium) {
+      nextErrors.artworkMedium = "Please enter the artwork medium.";
+    }
+
+    if (!trimmedPrice) {
+      nextErrors.artworkPrice = "Please enter the artwork price.";
+    } else if (Number.isNaN(draftPrice) || draftPrice <= 0) {
+      nextErrors.artworkPrice = "Please enter a price greater than 0.";
     }
 
     if (!uploadPreview) {
@@ -136,10 +153,22 @@ const DashboardPage = () => {
       return;
     }
 
+    const newDraftArtwork = {
+      id: `draft-${Date.now()}`,
+      title: trimmedTitle,
+      medium: trimmedMedium,
+      price: draftPrice,
+      image: uploadPreview,
+    };
+
+    setDraftArtworks((prevDraftArtworks) => [
+      newDraftArtwork,
+      ...prevDraftArtworks,
+    ]);
     setUploadValues(INITIAL_UPLOAD_VALUES);
     setUploadErrors({});
     setUploadPreview("");
-    setUploadSuccessMessage("Artwork details saved locally.");
+    setUploadSuccessMessage(`${trimmedTitle} was added as a local draft.`);
     if (artworkFileInputRef.current) {
       artworkFileInputRef.current.value = "";
     }
@@ -215,7 +244,8 @@ const DashboardPage = () => {
                 <p className={styles.sectionText}>
                   You currently have {listedArtworksCount} artwork
                   {listedArtworksCount === 1 ? "" : "s"} listed on your public
-                  profile.
+                  profile and {draftArtworksCount} local draft
+                  {draftArtworksCount === 1 ? "" : "s"} pending review.
                 </p>
 
                 <form className={styles.uploadForm} onSubmit={handleUploadSubmit}>
@@ -289,19 +319,50 @@ const DashboardPage = () => {
                   <div className={styles.field}>
                     <label
                       className={styles.label}
-                      htmlFor="dashboard-art-description"
+                      htmlFor="dashboard-art-medium"
                     >
-                      Description
+                      Medium
                     </label>
-                    <textarea
-                      className={styles.textarea}
-                      id="dashboard-art-description"
-                      name="artworkDescription"
-                      rows="4"
-                      placeholder="Write a short description"
-                      value={uploadValues.artworkDescription}
+                    <input
+                      className={`${styles.input} ${
+                        uploadErrors.artworkMedium ? styles.inputError : ""
+                      }`}
+                      id="dashboard-art-medium"
+                      name="artworkMedium"
+                      type="text"
+                      placeholder="Example: Acrylic on canvas"
+                      value={uploadValues.artworkMedium}
                       onChange={handleUploadChange}
                     />
+                    {uploadErrors.artworkMedium && (
+                      <p className={styles.errorText} role="alert">
+                        {uploadErrors.artworkMedium}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className={styles.field}>
+                    <label className={styles.label} htmlFor="dashboard-art-price">
+                      Price
+                    </label>
+                    <input
+                      className={`${styles.input} ${
+                        uploadErrors.artworkPrice ? styles.inputError : ""
+                      }`}
+                      id="dashboard-art-price"
+                      name="artworkPrice"
+                      type="number"
+                      min="1"
+                      step="1"
+                      placeholder="Price in USD"
+                      value={uploadValues.artworkPrice}
+                      onChange={handleUploadChange}
+                    />
+                    {uploadErrors.artworkPrice && (
+                      <p className={styles.errorText} role="alert">
+                        {uploadErrors.artworkPrice}
+                      </p>
+                    )}
                   </div>
 
                   <button className={styles.primaryButton} type="submit">
@@ -319,13 +380,18 @@ const DashboardPage = () => {
                   <h2 className={styles.blockTitle}>Portfolio Snapshot</h2>
                   <p className={styles.sectionText}>
                     These summary cards are based on the artworks currently tied
-                    to your artist profile.
+                    to your artist profile, with local drafts counted separately.
                   </p>
 
                   <div className={styles.summaryGrid}>
                     <article className={styles.summaryCard}>
                       <p className={styles.summaryLabel}>Listed artworks</p>
                       <p className={styles.summaryValue}>{listedArtworksCount}</p>
+                    </article>
+
+                    <article className={styles.summaryCard}>
+                      <p className={styles.summaryLabel}>Local drafts</p>
+                      <p className={styles.summaryValue}>{draftArtworksCount}</p>
                     </article>
 
                     <article className={styles.summaryCard}>
@@ -345,10 +411,35 @@ const DashboardPage = () => {
                 <section className={styles.topSellingBlock}>
                   <h2 className={styles.blockTitle}>Your Artworks</h2>
                   <p className={styles.sectionText}>
-                    Recent artworks connected to your artist page.
+                    Recent published artworks and local upload drafts.
                   </p>
 
                   <ul className={styles.topSellingList}>
+                    {draftArtworks.map((artwork) => (
+                      <li
+                        key={artwork.id}
+                        className={`${styles.topSellingItem} ${styles.draftItem}`}
+                      >
+                        <img
+                          className={styles.topSellingImage}
+                          src={artwork.image}
+                          alt={artwork.title}
+                        />
+                        <div className={styles.topSellingContent}>
+                          <p className={styles.draftTitle}>{artwork.title}</p>
+                          <span className={styles.topSellingMeta}>
+                            {artwork.medium} | Local draft
+                          </span>
+                          <span className={styles.draftBadge}>
+                            Pending review
+                          </span>
+                        </div>
+                        <span className={styles.topSellingPrice}>
+                          {formatPrice(artwork.price)}
+                        </span>
+                      </li>
+                    ))}
+
                     {recentArtworks.map((artwork) => (
                       <li key={artwork.id} className={styles.topSellingItem}>
                         <img

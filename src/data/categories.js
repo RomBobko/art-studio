@@ -1,11 +1,11 @@
-import paintingsImg from "../assets/images/paintings.webp";
-import digitalArtImg from "../assets/images/digitalArt.webp";
-import craftsImg from "../assets/images/crafts.webp";
-import sketchImg from "../assets/images/sketch.webp";
-import resinArtImg from "../assets/images/resinArt.webp";
-import lippanArtImg from "../assets/images/lippanArt.webp";
-import illustrationImg from "../assets/images/illustration.webp";
-import traditionalArtImg from "../assets/images/traditionalArt.webp";
+import paintingsImg from "../assets/images/category-covers/paintings.webp";
+import digitalArtImg from "../assets/images/category-covers/digital-art.webp";
+import craftsImg from "../assets/images/category-covers/crafts.webp";
+import sketchImg from "../assets/images/category-covers/sketch.webp";
+import resinArtImg from "../assets/images/category-covers/resin-art.webp";
+import abstractImg from "../assets/images/category-covers/abstract.webp";
+import illustrationImg from "../assets/images/category-covers/illustration.webp";
+import abstractFacesImg from "../assets/images/category-covers/abstract-faces.webp";
 
 const categories = [
   {
@@ -34,9 +34,9 @@ const categories = [
   },
   {
     id: 5,
-    slug: "traditional-art",
-    name: "Traditional Art",
-    image: traditionalArtImg,
+    slug: "abstract-faces",
+    name: "Abstract Faces",
+    image: abstractFacesImg,
   },
   {
     id: 6,
@@ -46,9 +46,9 @@ const categories = [
   },
   {
     id: 7,
-    slug: "lippan-art",
-    name: "Lippan Art",
-    image: lippanArtImg,
+    slug: "abstract",
+    name: "Abstract",
+    image: abstractImg,
   },
   {
     id: 8,

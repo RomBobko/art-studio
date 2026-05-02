@@ -297,7 +297,7 @@
 
 .summaryGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
 }
 
@@ -341,6 +341,11 @@
   background-color: rgba(255, 255, 255, 0.82);
 }
 
+.draftItem {
+  border-color: rgba(123, 102, 72, 0.2);
+  background-color: rgba(246, 240, 231, 0.9);
+}
+
 .topSellingImage {
   width: 48px;
   height: 48px;
@@ -367,10 +372,27 @@
   text-decoration: underline;
 }
 
+.draftTitle {
+  color: var(--color-text-primary);
+  font-size: var(--fs-200);
+  line-height: var(--lh-140);
+}
+
 .topSellingMeta {
   color: var(--color-text-muted);
   font-size: var(--fs-100);
   line-height: var(--lh-150);
+}
+
+.draftBadge {
+  width: fit-content;
+  padding: 4px 8px;
+  border-radius: var(--radius-pill);
+  background-color: rgba(123, 102, 72, 0.12);
+  color: var(--color-accent-strong);
+  font-size: 12px;
+  font-weight: var(--fw-semibold);
+  line-height: 1;
 }
 
 .topSellingPrice {
@@ -406,7 +428,7 @@
 
 .profileName {
   color: var(--color-text-strong);
-  font-size: var(--fs-350);
+  font-size: var(--fs-300);
   font-weight: var(--fw-semibold);
   line-height: var(--lh-140);
 }

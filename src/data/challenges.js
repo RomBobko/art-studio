@@ -1,7 +1,7 @@
 import joinChallengeImage from "../assets/images/joinChallenge.png";
-import abstractImage from "../assets/images/abstract.webp";
-import craftsImage from "../assets/images/crafts.webp";
-import traditionalArtImage from "../assets/images/traditionalArt.webp";
+import colorStormImage from "../assets/images/artworks/abstract/color-storm.webp";
+import fracturedGazeImage from "../assets/images/artworks/abstract-faces/fractured-gaze.webp";
+import goodVibeStonesImage from "../assets/images/artworks/crafts/good-vibe-stones.webp";
 
 const currentChallenge = {
   id: 1,
@@ -24,11 +24,11 @@ const pastChallenges = [
     title: "Texture Stories",
     theme: "Visible texture and surface detail",
     brief: "Build a piece around visible texture and layered material details.",
-    coverImage: traditionalArtImage,
+    coverImage: fracturedGazeImage,
     deadline: "2026-03-31",
     status: "closed",
     winnerArtistId: 6,
-    winningArtworkTitle: "Sacred Geometry",
+    winningArtworkTitle: "Fractured Gaze",
   },
   {
     id: 3,
@@ -36,11 +36,11 @@ const pastChallenges = [
     title: "Night Palette",
     theme: "Limited evening color studies",
     brief: "Explore a restrained palette inspired by evening scenes and low light.",
-    coverImage: abstractImage,
+    coverImage: colorStormImage,
     deadline: "2026-02-28",
     status: "closed",
     winnerArtistId: 2,
-    winningArtworkTitle: "Inner Flame",
+    winningArtworkTitle: "Color Storm",
   },
   {
     id: 4,
@@ -48,11 +48,11 @@ const pastChallenges = [
     title: "Handmade Patterns",
     theme: "Decorative repeated shapes",
     brief: "Create a design using repeated decorative shapes and handmade rhythm.",
-    coverImage: craftsImage,
+    coverImage: goodVibeStonesImage,
     deadline: "2026-01-31",
     status: "closed",
     winnerArtistId: 4,
-    winningArtworkTitle: "Thread Garden",
+    winningArtworkTitle: "Good Vibe Stones",
   },
 ];
 

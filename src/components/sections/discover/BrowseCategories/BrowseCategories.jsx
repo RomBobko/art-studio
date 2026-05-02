@@ -16,7 +16,14 @@ const BrowseCategories = () => {
           <ul className={styles.list}>
             {categories.map(({ id, name, slug, image }) => (
               <li className={styles.item} key={id}>
-                <Link to={`/discover/${slug}`} className={styles.card}>
+                <Link
+                  to={`/discover/${slug}`}
+                  className={
+                    slug === "abstract-faces"
+                      ? `${styles.card} ${styles.abstractFacesCard}`
+                      : styles.card
+                  }
+                >
                   <img className={styles.image} src={image} alt={name} />
                   <span className={styles.label}>{name}</span>
                 </Link>

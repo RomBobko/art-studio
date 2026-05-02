@@ -46,7 +46,7 @@ const artists = [
     slug: "clara-moreau",
     name: "Clara Moreau",
     avatar: claraAvatar,
-    bio: "Traditional mixed-media artist inspired by ornament, geometry, and symbolic handmade pattern work.",
+    bio: "Mixed-media artist creating abstract faces, expressive figures, and textured modern gallery pieces.",
   },
 ];
 
