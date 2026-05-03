@@ -1,20 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TutorialCard from "../TutorialCard/TutorialCard";
 import styles from "./FeaturedTutorialsSection.module.css";
 
 const VIEW_MORE_STEP = 3;
+const INITIAL_VISIBLE_COUNT = 3;
 
 const FeaturedTutorialsSection = ({
   tutorials,
-  initialVisibleCount = tutorials.length,
+  initialVisibleCount = INITIAL_VISIBLE_COUNT,
 }) => {
   const [visibleCount, setVisibleCount] = useState(initialVisibleCount);
   const visibleTutorials = tutorials.slice(0, visibleCount);
   const hasMoreTutorials = visibleCount < tutorials.length;
-
-  useEffect(() => {
-    setVisibleCount(initialVisibleCount);
-  }, [initialVisibleCount, tutorials.length]);
 
   const handleViewMore = () => {
     setVisibleCount((currentVisibleCount) =>

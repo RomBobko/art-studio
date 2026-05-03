@@ -50,13 +50,13 @@ const LearnPage = () => {
         onSelectCategory={setSelectedCategory}
       />
       <TutorialsSection
+        key={`tutorials-${selectedCategory}`}
         tutorials={visibleTutorials}
-        initialVisibleCount={
-          hasActiveCategoryFilter ? visibleTutorials.length : 4
-        }
+        initialVisibleCount={4}
       />
       {featuredTutorials.length > 0 && (
         <FeaturedTutorialsSection
+          key={`featured-tutorials-${selectedCategory}`}
           tutorials={featuredTutorials}
           initialVisibleCount={3}
         />

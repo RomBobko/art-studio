@@ -198,7 +198,7 @@ test("category sorting and filters can be changed and cleared", async ({
   await expect(firstFilter).not.toBeChecked();
 });
 
-test("tutorials limit all results and View more reveals more cards", async ({
+test("tutorials start with four cards and View more reveals four more", async ({
   page,
 }) => {
   await page.goto("/learn");
@@ -247,7 +247,7 @@ test("tutorial category filtering keeps matching cards visible", async ({
   ).toHaveCount(0);
 });
 
-test("featured tutorials limit all results and View more reveals hidden cards", async ({
+test("featured tutorials start with three cards and View more reveals the rest", async ({
   page,
 }) => {
   await page.goto("/learn");
