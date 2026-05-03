@@ -124,6 +124,18 @@ test("discover search and category links work", async ({ page }) => {
   ).toBeVisible();
 });
 
+test("discover artwork cards link to detail pages", async ({ page }) => {
+  await page.goto("/discover");
+
+  await page.getByLabel("Search artworks").fill("color storm");
+  await page.getByRole("link", { name: "View Color Storm" }).click();
+
+  await expect(page).toHaveURL(/\/artworks\/color-storm$/);
+  await expect(
+    page.getByRole("heading", { name: "Color Storm", exact: true }),
+  ).toBeVisible();
+});
+
 test("category sorting and filters can be changed and cleared", async ({
   page,
 }) => {
@@ -139,6 +151,81 @@ test("category sorting and filters can be changed and cleared", async ({
 
   await page.getByRole("button", { name: "Clear All" }).click();
   await expect(firstFilter).not.toBeChecked();
+});
+
+test("tutorials limit all results and View more reveals more cards", async ({
+  page,
+}) => {
+  await page.goto("/learn");
+
+  const tutorialsRegion = page.getByRole("region", {
+    name: "Tutorials",
+    exact: true,
+  });
+
+  await expect(tutorialsRegion.getByRole("heading", { level: 3 })).toHaveCount(
+    4,
+  );
+  await expect(
+    tutorialsRegion.getByRole("button", { name: "View more" }),
+  ).toBeVisible();
+
+  await tutorialsRegion.getByRole("button", { name: "View more" }).click();
+
+  await expect(tutorialsRegion.getByRole("heading", { level: 3 })).toHaveCount(
+    8,
+  );
+});
+
+test("tutorial category filtering keeps matching cards visible", async ({
+  page,
+}) => {
+  await page.goto("/learn");
+
+  await page.getByRole("button", { name: "Digital Art" }).click();
+
+  const tutorialsRegion = page.getByRole("region", {
+    name: "Tutorials",
+    exact: true,
+  });
+
+  await expect(tutorialsRegion.getByText("Digital Color Moodboards")).toBeVisible();
+  await expect(tutorialsRegion.getByText("Glitch Portrait Effects")).toBeVisible();
+  await expect(tutorialsRegion.getByRole("heading", { level: 3 })).toHaveCount(
+    2,
+  );
+  await expect(
+    tutorialsRegion.getByRole("button", { name: "View more" }),
+  ).toHaveCount(0);
+  await expect(
+    page.getByRole("region", { name: "Featured Tutorials" }),
+  ).toHaveCount(0);
+});
+
+test("featured tutorials limit all results and View more reveals hidden cards", async ({
+  page,
+}) => {
+  await page.goto("/learn");
+
+  const featuredRegion = page.getByRole("region", {
+    name: "Featured Tutorials",
+  });
+
+  await expect(featuredRegion.getByRole("heading", { level: 3 })).toHaveCount(
+    3,
+  );
+  await expect(
+    featuredRegion.getByRole("button", { name: "View more" }),
+  ).toBeVisible();
+
+  await featuredRegion.getByRole("button", { name: "View more" }).click();
+
+  await expect(featuredRegion.getByRole("heading", { level: 3 })).toHaveCount(
+    5,
+  );
+  await expect(
+    featuredRegion.getByRole("button", { name: "View more" }),
+  ).toHaveCount(0);
 });
 
 test("newsletter form accepts a valid email", async ({ page }) => {
@@ -174,10 +261,40 @@ test("login and sign-up forms show local success messages", async ({ page }) => 
   );
 });
 
+test("auth demo forms show validation messages", async ({ page }) => {
+  await page.goto("/login");
+
+  await page.getByLabel("Email Address").fill("not-an-email");
+  await page.getByLabel("Password", { exact: true }).fill("creative123");
+  await page.getByRole("button", { name: "Login" }).click();
+
+  await expect(page.getByRole("alert")).toHaveText(
+    "Enter a valid email address.",
+  );
+
+  await page.goto("/signup");
+
+  await page.getByLabel("Username").fill("galleryfriend");
+  await page.getByLabel("Email Address").fill("friend@example.com");
+  await page.getByLabel("Password", { exact: true }).fill("creative123");
+  await page.getByLabel("Confirm Password").fill("different123");
+  await page.getByRole("button", { name: "Sign Up" }).click();
+
+  await expect(page.getByRole("alert")).toHaveText("Passwords do not match.");
+});
+
 test("challenge submission modal validates and adds a local submission", async ({
   page,
 }) => {
   await page.goto("/challenges");
+
+  await expect(
+    page.getByRole("img", { name: "Spring Light Study challenge cover" }),
+  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Submissions" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Past Challenges" }),
+  ).toBeVisible();
 
   await page.getByRole("button", { name: "Participate" }).click();
 

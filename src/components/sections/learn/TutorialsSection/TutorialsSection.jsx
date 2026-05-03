@@ -27,10 +27,12 @@ const TutorialsSection = ({
   };
 
   return (
-    <section className={styles.section}>
+    <section className={styles.section} aria-labelledby="tutorials-title">
       <div className="container">
         <div className={styles.header}>
-          <h2 className={styles.title}>Tutorials</h2>
+          <h2 id="tutorials-title" className={styles.title}>
+            Tutorials
+          </h2>
           <p className={styles.text}>
             Start with approachable lessons that build confidence step by step.
           </p>

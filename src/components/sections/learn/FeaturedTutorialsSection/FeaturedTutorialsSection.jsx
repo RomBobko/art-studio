@@ -23,10 +23,15 @@ const FeaturedTutorialsSection = ({
   };
 
   return (
-    <section className={styles.section}>
+    <section
+      className={styles.section}
+      aria-labelledby="featured-tutorials-title"
+    >
       <div className="container">
         <div className={styles.header}>
-          <h2 className={styles.title}>Featured Tutorials</h2>
+          <h2 id="featured-tutorials-title" className={styles.title}>
+            Featured Tutorials
+          </h2>
           <p className={styles.text}>
             Highlighted lessons that can stay separate from the main tutorial
             grid.
