@@ -1,6 +1,6 @@
-import blossomImage from "../assets/images/blossom.webp";
-import cityscapeImage from "../assets/images/cityscape.webp";
-import sunsetImage from "../assets/images/sunset.webp";
+import dreamGardenImage from "../assets/images/artworks/illustration/dream-garden.webp";
+import alpineLightImage from "../assets/images/artworks/paintings/alpine-light.webp";
+import fieldSketchbookImage from "../assets/images/artworks/sketch/field-sketchbook.webp";
 
 const challengeSubmissions = [
   {
@@ -9,7 +9,7 @@ const challengeSubmissions = [
     artistId: 1,
     artistName: "Elena Novak",
     artworkTitle: "Morning Window",
-    image: blossomImage,
+    image: alpineLightImage,
     medium: "Acrylic on canvas",
     submittedAt: "2026-04-12",
     note: "Warm indoor light with soft shadow shapes.",
@@ -20,7 +20,7 @@ const challengeSubmissions = [
     artistId: 3,
     artistName: "Lucas Bennett",
     artworkTitle: "Quiet Bloom",
-    image: sunsetImage,
+    image: dreamGardenImage,
     medium: "Digital illustration",
     submittedAt: "2026-04-10",
     note: "A calm spring scene built with pale sunrise tones and soft contrast.",
@@ -31,7 +31,7 @@ const challengeSubmissions = [
     artistId: 5,
     artistName: "Matteo Ricci",
     artworkTitle: "Light on Paper",
-    image: cityscapeImage,
+    image: fieldSketchbookImage,
     medium: "Graphite sketch",
     submittedAt: "2026-04-08",
     note: "A simple still life focused on contrast, shadow edges, and quiet highlights.",

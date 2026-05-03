@@ -152,3 +152,24 @@ When the task is about auditing, reviewing, or improving the data layer:
   - improve now
   - leave for later
   - unnecessary / overengineering
+
+
+## Browser testing with Playwright
+
+When a task involves UI, layout, routing, forms, navigation, responsive behavior, or visual QA:
+
+- Prefer using Playwright to inspect the app in a real browser.
+- Start the dev server with `npm run dev` if needed.
+- Test both desktop and mobile viewport when relevant.
+- Check the actual user flow instead of only reading code.
+- Prefer small, high-confidence fixes.
+- Do not introduce complex test architecture.
+- Keep Playwright tests beginner-friendly and readable.
+- After changes, run:
+  - `npm run lint`
+  - `npm run test:e2e` when e2e tests exist.
+- Report:
+  - what was tested
+  - what failed
+  - what was fixed
+  - what still needs manual review.
