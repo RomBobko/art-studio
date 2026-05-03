@@ -4,7 +4,7 @@ import { primarySiteLinks } from "../../../data/siteLinks";
 
 const Navigation = () => {
   return (
-    <nav className={styles.nav}>
+    <nav className={styles.nav} aria-label="Primary">
       <ul className={styles.navList}>
         {primarySiteLinks.map(({ to, label, end }) => (
           <li key={label} className={styles.navItem}>

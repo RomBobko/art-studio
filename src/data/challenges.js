@@ -1,4 +1,4 @@
-import joinChallengeImage from "../assets/images/joinChallenge.png";
+import blossomImage from "../assets/images/blossom.webp";
 import colorStormImage from "../assets/images/artworks/abstract/color-storm.webp";
 import fracturedGazeImage from "../assets/images/artworks/abstract-faces/fractured-gaze.webp";
 import goodVibeStonesImage from "../assets/images/artworks/crafts/good-vibe-stones.webp";
@@ -10,7 +10,7 @@ const currentChallenge = {
   theme: "Soft seasonal light",
   brief:
     "Create an artwork inspired by the feeling of early spring light using any medium you enjoy.",
-  coverImage: joinChallengeImage,
+  coverImage: blossomImage,
   deadline: "2026-05-10",
   status: "active",
   allowedMedia: "Open medium",

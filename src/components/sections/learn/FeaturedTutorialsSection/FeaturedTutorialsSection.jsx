@@ -1,7 +1,27 @@
+import { useEffect, useState } from "react";
 import TutorialCard from "../TutorialCard/TutorialCard";
 import styles from "./FeaturedTutorialsSection.module.css";
 
-const FeaturedTutorialsSection = ({ tutorials }) => {
+const VIEW_MORE_STEP = 3;
+
+const FeaturedTutorialsSection = ({
+  tutorials,
+  initialVisibleCount = tutorials.length,
+}) => {
+  const [visibleCount, setVisibleCount] = useState(initialVisibleCount);
+  const visibleTutorials = tutorials.slice(0, visibleCount);
+  const hasMoreTutorials = visibleCount < tutorials.length;
+
+  useEffect(() => {
+    setVisibleCount(initialVisibleCount);
+  }, [initialVisibleCount, tutorials.length]);
+
+  const handleViewMore = () => {
+    setVisibleCount((currentVisibleCount) =>
+      Math.min(currentVisibleCount + VIEW_MORE_STEP, tutorials.length),
+    );
+  };
+
   return (
     <section className={styles.section}>
       <div className="container">
@@ -14,13 +34,27 @@ const FeaturedTutorialsSection = ({ tutorials }) => {
         </div>
 
         {tutorials.length > 0 ? (
-          <ul className={styles.list}>
-            {tutorials.map((tutorial) => (
-              <li className={styles.item} key={tutorial.id}>
-                <TutorialCard {...tutorial} />
-              </li>
-            ))}
-          </ul>
+          <>
+            <ul className={styles.list}>
+              {visibleTutorials.map((tutorial) => (
+                <li className={styles.item} key={tutorial.id}>
+                  <TutorialCard {...tutorial} />
+                </li>
+              ))}
+            </ul>
+
+            {hasMoreTutorials && (
+              <div className={styles.actions}>
+                <button
+                  className={styles.viewMoreButton}
+                  type="button"
+                  onClick={handleViewMore}
+                >
+                  View more
+                </button>
+              </div>
+            )}
+          </>
         ) : (
           <p className={styles.empty}>
             No featured tutorials match this category yet.

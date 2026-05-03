@@ -33,13 +33,14 @@ const LearnPage = () => {
       : tutorialsWithDetails.filter(
           (tutorial) => tutorial.category === selectedCategory,
         );
+  const hasActiveCategoryFilter = selectedCategory !== "All";
 
-  const visibleTutorials = filteredTutorials.filter(
-    (tutorial) => !tutorial.isFeatured,
-  );
-  const featuredTutorials = filteredTutorials.filter(
-    (tutorial) => tutorial.isFeatured,
-  );
+  const visibleTutorials = hasActiveCategoryFilter
+    ? filteredTutorials
+    : filteredTutorials.filter((tutorial) => !tutorial.isFeatured);
+  const featuredTutorials = hasActiveCategoryFilter
+    ? []
+    : filteredTutorials.filter((tutorial) => tutorial.isFeatured);
 
   return (
     <>
@@ -48,8 +49,18 @@ const LearnPage = () => {
         selectedCategory={selectedCategory}
         onSelectCategory={setSelectedCategory}
       />
-      <TutorialsSection tutorials={visibleTutorials} />
-      <FeaturedTutorialsSection tutorials={featuredTutorials} />
+      <TutorialsSection
+        tutorials={visibleTutorials}
+        initialVisibleCount={
+          hasActiveCategoryFilter ? visibleTutorials.length : 4
+        }
+      />
+      {featuredTutorials.length > 0 && (
+        <FeaturedTutorialsSection
+          tutorials={featuredTutorials}
+          initialVisibleCount={3}
+        />
+      )}
     </>
   );
 };
