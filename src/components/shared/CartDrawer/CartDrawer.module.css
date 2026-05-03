@@ -4,7 +4,7 @@
   z-index: 40;
   display: flex;
   justify-content: flex-end;
-  background: rgba(38, 29, 21, 0.26);
+  background: var(--drawer-backdrop-bg);
   backdrop-filter: blur(4px);
   overscroll-behavior: contain;
 }
@@ -14,13 +14,9 @@
   grid-template-rows: auto minmax(0, 1fr) auto;
   width: min(540px, 100%);
   height: 100dvh;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.98),
-    rgba(247, 243, 237, 0.96)
-  );
+  background: var(--drawer-bg);
   border-left: 1px solid rgba(123, 102, 72, 0.14);
-  box-shadow: -20px 0 44px rgba(89, 72, 50, 0.16);
+  box-shadow: var(--drawer-shadow);
   animation: slideIn 220ms ease-out;
 }
 
@@ -29,7 +25,7 @@
   gap: 16px;
   padding: 24px 24px 18px;
   border-bottom: 1px solid rgba(123, 102, 72, 0.12);
-  background-color: rgba(255, 255, 255, 0.92);
+  background-color: var(--drawer-header-bg);
 }
 
 .headerTopRow {
@@ -52,7 +48,7 @@
   padding: 0 12px;
   border: 1px solid rgba(123, 102, 72, 0.12);
   border-radius: var(--radius-pill);
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: var(--drawer-count-bg);
   color: var(--color-text-secondary);
   font-size: 14px;
   font-weight: 500;
@@ -69,7 +65,7 @@
   padding: 0;
   border: 1px solid rgba(123, 102, 72, 0.16);
   border-radius: var(--radius-pill);
-  background-color: rgba(255, 255, 255, 0.94);
+  background-color: var(--drawer-close-bg);
   color: var(--color-text-strong);
   box-shadow: 0 10px 20px rgba(89, 72, 50, 0.08);
   transition:
@@ -81,7 +77,7 @@
 
 .closeButton:hover,
 .closeButton:focus-visible {
-  background-color: var(--color-white);
+  background-color: var(--drawer-close-hover-bg);
   box-shadow: 0 14px 24px rgba(89, 72, 50, 0.12);
   transform: translateY(-1px);
 }
@@ -125,12 +121,8 @@
   padding: 24px;
   border: 1px solid rgba(123, 102, 72, 0.1);
   border-radius: 24px;
-  background: linear-gradient(
-    180deg,
-    rgba(249, 246, 242, 0.92),
-    rgba(255, 255, 255, 0.98)
-  );
-  box-shadow: 0 10px 22px rgba(89, 72, 50, 0.05);
+  background: var(--drawer-panel-bg);
+  box-shadow: var(--drawer-panel-shadow);
 }
 
 .itemsPanel {
@@ -142,22 +134,14 @@
   display: grid;
   align-content: start;
   gap: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(244, 238, 229, 0.96),
-    rgba(255, 255, 255, 0.98)
-  );
+  background: var(--drawer-summary-bg);
 }
 
 .drawerFooter {
   padding: 20px 24px 24px;
   border-top: 1px solid rgba(123, 102, 72, 0.1);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.94),
-    rgba(244, 238, 229, 0.96)
-  );
-  box-shadow: 0 -14px 26px rgba(89, 72, 50, 0.05);
+  background: var(--drawer-footer-bg);
+  box-shadow: var(--drawer-footer-shadow);
 }
 
 .panelHeader {
@@ -193,8 +177,8 @@
   padding: 16px;
   border: 1px solid rgba(123, 102, 72, 0.1);
   border-radius: 22px;
-  background-color: rgba(255, 255, 255, 0.98);
-  box-shadow: 0 8px 18px rgba(89, 72, 50, 0.04);
+  background-color: var(--drawer-item-bg);
+  box-shadow: var(--drawer-item-shadow);
 }
 
 .itemImage {
@@ -240,12 +224,8 @@
   padding: 6px 8px;
   border: 1px solid rgba(123, 102, 72, 0.14);
   border-radius: 999px;
-  background: linear-gradient(
-    180deg,
-    rgba(248, 244, 238, 0.96),
-    rgba(255, 255, 255, 0.96)
-  );
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  background: var(--drawer-quantity-bg);
+  box-shadow: var(--drawer-quantity-shadow);
 }
 
 .quantityButton {
@@ -253,7 +233,7 @@
   height: 34px;
   border: 1px solid rgba(123, 102, 72, 0.14);
   border-radius: 50%;
-  background-color: var(--color-white);
+  background-color: var(--drawer-quantity-button-bg);
   color: var(--color-text-strong);
   font-size: 18px;
   line-height: 1;
@@ -324,7 +304,7 @@
   padding: 0 12px;
   border: 1px solid rgba(123, 102, 72, 0.1);
   border-radius: var(--radius-pill);
-  background-color: rgba(255, 255, 255, 0.88);
+  background-color: var(--drawer-price-bg);
   color: var(--color-accent-strong);
   font-size: 14px;
   font-weight: 500;
@@ -367,7 +347,7 @@
 .secondaryButton {
   border: 1px solid var(--color-button-border);
   color: var(--color-accent-strong);
-  background-color: rgba(255, 255, 255, 0.86);
+  background-color: var(--drawer-secondary-bg);
 }
 
 .primaryButton {
@@ -427,13 +407,9 @@
   padding: clamp(28px, 4vw, 44px);
   border: 1px solid rgba(123, 102, 72, 0.12);
   border-radius: 28px;
-  background: linear-gradient(
-    180deg,
-    rgba(249, 246, 242, 0.96),
-    rgba(255, 255, 255, 0.98)
-  );
+  background: var(--drawer-empty-bg);
   text-align: center;
-  box-shadow: 0 18px 34px rgba(89, 72, 50, 0.08);
+  box-shadow: var(--drawer-empty-shadow);
 }
 
 .emptyTitle {

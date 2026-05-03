@@ -8,14 +8,13 @@
 
 html {
   scroll-behavior: smooth;
+  color-scheme: var(--color-scheme);
 }
 
 body {
   margin: 0;
   min-width: 320px;
-  background:
-    radial-gradient(circle at top left, rgba(198, 164, 110, 0.14), transparent 32vw),
-    var(--color-bg);
+  background: var(--body-background);
   color: var(--color-text-primary);
   font-size: var(--fs-200);
   line-height: var(--lh-body);
@@ -26,6 +25,11 @@ body {
 main {
   display: flow-root;
   background-color: var(--color-bg);
+}
+
+::selection {
+  background-color: var(--selection-bg);
+  color: var(--selection-text);
 }
 
 img,

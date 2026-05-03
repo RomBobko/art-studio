@@ -45,7 +45,7 @@
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background-color: rgba(255, 250, 242, 0.92);
+  background-color: var(--tutorial-play-bg);
   transform: translate(-50%, -50%);
   box-shadow: var(--shadow-md);
   transition:
@@ -100,8 +100,8 @@
 }
 
 .badgeMuted {
-  background-color: rgba(255, 250, 242, 0.86);
-  border-color: rgba(198, 164, 110, 0.3);
+  background-color: var(--tutorial-muted-badge-bg);
+  border-color: var(--tutorial-muted-badge-border);
   color: var(--color-text-secondary);
 }
 

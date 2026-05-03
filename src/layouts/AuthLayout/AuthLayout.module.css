@@ -1,13 +1,7 @@
 .page {
   min-height: 100vh;
   padding: 40px 20px;
-  background:
-    radial-gradient(
-      circle at top right,
-      rgba(198, 164, 110, 0.18),
-      rgba(198, 164, 110, 0) 28%
-    ),
-    linear-gradient(180deg, #463728, #2a2119);
+  background: var(--auth-layout-bg);
 }
 
 .authSection {
@@ -23,10 +17,10 @@
   width: min(1100px, 100%);
   min-height: var(--auth-shell-height);
   overflow: hidden;
-  border: 1px solid rgba(255, 250, 242, 0.16);
+  border: 1px solid var(--auth-shell-border);
   border-radius: 30px;
-  background-color: rgba(255, 250, 242, 0.05);
-  box-shadow: 0 24px 54px rgba(23, 17, 12, 0.2);
+  background-color: var(--auth-shell-bg);
+  box-shadow: var(--auth-shell-shadow);
 }
 
 .promoPanel {
@@ -60,11 +54,7 @@
   display: grid;
   min-width: 0;
   min-height: var(--auth-shell-height);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 250, 242, 0.98),
-    rgba(247, 241, 232, 0.98)
-  );
+  background: var(--auth-form-bg);
 }
 
 @media (max-width: 920px) {

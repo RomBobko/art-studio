@@ -61,7 +61,7 @@
   height: 14px;
   margin: 0;
   flex-shrink: 0;
-  border: 1px solid rgba(31, 31, 31, 0.55);
+  border: 1px solid var(--category-checkbox-border);
   border-radius: 3px;
   background-color: var(--color-bg);
   transition:
@@ -81,7 +81,7 @@
 
 .checkbox:checked {
   border-color: var(--color-accent-strong);
-  background-color: rgba(123, 102, 72, 0.08);
+  background-color: var(--category-checkbox-checked-bg);
 }
 
 .checkbox:checked::before {
@@ -118,7 +118,7 @@
   font-size: 14px;
   line-height: 1.4;
   text-align: left;
-  border-top: 1px solid rgba(123, 102, 72, 0.1);
+  border-top: 1px solid var(--category-filter-footer-border);
 }
 
 .clearButton:not(:disabled):hover {

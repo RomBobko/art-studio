@@ -63,6 +63,51 @@ test("desktop navigation links move between main pages", async ({
   ).toBeVisible();
 });
 
+test("theme toggle switches theme and keeps the saved choice", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.evaluate(() => localStorage.removeItem("theme"));
+  await page.reload();
+
+  const html = page.locator("html");
+  const header = page.getByRole("banner");
+  const switchToDarkButton = header.getByRole("button", {
+    name: "Switch to dark theme",
+  });
+
+  await expect(switchToDarkButton).toBeVisible();
+  await expect(html).toHaveAttribute("data-theme", "light");
+
+  await switchToDarkButton.click();
+
+  await expect(html).toHaveAttribute("data-theme", "dark");
+  await expect(
+    header.getByRole("button", { name: "Switch to light theme" }),
+  ).toBeVisible();
+  await expect
+    .poll(() => page.evaluate(() => localStorage.getItem("theme")))
+    .toBe("dark");
+
+  await header.getByRole("button", { name: "Switch to light theme" }).click();
+
+  await expect(html).toHaveAttribute("data-theme", "light");
+  await expect(
+    header.getByRole("button", { name: "Switch to dark theme" }),
+  ).toBeVisible();
+  await expect
+    .poll(() => page.evaluate(() => localStorage.getItem("theme")))
+    .toBe("light");
+
+  await header.getByRole("button", { name: "Switch to dark theme" }).click();
+  await page.reload();
+
+  await expect(html).toHaveAttribute("data-theme", "dark");
+  await expect(
+    header.getByRole("button", { name: "Switch to light theme" }),
+  ).toBeVisible();
+});
+
 test("mobile header has navigation or menu controls available", async ({
   page,
 }, testInfo) => {

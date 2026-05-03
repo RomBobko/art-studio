@@ -46,7 +46,7 @@
   border: 1px solid rgba(198, 164, 110, 0.16);
   border-radius: 28px;
   background-color: var(--color-surface);
-  box-shadow: 0 12px 26px rgba(71, 54, 33, 0.07);
+  box-shadow: var(--submission-card-shadow);
   overflow: hidden;
   transition:
     transform var(--transition-fast),
@@ -57,7 +57,7 @@
 .card:hover {
   transform: translateY(-3px);
   border-color: rgba(198, 164, 110, 0.3);
-  box-shadow: 0 18px 34px rgba(71, 54, 33, 0.1);
+  box-shadow: var(--submission-card-hover-shadow);
 }
 
 .imageWrap,
@@ -71,7 +71,7 @@
   border: 1px solid rgba(198, 164, 110, 0.14);
   border-radius: 22px;
   background-color: var(--color-page-bg);
-  box-shadow: 0 10px 20px rgba(71, 54, 33, 0.09);
+  box-shadow: var(--submission-image-shadow);
 }
 
 .image {
@@ -105,7 +105,7 @@
   width: fit-content;
   padding: 5px 9px;
   border-radius: var(--radius-pill);
-  background-color: rgba(167, 119, 50, 0.08);
+  background-color: var(--submission-badge-bg);
   border: 1px solid rgba(198, 164, 110, 0.18);
   color: var(--color-accent-strong);
   font-size: var(--fs-100);

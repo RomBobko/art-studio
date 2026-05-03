@@ -14,14 +14,20 @@ import ArtworkPage from "./pages/ArtworkPage/ArtworkPage";
 import ArtistPage from "./pages/ArtistPage/ArtistPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
+import useTheme from "./hooks/useTheme";
 
 const App = () => {
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <>
       <Routes>
         <Route path="login" element={<LoginPage />} />
         <Route path="signup" element={<SignUpPage />} />
-        <Route path="/" element={<MainLayout />}>
+        <Route
+          path="/"
+          element={<MainLayout theme={theme} onThemeToggle={toggleTheme} />}
+        >
           <Route index element={<HomePage />} />
           <Route path="discover" element={<DiscoverPage />} />
           <Route path="discover/:categorySlug" element={<CategoryPage />} />

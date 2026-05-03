@@ -1,7 +1,8 @@
 .header {
-  background: rgba(255, 250, 242, 0.92);
-  border-bottom: 1px solid rgba(198, 164, 110, 0.22);
-  box-shadow: 0 8px 24px rgba(71, 54, 33, 0.04);
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--header-border);
+  box-shadow: var(--header-shadow);
+  backdrop-filter: var(--header-backdrop-filter);
   position: relative;
   z-index: 10;
 }
@@ -10,12 +11,14 @@
   --nav-indicator-offset: 6px;
   min-height: 84px;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: clamp(20px, 3vw, 40px);
 }
 
 .actions {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-self: end;
@@ -82,9 +85,26 @@
   padding: 0 6px;
   border-radius: var(--radius-pill);
   background-color: var(--color-button-secondary);
-  box-shadow: 0 4px 10px rgba(89, 72, 50, 0.18);
-  color: var(--color-white);
+  box-shadow: var(--cart-badge-shadow);
+  color: var(--cart-badge-text);
   font-size: 11px;
   font-weight: var(--fw-semibold);
   line-height: 1;
+}
+
+@media (max-width: 640px) {
+  .inner {
+    gap: 10px;
+  }
+
+  .actions {
+    gap: 6px;
+  }
+
+  .iconBtn {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+  }
 }

@@ -1,12 +1,7 @@
 .section {
   margin: 0 0 79px;
-  background: linear-gradient(
-    96deg,
-    rgba(255, 250, 242, 0.98) 0%,
-    rgba(247, 241, 232, 0.98) 48%,
-    rgba(234, 223, 206, 0.96) 100%
-  );
-  border-bottom: 1px solid rgba(198, 164, 110, 0.18);
+  background: var(--home-hero-bg);
+  border-bottom: 1px solid var(--home-hero-border);
 }
 
 .inner {
@@ -80,7 +75,7 @@
 .secondary {
   border: 1px solid var(--color-button-border);
   color: var(--color-accent-strong);
-  background-color: rgba(255, 250, 242, 0.72);
+  background-color: var(--home-hero-secondary-bg);
 }
 
 .primary:hover,
@@ -109,7 +104,7 @@
 .image {
   display: block;
   border-radius: var(--radius-2xl);
-  border: 1px solid rgba(255, 250, 242, 0.74);
+  border: 1px solid var(--home-hero-image-border);
   box-shadow: var(--shadow-hero);
 }
 

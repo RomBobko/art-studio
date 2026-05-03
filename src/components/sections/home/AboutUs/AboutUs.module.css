@@ -41,13 +41,7 @@
   left: 0;
   width: 55%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    rgba(244, 234, 220, 0.1) 30%,
-    rgba(244, 234, 220, 0.82) 85.5%,
-    rgba(244, 234, 220, 1) 95%,
-    var(--color-page-bg) 100%
-  );
+  background: var(--about-image-overlay);
 }
 
 .content {
@@ -87,12 +81,7 @@
 
   .about::after {
     width: 100%;
-    background: linear-gradient(
-      180deg,
-      rgba(244, 234, 220, 0.72) 0%,
-      rgba(244, 234, 220, 0.96) 55%,
-      var(--color-page-bg) 100%
-    );
+    background: var(--about-image-overlay-mobile);
   }
 
   .content,

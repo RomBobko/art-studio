@@ -5,7 +5,7 @@ import CartDrawer from "../components/shared/CartDrawer/CartDrawer";
 import Footer from "../components/shared/Footer";
 import { CartProvider } from "../context/CartContext";
 
-const MainLayout = () => {
+const MainLayout = ({ theme, onThemeToggle }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   const handleOpenCart = () => {
@@ -19,7 +19,11 @@ const MainLayout = () => {
   return (
     <CartProvider>
       <div>
-        <Header onCartOpen={handleOpenCart} />
+        <Header
+          theme={theme}
+          onThemeToggle={onThemeToggle}
+          onCartOpen={handleOpenCart}
+        />
 
         <main>
           <Outlet />

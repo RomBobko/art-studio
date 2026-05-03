@@ -67,6 +67,7 @@
   --radius-pill: 999px;
 
   /* colors */
+  --color-scheme: light;
   --color-bg: #f7f1e8;
   --color-page-bg: #f4eadc;
   --color-surface: #fffaf2;
@@ -95,6 +96,266 @@
   --shadow-media: 0 16px 34px rgba(71, 54, 33, 0.14);
   --shadow-hero: 0 26px 56px rgba(71, 54, 33, 0.18);
 
+  /* theme-specific surfaces */
+  --body-background:
+    radial-gradient(circle at top left, rgba(198, 164, 110, 0.14), transparent 32vw),
+    var(--color-bg);
+  --selection-bg: rgba(167, 119, 50, 0.24);
+  --selection-text: var(--color-text-strong);
+  --header-bg: rgba(255, 250, 242, 0.92);
+  --header-border: rgba(198, 164, 110, 0.22);
+  --header-shadow: 0 8px 24px rgba(71, 54, 33, 0.04);
+  --header-backdrop-filter: none;
+  --cart-badge-shadow: 0 4px 10px rgba(89, 72, 50, 0.18);
+  --cart-badge-text: var(--color-white);
+  --home-hero-bg: linear-gradient(
+    96deg,
+    rgba(255, 250, 242, 0.98) 0%,
+    rgba(247, 241, 232, 0.98) 48%,
+    rgba(234, 223, 206, 0.96) 100%
+  );
+  --home-hero-border: rgba(198, 164, 110, 0.18);
+  --home-hero-secondary-bg: rgba(255, 250, 242, 0.72);
+  --home-hero-image-border: rgba(255, 250, 242, 0.74);
+  --about-image-overlay: linear-gradient(
+    90deg,
+    rgba(244, 234, 220, 0.1) 30%,
+    rgba(244, 234, 220, 0.82) 85.5%,
+    rgba(244, 234, 220, 1) 95%,
+    var(--color-page-bg) 100%
+  );
+  --about-image-overlay-mobile: linear-gradient(
+    180deg,
+    rgba(244, 234, 220, 0.72) 0%,
+    rgba(244, 234, 220, 0.96) 55%,
+    var(--color-page-bg) 100%
+  );
+  --newsletter-form-bg: rgba(255, 250, 242, 0.96);
+  --newsletter-form-border: rgba(255, 250, 242, 0.36);
+  --newsletter-form-shadow: 0 18px 38px rgba(23, 17, 12, 0.16);
+  --newsletter-input-text: var(--color-text-primary);
+  --newsletter-status-bg: rgba(255, 255, 255, 0.92);
+  --newsletter-status-border: transparent;
+  --newsletter-status-text: var(--color-text-strong);
+  --discover-hero-panel-bg: rgba(255, 250, 242, 0.18);
+  --discover-hero-panel-border: rgba(255, 250, 242, 0.28);
+  --discover-hero-panel-shadow: 0 18px 38px rgba(23, 17, 12, 0.18);
+  --featured-artists-arrow-bg: rgba(255, 250, 242, 0.72);
+  --featured-tutorials-bg-end: rgba(244, 234, 220, 0.62);
+  --learn-hero-chip-bg: rgba(255, 250, 242, 0.95);
+  --learn-hero-chip-border: rgba(198, 164, 110, 0.24);
+  --learn-hero-chip-hover-border: rgba(198, 164, 110, 0.52);
+  --tutorial-play-bg: rgba(255, 250, 242, 0.92);
+  --tutorial-muted-badge-bg: rgba(255, 250, 242, 0.86);
+  --tutorial-muted-badge-border: rgba(198, 164, 110, 0.3);
+  --secondary-action-bg: rgba(255, 250, 242, 0.72);
+  --category-checkbox-border: rgba(31, 31, 31, 0.55);
+  --category-checkbox-checked-bg: rgba(123, 102, 72, 0.08);
+  --category-filter-footer-border: rgba(123, 102, 72, 0.1);
+  --success-message-border: rgba(44, 107, 63, 0.18);
+  --success-message-bg: rgba(233, 245, 237, 0.92);
+  --success-message-text: #2c6b3f;
+  --form-input-bg: var(--color-white);
+  --form-field-bg: rgba(255, 255, 255, 0.95);
+  --form-field-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74);
+  --form-field-focus-bg: var(--color-white);
+  --form-field-focus-shadow:
+    0 0 0 4px rgba(154, 122, 80, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.74);
+  --challenge-close-bg: rgba(255, 250, 242, 0.94);
+  --challenge-form-card-bg: linear-gradient(
+    180deg,
+    rgba(255, 250, 242, 0.98),
+    rgba(247, 241, 232, 0.98)
+  );
+  --challenge-form-card-shadow:
+    0 22px 56px rgba(71, 54, 33, 0.12),
+    inset 0 1px 0 rgba(255, 250, 242, 0.78);
+  --challenge-preview-bg: rgba(255, 250, 242, 0.72);
+  --challenge-preview-box-bg: rgba(255, 250, 242, 0.92);
+  --challenge-preview-box-shadow: 0 16px 28px rgba(71, 54, 33, 0.1);
+  --challenge-fields-bg: rgba(255, 250, 242, 0.76);
+  --challenge-fields-shadow: inset 0 1px 0 rgba(255, 250, 242, 0.78);
+  --challenge-input-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  --challenge-upload-bg: linear-gradient(
+    180deg,
+    rgba(255, 250, 242, 0.9),
+    rgba(244, 239, 231, 0.82)
+  );
+  --challenge-cancel-bg: rgba(255, 250, 242, 0.84);
+  --submission-card-shadow: 0 12px 26px rgba(71, 54, 33, 0.07);
+  --submission-card-hover-shadow: 0 18px 34px rgba(71, 54, 33, 0.1);
+  --submission-image-shadow: 0 10px 20px rgba(71, 54, 33, 0.09);
+  --submission-badge-bg: rgba(167, 119, 50, 0.08);
+  --current-challenge-bg: linear-gradient(
+    145deg,
+    rgba(255, 250, 242, 0.98),
+    rgba(234, 223, 206, 0.94)
+  );
+  --current-challenge-shadow:
+    0 28px 70px rgba(71, 54, 33, 0.14),
+    inset 0 1px 0 rgba(255, 250, 242, 0.8);
+  --current-challenge-soft-light: rgba(255, 250, 242, 0.72);
+  --current-challenge-soft-light-clear: rgba(255, 250, 242, 0);
+  --current-challenge-meta-bg: rgba(255, 250, 242, 0.82);
+  --current-challenge-meta-shadow: 0 10px 22px rgba(71, 54, 33, 0.07);
+  --current-challenge-media-bg: linear-gradient(
+    180deg,
+    rgba(255, 250, 242, 0.82),
+    rgba(255, 250, 242, 0.42)
+  );
+  --current-challenge-media-border: rgba(255, 250, 242, 0.62);
+  --current-challenge-media-shadow: 0 28px 46px rgba(71, 54, 33, 0.16);
+  --current-challenge-info-bg: rgba(255, 250, 242, 0.92);
+  --current-challenge-info-shadow: 0 18px 32px rgba(71, 54, 33, 0.12);
+  --past-challenge-card-bg: linear-gradient(
+    180deg,
+    rgba(255, 250, 242, 0.9),
+    rgba(244, 234, 220, 0.96)
+  );
+  --past-challenge-card-shadow:
+    0 18px 34px rgba(71, 54, 33, 0.08),
+    inset 0 1px 0 rgba(255, 250, 242, 0.78);
+  --past-thumbnail-bg: rgba(255, 250, 242, 0.78);
+  --past-thumbnail-shadow: 0 14px 22px rgba(71, 54, 33, 0.1);
+  --past-arrow-bg: rgba(255, 250, 242, 0.84);
+  --past-arrow-shadow: 0 12px 20px rgba(71, 54, 33, 0.08);
+  --auth-layout-bg:
+    radial-gradient(circle at top right, rgba(198, 164, 110, 0.18), rgba(198, 164, 110, 0) 28%),
+    linear-gradient(180deg, #463728, #2a2119);
+  --auth-shell-border: rgba(255, 250, 242, 0.16);
+  --auth-shell-bg: rgba(255, 250, 242, 0.05);
+  --auth-shell-shadow: 0 24px 54px rgba(23, 17, 12, 0.2);
+  --auth-form-bg: linear-gradient(
+    180deg,
+    rgba(255, 250, 242, 0.98),
+    rgba(247, 241, 232, 0.98)
+  );
+  --checkout-page-gradient: linear-gradient(
+    180deg,
+    rgba(243, 239, 233, 0.9),
+    rgba(255, 255, 255, 0.98) 44%,
+    rgba(255, 255, 255, 1)
+  );
+  --checkout-card-bg: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.98),
+    rgba(247, 243, 237, 0.94)
+  );
+  --checkout-card-shadow:
+    0 24px 52px rgba(89, 72, 50, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.78);
+  --checkout-summary-bg: rgba(255, 255, 255, 0.96);
+  --checkout-block-bg: linear-gradient(
+    180deg,
+    rgba(249, 246, 242, 0.94),
+    rgba(255, 255, 255, 0.98)
+  );
+  --checkout-block-shadow: 0 12px 26px rgba(89, 72, 50, 0.05);
+  --checkout-preview-bg: linear-gradient(
+    160deg,
+    rgba(245, 239, 231, 0.98),
+    rgba(255, 255, 255, 0.95)
+  );
+  --checkout-option-bg: rgba(255, 255, 255, 0.9);
+  --checkout-option-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  --checkout-helper-bg: rgba(255, 255, 255, 0.82);
+  --checkout-summary-block-bg: linear-gradient(
+    180deg,
+    rgba(244, 238, 229, 0.96),
+    rgba(255, 255, 255, 0.98)
+  );
+  --checkout-summary-row-bg: rgba(255, 255, 255, 0.96);
+  --checkout-total-row-bg: linear-gradient(
+    180deg,
+    rgba(248, 244, 238, 0.96),
+    rgba(255, 255, 255, 0.98)
+  );
+  --dashboard-page-gradient: linear-gradient(
+    180deg,
+    rgba(243, 239, 233, 0.84),
+    rgba(255, 255, 255, 0.94) 40%,
+    rgba(255, 255, 255, 1)
+  );
+  --dashboard-card-bg: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.98),
+    rgba(246, 241, 234, 0.96)
+  );
+  --dashboard-card-shadow:
+    0 24px 58px rgba(89, 72, 50, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  --dashboard-card-light: rgba(255, 255, 255, 0.7);
+  --dashboard-card-light-clear: rgba(255, 255, 255, 0);
+  --dashboard-panel-bg: linear-gradient(
+    180deg,
+    rgba(250, 247, 243, 0.94),
+    rgba(255, 255, 255, 0.98)
+  );
+  --dashboard-panel-shadow: 0 14px 30px rgba(89, 72, 50, 0.05);
+  --dashboard-wide-panel-bg: linear-gradient(
+    180deg,
+    rgba(246, 240, 231, 0.98),
+    rgba(255, 255, 255, 0.98)
+  );
+  --dashboard-upload-bg: linear-gradient(
+    180deg,
+    rgba(247, 244, 239, 0.9),
+    rgba(255, 255, 255, 0.98)
+  );
+  --dashboard-upload-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.72),
+    0 12px 20px rgba(89, 72, 50, 0.06);
+  --dashboard-upload-icon: rgba(95, 95, 95, 0.7);
+  --dashboard-success-text: #2f6b3b;
+  --dashboard-soft-block-bg: rgba(255, 255, 255, 0.82);
+  --dashboard-draft-bg: rgba(246, 240, 231, 0.9);
+  --drawer-backdrop-bg: rgba(38, 29, 21, 0.26);
+  --drawer-bg: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.98),
+    rgba(247, 243, 237, 0.96)
+  );
+  --drawer-shadow: -20px 0 44px rgba(89, 72, 50, 0.16);
+  --drawer-header-bg: rgba(255, 255, 255, 0.92);
+  --drawer-count-bg: rgba(255, 255, 255, 0.8);
+  --drawer-close-bg: rgba(255, 255, 255, 0.94);
+  --drawer-close-hover-bg: var(--color-white);
+  --drawer-panel-bg: linear-gradient(
+    180deg,
+    rgba(249, 246, 242, 0.92),
+    rgba(255, 255, 255, 0.98)
+  );
+  --drawer-panel-shadow: 0 10px 22px rgba(89, 72, 50, 0.05);
+  --drawer-summary-bg: linear-gradient(
+    180deg,
+    rgba(244, 238, 229, 0.96),
+    rgba(255, 255, 255, 0.98)
+  );
+  --drawer-footer-bg: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.94),
+    rgba(244, 238, 229, 0.96)
+  );
+  --drawer-footer-shadow: 0 -14px 26px rgba(89, 72, 50, 0.05);
+  --drawer-item-bg: rgba(255, 255, 255, 0.98);
+  --drawer-item-shadow: 0 8px 18px rgba(89, 72, 50, 0.04);
+  --drawer-quantity-bg: linear-gradient(
+    180deg,
+    rgba(248, 244, 238, 0.96),
+    rgba(255, 255, 255, 0.96)
+  );
+  --drawer-quantity-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  --drawer-quantity-button-bg: var(--color-white);
+  --drawer-price-bg: rgba(255, 255, 255, 0.88);
+  --drawer-secondary-bg: rgba(255, 255, 255, 0.86);
+  --drawer-empty-bg: linear-gradient(
+    180deg,
+    rgba(249, 246, 242, 0.96),
+    rgba(255, 255, 255, 0.98)
+  );
+  --drawer-empty-shadow: 0 18px 34px rgba(89, 72, 50, 0.08);
+
   /* transitions */
   --transition-fast: 0.2s ease;
   --transition-base: 250ms ease;
@@ -116,4 +377,291 @@
   --lh-tight: var(--lh-110);
   --lh-title: var(--lh-120);
   --lh-loose: var(--lh-170);
+}
+
+[data-theme="dark"] {
+  --color-scheme: dark;
+  --color-bg: #0f0d0b;
+  --color-page-bg: #15110f;
+  --color-surface: #1b1612;
+  --color-surface-alt: #241d18;
+  --color-input-bg: #17120f;
+  --color-text-primary: #eadfce;
+  --color-text-secondary: #cdbda7;
+  --color-text-muted: #a99882;
+  --color-text-strong: #fff4e2;
+  --color-link-artist: #f0c57f;
+  --color-accent: #c89245;
+  --color-accent-hover: #dfa957;
+  --color-accent-strong: #e0b66f;
+  --color-accent-border: #765b37;
+  --color-accent-muted: #8d7352;
+  --color-border: #3a3028;
+  --color-accent-ghost: rgba(200, 146, 69, 0.14);
+  --color-black: var(--color-text-strong);
+  --shadow-sm: 0 10px 24px rgba(0, 0, 0, 0.26);
+  --shadow-md: 0 18px 42px rgba(0, 0, 0, 0.34);
+  --shadow-lg: 0 26px 64px rgba(0, 0, 0, 0.42);
+  --shadow-card: 0 18px 42px rgba(0, 0, 0, 0.32);
+  --shadow-media: 0 16px 34px rgba(0, 0, 0, 0.34);
+  --shadow-hero: 0 28px 68px rgba(0, 0, 0, 0.44);
+  --body-background:
+    radial-gradient(circle at top left, rgba(200, 146, 69, 0.18), transparent 32vw),
+    radial-gradient(circle at bottom right, rgba(97, 66, 35, 0.16), transparent 28vw),
+    var(--color-bg);
+  --selection-bg: rgba(200, 146, 69, 0.36);
+  --selection-text: var(--color-text-strong);
+  --header-bg: rgba(15, 13, 11, 0.9);
+  --header-border: rgba(200, 146, 69, 0.22);
+  --header-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+  --header-backdrop-filter: blur(14px);
+  --cart-badge-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
+  --cart-badge-text: #17110c;
+  --home-hero-bg: linear-gradient(
+    96deg,
+    rgba(15, 13, 11, 0.98) 0%,
+    rgba(21, 17, 15, 0.98) 48%,
+    rgba(36, 29, 24, 0.96) 100%
+  );
+  --home-hero-border: rgba(200, 146, 69, 0.22);
+  --home-hero-secondary-bg: rgba(27, 22, 18, 0.78);
+  --home-hero-image-border: rgba(200, 146, 69, 0.26);
+  --about-image-overlay: linear-gradient(
+    90deg,
+    rgba(21, 17, 15, 0.06) 30%,
+    rgba(21, 17, 15, 0.82) 85.5%,
+    rgba(21, 17, 15, 0.98) 95%,
+    var(--color-page-bg) 100%
+  );
+  --about-image-overlay-mobile: linear-gradient(
+    180deg,
+    rgba(21, 17, 15, 0.72) 0%,
+    rgba(21, 17, 15, 0.96) 55%,
+    var(--color-page-bg) 100%
+  );
+  --newsletter-form-bg: rgba(23, 18, 15, 0.92);
+  --newsletter-form-border: rgba(198, 164, 110, 0.28);
+  --newsletter-form-shadow: 0 18px 38px rgba(0, 0, 0, 0.22);
+  --newsletter-input-text: var(--color-text-muted);
+  --newsletter-status-bg: rgba(23, 18, 15, 0.92);
+  --newsletter-status-border: rgba(198, 164, 110, 0.24);
+  --newsletter-status-text: var(--color-text-primary);
+  --discover-hero-panel-bg: rgba(15, 13, 11, 0.46);
+  --discover-hero-panel-border: rgba(198, 164, 110, 0.28);
+  --discover-hero-panel-shadow: 0 18px 38px rgba(0, 0, 0, 0.24);
+  --featured-artists-arrow-bg: rgba(29, 23, 19, 0.82);
+  --featured-tutorials-bg-end: rgba(29, 23, 19, 0.82);
+  --learn-hero-chip-bg: rgba(27, 22, 18, 0.9);
+  --learn-hero-chip-border: rgba(200, 146, 69, 0.34);
+  --learn-hero-chip-hover-border: rgba(200, 146, 69, 0.58);
+  --tutorial-play-bg: rgba(27, 22, 18, 0.88);
+  --tutorial-muted-badge-bg: rgba(255, 244, 226, 0.06);
+  --tutorial-muted-badge-border: rgba(200, 146, 69, 0.28);
+  --secondary-action-bg: rgba(200, 146, 69, 0.12);
+  --category-checkbox-border: rgba(198, 164, 110, 0.34);
+  --category-checkbox-checked-bg: rgba(200, 146, 69, 0.16);
+  --category-filter-footer-border: rgba(198, 164, 110, 0.18);
+  --success-message-border: rgba(95, 168, 112, 0.24);
+  --success-message-bg: rgba(37, 76, 48, 0.28);
+  --success-message-text: #9be1ad;
+  --form-input-bg: var(--color-input-bg);
+  --form-field-bg: var(--color-input-bg);
+  --form-field-shadow: inset 0 1px 0 rgba(255, 244, 226, 0.06);
+  --form-field-focus-bg: var(--color-surface);
+  --form-field-focus-shadow:
+    0 0 0 4px rgba(154, 122, 80, 0.12),
+    inset 0 1px 0 rgba(255, 244, 226, 0.08);
+  --challenge-close-bg: var(--color-surface-alt);
+  --challenge-form-card-bg: linear-gradient(
+    180deg,
+    rgba(27, 22, 18, 0.98),
+    rgba(21, 17, 15, 0.98)
+  );
+  --challenge-form-card-shadow:
+    0 22px 56px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 244, 226, 0.06);
+  --challenge-preview-bg: rgba(255, 244, 226, 0.05);
+  --challenge-preview-box-bg: var(--color-surface-alt);
+  --challenge-preview-box-shadow: 0 16px 28px rgba(0, 0, 0, 0.28);
+  --challenge-fields-bg: rgba(255, 244, 226, 0.05);
+  --challenge-fields-shadow: inset 0 1px 0 rgba(255, 244, 226, 0.06);
+  --challenge-input-shadow: inset 0 1px 0 rgba(255, 244, 226, 0.06);
+  --challenge-upload-bg: linear-gradient(
+    180deg,
+    rgba(36, 29, 24, 0.9),
+    rgba(27, 22, 18, 0.82)
+  );
+  --challenge-cancel-bg: rgba(255, 244, 226, 0.05);
+  --submission-card-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
+  --submission-card-hover-shadow: 0 18px 38px rgba(0, 0, 0, 0.32);
+  --submission-image-shadow: 0 10px 22px rgba(0, 0, 0, 0.22);
+  --submission-badge-bg: rgba(200, 146, 69, 0.12);
+  --current-challenge-bg: linear-gradient(
+    145deg,
+    rgba(27, 22, 18, 0.98),
+    rgba(36, 29, 24, 0.94)
+  );
+  --current-challenge-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.36),
+    inset 0 1px 0 rgba(255, 244, 226, 0.06);
+  --current-challenge-soft-light: rgba(255, 244, 226, 0.06);
+  --current-challenge-soft-light-clear: rgba(255, 244, 226, 0);
+  --current-challenge-meta-bg: rgba(255, 244, 226, 0.05);
+  --current-challenge-meta-shadow: 0 10px 22px rgba(0, 0, 0, 0.22);
+  --current-challenge-media-bg: linear-gradient(
+    180deg,
+    rgba(255, 244, 226, 0.1),
+    rgba(255, 244, 226, 0.04)
+  );
+  --current-challenge-media-border: rgba(200, 146, 69, 0.28);
+  --current-challenge-media-shadow: 0 28px 46px rgba(0, 0, 0, 0.34);
+  --current-challenge-info-bg: rgba(27, 22, 18, 0.88);
+  --current-challenge-info-shadow: 0 18px 32px rgba(0, 0, 0, 0.3);
+  --past-challenge-card-bg: linear-gradient(
+    180deg,
+    rgba(29, 23, 19, 0.94),
+    rgba(21, 17, 15, 0.98)
+  );
+  --past-challenge-card-shadow:
+    0 18px 34px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(198, 164, 110, 0.12);
+  --past-thumbnail-bg: rgba(18, 14, 12, 0.9);
+  --past-thumbnail-shadow: 0 14px 22px rgba(0, 0, 0, 0.2);
+  --past-arrow-bg: rgba(18, 14, 12, 0.86);
+  --past-arrow-shadow: 0 12px 22px rgba(0, 0, 0, 0.2);
+  --auth-layout-bg:
+    radial-gradient(circle at top right, rgba(200, 146, 69, 0.2), rgba(200, 146, 69, 0) 28%),
+    linear-gradient(180deg, #221a14, #0f0d0b);
+  --auth-shell-border: rgba(200, 146, 69, 0.24);
+  --auth-shell-bg: rgba(27, 22, 18, 0.74);
+  --auth-shell-shadow: 0 24px 60px rgba(0, 0, 0, 0.42);
+  --auth-form-bg: linear-gradient(
+    180deg,
+    rgba(27, 22, 18, 0.98),
+    rgba(21, 17, 15, 0.98)
+  );
+  --checkout-page-gradient: linear-gradient(
+    180deg,
+    rgba(15, 13, 11, 0.96),
+    rgba(21, 17, 15, 0.98) 44%,
+    rgba(15, 13, 11, 1)
+  );
+  --checkout-card-bg: linear-gradient(
+    180deg,
+    rgba(27, 22, 18, 0.98),
+    rgba(21, 17, 15, 0.96)
+  );
+  --checkout-card-shadow:
+    0 24px 52px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 244, 226, 0.06);
+  --checkout-summary-bg: var(--color-surface-alt);
+  --checkout-block-bg: linear-gradient(
+    180deg,
+    rgba(36, 29, 24, 0.94),
+    rgba(27, 22, 18, 0.98)
+  );
+  --checkout-block-shadow: 0 12px 26px rgba(0, 0, 0, 0.24);
+  --checkout-preview-bg: linear-gradient(
+    160deg,
+    rgba(36, 29, 24, 0.98),
+    rgba(21, 17, 15, 0.95)
+  );
+  --checkout-option-bg: rgba(27, 22, 18, 0.9);
+  --checkout-option-shadow: inset 0 1px 0 rgba(255, 244, 226, 0.06);
+  --checkout-helper-bg: rgba(255, 244, 226, 0.05);
+  --checkout-summary-block-bg: linear-gradient(
+    180deg,
+    rgba(36, 29, 24, 0.96),
+    rgba(27, 22, 18, 0.98)
+  );
+  --checkout-summary-row-bg: rgba(27, 22, 18, 0.94);
+  --checkout-total-row-bg: linear-gradient(
+    180deg,
+    rgba(36, 29, 24, 0.96),
+    rgba(27, 22, 18, 0.98)
+  );
+  --dashboard-page-gradient: linear-gradient(
+    180deg,
+    rgba(15, 13, 11, 0.96),
+    rgba(21, 17, 15, 0.98) 40%,
+    rgba(15, 13, 11, 1)
+  );
+  --dashboard-card-bg: linear-gradient(
+    180deg,
+    rgba(27, 22, 18, 0.98),
+    rgba(21, 17, 15, 0.96)
+  );
+  --dashboard-card-shadow:
+    0 24px 58px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 244, 226, 0.06);
+  --dashboard-card-light: rgba(255, 244, 226, 0.06);
+  --dashboard-card-light-clear: rgba(255, 244, 226, 0);
+  --dashboard-panel-bg: linear-gradient(
+    180deg,
+    rgba(36, 29, 24, 0.94),
+    rgba(27, 22, 18, 0.98)
+  );
+  --dashboard-panel-shadow: 0 14px 30px rgba(0, 0, 0, 0.24);
+  --dashboard-wide-panel-bg: linear-gradient(
+    180deg,
+    rgba(36, 29, 24, 0.98),
+    rgba(27, 22, 18, 0.98)
+  );
+  --dashboard-upload-bg: linear-gradient(
+    180deg,
+    rgba(36, 29, 24, 0.9),
+    rgba(27, 22, 18, 0.98)
+  );
+  --dashboard-upload-shadow:
+    inset 0 1px 0 rgba(255, 244, 226, 0.06),
+    0 12px 20px rgba(0, 0, 0, 0.22);
+  --dashboard-upload-icon: var(--color-text-muted);
+  --dashboard-success-text: #9be1ad;
+  --dashboard-soft-block-bg: rgba(255, 244, 226, 0.05);
+  --dashboard-draft-bg: rgba(200, 146, 69, 0.08);
+  --drawer-backdrop-bg: rgba(0, 0, 0, 0.58);
+  --drawer-bg: linear-gradient(
+    180deg,
+    rgba(27, 22, 18, 0.98),
+    rgba(15, 13, 11, 0.98)
+  );
+  --drawer-shadow: -20px 0 44px rgba(0, 0, 0, 0.42);
+  --drawer-header-bg: rgba(27, 22, 18, 0.94);
+  --drawer-count-bg: rgba(255, 244, 226, 0.05);
+  --drawer-close-bg: var(--color-surface-alt);
+  --drawer-close-hover-bg: var(--color-surface);
+  --drawer-panel-bg: linear-gradient(
+    180deg,
+    rgba(36, 29, 24, 0.92),
+    rgba(27, 22, 18, 0.98)
+  );
+  --drawer-panel-shadow: 0 10px 22px rgba(0, 0, 0, 0.24);
+  --drawer-summary-bg: linear-gradient(
+    180deg,
+    rgba(36, 29, 24, 0.96),
+    rgba(27, 22, 18, 0.98)
+  );
+  --drawer-footer-bg: linear-gradient(
+    180deg,
+    rgba(27, 22, 18, 0.94),
+    rgba(15, 13, 11, 0.96)
+  );
+  --drawer-footer-shadow: 0 -14px 26px rgba(0, 0, 0, 0.26);
+  --drawer-item-bg: rgba(36, 29, 24, 0.96);
+  --drawer-item-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+  --drawer-quantity-bg: linear-gradient(
+    180deg,
+    rgba(36, 29, 24, 0.96),
+    rgba(27, 22, 18, 0.96)
+  );
+  --drawer-quantity-shadow: inset 0 1px 0 rgba(255, 244, 226, 0.06);
+  --drawer-quantity-button-bg: var(--color-surface);
+  --drawer-price-bg: rgba(255, 244, 226, 0.05);
+  --drawer-secondary-bg: rgba(255, 244, 226, 0.05);
+  --drawer-empty-bg: linear-gradient(
+    180deg,
+    rgba(36, 29, 24, 0.96),
+    rgba(27, 22, 18, 0.98)
+  );
+  --drawer-empty-shadow: 0 18px 34px rgba(0, 0, 0, 0.28);
 }

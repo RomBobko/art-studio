@@ -6,12 +6,7 @@
       rgba(183, 157, 121, 0.16),
       rgba(183, 157, 121, 0) 26%
     ),
-    linear-gradient(
-      180deg,
-      rgba(243, 239, 233, 0.84),
-      rgba(255, 255, 255, 0.94) 40%,
-      rgba(255, 255, 255, 1)
-    );
+    var(--dashboard-page-gradient);
 }
 
 .dashboardSection {
@@ -45,14 +40,8 @@
   padding: clamp(var(--space-24), 4vw, 40px);
   border: 1px solid rgba(123, 102, 72, 0.14);
   border-radius: 34px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.98),
-    rgba(246, 241, 234, 0.96)
-  );
-  box-shadow:
-    0 24px 58px rgba(89, 72, 50, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  background: var(--dashboard-card-bg);
+  box-shadow: var(--dashboard-card-shadow);
   overflow: hidden;
 }
 
@@ -63,8 +52,8 @@
   background:
     radial-gradient(
       circle at 12% 12%,
-      rgba(255, 255, 255, 0.7),
-      rgba(255, 255, 255, 0) 26%
+      var(--dashboard-card-light),
+      var(--dashboard-card-light-clear) 26%
     ),
     radial-gradient(
       circle at 90% 82%,
@@ -92,12 +81,8 @@
   padding: 24px;
   border: 1px solid rgba(123, 102, 72, 0.12);
   border-radius: 26px;
-  background: linear-gradient(
-    180deg,
-    rgba(250, 247, 243, 0.94),
-    rgba(255, 255, 255, 0.98)
-  );
-  box-shadow: 0 14px 30px rgba(89, 72, 50, 0.05);
+  background: var(--dashboard-panel-bg);
+  box-shadow: var(--dashboard-panel-shadow);
 }
 
 .insightsColumn {
@@ -107,11 +92,7 @@
 
 .profileBlock {
   grid-column: 1 / -1;
-  background: linear-gradient(
-    180deg,
-    rgba(246, 240, 231, 0.98),
-    rgba(255, 255, 255, 0.98)
-  );
+  background: var(--dashboard-wide-panel-bg);
 }
 
 .blockTitle {
@@ -148,14 +129,8 @@
       rgba(154, 122, 80, 0.12),
       rgba(154, 122, 80, 0) 44%
     ),
-    linear-gradient(
-      180deg,
-      rgba(247, 244, 239, 0.9),
-      rgba(255, 255, 255, 0.98)
-    );
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.72),
-    0 12px 20px rgba(89, 72, 50, 0.06);
+    var(--dashboard-upload-bg);
+  box-shadow: var(--dashboard-upload-shadow);
   cursor: pointer;
   overflow: hidden;
   transition:
@@ -171,7 +146,7 @@
 .uploadIcon {
   width: 56px;
   height: 56px;
-  color: rgba(95, 95, 95, 0.7);
+  color: var(--dashboard-upload-icon);
 }
 
 .uploadPreviewPlaceholder {
@@ -232,9 +207,9 @@
   padding: 12px 14px;
   border: 1px solid rgba(123, 102, 72, 0.16);
   border-radius: 14px;
-  background-color: rgba(255, 255, 255, 0.96);
+  background-color: var(--form-field-bg);
   color: var(--color-text-primary);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.82);
+  box-shadow: var(--form-field-shadow);
   transition:
     border-color var(--transition-fast),
     box-shadow var(--transition-fast);
@@ -245,7 +220,7 @@
   outline: none;
   border-color: rgba(123, 102, 72, 0.34);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.82),
+    var(--form-field-shadow),
     0 0 0 3px rgba(183, 157, 121, 0.16);
 }
 
@@ -290,7 +265,7 @@
 }
 
 .successText {
-  color: #2f6b3b;
+  color: var(--dashboard-success-text);
   font-size: var(--fs-100);
   line-height: var(--lh-150);
 }
@@ -308,7 +283,7 @@
   padding: 18px;
   border: 1px solid rgba(123, 102, 72, 0.1);
   border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.82);
+  background-color: var(--dashboard-soft-block-bg);
 }
 
 .summaryLabel {
@@ -338,12 +313,12 @@
   padding: 10px 12px;
   border: 1px solid rgba(123, 102, 72, 0.1);
   border-radius: 16px;
-  background-color: rgba(255, 255, 255, 0.82);
+  background-color: var(--dashboard-soft-block-bg);
 }
 
 .draftItem {
   border-color: rgba(123, 102, 72, 0.2);
-  background-color: rgba(246, 240, 231, 0.9);
+  background-color: var(--dashboard-draft-bg);
 }
 
 .topSellingImage {
@@ -410,7 +385,7 @@
   padding: 16px 18px;
   border: 1px solid rgba(123, 102, 72, 0.12);
   border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.82);
+  background-color: var(--dashboard-soft-block-bg);
 }
 
 .profileAvatar {

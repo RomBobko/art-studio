@@ -11,12 +11,7 @@
       rgba(123, 102, 72, 0.08),
       rgba(123, 102, 72, 0) 24%
     ),
-    linear-gradient(
-      180deg,
-      rgba(243, 239, 233, 0.9),
-      rgba(255, 255, 255, 0.98) 44%,
-      rgba(255, 255, 255, 1)
-    );
+    var(--checkout-page-gradient);
 }
 
 .checkoutSection {
@@ -88,14 +83,8 @@
   padding: clamp(24px, 4vw, 38px);
   border: 1px solid rgba(123, 102, 72, 0.14);
   border-radius: 30px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.98),
-    rgba(247, 243, 237, 0.94)
-  );
-  box-shadow:
-    0 24px 52px rgba(89, 72, 50, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.78);
+  background: var(--checkout-card-bg);
+  box-shadow: var(--checkout-card-shadow);
 }
 
 .successSummary {
@@ -104,7 +93,7 @@
   border: 1px solid rgba(123, 102, 72, 0.12);
   border-radius: 16px;
   overflow: hidden;
-  background-color: rgba(255, 255, 255, 0.96);
+  background-color: var(--checkout-summary-bg);
 }
 
 .topRow {
@@ -123,21 +112,13 @@
   padding: 22px;
   border: 1px solid rgba(123, 102, 72, 0.1);
   border-radius: 24px;
-  background: linear-gradient(
-    180deg,
-    rgba(249, 246, 242, 0.94),
-    rgba(255, 255, 255, 0.98)
-  );
-  box-shadow: 0 12px 26px rgba(89, 72, 50, 0.05);
+  background: var(--checkout-block-bg);
+  box-shadow: var(--checkout-block-shadow);
 }
 
 .previewBlock {
   align-content: stretch;
-  background: linear-gradient(
-    160deg,
-    rgba(245, 239, 231, 0.98),
-    rgba(255, 255, 255, 0.95)
-  );
+  background: var(--checkout-preview-bg);
 }
 
 .previewImageWrap {
@@ -186,8 +167,8 @@
   padding: 12px 15px;
   border: 1px solid rgba(123, 102, 72, 0.16);
   border-radius: 12px;
-  background-color: rgba(255, 255, 255, 0.95);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74);
+  background-color: var(--form-field-bg);
+  box-shadow: var(--form-field-shadow);
   color: var(--color-text-primary);
   transition:
     border-color var(--transition-fast),
@@ -209,10 +190,8 @@
 .select:focus {
   outline: none;
   border-color: rgba(154, 122, 80, 0.6);
-  box-shadow:
-    0 0 0 4px rgba(154, 122, 80, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.74);
-  background-color: var(--color-white);
+  box-shadow: var(--form-field-focus-shadow);
+  background-color: var(--form-field-focus-bg);
 }
 
 .input[aria-invalid="true"],
@@ -246,11 +225,11 @@
   padding: 0 16px;
   border: 1px solid rgba(123, 102, 72, 0.14);
   border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--checkout-option-bg);
   color: var(--color-text-secondary);
   font-size: 15px;
   font-weight: 500;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  box-shadow: var(--checkout-option-shadow);
   cursor: pointer;
   transition:
     border-color var(--transition-fast),
@@ -286,7 +265,7 @@
   padding: 14px 16px;
   border: 1px solid rgba(123, 102, 72, 0.12);
   border-radius: 14px;
-  background-color: rgba(255, 255, 255, 0.82);
+  background-color: var(--checkout-helper-bg);
   color: var(--color-text-muted);
 }
 
@@ -296,11 +275,7 @@
 
 .summaryBlock {
   gap: 20px;
-  background: linear-gradient(
-    180deg,
-    rgba(244, 238, 229, 0.96),
-    rgba(255, 255, 255, 0.98)
-  );
+  background: var(--checkout-summary-block-bg);
 }
 
 .summaryTable {
@@ -308,7 +283,7 @@
   border: 1px solid rgba(123, 102, 72, 0.12);
   border-radius: 16px;
   overflow: hidden;
-  background-color: rgba(255, 255, 255, 0.96);
+  background-color: var(--checkout-summary-bg);
 }
 
 .summaryRow {
@@ -318,7 +293,7 @@
   gap: 16px;
   padding: 14px 16px;
   border-bottom: 1px solid rgba(123, 102, 72, 0.12);
-  background-color: rgba(255, 255, 255, 0.96);
+  background-color: var(--checkout-summary-row-bg);
 }
 
 .summaryRow:last-child {
@@ -337,11 +312,7 @@
 }
 
 .totalRow {
-  background: linear-gradient(
-    180deg,
-    rgba(248, 244, 238, 0.96),
-    rgba(255, 255, 255, 0.98)
-  );
+  background: var(--checkout-total-row-bg);
 }
 
 .totalRow .summaryLabel,

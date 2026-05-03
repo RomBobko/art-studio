@@ -85,7 +85,7 @@
 }
 
 .buttonFollowing {
-  background-color: rgba(255, 250, 242, 0.72);
+  background-color: var(--secondary-action-bg);
   color: var(--color-accent-strong);
   border-color: var(--color-accent-border);
 }

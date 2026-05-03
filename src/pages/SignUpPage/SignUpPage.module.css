@@ -60,7 +60,7 @@
   padding: 12px 15px;
   border: 1px solid rgba(123, 102, 72, 0.26);
   border-radius: 14px;
-  background-color: var(--color-white);
+  background-color: var(--form-input-bg);
   color: var(--color-text-primary);
   transition:
     border-color var(--transition-fast),
@@ -123,10 +123,10 @@
 .successText {
   margin: 0;
   padding: 12px 14px;
-  border: 1px solid rgba(44, 107, 63, 0.18);
+  border: 1px solid var(--success-message-border);
   border-radius: 14px;
-  background-color: rgba(233, 245, 237, 0.92);
-  color: #2c6b3f;
+  background-color: var(--success-message-bg);
+  color: var(--success-message-text);
   font-size: 14px;
   line-height: 1.5;
 }

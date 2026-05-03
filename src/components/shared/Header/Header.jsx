@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 import {
+  BsMoonStarsFill,
   BsSearch,
+  BsSunFill,
   BsPersonFill,
   BsCartFill,
 } from "react-icons/bs";
@@ -9,8 +11,9 @@ import Navigation from "../Navigation";
 import Logo from "../Logo";
 import { useCart } from "../../../context/CartContext";
 
-const Header = ({ onCartOpen }) => {
+const Header = ({ theme, onThemeToggle, onCartOpen }) => {
   const { itemCount } = useCart();
+  const isDarkTheme = theme === "dark";
 
   return (
     <header className={styles.header}>
@@ -21,6 +24,22 @@ const Header = ({ onCartOpen }) => {
           <Navigation />
 
           <div className={styles.actions}>
+            <button
+              className={styles.iconBtn}
+              type="button"
+              aria-label={
+                isDarkTheme
+                  ? "Switch to light theme"
+                  : "Switch to dark theme"
+              }
+              onClick={onThemeToggle}
+            >
+              {isDarkTheme ? (
+                <BsSunFill className={styles.icon} />
+              ) : (
+                <BsMoonStarsFill className={styles.icon} />
+              )}
+            </button>
             <Link
               className={styles.iconBtn}
               to="/discover"
