@@ -157,3 +157,27 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+@media (max-width: 640px) {
+  .artistSection {
+    padding: 64px 0 80px;
+  }
+
+  .layout {
+    gap: 28px;
+  }
+
+  .avatar {
+    width: clamp(220px, 70vw, 280px);
+    height: clamp(220px, 70vw, 280px);
+  }
+
+  .title {
+    font-size: clamp(42px, 14vw, 52px);
+    line-height: 1.1;
+  }
+
+  .description {
+    font-size: 20px;
+  }
+}

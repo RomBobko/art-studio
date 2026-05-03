@@ -48,3 +48,23 @@
     width: 100%;
   }
 }
+
+@media (max-width: 640px) {
+  .section {
+    margin-bottom: 72px;
+  }
+
+  .inner {
+    padding: 24px 20px;
+  }
+
+  .title {
+    font-size: 30px;
+    line-height: 1.2;
+  }
+
+  .button {
+    padding: 18px 24px;
+    font-size: 22px;
+  }
+}

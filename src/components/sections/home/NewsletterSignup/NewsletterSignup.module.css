@@ -147,3 +147,41 @@
   }
 }
 
+@media (max-width: 640px) {
+  .section {
+    margin-bottom: 72px;
+  }
+
+  .inner {
+    gap: 28px;
+    padding: 48px 32px;
+    border-radius: 34px;
+  }
+
+  .title {
+    margin-bottom: 0;
+    font-size: 38px;
+    line-height: 1.2;
+  }
+
+  .text {
+    font-size: 22px;
+    line-height: 1.45;
+  }
+
+  .input {
+    min-height: 56px;
+    height: auto;
+    padding: 0 14px;
+    font-size: 18px;
+  }
+
+  .input::placeholder {
+    font-size: 18px;
+  }
+
+  .button {
+    padding: 14px 20px;
+    font-size: 22px;
+  }
+}

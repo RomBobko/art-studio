@@ -113,17 +113,67 @@ test("mobile header has navigation or menu controls available", async ({
 }, testInfo) => {
   test.skip(testInfo.project.name !== "mobile-chrome", "Mobile-only test");
 
+  await page.setViewportSize({ width: 390, height: 900 });
   await page.goto("/");
 
-  const navigation = page.getByRole("navigation", { name: "Primary" });
-  const menuButton = page.getByRole("button", { name: /menu|navigation/i });
+  const header = page.getByRole("banner");
+  const openMenuButton = header.getByRole("button", {
+    name: "Open navigation menu",
+  });
 
-  if ((await menuButton.count()) > 0) {
-    await menuButton.first().click();
-    await expect(navigation).toBeVisible();
-  } else {
-    await expect(navigation).toBeAttached();
-    await expect(page.getByRole("button", { name: /^Cart/ })).toBeVisible();
+  await expect(openMenuButton).toBeVisible();
+  await expect(openMenuButton).toHaveAttribute("aria-expanded", "false");
+
+  await openMenuButton.click();
+
+  const navigation = header.getByRole("navigation", { name: "Primary" });
+
+  await expect(navigation).toBeVisible();
+  await expect(
+    header.getByRole("button", { name: "Close navigation menu" }),
+  ).toHaveAttribute("aria-expanded", "true");
+
+  await navigation.getByRole("link", { name: "Learn" }).click();
+
+  await expect(page).toHaveURL(/\/learn$/);
+  await expect(
+    header.getByRole("button", { name: "Open navigation menu" }),
+  ).toBeVisible();
+  await expect(page.getByRole("button", { name: /^Cart/ })).toBeVisible();
+});
+
+test("key pages do not scroll horizontally on small mobile screens", async ({
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== "mobile-chrome", "Mobile-only test");
+
+  const pagesToCheck = [
+    "/",
+    "/discover",
+    "/discover/abstract",
+    "/artworks/abstract-cascade",
+    "/artists/elena-novak",
+    "/learn",
+    "/challenges",
+    "/checkout",
+    "/dashboard",
+  ];
+  const mobileWidths = [390, 360];
+
+  for (const width of mobileWidths) {
+    await page.setViewportSize({ width, height: 900 });
+
+    for (const path of pagesToCheck) {
+      await page.goto(path);
+
+      const horizontalOverflow = await page.evaluate(
+        () =>
+          document.documentElement.scrollWidth -
+          document.documentElement.clientWidth,
+      );
+
+      expect(horizontalOverflow).toBeLessThanOrEqual(1);
+    }
   }
 });
 
@@ -179,6 +229,80 @@ test("discover artwork cards link to detail pages", async ({ page }) => {
   await expect(
     page.getByRole("heading", { name: "Color Storm", exact: true }),
   ).toBeVisible();
+});
+
+test("featured artists carousel keeps visible card content inside the carousel", async ({
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "Run once with custom widths");
+
+  const widths = [1280, 1024, 768, 430, 390, 360];
+  const themes = ["light", "dark"];
+
+  for (const theme of themes) {
+    for (const width of widths) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("/discover");
+      await page.evaluate(
+        (selectedTheme) => localStorage.setItem("theme", selectedTheme),
+        theme,
+      );
+      await page.reload();
+
+      const featuredArtists = page.locator("section").filter({
+        has: page.getByRole("heading", { name: "Featured Artists" }),
+      });
+
+      await featuredArtists.scrollIntoViewIfNeeded();
+
+      const clippedItems = await featuredArtists.evaluate((section) => {
+        const list = section.querySelector("ul");
+        const viewport = list?.parentElement;
+
+        if (!viewport) {
+          return ["Featured artists viewport was not found."];
+        }
+
+        const viewportRect = viewport.getBoundingClientRect();
+        const visibleCards = [...section.querySelectorAll("article")].filter(
+          (card) => {
+            const cardRect = card.getBoundingClientRect();
+            const visibleWidth =
+              Math.min(cardRect.right, viewportRect.right) -
+              Math.max(cardRect.left, viewportRect.left);
+
+            return visibleWidth > 40;
+          },
+        );
+
+        return visibleCards.flatMap((card) => {
+          const cardRect = card.getBoundingClientRect();
+          const artistName = card.querySelector("h3");
+          const profileLink = card.querySelector("a");
+          const itemsToCheck = [
+            ["card", cardRect],
+            ["artist name", artistName?.getBoundingClientRect()],
+            ["profile link", profileLink?.getBoundingClientRect()],
+          ];
+
+          return itemsToCheck
+            .filter(([, rect]) => {
+              if (!rect) {
+                return true;
+              }
+
+              return (
+                rect.left < viewportRect.left - 1 ||
+                rect.right > viewportRect.right + 1
+              );
+            })
+            .map(([label]) => `${label} is clipped`);
+        });
+      });
+
+      expect(clippedItems).toEqual([]);
+    }
+  }
 });
 
 test("category sorting and filters can be changed and cleared", async ({

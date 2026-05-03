@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 import {
+  BsList,
   BsMoonStarsFill,
   BsSearch,
   BsSunFill,
+  BsX,
   BsPersonFill,
   BsCartFill,
 } from "react-icons/bs";
@@ -13,7 +16,14 @@ import { useCart } from "../../../context/CartContext";
 
 const Header = ({ theme, onThemeToggle, onCartOpen }) => {
   const { itemCount } = useCart();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isDarkTheme = theme === "dark";
+  const mobileMenuId = "mobile-navigation";
+
+  const handleCartOpen = () => {
+    setIsMenuOpen(false);
+    onCartOpen();
+  };
 
   return (
     <header className={styles.header}>
@@ -21,9 +31,25 @@ const Header = ({ theme, onThemeToggle, onCartOpen }) => {
         <div className={styles.inner}>
           <Logo />
 
-          <Navigation />
+          <Navigation className={styles.desktopNav} />
 
           <div className={styles.actions}>
+            <button
+              className={`${styles.iconBtn} ${styles.menuButton}`}
+              type="button"
+              aria-label={
+                isMenuOpen ? "Close navigation menu" : "Open navigation menu"
+              }
+              aria-expanded={isMenuOpen}
+              aria-controls={mobileMenuId}
+              onClick={() => setIsMenuOpen((currentValue) => !currentValue)}
+            >
+              {isMenuOpen ? (
+                <BsX className={styles.menuIcon} />
+              ) : (
+                <BsList className={styles.menuIcon} />
+              )}
+            </button>
             <button
               className={styles.iconBtn}
               type="button"
@@ -41,7 +67,7 @@ const Header = ({ theme, onThemeToggle, onCartOpen }) => {
               )}
             </button>
             <Link
-              className={styles.iconBtn}
+              className={`${styles.iconBtn} ${styles.searchLink}`}
               to="/discover"
               aria-label="Browse artworks"
             >
@@ -62,7 +88,7 @@ const Header = ({ theme, onThemeToggle, onCartOpen }) => {
                   ? `Cart (${itemCount} item${itemCount === 1 ? "" : "s"})`
                   : "Cart"
               }
-              onClick={onCartOpen}
+              onClick={handleCartOpen}
             >
               <BsCartFill className={styles.icon} />
               {itemCount > 0 && (
@@ -71,6 +97,18 @@ const Header = ({ theme, onThemeToggle, onCartOpen }) => {
                 </span>
               )}
             </button>
+          </div>
+
+          <div
+            id={mobileMenuId}
+            className={`${styles.mobileNavPanel} ${
+              isMenuOpen ? styles.mobileNavPanelOpen : ""
+            }`}
+          >
+            <Navigation
+              variant="mobile"
+              onLinkClick={() => setIsMenuOpen(false)}
+            />
           </div>
         </div>
       </div>

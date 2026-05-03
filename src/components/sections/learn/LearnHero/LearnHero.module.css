@@ -92,4 +92,23 @@
   .inner {
     gap: 20px;
   }
+
+  .title {
+    font-size: clamp(42px, 12vw, 56px);
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 72px 0 64px;
+  }
+
+  .categories {
+    gap: 10px;
+  }
+
+  .categoryChip {
+    min-height: 42px;
+    padding: 9px 14px;
+  }
 }

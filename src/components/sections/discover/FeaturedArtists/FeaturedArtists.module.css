@@ -58,7 +58,7 @@
   min-width: 0;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1400px) {
   .list {
     gap: 24px;
   }
@@ -68,13 +68,13 @@
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .item {
     flex: 0 0 100%;
   }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1100px) {
   .slider {
     grid-template-columns: minmax(0, 1fr);
   }

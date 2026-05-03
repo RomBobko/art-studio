@@ -116,13 +116,56 @@
 }
 
 @media (max-width: 900px) {
+  .inner {
+    gap: 28px;
+    padding: 72px 0 56px;
+  }
+
+  .title {
+    font-size: clamp(44px, 12vw, 58px);
+  }
+
+  .text {
+    font-size: clamp(24px, 7vw, 32px);
+    line-height: 1.45;
+  }
+
   .form {
     gap: 16px;
     min-height: auto;
     padding: 16px 20px;
   }
 
+  .input {
+    font-size: 20px;
+  }
+
+  .input::placeholder {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
   .button {
     padding: 16px 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .inner {
+    padding: 64px 0 48px;
+  }
+
+  .form {
+    padding: 12px 14px;
+    border-radius: 20px;
+  }
+
+  .button {
+    padding: 12px;
+  }
+
+  .icon {
+    width: 30px;
+    height: 30px;
   }
 }

@@ -86,3 +86,42 @@
     max-width: 520px;
   }
 }
+
+@media (max-width: 640px) {
+  .section {
+    margin-bottom: 72px;
+  }
+
+  .inner {
+    gap: 30px;
+  }
+
+  .imageWrapper {
+    border-radius: 28px;
+  }
+
+  .title {
+    font-size: 44px;
+    line-height: 1.1;
+  }
+
+  .name {
+    margin-bottom: 14px;
+    font-size: 30px;
+    line-height: 1.2;
+  }
+
+  .description {
+    margin-bottom: 28px;
+    font-size: 20px;
+    line-height: 1.55;
+  }
+
+  .link {
+    width: 100%;
+    min-width: 0;
+    height: 56px;
+    padding: 0 24px;
+    font-size: 20px;
+  }
+}

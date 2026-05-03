@@ -41,11 +41,14 @@
 
 .contact {
   display: grid;
-  gap: 3px;
+  gap: 4px;
   font-weight: 600;
 }
 
 .contact a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
   font-size: 13px;
   color: var(--color-text-secondary);
 }
@@ -72,10 +75,13 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
 }
 
 .list a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
   font-family: Inter, system-ui, sans-serif;
   font-weight: 500;
   line-height: 1.5;
@@ -108,5 +114,14 @@
   .top {
     grid-template-columns: minmax(0, 1fr);
     gap: 32px;
+  }
+
+  .contact a,
+  .list a {
+    min-height: 40px;
+  }
+
+  .title {
+    margin-bottom: 16px;
   }
 }

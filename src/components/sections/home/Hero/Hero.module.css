@@ -150,9 +150,21 @@
     padding-block: 48px;
   }
 
+  .title {
+    font-size: clamp(44px, 13vw, 56px);
+  }
+
+  .text {
+    font-size: 18px;
+    line-height: 1.65;
+  }
+
   .primary,
   .secondary {
     width: 100%;
     min-width: 0;
+    height: 58px;
+    padding: 0 22px;
+    font-size: 21px;
   }
 }

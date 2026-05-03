@@ -249,7 +249,7 @@
   }
 
   .title {
-    font-size: clamp(40px, 12vw, 56px);
+    font-size: clamp(38px, 11vw, 52px);
   }
 
   .theme {
