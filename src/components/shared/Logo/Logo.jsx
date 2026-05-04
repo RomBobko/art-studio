@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import logo from "../../../assets/logo.svg";
 import styles from "./Logo.module.css";
 
-const Logo = () => {
+const Logo = ({ onClick }) => {
   return (
-    <Link className={styles.brand} to="/">
+    <Link className={styles.brand} to="/" onClick={onClick}>
       <img className={styles.logo} src={logo} alt="ArtStudio" />
       <span className={styles.brandText}>ArtStudio</span>
     </Link>

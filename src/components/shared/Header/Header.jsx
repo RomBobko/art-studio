@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 import {
@@ -20,20 +20,50 @@ const Header = ({ theme, onThemeToggle, onCartOpen }) => {
   const isDarkTheme = theme === "dark";
   const mobileMenuId = "mobile-navigation";
 
+  useEffect(() => {
+    if (!isMenuOpen) {
+      document.body.classList.remove("mobile-menu-open");
+      return;
+    }
+
+    document.body.classList.add("mobile-menu-open");
+
+    const handleEscapeKey = (event) => {
+      if (event.key === "Escape") {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscapeKey);
+
+    return () => {
+      document.body.classList.remove("mobile-menu-open");
+      window.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [isMenuOpen]);
+
   const handleCartOpen = () => {
     setIsMenuOpen(false);
     onCartOpen();
   };
 
   return (
-    <header className={styles.header}>
+    <header
+      className={`${styles.header} ${isMenuOpen ? styles.headerMenuOpen : ""}`}
+    >
       <div className="container-main">
         <div className={styles.inner}>
-          <Logo />
+          <div className={styles.logoArea}>
+            <Logo onClick={() => setIsMenuOpen(false)} />
+          </div>
 
           <Navigation className={styles.desktopNav} />
 
-          <div className={styles.actions}>
+          <div
+            className={`${styles.actions} ${
+              isMenuOpen ? styles.actionsMenuOpen : ""
+            }`}
+          >
             <button
               className={`${styles.iconBtn} ${styles.menuButton}`}
               type="button"
@@ -51,7 +81,7 @@ const Header = ({ theme, onThemeToggle, onCartOpen }) => {
               )}
             </button>
             <button
-              className={styles.iconBtn}
+              className={`${styles.iconBtn} ${styles.mobileHiddenAction}`}
               type="button"
               aria-label={
                 isDarkTheme
@@ -67,21 +97,21 @@ const Header = ({ theme, onThemeToggle, onCartOpen }) => {
               )}
             </button>
             <Link
-              className={`${styles.iconBtn} ${styles.searchLink}`}
+              className={`${styles.iconBtn} ${styles.searchLink} ${styles.mobileHiddenAction}`}
               to="/discover"
               aria-label="Browse artworks"
             >
               <BsSearch className={styles.icon} />
             </Link>
             <Link
-              className={styles.iconBtn}
+              className={`${styles.iconBtn} ${styles.mobileHiddenAction}`}
               to="/login"
               aria-label="Open login page"
             >
               <BsPersonFill className={styles.icon} />
             </Link>
             <button
-              className={`${styles.iconBtn} ${styles.cartButton}`}
+              className={`${styles.iconBtn} ${styles.cartButton} ${styles.mobileHiddenAction}`}
               type="button"
               aria-label={
                 itemCount > 0

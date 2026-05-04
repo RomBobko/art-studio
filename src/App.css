@@ -3,6 +3,10 @@ body.cart-drawer-open .appToastContainer.Toastify__toast-container--bottom-right
 }
 
 @media (max-width: 900px) {
+  body.mobile-menu-open {
+    overflow: hidden;
+  }
+
   .appToastContainerCheckout.Toastify__toast-container--bottom-right {
     top: 80px;
     bottom: auto;

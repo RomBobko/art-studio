@@ -176,6 +176,124 @@ test("mobile header has navigation or menu controls available", async ({
   await expect(page.getByRole("button", { name: /^Cart/ })).toBeVisible();
 });
 
+test("mobile navigation opens as a full-screen overlay", async ({
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "Run once with custom widths");
+
+  const widths = [768, 430, 390, 360];
+  const themes = ["light", "dark"];
+
+  for (const theme of themes) {
+    for (const width of widths) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("/");
+      await applyThemeForLayoutCheck(page, theme);
+
+      const header = page.getByRole("banner");
+      const openMenuButton = header.getByRole("button", {
+        name: "Open navigation menu",
+      });
+
+      await expect(openMenuButton).toBeVisible();
+      await openMenuButton.click();
+
+      const closeMenuButton = header.getByRole("button", {
+        name: "Close navigation menu",
+      });
+      const overlay = page.locator("#mobile-navigation");
+      const navigation = header.getByRole("navigation", { name: "Primary" });
+
+      await expect(closeMenuButton).toBeVisible();
+      await expect(closeMenuButton).toHaveAttribute("aria-expanded", "true");
+      await expect(overlay).toBeVisible();
+      await expect(navigation).toBeVisible();
+      await expect(
+        header.getByRole("button", { name: /Switch to/ }),
+      ).toBeHidden();
+      await expect(
+        header.getByRole("link", { name: "Open login page" }),
+      ).toBeHidden();
+      await expect(header.getByRole("button", { name: /^Cart/ })).toBeHidden();
+
+      const overlayReport = await overlay.evaluate((panel) => {
+        const rect = panel.getBoundingClientRect();
+        const nav = panel.querySelector("nav");
+        const navRect = nav?.getBoundingClientRect();
+        const links = [...panel.querySelectorAll("a")].map((link) => {
+          const linkRect = link.getBoundingClientRect();
+
+          return {
+            top: Math.round(linkRect.top),
+            right: Math.round(linkRect.right),
+            bottom: Math.round(linkRect.bottom),
+            left: Math.round(linkRect.left),
+            height: Math.round(linkRect.height),
+          };
+        });
+
+        const linksStayInsideOverlay = links.every(
+          (link) =>
+            link.left >= rect.left &&
+            link.right <= rect.right &&
+            link.top >= rect.top &&
+            link.bottom <= rect.bottom,
+        );
+        const linksAreStacked = links.every(
+          (link, index) => index === 0 || link.top >= links[index - 1].bottom,
+        );
+        const minLinkHeight = Math.min(...links.map((link) => link.height));
+
+        return {
+          bodyLocked: document.body.classList.contains("mobile-menu-open"),
+          horizontalOverflow:
+            document.documentElement.scrollWidth -
+            document.documentElement.clientWidth,
+          linkCount: links.length,
+          linksAreStacked,
+          linksStayInsideOverlay,
+          minLinkHeight,
+          navCenterOffset: navRect
+            ? Math.abs(navRect.top + navRect.height / 2 - window.innerHeight / 2)
+            : window.innerHeight,
+          overlayHeight: Math.round(rect.height),
+          overlayLeft: Math.round(rect.left),
+          overlayPosition: getComputedStyle(panel).position,
+          overlayTop: Math.round(rect.top),
+          overlayWidth: Math.round(rect.width),
+        };
+      });
+
+      expect(overlayReport.overlayPosition).toBe("fixed");
+      expect(overlayReport.overlayLeft).toBeLessThanOrEqual(1);
+      expect(overlayReport.overlayTop).toBeLessThanOrEqual(1);
+      expect(overlayReport.overlayWidth).toBeGreaterThanOrEqual(width - 1);
+      expect(overlayReport.overlayHeight).toBeGreaterThanOrEqual(899);
+      expect(overlayReport.linkCount).toBe(4);
+      expect(overlayReport.linksAreStacked).toBe(true);
+      expect(overlayReport.linksStayInsideOverlay).toBe(true);
+      expect(overlayReport.minLinkHeight).toBeGreaterThanOrEqual(48);
+      expect(overlayReport.navCenterOffset).toBeLessThanOrEqual(90);
+      expect(overlayReport.horizontalOverflow).toBeLessThanOrEqual(1);
+      expect(overlayReport.bodyLocked).toBe(true);
+
+      await closeMenuButton.click();
+
+      await expect(overlay).toBeHidden();
+      await expect(
+        header.getByRole("button", { name: "Open navigation menu" }),
+      ).toHaveAttribute("aria-expanded", "false");
+      await expect
+        .poll(() =>
+          page.evaluate(() =>
+            document.body.classList.contains("mobile-menu-open"),
+          ),
+        )
+        .toBe(false);
+    }
+  }
+});
+
 test("key pages do not scroll horizontally on small mobile screens", async ({
   page,
 }, testInfo) => {
