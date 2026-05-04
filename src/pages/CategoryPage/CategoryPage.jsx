@@ -6,6 +6,14 @@ import artworks from "../../data/artworks";
 import ArtworkCard from "../../components/sections/discover/TrendingArtworks/ArtworkCard";
 import { toArtworkCardProps } from "../../data/artworkPreview";
 import CategoryFilter from "./CategoryFilter";
+import {
+  filterArtworks,
+  getCategoryFilterGroups,
+  getCategoryFilterOptions,
+  getPriceBounds,
+  getVisibleArtworks,
+  sortArtworks,
+} from "./categoryPageUtils";
 
 const DEFAULT_SORT_BY = "newest";
 const INITIAL_VISIBLE_COUNT = 8;
@@ -15,44 +23,13 @@ const createInitialSelectedFilters = () => ({
   style: [],
 });
 
-const getPriceBounds = (categoryArtworks) => {
-  if (categoryArtworks.length === 0) {
-    return {
-      min: 0,
-      max: 0,
-    };
-  }
-
-  const prices = categoryArtworks.map((artwork) => artwork.price);
-
-  return {
-    min: Math.min(...prices),
-    max: Math.max(...prices),
-  };
-};
-
 const CategoryPageContent = ({ categorySlug }) => {
   const category = categories.find((item) => item.slug === categorySlug);
   const categoryArtworks = category
     ? artworks.filter((artwork) => artwork.categoryId === category.id)
     : [];
   const priceBounds = getPriceBounds(categoryArtworks);
-  const mediumOptions = [...new Set(categoryArtworks.map((artwork) => artwork.medium))]
-    .sort((firstMedium, secondMedium) => firstMedium.localeCompare(secondMedium))
-    .map((medium) => ({
-      value: medium,
-      label: medium,
-    }));
-  const styleOptions = [
-    ...new Set(
-      categoryArtworks.flatMap((artwork) => artwork.styleTags || []),
-    ),
-  ]
-    .sort((firstTag, secondTag) => firstTag.localeCompare(secondTag))
-    .map((tag) => ({
-      value: tag,
-      label: tag,
-    }));
+  const filterOptions = getCategoryFilterOptions(categoryArtworks);
   const [sortBy, setSortBy] = useState(DEFAULT_SORT_BY);
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT);
   const [selectedFilters, setSelectedFilters] = useState(
@@ -64,54 +41,21 @@ const CategoryPageContent = ({ categorySlug }) => {
     return <h1>Category not found</h1>;
   }
 
-  const filteredCategoryArtworks = categoryArtworks.filter((artwork) => {
-    const matchesMedium =
-      selectedFilters.medium.length === 0 ||
-      selectedFilters.medium.includes(artwork.medium);
-    const matchesStyle =
-      selectedFilters.style.length === 0 ||
-      (artwork.styleTags || []).some((tag) =>
-        selectedFilters.style.includes(tag),
-      );
-    const matchesPrice = artwork.price <= selectedMaxPrice;
-
-    return matchesMedium && matchesStyle && matchesPrice;
-  });
-  const sortedCategoryArtworks = [...filteredCategoryArtworks].sort(
-    (firstArtwork, secondArtwork) => {
-      switch (sortBy) {
-        case "oldest":
-          return firstArtwork.year - secondArtwork.year;
-        case "price-low":
-          return firstArtwork.price - secondArtwork.price;
-        case "price-high":
-          return secondArtwork.price - firstArtwork.price;
-        case "title":
-          return firstArtwork.title.localeCompare(secondArtwork.title);
-        case DEFAULT_SORT_BY:
-        default:
-          return secondArtwork.year - firstArtwork.year;
-      }
-    },
+  const filteredCategoryArtworks = filterArtworks(
+    categoryArtworks,
+    selectedFilters,
+    selectedMaxPrice,
   );
-  const visibleArtworks = sortedCategoryArtworks.slice(0, visibleCount);
+  const sortedCategoryArtworks = sortArtworks(
+    filteredCategoryArtworks,
+    sortBy,
+  );
+  const visibleArtworks = getVisibleArtworks(
+    sortedCategoryArtworks,
+    visibleCount,
+  );
   const hasMoreArtworks = visibleCount < sortedCategoryArtworks.length;
-  const filterGroups = [
-    {
-      name: "medium",
-      label: "Mediums",
-      options: mediumOptions,
-    },
-    ...(styleOptions.length > 0
-      ? [
-          {
-            name: "style",
-            label: "Styles",
-            options: styleOptions,
-          },
-        ]
-      : []),
-  ];
+  const filterGroups = getCategoryFilterGroups(filterOptions);
 
   const handleSortChange = (evt) => {
     setSortBy(evt.target.value);
