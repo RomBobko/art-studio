@@ -49,6 +49,35 @@ const applyThemeForLayoutCheck = async (page, theme) => {
   }, theme);
 };
 
+const mockTutorials = [
+  {
+    id: 101,
+    slug: "mock-abstract-basics",
+    title: "Mock Abstract Basics",
+    description: "A mocked tutorial loaded through the async tutorial service.",
+    categoryId: 7,
+    level: "Beginner",
+    imageKey: "colorStorm",
+    authorId: 6,
+    duration: "20 min",
+    lessonsCount: 3,
+    isFeatured: false,
+  },
+  {
+    id: 102,
+    slug: "mock-featured-lesson",
+    title: "Mock Featured Lesson",
+    description: "A mocked featured tutorial loaded from JSON.",
+    categoryId: 2,
+    level: "Intermediate",
+    imageKey: "chromeDream",
+    authorId: 3,
+    duration: "35 min",
+    lessonsCount: 5,
+    isFeatured: true,
+  },
+];
+
 for (const { path, heading } of pageChecks) {
   test(`${path} opens without crashing`, async ({ page }) => {
     await page.goto(path);
@@ -515,6 +544,86 @@ test("tutorials start with four cards and View more reveals four more", async ({
   await expect(tutorialsRegion.getByRole("heading", { level: 3 })).toHaveCount(
     8,
   );
+});
+
+test("learn page renders tutorials after async data loads", async ({ page }) => {
+  await page.route("**/data/tutorials.json", async (route) => {
+    await route.fulfill({
+      contentType: "application/json",
+      body: JSON.stringify(mockTutorials),
+    });
+  });
+
+  await page.goto("/learn");
+
+  const tutorialsRegion = page.getByRole("region", {
+    name: "Tutorials",
+    exact: true,
+  });
+  const featuredRegion = page.getByRole("region", {
+    name: "Featured Tutorials",
+  });
+
+  await expect(tutorialsRegion.getByText("Mock Abstract Basics")).toBeVisible();
+  await expect(featuredRegion.getByText("Mock Featured Lesson")).toBeVisible();
+});
+
+test("learn page shows loading state while tutorial data is pending", async ({
+  page,
+}) => {
+  let finishRequest;
+  const requestCanFinish = new Promise((resolve) => {
+    finishRequest = resolve;
+  });
+
+  await page.route("**/data/tutorials.json", async (route) => {
+    await requestCanFinish;
+    await route.fulfill({
+      contentType: "application/json",
+      body: JSON.stringify(mockTutorials),
+    });
+  });
+
+  await page.goto("/learn");
+
+  await expect(page.getByText("Loading tutorials...")).toBeVisible();
+
+  finishRequest();
+
+  await expect(page.getByText("Mock Abstract Basics")).toBeVisible();
+});
+
+test("learn page shows an error state when tutorial loading fails", async ({
+  page,
+}) => {
+  await page.route("**/data/tutorials.json", async (route) => {
+    await route.fulfill({
+      status: 500,
+      contentType: "application/json",
+      body: JSON.stringify({ message: "Server error" }),
+    });
+  });
+
+  await page.goto("/learn");
+
+  await expect(page.getByRole("alert")).toHaveText("Unable to load tutorials.");
+});
+
+test("learn page shows the tutorial empty state for an empty response", async ({
+  page,
+}) => {
+  await page.route("**/data/tutorials.json", async (route) => {
+    await route.fulfill({
+      contentType: "application/json",
+      body: JSON.stringify([]),
+    });
+  });
+
+  await page.goto("/learn");
+
+  await expect(
+    page.getByText("No standard tutorials match this category yet."),
+  ).toBeVisible();
 });
 
 test("tutorial category filtering keeps matching cards visible", async ({
