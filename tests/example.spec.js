@@ -589,7 +589,7 @@ test("login and sign-up forms show local success messages", async ({ page }) => 
 
   await page.goto("/signup");
 
-  await page.getByLabel("Username").fill("galleryfriend");
+  await page.getByLabel("Name").fill("Gallery Friend");
   await page.getByLabel("Email Address").fill("friend@example.com");
   await page.getByLabel("Password", { exact: true }).fill("creative123");
   await page.getByLabel("Confirm Password").fill("creative123");
@@ -613,7 +613,7 @@ test("auth demo forms show validation messages", async ({ page }) => {
 
   await page.goto("/signup");
 
-  await page.getByLabel("Username").fill("galleryfriend");
+  await page.getByLabel("Name").fill("Gallery Friend");
   await page.getByLabel("Email Address").fill("friend@example.com");
   await page.getByLabel("Password", { exact: true }).fill("creative123");
   await page.getByLabel("Confirm Password").fill("different123");

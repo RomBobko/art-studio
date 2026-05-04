@@ -1,94 +1,69 @@
 import { useState } from "react";
+import { useFormik } from "formik";
 import { Link } from "react-router-dom";
+import * as Yup from "yup";
 import AuthLayout from "../../layouts/AuthLayout/AuthLayout";
 import logo from "../../assets/logo.svg";
 import styles from "./SignUpPage.module.css";
 
 const INITIAL_SIGN_UP_VALUES = {
-  username: "",
+  name: "",
   email: "",
   password: "",
   confirmPassword: "",
 };
 
-const validateSignUpValues = (values) => {
-  const nextErrors = {};
-  const username = values.username.trim();
-  const email = values.email.trim();
-  const password = values.password.trim();
-  const confirmPassword = values.confirmPassword.trim();
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  if (!username) {
-    nextErrors.username = "Enter your username.";
-  }
-
-  if (!email) {
-    nextErrors.email = "Enter your email address.";
-  } else if (!emailPattern.test(email)) {
-    nextErrors.email = "Enter a valid email address.";
-  }
-
-  if (!password) {
-    nextErrors.password = "Enter your password.";
-  }
-
-  if (!confirmPassword) {
-    nextErrors.confirmPassword = "Confirm your password.";
-  } else if (password && password !== confirmPassword) {
-    nextErrors.confirmPassword = "Passwords do not match.";
-  }
-
-  return nextErrors;
-};
+const signUpValidationSchema = Yup.object({
+  name: Yup.string()
+    .trim()
+    .min(2, "Name must be at least 2 characters.")
+    .required("Enter your name."),
+  email: Yup.string()
+    .email("Enter a valid email address.")
+    .required("Enter your email address."),
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters.")
+    .required("Enter your password."),
+  confirmPassword: Yup.string()
+    .required("Confirm your password.")
+    .oneOf([Yup.ref("password")], "Passwords do not match."),
+});
 
 const SignUpPage = () => {
-  const [signUpValues, setSignUpValues] = useState(INITIAL_SIGN_UP_VALUES);
-  const [signUpErrors, setSignUpErrors] = useState({});
   const [signUpSuccessMessage, setSignUpSuccessMessage] = useState("");
 
-  const isSubmitDisabled =
-    !signUpValues.username.trim() ||
-    !signUpValues.email.trim() ||
-    !signUpValues.password.trim() ||
-    !signUpValues.confirmPassword.trim();
+  const formik = useFormik({
+    initialValues: INITIAL_SIGN_UP_VALUES,
+    validationSchema: signUpValidationSchema,
+    onSubmit: (values, formikHelpers) => {
+      setSignUpSuccessMessage(
+        "Account created locally. No real sign-up was performed.",
+      );
+      formikHelpers.resetForm();
+      formikHelpers.setSubmitting(false);
+    },
+  });
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  const nameError = formik.touched.name && formik.errors.name;
+  const emailError = formik.touched.email && formik.errors.email;
+  const passwordError = formik.touched.password && formik.errors.password;
+  const confirmPasswordError =
+    formik.touched.confirmPassword && formik.errors.confirmPassword;
 
-    setSignUpValues((prevSignUpValues) => ({
-      ...prevSignUpValues,
-      [name]: value,
-    }));
-
-    if (signUpErrors[name]) {
-      setSignUpErrors((prevSignUpErrors) => ({
-        ...prevSignUpErrors,
-        [name]: "",
-      }));
-    }
-
+  const handleInputChange = (event) => {
     if (signUpSuccessMessage) {
       setSignUpSuccessMessage("");
     }
+
+    formik.handleChange(event);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const nextErrors = validateSignUpValues(signUpValues);
-
-    if (Object.keys(nextErrors).length > 0) {
-      setSignUpErrors(nextErrors);
+  const handleFormSubmit = (event) => {
+    if (signUpSuccessMessage) {
       setSignUpSuccessMessage("");
-      return;
     }
 
-    setSignUpErrors({});
-    setSignUpSuccessMessage(
-      "Account created locally. No real sign-up was performed.",
-    );
-    setSignUpValues(INITIAL_SIGN_UP_VALUES);
+    formik.handleSubmit(event);
   };
 
   return (
@@ -106,30 +81,29 @@ const SignUpPage = () => {
             <h2 className={styles.cardTitle}>Welcome to ArtStudio</h2>
           </div>
 
-          <form className={styles.form} onSubmit={handleSubmit} noValidate>
+          <form className={styles.form} onSubmit={handleFormSubmit} noValidate>
             <div className={styles.field}>
-              <label className={styles.label} htmlFor="signup-username">
-                Username
+              <label className={styles.label} htmlFor="signup-name">
+                Name
               </label>
               <input
                 className={`${styles.input} ${
-                  signUpErrors.username ? styles.inputError : ""
+                  nameError ? styles.inputError : ""
                 }`}
-                id="signup-username"
-                name="username"
+                id="signup-name"
+                name="name"
                 type="text"
-                placeholder="Username"
-                value={signUpValues.username}
-                onChange={handleChange}
-                autoComplete="username"
-                aria-invalid={Boolean(signUpErrors.username)}
-                aria-describedby={
-                  signUpErrors.username ? "signup-username-error" : undefined
-                }
+                placeholder="Name"
+                value={formik.values.name}
+                onChange={handleInputChange}
+                onBlur={formik.handleBlur}
+                autoComplete="name"
+                aria-invalid={Boolean(nameError)}
+                aria-describedby={nameError ? "signup-name-error" : undefined}
               />
-              {signUpErrors.username && (
-                <p className={styles.errorText} id="signup-username-error" role="alert">
-                  {signUpErrors.username}
+              {nameError && (
+                <p className={styles.errorText} id="signup-name-error" role="alert">
+                  {nameError}
                 </p>
               )}
             </div>
@@ -140,23 +114,22 @@ const SignUpPage = () => {
               </label>
               <input
                 className={`${styles.input} ${
-                  signUpErrors.email ? styles.inputError : ""
+                  emailError ? styles.inputError : ""
                 }`}
                 id="signup-email"
                 name="email"
                 type="email"
                 placeholder="Email"
-                value={signUpValues.email}
-                onChange={handleChange}
+                value={formik.values.email}
+                onChange={handleInputChange}
+                onBlur={formik.handleBlur}
                 autoComplete="email"
-                aria-invalid={Boolean(signUpErrors.email)}
-                aria-describedby={
-                  signUpErrors.email ? "signup-email-error" : undefined
-                }
+                aria-invalid={Boolean(emailError)}
+                aria-describedby={emailError ? "signup-email-error" : undefined}
               />
-              {signUpErrors.email && (
+              {emailError && (
                 <p className={styles.errorText} id="signup-email-error" role="alert">
-                  {signUpErrors.email}
+                  {emailError}
                 </p>
               )}
             </div>
@@ -167,23 +140,24 @@ const SignUpPage = () => {
               </label>
               <input
                 className={`${styles.input} ${
-                  signUpErrors.password ? styles.inputError : ""
+                  passwordError ? styles.inputError : ""
                 }`}
                 id="signup-password"
                 name="password"
                 type="password"
                 placeholder="Password"
-                value={signUpValues.password}
-                onChange={handleChange}
+                value={formik.values.password}
+                onChange={handleInputChange}
+                onBlur={formik.handleBlur}
                 autoComplete="new-password"
-                aria-invalid={Boolean(signUpErrors.password)}
+                aria-invalid={Boolean(passwordError)}
                 aria-describedby={
-                  signUpErrors.password ? "signup-password-error" : undefined
+                  passwordError ? "signup-password-error" : undefined
                 }
               />
-              {signUpErrors.password && (
+              {passwordError && (
                 <p className={styles.errorText} id="signup-password-error" role="alert">
-                  {signUpErrors.password}
+                  {passwordError}
                 </p>
               )}
             </div>
@@ -194,29 +168,28 @@ const SignUpPage = () => {
               </label>
               <input
                 className={`${styles.input} ${
-                  signUpErrors.confirmPassword ? styles.inputError : ""
+                  confirmPasswordError ? styles.inputError : ""
                 }`}
                 id="signup-confirm-password"
                 name="confirmPassword"
                 type="password"
                 placeholder="Confirm password"
-                value={signUpValues.confirmPassword}
-                onChange={handleChange}
+                value={formik.values.confirmPassword}
+                onChange={handleInputChange}
+                onBlur={formik.handleBlur}
                 autoComplete="new-password"
-                aria-invalid={Boolean(signUpErrors.confirmPassword)}
+                aria-invalid={Boolean(confirmPasswordError)}
                 aria-describedby={
-                  signUpErrors.confirmPassword
-                    ? "signup-confirm-password-error"
-                    : undefined
+                  confirmPasswordError ? "signup-confirm-password-error" : undefined
                 }
               />
-              {signUpErrors.confirmPassword && (
+              {confirmPasswordError && (
                 <p
                   className={styles.errorText}
                   id="signup-confirm-password-error"
                   role="alert"
                 >
-                  {signUpErrors.confirmPassword}
+                  {confirmPasswordError}
                 </p>
               )}
             </div>
@@ -224,7 +197,7 @@ const SignUpPage = () => {
             <button
               className={styles.primaryButton}
               type="submit"
-              disabled={isSubmitDisabled}
+              disabled={formik.isSubmitting}
             >
               Sign Up
             </button>

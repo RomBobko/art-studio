@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { useFormik } from "formik";
 import { Link } from "react-router-dom";
+import * as Yup from "yup";
 import AuthLayout from "../../layouts/AuthLayout/AuthLayout";
 import logo from "../../assets/logo.svg";
 import styles from "./LoginPage.module.css";
@@ -9,69 +11,45 @@ const INITIAL_LOGIN_VALUES = {
   password: "",
 };
 
-const validateLoginValues = (values) => {
-  const nextErrors = {};
-  const email = values.email.trim();
-  const password = values.password.trim();
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  if (!email) {
-    nextErrors.email = "Enter your email address.";
-  } else if (!emailPattern.test(email)) {
-    nextErrors.email = "Enter a valid email address.";
-  }
-
-  if (!password) {
-    nextErrors.password = "Enter your password.";
-  }
-
-  return nextErrors;
-};
+const loginValidationSchema = Yup.object({
+  email: Yup.string()
+    .email("Enter a valid email address.")
+    .required("Enter your email address."),
+  password: Yup.string().required("Enter your password."),
+});
 
 const LoginPage = () => {
-  const [loginValues, setLoginValues] = useState(INITIAL_LOGIN_VALUES);
-  const [loginErrors, setLoginErrors] = useState({});
   const [loginSuccessMessage, setLoginSuccessMessage] = useState("");
 
-  const isSubmitDisabled =
-    !loginValues.email.trim() || !loginValues.password.trim();
+  const formik = useFormik({
+    initialValues: INITIAL_LOGIN_VALUES,
+    validationSchema: loginValidationSchema,
+    onSubmit: (values, formikHelpers) => {
+      setLoginSuccessMessage(
+        "Logged in locally. No real authentication was performed.",
+      );
+      formikHelpers.resetForm();
+      formikHelpers.setSubmitting(false);
+    },
+  });
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  const emailError = formik.touched.email && formik.errors.email;
+  const passwordError = formik.touched.password && formik.errors.password;
 
-    setLoginValues((prevLoginValues) => ({
-      ...prevLoginValues,
-      [name]: value,
-    }));
-
-    if (loginErrors[name]) {
-      setLoginErrors((prevLoginErrors) => ({
-        ...prevLoginErrors,
-        [name]: "",
-      }));
-    }
-
+  const handleInputChange = (event) => {
     if (loginSuccessMessage) {
       setLoginSuccessMessage("");
     }
+
+    formik.handleChange(event);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const nextErrors = validateLoginValues(loginValues);
-
-    if (Object.keys(nextErrors).length > 0) {
-      setLoginErrors(nextErrors);
+  const handleFormSubmit = (event) => {
+    if (loginSuccessMessage) {
       setLoginSuccessMessage("");
-      return;
     }
 
-    setLoginErrors({});
-    setLoginSuccessMessage(
-      "Logged in locally. No real authentication was performed.",
-    );
-    setLoginValues(INITIAL_LOGIN_VALUES);
+    formik.handleSubmit(event);
   };
 
   return (
@@ -93,28 +71,29 @@ const LoginPage = () => {
             <h2 className={styles.cardTitle}>Welcome to ArtStudio</h2>
           </div>
 
-          <form className={styles.form} onSubmit={handleSubmit} noValidate>
+          <form className={styles.form} onSubmit={handleFormSubmit} noValidate>
             <div className={styles.field}>
               <label className={styles.label} htmlFor="login-email">
                 Email Address
               </label>
               <input
                 className={`${styles.input} ${
-                  loginErrors.email ? styles.inputError : ""
+                  emailError ? styles.inputError : ""
                 }`}
                 id="login-email"
                 name="email"
                 type="email"
                 placeholder="Email"
-                value={loginValues.email}
-                onChange={handleChange}
+                value={formik.values.email}
+                onChange={handleInputChange}
+                onBlur={formik.handleBlur}
                 autoComplete="email"
-                aria-invalid={Boolean(loginErrors.email)}
-                aria-describedby={loginErrors.email ? "login-email-error" : undefined}
+                aria-invalid={Boolean(emailError)}
+                aria-describedby={emailError ? "login-email-error" : undefined}
               />
-              {loginErrors.email && (
+              {emailError && (
                 <p className={styles.errorText} id="login-email-error" role="alert">
-                  {loginErrors.email}
+                  {emailError}
                 </p>
               )}
             </div>
@@ -125,27 +104,28 @@ const LoginPage = () => {
               </label>
               <input
                 className={`${styles.input} ${
-                  loginErrors.password ? styles.inputError : ""
+                  passwordError ? styles.inputError : ""
                 }`}
                 id="login-password"
                 name="password"
                 type="password"
                 placeholder="Password"
-                value={loginValues.password}
-                onChange={handleChange}
+                value={formik.values.password}
+                onChange={handleInputChange}
+                onBlur={formik.handleBlur}
                 autoComplete="current-password"
-                aria-invalid={Boolean(loginErrors.password)}
+                aria-invalid={Boolean(passwordError)}
                 aria-describedby={
-                  loginErrors.password ? "login-password-error" : undefined
+                  passwordError ? "login-password-error" : undefined
                 }
               />
-              {loginErrors.password && (
+              {passwordError && (
                 <p
                   className={styles.errorText}
                   id="login-password-error"
                   role="alert"
                 >
-                  {loginErrors.password}
+                  {passwordError}
                 </p>
               )}
             </div>
@@ -161,7 +141,7 @@ const LoginPage = () => {
               <button
                 className={styles.primaryButton}
                 type="submit"
-                disabled={isSubmitDisabled}
+                disabled={formik.isSubmitting}
               >
                 Login
               </button>
