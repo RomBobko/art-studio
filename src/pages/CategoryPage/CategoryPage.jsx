@@ -112,7 +112,10 @@ const CategoryPageContent = ({ categorySlug }) => {
         </div>
       </section>
 
-      <section className={styles.catalog} aria-labelledby="artworks-heading">
+      <section
+        className={styles.catalog}
+        aria-label={`${category.name} artworks`}
+      >
         <div className="container">
           <div className={styles.catalogLayout}>
             <CategoryFilter

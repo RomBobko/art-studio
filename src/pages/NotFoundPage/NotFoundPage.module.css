@@ -1,0 +1,114 @@
+.section {
+  padding: 96px 0 120px;
+  background: var(--color-bg);
+}
+
+.card {
+  display: grid;
+  justify-items: start;
+  gap: 18px;
+  padding: clamp(28px, 5vw, 48px);
+  border: 1px solid rgba(198, 164, 110, 0.22);
+  border-radius: 28px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.kicker {
+  color: var(--color-accent-strong);
+  font-size: var(--fs-200);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-140);
+}
+
+.title {
+  color: var(--color-text-strong);
+  font-size: clamp(38px, 6vw, 58px);
+  font-weight: var(--fw-bold);
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+
+.text {
+  max-width: 48ch;
+  color: var(--color-text-muted);
+  font-size: var(--fs-300);
+  line-height: var(--lh-160);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.primaryLink,
+.secondaryLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: var(--radius-lg);
+  font-size: var(--fs-200);
+  font-weight: var(--fw-semibold);
+  line-height: 1.2;
+  text-decoration: none;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.primaryLink {
+  border: 1px solid var(--color-accent-strong);
+  background: linear-gradient(
+    135deg,
+    var(--color-accent),
+    var(--color-accent-strong)
+  );
+  color: var(--color-white);
+}
+
+.secondaryLink {
+  border: 1px solid var(--color-button-border);
+  background-color: var(--secondary-action-bg);
+  color: var(--color-accent-strong);
+}
+
+.primaryLink:hover,
+.primaryLink:focus-visible {
+  background-color: var(--color-accent-hover);
+}
+
+.secondaryLink:hover,
+.secondaryLink:focus-visible {
+  background-color: var(--color-accent-ghost);
+  color: var(--color-text-strong);
+}
+
+.primaryLink:focus-visible,
+.secondaryLink:focus-visible {
+  outline: 2px solid rgba(154, 122, 80, 0.28);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 64px 0 88px;
+  }
+
+  .card {
+    border-radius: 22px;
+  }
+
+  .actions {
+    width: 100%;
+  }
+
+  .primaryLink,
+  .secondaryLink {
+    width: 100%;
+  }
+}

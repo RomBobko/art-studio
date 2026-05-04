@@ -15,6 +15,7 @@ import ArtworkPage from "./pages/ArtworkPage/ArtworkPage";
 import ArtistPage from "./pages/ArtistPage/ArtistPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import useTheme from "./hooks/useTheme";
 
 const App = () => {
@@ -45,6 +46,7 @@ const App = () => {
           <Route path="challenges" element={<ChallengesPage />} />
           <Route path="checkout" element={<CheckoutPage />} />
           <Route path="dashboard" element={<DashboardPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
 

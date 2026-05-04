@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import imagePlaceholder from "../../assets/placeholders/imagePlaceholder.webp";
 import styles from "./ChallengesPage.module.css";
 import CurrentChallengeSection from "../../components/sections/challenges/CurrentChallengeSection/CurrentChallengeSection";
@@ -16,20 +16,20 @@ const ChallengesPage = () => {
     (submission) => submission.challengeId === currentChallenge.id,
   );
 
-  const resetFormState = () => {
+  const resetFormState = useCallback(() => {
     setImagePreview("");
-  };
+  }, []);
 
-  const handleOpenForm = () => {
+  const handleOpenForm = useCallback(() => {
     setIsFormOpen(true);
-  };
+  }, []);
 
-  const handleCloseForm = () => {
+  const handleCloseForm = useCallback(() => {
     setIsFormOpen(false);
     resetFormState();
-  };
+  }, [resetFormState]);
 
-  const handleFormSubmit = (formValues) => {
+  const handleFormSubmit = useCallback((formValues) => {
     const trimmedArtworkTitle = formValues.artworkTitle.trim();
     const trimmedArtistName = formValues.artistName.trim();
     const trimmedMedium = formValues.medium.trim();
@@ -57,7 +57,7 @@ const ChallengesPage = () => {
 
     resetFormState();
     setIsFormOpen(false);
-  };
+  }, [imagePreview, resetFormState]);
 
   return (
     <div className={styles.page}>
