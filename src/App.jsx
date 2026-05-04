@@ -1,6 +1,7 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
 import MainLayout from "./layouts/MainLayout";
 
 import HomePage from "./pages/HomePage";
@@ -18,6 +19,13 @@ import useTheme from "./hooks/useTheme";
 
 const App = () => {
   const { theme, toggleTheme } = useTheme();
+  const location = useLocation();
+  const toastClassName = [
+    "appToastContainer",
+    location.pathname.startsWith("/checkout") ? "appToastContainerCheckout" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <>
@@ -40,7 +48,11 @@ const App = () => {
         </Route>
       </Routes>
 
-      <ToastContainer position="bottom-right" autoClose={4000} />
+      <ToastContainer
+        className={toastClassName}
+        position="bottom-right"
+        autoClose={4000}
+      />
     </>
   );
 };

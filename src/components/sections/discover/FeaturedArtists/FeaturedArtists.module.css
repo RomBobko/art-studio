@@ -58,19 +58,22 @@
   min-width: 0;
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1700px) {
+  .slider {
+    gap: 28px;
+  }
+
+  .icon {
+    width: 58px;
+    height: 58px;
+  }
+
   .list {
     gap: 24px;
   }
 
   .item {
-    flex: 0 0 calc((100% - 24px) / 2);
-  }
-}
-
-@media (max-width: 900px) {
-  .item {
-    flex: 0 0 100%;
+    flex: 0 0 calc((100% - 48px) / 3);
   }
 }
 
@@ -81,5 +84,15 @@
 
   .arrowButton {
     display: none;
+  }
+
+  .item {
+    flex: 0 0 calc((100% - 24px) / 2);
+  }
+}
+
+@media (max-width: 900px) {
+  .item {
+    flex: 0 0 100%;
   }
 }

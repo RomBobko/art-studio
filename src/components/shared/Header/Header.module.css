@@ -157,4 +157,8 @@
   .actions {
     gap: 4px;
   }
+
+  .mobileNavPanelOpen {
+    padding: 4px 0 10px;
+  }
 }

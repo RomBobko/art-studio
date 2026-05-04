@@ -35,6 +35,7 @@ const CartDrawer = ({ onClose }) => {
     const previousFocusedElement = document.activeElement;
 
     document.body.style.overflow = "hidden";
+    document.body.classList.add("cart-drawer-open");
     closeButtonRef.current?.focus();
 
     const handleKeyDown = (event) => {
@@ -71,6 +72,7 @@ const CartDrawer = ({ onClose }) => {
 
     return () => {
       document.body.style.overflow = previousBodyOverflow;
+      document.body.classList.remove("cart-drawer-open");
       window.removeEventListener("keydown", handleKeyDown);
 
       if (previousFocusedElement instanceof HTMLElement) {

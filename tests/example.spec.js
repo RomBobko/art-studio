@@ -14,6 +14,40 @@ const pageChecks = [
   { path: "/artists/elena-novak", heading: "Elena Novak" },
 ];
 
+const getElementBox = async (locator) => {
+  const element = locator.first();
+
+  await expect(element).toBeVisible();
+
+  return element.evaluate((node) => {
+    const rect = node.getBoundingClientRect();
+
+    return {
+      top: Math.round(rect.top),
+      right: Math.round(rect.right),
+      bottom: Math.round(rect.bottom),
+      left: Math.round(rect.left),
+      width: Math.round(rect.width),
+      height: Math.round(rect.height),
+    };
+  });
+};
+
+const boxesOverlap = (firstBox, secondBox) =>
+  !(
+    firstBox.right <= secondBox.left ||
+    firstBox.left >= secondBox.right ||
+    firstBox.bottom <= secondBox.top ||
+    firstBox.top >= secondBox.bottom
+  );
+
+const applyThemeForLayoutCheck = async (page, theme) => {
+  await page.evaluate((selectedTheme) => {
+    localStorage.setItem("theme", selectedTheme);
+    document.documentElement.dataset.theme = selectedTheme;
+  }, theme);
+};
+
 for (const { path, heading } of pageChecks) {
   test(`${path} opens without crashing`, async ({ page }) => {
     await page.goto(path);
@@ -236,18 +270,14 @@ test("featured artists carousel keeps visible card content inside the carousel",
 }, testInfo) => {
   test.skip(testInfo.project.name !== "chromium", "Run once with custom widths");
 
-  const widths = [1280, 1024, 768, 430, 390, 360];
+  const widths = [1440, 1280, 1024, 768, 430, 390, 360];
   const themes = ["light", "dark"];
 
   for (const theme of themes) {
     for (const width of widths) {
       await page.setViewportSize({ width, height: 900 });
       await page.goto("/discover");
-      await page.evaluate(
-        (selectedTheme) => localStorage.setItem("theme", selectedTheme),
-        theme,
-      );
-      await page.reload();
+      await applyThemeForLayoutCheck(page, theme);
 
       const featuredArtists = page.locator("section").filter({
         has: page.getByRole("heading", { name: "Featured Artists" }),
@@ -255,12 +285,16 @@ test("featured artists carousel keeps visible card content inside the carousel",
 
       await featuredArtists.scrollIntoViewIfNeeded();
 
-      const clippedItems = await featuredArtists.evaluate((section) => {
+      const carouselReport = await featuredArtists.evaluate((section) => {
         const list = section.querySelector("ul");
         const viewport = list?.parentElement;
 
         if (!viewport) {
-          return ["Featured artists viewport was not found."];
+          return {
+            visibleCardCount: 0,
+            clippedItems: ["Featured artists viewport was not found."],
+            buttonTopDifference: 0,
+          };
         }
 
         const viewportRect = viewport.getBoundingClientRect();
@@ -275,7 +309,7 @@ test("featured artists carousel keeps visible card content inside the carousel",
           },
         );
 
-        return visibleCards.flatMap((card) => {
+        const clippedItems = visibleCards.flatMap((card) => {
           const cardRect = card.getBoundingClientRect();
           const artistName = card.querySelector("h3");
           const profileLink = card.querySelector("a");
@@ -298,9 +332,27 @@ test("featured artists carousel keeps visible card content inside the carousel",
             })
             .map(([label]) => `${label} is clipped`);
         });
+
+        const buttonTopValues = visibleCards.map((card) =>
+          Math.round(card.querySelector("a")?.getBoundingClientRect().top || 0),
+        );
+        const buttonTopDifference =
+          buttonTopValues.length > 1
+            ? Math.max(...buttonTopValues) - Math.min(...buttonTopValues)
+            : 0;
+
+        return {
+          visibleCardCount: visibleCards.length,
+          clippedItems,
+          buttonTopDifference,
+        };
       });
 
-      expect(clippedItems).toEqual([]);
+      const expectedVisibleCardCount = width >= 1280 ? 3 : width >= 901 ? 2 : 1;
+
+      expect(carouselReport.visibleCardCount).toBe(expectedVisibleCardCount);
+      expect(carouselReport.clippedItems).toEqual([]);
+      expect(carouselReport.buttonTopDifference).toBeLessThanOrEqual(2);
     }
   }
 });
@@ -490,6 +542,88 @@ test("challenge submission modal validates and adds a local submission", async (
 
   await expect(dialog).toBeHidden();
   await expect(page.getByText("Playwright Spring Study")).toBeVisible();
+});
+
+test("cart toast stays clear of the drawer checkout button", async ({
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "Run once with custom widths");
+
+  const widths = [1440, 1280, 1024, 768, 430, 390, 360];
+  const themes = ["light", "dark"];
+
+  for (const theme of themes) {
+    for (const width of widths) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("/artworks/abstract-cascade");
+      await applyThemeForLayoutCheck(page, theme);
+
+      await page.getByRole("button", { name: "Add to cart" }).click();
+      await page.getByRole("button", { name: "Cart (1 item)" }).click();
+
+      const cartDrawer = page.getByRole("dialog", { name: "Shopping Cart" });
+      const toast = page.getByRole("alert").filter({
+        hasText: "Abstract Cascade added to cart.",
+      });
+
+      await expect(cartDrawer).toBeVisible();
+
+      const toastBox = await getElementBox(toast);
+      const checkoutBox = await getElementBox(
+        cartDrawer.getByRole("button", { name: "Checkout" }),
+      );
+
+      expect(boxesOverlap(toastBox, checkoutBox)).toBe(false);
+    }
+  }
+});
+
+test("mobile checkout toast stays clear of shipping fields", async ({
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "Run once with custom widths");
+
+  const widths = [768, 430, 390, 360];
+  const themes = ["light", "dark"];
+  const checkoutFieldLabels = [
+    "Full name",
+    "Address",
+    "City",
+    "State",
+    "ZIP code",
+  ];
+
+  for (const theme of themes) {
+    for (const width of widths) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("/artworks/abstract-cascade");
+      await applyThemeForLayoutCheck(page, theme);
+
+      await page.getByRole("button", { name: "Add to cart" }).click();
+      await page.getByRole("button", { name: "Cart (1 item)" }).click();
+      await page
+        .getByRole("dialog", { name: "Shopping Cart" })
+        .getByRole("button", { name: "Checkout" })
+        .click();
+
+      await expect(page).toHaveURL(/\/checkout$/);
+
+      const toastBox = await getElementBox(
+        page.getByRole("alert").filter({
+          hasText: "Abstract Cascade added to cart.",
+        }),
+      );
+
+      for (const fieldLabel of checkoutFieldLabels) {
+        const fieldBox = await getElementBox(page.getByLabel(fieldLabel));
+        const fieldIsInViewport = fieldBox.bottom > 0 && fieldBox.top < 900;
+
+        if (fieldIsInViewport) {
+          expect(boxesOverlap(toastBox, fieldBox)).toBe(false);
+        }
+      }
+    }
+  }
 });
 
 test("cart drawer and checkout flow work locally", async ({ page }) => {
