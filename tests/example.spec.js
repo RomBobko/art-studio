@@ -733,7 +733,9 @@ test("mobile checkout toast stays clear of shipping fields", async ({
       );
 
       for (const fieldLabel of checkoutFieldLabels) {
-        const fieldBox = await getElementBox(page.getByLabel(fieldLabel));
+        const fieldBox = await getElementBox(
+          page.getByLabel(fieldLabel, { exact: true }),
+        );
         const fieldIsInViewport = fieldBox.bottom > 0 && fieldBox.top < 900;
 
         if (fieldIsInViewport) {
@@ -761,7 +763,8 @@ test("cart drawer and checkout flow work locally", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "Checkout" })).toBeVisible();
 
   await page.getByLabel("Full name").fill("Test Collector");
-  await page.getByLabel("Address").fill("123 Gallery Lane");
+  await page.getByLabel("Email address").fill("collector@example.com");
+  await page.getByLabel("Address", { exact: true }).fill("123 Gallery Lane");
   await page.getByLabel("City").fill("Austin");
   await page.getByLabel("State").selectOption("Texas");
   await page.getByLabel("ZIP code").fill("73301");

@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import styles from "./CheckoutPage.module.css";
 import { useCart } from "../../context/CartContext";
 
@@ -12,6 +14,7 @@ const formatPrice = (value) =>
 
 const INITIAL_CHECKOUT_VALUES = {
   fullName: "",
+  email: "",
   address: "",
   city: "",
   state: "",
@@ -24,6 +27,33 @@ const INITIAL_CHECKOUT_VALUES = {
 
 const INITIAL_COMPLETED_ORDER = null;
 
+const checkoutValidationSchema = Yup.object({
+  fullName: Yup.string().trim().required("Enter your full name."),
+  email: Yup.string()
+    .email("Enter a valid email address.")
+    .required("Enter your email address."),
+  address: Yup.string().trim().required("Enter your address."),
+  city: Yup.string().trim().required("Enter your city."),
+  state: Yup.string().trim().required("Choose a state."),
+  zipCode: Yup.string().trim().required("Enter your ZIP code."),
+  paymentMethod: Yup.string().required("Choose a payment method."),
+  cardNumber: Yup.string().when("paymentMethod", {
+    is: "Card",
+    then: (schema) => schema.trim().required("Enter your card number."),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  expiry: Yup.string().when("paymentMethod", {
+    is: "Card",
+    then: (schema) => schema.trim().required("Enter the expiry date."),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+  cvc: Yup.string().when("paymentMethod", {
+    is: "Card",
+    then: (schema) => schema.trim().required("Enter the CVC."),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+});
+
 const CheckoutPage = () => {
   const {
     cartItems,
@@ -32,8 +62,6 @@ const CheckoutPage = () => {
     total: cartTotal,
     clearCart,
   } = useCart();
-  const [checkoutValues, setCheckoutValues] = useState(INITIAL_CHECKOUT_VALUES);
-  const [checkoutErrors, setCheckoutErrors] = useState({});
   const [completedOrder, setCompletedOrder] = useState(INITIAL_COMPLETED_ORDER);
   const hasCartItems = cartItems.length > 0;
 
@@ -46,7 +74,42 @@ const CheckoutPage = () => {
   const total = cartTotal;
   const previewImage = cartItems[0]?.image;
   const previewAlt = `${cartItems[0]?.title || "Artwork"} selected for checkout`;
-  const isCardPayment = checkoutValues.paymentMethod === "Card";
+  const formik = useFormik({
+    initialValues: INITIAL_CHECKOUT_VALUES,
+    validationSchema: checkoutValidationSchema,
+    onSubmit: (values, formikHelpers) => {
+      if (!hasCartItems) {
+        return;
+      }
+
+      setCompletedOrder({
+        itemCount,
+        total,
+      });
+      formikHelpers.resetForm();
+      formikHelpers.setSubmitting(false);
+      clearCart();
+    },
+  });
+  const isCardPayment = formik.values.paymentMethod === "Card";
+
+  const getFieldError = (fieldName) =>
+    formik.touched[fieldName] && formik.errors[fieldName];
+
+  const handlePaymentMethodChange = (event) => {
+    const nextPaymentMethod = event.target.value;
+
+    formik.handleChange(event);
+
+    if (nextPaymentMethod !== "Card") {
+      formik.setFieldValue("cardNumber", "", false);
+      formik.setFieldValue("expiry", "", false);
+      formik.setFieldValue("cvc", "", false);
+      formik.setFieldTouched("cardNumber", false, false);
+      formik.setFieldTouched("expiry", false, false);
+      formik.setFieldTouched("cvc", false, false);
+    }
+  };
 
   if (completedOrder) {
     return (
@@ -139,94 +202,6 @@ const CheckoutPage = () => {
     );
   }
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    const nextErrors = {
-      ...checkoutErrors,
-      [name]: "",
-    };
-
-    if (name === "paymentMethod" && value !== "Card") {
-      nextErrors.cardNumber = "";
-      nextErrors.expiry = "";
-      nextErrors.cvc = "";
-    }
-
-    setCheckoutValues((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
-
-    setCheckoutErrors(nextErrors);
-  };
-
-  const validateCheckoutValues = (values) => {
-    const nextErrors = {};
-
-    if (!values.fullName.trim()) {
-      nextErrors.fullName = "Enter your full name.";
-    }
-
-    if (!values.address.trim()) {
-      nextErrors.address = "Enter your address.";
-    }
-
-    if (!values.city.trim()) {
-      nextErrors.city = "Enter your city.";
-    }
-
-    if (!values.state.trim()) {
-      nextErrors.state = "Choose a state.";
-    }
-
-    if (!values.zipCode.trim()) {
-      nextErrors.zipCode = "Enter your ZIP code.";
-    }
-
-    if (!values.paymentMethod.trim()) {
-      nextErrors.paymentMethod = "Choose a payment method.";
-    }
-
-    if (values.paymentMethod === "Card") {
-      if (!values.cardNumber.trim()) {
-        nextErrors.cardNumber = "Enter your card number.";
-      }
-
-      if (!values.expiry.trim()) {
-        nextErrors.expiry = "Enter the expiry date.";
-      }
-
-      if (!values.cvc.trim()) {
-        nextErrors.cvc = "Enter the CVC.";
-      }
-    }
-
-    return nextErrors;
-  };
-
-  const handleCheckoutSubmit = (event) => {
-    event.preventDefault();
-
-    if (!hasCartItems) {
-      return;
-    }
-
-    const nextErrors = validateCheckoutValues(checkoutValues);
-
-    if (Object.keys(nextErrors).length > 0) {
-      setCheckoutErrors(nextErrors);
-      return;
-    }
-
-    setCheckoutErrors({});
-    setCompletedOrder({
-      itemCount,
-      total,
-    });
-    setCheckoutValues(INITIAL_CHECKOUT_VALUES);
-    clearCart();
-  };
-
   return (
     <div className={styles.page}>
       <section
@@ -242,7 +217,7 @@ const CheckoutPage = () => {
 
           <form
             className={styles.checkoutForm}
-            onSubmit={handleCheckoutSubmit}
+            onSubmit={formik.handleSubmit}
             noValidate
           >
             <div className={styles.checkoutCard}>
@@ -263,10 +238,10 @@ const CheckoutPage = () => {
                   <div className={styles.formGrid}>
                     <div className={`${styles.field} ${styles.fieldFull}`}>
                       <input
-                        aria-invalid={Boolean(checkoutErrors.fullName)}
+                        aria-invalid={Boolean(getFieldError("fullName"))}
                         aria-label="Full name"
                         aria-describedby={
-                          checkoutErrors.fullName
+                          getFieldError("fullName")
                             ? "checkout-full-name-error"
                             : undefined
                         }
@@ -274,28 +249,59 @@ const CheckoutPage = () => {
                         className={styles.input}
                         id="checkout-full-name"
                         name="fullName"
-                        onChange={handleInputChange}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
                         placeholder="Full name"
                         type="text"
-                        value={checkoutValues.fullName}
+                        value={formik.values.fullName}
                       />
-                      {checkoutErrors.fullName && (
+                      {getFieldError("fullName") && (
                         <p
                           className={styles.errorMessage}
                           id="checkout-full-name-error"
                           role="alert"
                         >
-                          {checkoutErrors.fullName}
+                          {getFieldError("fullName")}
                         </p>
                       )}
                     </div>
 
                     <div className={`${styles.field} ${styles.fieldFull}`}>
                       <input
-                        aria-invalid={Boolean(checkoutErrors.address)}
+                        aria-invalid={Boolean(getFieldError("email"))}
+                        aria-label="Email address"
+                        aria-describedby={
+                          getFieldError("email")
+                            ? "checkout-email-error"
+                            : undefined
+                        }
+                        autoComplete="email"
+                        className={styles.input}
+                        id="checkout-email"
+                        name="email"
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        placeholder="Email address"
+                        type="email"
+                        value={formik.values.email}
+                      />
+                      {getFieldError("email") && (
+                        <p
+                          className={styles.errorMessage}
+                          id="checkout-email-error"
+                          role="alert"
+                        >
+                          {getFieldError("email")}
+                        </p>
+                      )}
+                    </div>
+
+                    <div className={`${styles.field} ${styles.fieldFull}`}>
+                      <input
+                        aria-invalid={Boolean(getFieldError("address"))}
                         aria-label="Address"
                         aria-describedby={
-                          checkoutErrors.address
+                          getFieldError("address")
                             ? "checkout-address-error"
                             : undefined
                         }
@@ -303,84 +309,89 @@ const CheckoutPage = () => {
                         className={styles.input}
                         id="checkout-address"
                         name="address"
-                        onChange={handleInputChange}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
                         placeholder="Address"
                         type="text"
-                        value={checkoutValues.address}
+                        value={formik.values.address}
                       />
-                      {checkoutErrors.address && (
+                      {getFieldError("address") && (
                         <p
                           className={styles.errorMessage}
                           id="checkout-address-error"
                           role="alert"
                         >
-                          {checkoutErrors.address}
+                          {getFieldError("address")}
                         </p>
                       )}
                     </div>
 
                     <div className={styles.field}>
                       <input
-                        aria-invalid={Boolean(checkoutErrors.city)}
+                        aria-invalid={Boolean(getFieldError("city"))}
                         aria-label="City"
                         aria-describedby={
-                          checkoutErrors.city ? "checkout-city-error" : undefined
+                          getFieldError("city") ? "checkout-city-error" : undefined
                         }
                         autoComplete="address-level2"
                         className={styles.input}
                         id="checkout-city"
                         name="city"
-                        onChange={handleInputChange}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
                         placeholder="City"
                         type="text"
-                        value={checkoutValues.city}
+                        value={formik.values.city}
                       />
-                      {checkoutErrors.city && (
+                      {getFieldError("city") && (
                         <p
                           className={styles.errorMessage}
                           id="checkout-city-error"
                           role="alert"
                         >
-                          {checkoutErrors.city}
+                          {getFieldError("city")}
                         </p>
                       )}
                     </div>
 
                     <div className={styles.field}>
                       <select
-                        aria-invalid={Boolean(checkoutErrors.state)}
+                        aria-invalid={Boolean(getFieldError("state"))}
                         aria-label="State"
                         aria-describedby={
-                          checkoutErrors.state ? "checkout-state-error" : undefined
+                          getFieldError("state")
+                            ? "checkout-state-error"
+                            : undefined
                         }
                         className={styles.select}
                         id="checkout-state"
                         name="state"
-                        onChange={handleInputChange}
-                        value={checkoutValues.state}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                        value={formik.values.state}
                       >
                         <option value="">State</option>
                         <option value="California">California</option>
                         <option value="New York">New York</option>
                         <option value="Texas">Texas</option>
                       </select>
-                      {checkoutErrors.state && (
+                      {getFieldError("state") && (
                         <p
                           className={styles.errorMessage}
                           id="checkout-state-error"
                           role="alert"
                         >
-                          {checkoutErrors.state}
+                          {getFieldError("state")}
                         </p>
                       )}
                     </div>
 
                     <div className={`${styles.field} ${styles.fieldFull}`}>
                       <input
-                        aria-invalid={Boolean(checkoutErrors.zipCode)}
+                        aria-invalid={Boolean(getFieldError("zipCode"))}
                         aria-label="ZIP code"
                         aria-describedby={
-                          checkoutErrors.zipCode
+                          getFieldError("zipCode")
                             ? "checkout-zip-error"
                             : undefined
                         }
@@ -389,18 +400,19 @@ const CheckoutPage = () => {
                         id="checkout-zip"
                         inputMode="numeric"
                         name="zipCode"
-                        onChange={handleInputChange}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
                         placeholder="ZIP code"
                         type="text"
-                        value={checkoutValues.zipCode}
+                        value={formik.values.zipCode}
                       />
-                      {checkoutErrors.zipCode && (
+                      {getFieldError("zipCode") && (
                         <p
                           className={styles.errorMessage}
                           id="checkout-zip-error"
                           role="alert"
                         >
-                          {checkoutErrors.zipCode}
+                          {getFieldError("zipCode")}
                         </p>
                       )}
                     </div>
@@ -416,7 +428,7 @@ const CheckoutPage = () => {
                   role="radiogroup"
                   aria-label="Payment method"
                   aria-describedby={
-                    checkoutErrors.paymentMethod
+                    getFieldError("paymentMethod")
                       ? "checkout-payment-method-error"
                       : undefined
                   }
@@ -424,9 +436,10 @@ const CheckoutPage = () => {
                   {["Card", "PayPal", "UPI"].map((method) => (
                     <label className={styles.option} key={method}>
                       <input
-                        checked={checkoutValues.paymentMethod === method}
+                        checked={formik.values.paymentMethod === method}
                         name="paymentMethod"
-                        onChange={handleInputChange}
+                        onBlur={formik.handleBlur}
+                        onChange={handlePaymentMethodChange}
                         type="radio"
                         value={method}
                       />
@@ -434,13 +447,13 @@ const CheckoutPage = () => {
                     </label>
                   ))}
                 </div>
-                {checkoutErrors.paymentMethod && (
+                {getFieldError("paymentMethod") && (
                   <p
                     className={styles.errorMessage}
                     id="checkout-payment-method-error"
                     role="alert"
                   >
-                    {checkoutErrors.paymentMethod}
+                    {getFieldError("paymentMethod")}
                   </p>
                 )}
 
@@ -448,10 +461,10 @@ const CheckoutPage = () => {
                   <div className={styles.formGrid}>
                     <div className={`${styles.field} ${styles.fieldFull}`}>
                       <input
-                        aria-invalid={Boolean(checkoutErrors.cardNumber)}
+                        aria-invalid={Boolean(getFieldError("cardNumber"))}
                         aria-label="Card number"
                         aria-describedby={
-                          checkoutErrors.cardNumber
+                          getFieldError("cardNumber")
                             ? "checkout-card-number-error"
                             : undefined
                         }
@@ -460,28 +473,29 @@ const CheckoutPage = () => {
                         id="checkout-card-number"
                         inputMode="numeric"
                         name="cardNumber"
-                        onChange={handleInputChange}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
                         placeholder="1234 1234 1234 1234"
                         type="text"
-                        value={checkoutValues.cardNumber}
+                        value={formik.values.cardNumber}
                       />
-                      {checkoutErrors.cardNumber && (
+                      {getFieldError("cardNumber") && (
                         <p
                           className={styles.errorMessage}
                           id="checkout-card-number-error"
                           role="alert"
                         >
-                          {checkoutErrors.cardNumber}
+                          {getFieldError("cardNumber")}
                         </p>
                       )}
                     </div>
 
                     <div className={styles.field}>
                       <input
-                        aria-invalid={Boolean(checkoutErrors.expiry)}
+                        aria-invalid={Boolean(getFieldError("expiry"))}
                         aria-label="Card expiry date"
                         aria-describedby={
-                          checkoutErrors.expiry
+                          getFieldError("expiry")
                             ? "checkout-expiry-error"
                             : undefined
                         }
@@ -489,53 +503,55 @@ const CheckoutPage = () => {
                         className={styles.input}
                         id="checkout-expiry"
                         name="expiry"
-                        onChange={handleInputChange}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
                         placeholder="MM / YY"
                         type="text"
-                        value={checkoutValues.expiry}
+                        value={formik.values.expiry}
                       />
-                      {checkoutErrors.expiry && (
+                      {getFieldError("expiry") && (
                         <p
                           className={styles.errorMessage}
                           id="checkout-expiry-error"
                           role="alert"
                         >
-                          {checkoutErrors.expiry}
+                          {getFieldError("expiry")}
                         </p>
                       )}
                     </div>
 
                     <div className={styles.field}>
                       <input
-                        aria-invalid={Boolean(checkoutErrors.cvc)}
+                        aria-invalid={Boolean(getFieldError("cvc"))}
                         aria-label="CVC"
                         aria-describedby={
-                          checkoutErrors.cvc ? "checkout-cvc-error" : undefined
+                          getFieldError("cvc") ? "checkout-cvc-error" : undefined
                         }
                         autoComplete="cc-csc"
                         className={styles.input}
                         id="checkout-cvc"
                         inputMode="numeric"
                         name="cvc"
-                        onChange={handleInputChange}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
                         placeholder="CVC"
                         type="text"
-                        value={checkoutValues.cvc}
+                        value={formik.values.cvc}
                       />
-                      {checkoutErrors.cvc && (
+                      {getFieldError("cvc") && (
                         <p
                           className={styles.errorMessage}
                           id="checkout-cvc-error"
                           role="alert"
                         >
-                          {checkoutErrors.cvc}
+                          {getFieldError("cvc")}
                         </p>
                       )}
                     </div>
                   </div>
                 ) : (
                   <p className={styles.helperText}>
-                    {checkoutValues.paymentMethod} stays in demo mode for now.
+                    {formik.values.paymentMethod} stays in demo mode for now.
                     No real payment will be processed.
                   </p>
                 )}
