@@ -174,6 +174,14 @@
   .card {
     min-height: auto;
   }
+
+  .forgotLink {
+    justify-self: center;
+  }
+
+  .successText {
+    text-align: center;
+  }
 }
 
 @media (max-width: 640px) {
@@ -187,7 +195,9 @@
   }
 
   .cardTitle {
+    margin-inline: auto;
     font-size: 32px;
+    text-align: center;
   }
 
   .primaryButton {

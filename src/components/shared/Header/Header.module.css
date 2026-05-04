@@ -38,7 +38,7 @@
   gap: 12px;
 }
 
-.menuButton {
+.iconBtn.menuButton {
   display: none;
 }
 
@@ -133,7 +133,7 @@
     display: none;
   }
 
-  .menuButton {
+  .iconBtn.menuButton {
     display: inline-flex;
   }
 
@@ -149,13 +149,12 @@
     position: fixed;
     inset: 0;
     z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-items: center;
     width: 100vw;
     height: 100dvh;
     max-width: 100vw;
-    padding: 104px var(--page-gutter) 40px;
+    padding: clamp(96px, 13vh, 122px) var(--page-gutter);
     overflow-y: auto;
     background:
       radial-gradient(
