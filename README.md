@@ -4,6 +4,10 @@ ArtStudio is a React portfolio project for discovering artworks, browsing artist
 
 This project is built as a frontend-only demo. It uses local mock data and public JSON data so the app can feel realistic without requiring a backend.
 
+## Live Demo
+
+https://art-studio-tau.vercel.app
+
 ## Main Features
 
 - Home page with hero content, featured sections, curated artworks, artist spotlight, and newsletter signup.
