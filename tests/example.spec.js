@@ -1,3 +1,4 @@
+import { Buffer } from "node:buffer";
 import { test, expect } from "@playwright/test";
 
 const pageChecks = [
@@ -620,6 +621,89 @@ test("auth demo forms show validation messages", async ({ page }) => {
   await page.getByRole("button", { name: "Sign Up" }).click();
 
   await expect(page.getByRole("alert")).toHaveText("Passwords do not match.");
+});
+
+test("dashboard upload art form validates and creates a local draft", async ({
+  page,
+}) => {
+  await page.goto("/dashboard");
+
+  const uploadSection = page.locator("section", {
+    has: page.getByRole("heading", { name: "Upload Art" }),
+  });
+
+  await uploadSection.getByRole("button", { name: "Upload" }).click();
+
+  await expect(
+    uploadSection.getByText("Please choose an image for your artwork."),
+  ).toBeVisible();
+  await expect(
+    uploadSection.getByText("Please enter an artwork title."),
+  ).toBeVisible();
+  await expect(
+    uploadSection.getByText("Please enter the artwork medium."),
+  ).toBeVisible();
+  await expect(
+    uploadSection.getByText("Please enter the artwork price."),
+  ).toBeVisible();
+
+  await uploadSection.getByLabel("Title").fill("Playwright Draft");
+  await uploadSection.getByLabel("Medium").fill("Oil on panel");
+  await uploadSection.getByLabel("Price").fill("0");
+  await uploadSection.getByRole("button", { name: "Upload" }).click();
+
+  await expect(
+    uploadSection.getByText("Please enter a price greater than 0."),
+  ).toBeVisible();
+
+  await uploadSection.getByLabel("Price").fill("250");
+  await uploadSection.getByLabel("Choose an artwork image").setInputFiles({
+    name: "playwright-draft.png",
+    mimeType: "image/png",
+    buffer: Buffer.from(
+      "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/p9sAAAAASUVORK5CYII=",
+      "base64",
+    ),
+  });
+  await uploadSection.getByRole("button", { name: "Upload" }).click();
+
+  await expect(
+    uploadSection.getByText("Playwright Draft was added as a local draft."),
+  ).toBeVisible();
+  await expect(page.getByText("Playwright Draft").last()).toBeVisible();
+  await expect(page.getByText("$250")).toBeVisible();
+});
+
+test("dashboard profile management form validates and saves locally", async ({
+  page,
+}) => {
+  await page.goto("/dashboard");
+
+  const profileSection = page.locator("section", {
+    has: page.getByRole("heading", { name: "Profile Management" }),
+  });
+
+  await profileSection.getByLabel("Bio").fill("");
+  await profileSection.getByRole("button", { name: "Save Profile" }).click();
+
+  await expect(
+    profileSection.getByText("Please enter a short bio."),
+  ).toBeVisible();
+
+  await profileSection
+    .getByLabel("Bio")
+    .fill("Testing a local profile update.");
+  await profileSection.getByPlaceholder("Website").fill("not a website");
+  await profileSection.getByRole("button", { name: "Save Profile" }).click();
+
+  await expect(
+    profileSection.getByText("Please enter a valid website."),
+  ).toBeVisible();
+
+  await profileSection.getByPlaceholder("Website").fill("artist.example.com");
+  await profileSection.getByRole("button", { name: "Save Profile" }).click();
+
+  await expect(profileSection.getByText("Profile updated locally.")).toBeVisible();
 });
 
 test("challenge submission modal validates and adds a local submission", async ({

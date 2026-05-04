@@ -148,6 +148,17 @@
     min-height: auto;
   }
 
+  .mainContent,
+  .brandBlock {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .form {
+    width: 100%;
+    text-align: left;
+  }
+
   .successText {
     text-align: center;
   }

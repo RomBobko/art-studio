@@ -80,10 +80,14 @@
 
   .title {
     max-width: 100%;
+    margin-inline: auto;
+    text-align: center;
   }
 
   .description {
     max-width: 34ch;
+    margin-inline: auto;
+    text-align: center;
   }
 }
 
