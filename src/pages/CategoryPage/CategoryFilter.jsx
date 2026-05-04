@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import styles from "./CategoryFilter.module.css";
 
 const formatPrice = (value) => `$${value.toLocaleString()}`;
@@ -71,6 +72,29 @@ const CategoryFilter = ({
       </button>
     </aside>
   );
+};
+
+const filterOptionShape = PropTypes.shape({
+  value: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+});
+
+const filterGroupShape = PropTypes.shape({
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  options: PropTypes.arrayOf(filterOptionShape).isRequired,
+});
+
+CategoryFilter.propTypes = {
+  groups: PropTypes.arrayOf(filterGroupShape).isRequired,
+  selectedFilters: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.string))
+    .isRequired,
+  onFilterChange: PropTypes.func.isRequired,
+  minPrice: PropTypes.number.isRequired,
+  maxPrice: PropTypes.number.isRequired,
+  selectedMaxPrice: PropTypes.number.isRequired,
+  onPriceChange: PropTypes.func.isRequired,
+  onClearAll: PropTypes.func.isRequired,
 };
 
 export default CategoryFilter;

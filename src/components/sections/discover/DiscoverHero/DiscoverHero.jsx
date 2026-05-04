@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { BsSearch } from "react-icons/bs";
 import styles from "./DiscoverHero.module.css";
 
@@ -37,6 +38,11 @@ const DiscoverHero = ({ searchQuery, onSearchChange }) => {
       </div>
     </section>
   );
+};
+
+DiscoverHero.propTypes = {
+  searchQuery: PropTypes.string.isRequired,
+  onSearchChange: PropTypes.func.isRequired,
 };
 
 export default DiscoverHero;

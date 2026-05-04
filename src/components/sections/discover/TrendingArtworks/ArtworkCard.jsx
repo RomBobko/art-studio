@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import styles from "./ArtworkCard.module.css";
 import { Link } from "react-router-dom";
 
@@ -23,6 +24,15 @@ const ArtworkCard = ({ title, slug, price, medium, artistName, image }) => {
       </div>
     </article>
   );
+};
+
+ArtworkCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  medium: PropTypes.string.isRequired,
+  artistName: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
 };
 
 export default ArtworkCard;

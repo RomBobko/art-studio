@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { HiOutlineArrowRight } from "react-icons/hi2";
 import artists from "../../../../data/artists";
 import styles from "./PastChallengesSection.module.css";
@@ -79,6 +80,21 @@ const PastChallengesSection = ({ challenges }) => {
       </div>
     </section>
   );
+};
+
+const pastChallengeShape = PropTypes.shape({
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  title: PropTypes.string.isRequired,
+  theme: PropTypes.string.isRequired,
+  coverImage: PropTypes.string.isRequired,
+  deadline: PropTypes.string.isRequired,
+  status: PropTypes.oneOf(["active", "closed"]).isRequired,
+  winnerArtistId: PropTypes.number,
+  winningArtworkTitle: PropTypes.string,
+});
+
+PastChallengesSection.propTypes = {
+  challenges: PropTypes.arrayOf(pastChallengeShape).isRequired,
 };
 
 export default PastChallengesSection;

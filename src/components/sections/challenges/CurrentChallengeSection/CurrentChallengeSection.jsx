@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import styles from "./CurrentChallengeSection.module.css";
 
 const parseDateString = (value) => {
@@ -107,6 +108,18 @@ const CurrentChallengeSection = ({
       </div>
     </section>
   );
+};
+
+CurrentChallengeSection.propTypes = {
+  title: PropTypes.string.isRequired,
+  theme: PropTypes.string.isRequired,
+  brief: PropTypes.string.isRequired,
+  deadline: PropTypes.string.isRequired,
+  status: PropTypes.oneOf(["active", "closed"]).isRequired,
+  allowedMedia: PropTypes.string.isRequired,
+  prize: PropTypes.string.isRequired,
+  coverImage: PropTypes.string.isRequired,
+  onParticipate: PropTypes.func.isRequired,
 };
 
 export default CurrentChallengeSection;

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useEffect, useRef } from "react";
 import { useFormik } from "formik";
 import { HiOutlineXMark } from "react-icons/hi2";
@@ -337,6 +338,13 @@ const ChallengeSubmissionForm = ({
       </div>
     </div>
   );
+};
+
+ChallengeSubmissionForm.propTypes = {
+  previewImage: PropTypes.string.isRequired,
+  onPreviewChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default ChallengeSubmissionForm;

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import styles from "./LearnHero.module.css";
 
 const LearnHero = ({ categories, selectedCategory, onSelectCategory }) => {
@@ -35,6 +36,12 @@ const LearnHero = ({ categories, selectedCategory, onSelectCategory }) => {
       </div>
     </section>
   );
+};
+
+LearnHero.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selectedCategory: PropTypes.string.isRequired,
+  onSelectCategory: PropTypes.func.isRequired,
 };
 
 export default LearnHero;

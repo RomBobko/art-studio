@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import TutorialCard from "../TutorialCard/TutorialCard";
 import styles from "./TutorialsSection.module.css";
@@ -65,6 +66,24 @@ const TutorialsSection = ({
       </div>
     </section>
   );
+};
+
+const tutorialShape = PropTypes.shape({
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  level: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  authorName: PropTypes.string.isRequired,
+  authorAvatar: PropTypes.string.isRequired,
+  duration: PropTypes.string.isRequired,
+  lessonsCount: PropTypes.number.isRequired,
+});
+
+TutorialsSection.propTypes = {
+  tutorials: PropTypes.arrayOf(tutorialShape).isRequired,
+  initialVisibleCount: PropTypes.number,
 };
 
 export default TutorialsSection;

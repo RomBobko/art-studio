@@ -1,13 +1,47 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LearnHero from "../components/sections/learn/LearnHero/LearnHero";
 import TutorialsSection from "../components/sections/learn/TutorialsSection/TutorialsSection";
 import FeaturedTutorialsSection from "../components/sections/learn/FeaturedTutorialsSection/FeaturedTutorialsSection";
-import tutorials from "../data/tutorials";
 import artists from "../data/artists";
 import categories from "../data/categories";
+import tutorialImageMap from "../data/tutorialImageMap";
+import { getTutorials } from "../services/tutorialService";
 
 const LearnPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [tutorials, setTutorials] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    let shouldUpdateState = true;
+
+    const loadTutorials = async () => {
+      try {
+        const loadedTutorials = await getTutorials();
+
+        if (shouldUpdateState) {
+          setTutorials(loadedTutorials);
+          setErrorMessage("");
+        }
+      } catch (error) {
+        if (shouldUpdateState) {
+          setErrorMessage(error.message || "Unable to load tutorials.");
+        }
+      } finally {
+        if (shouldUpdateState) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    loadTutorials();
+
+    return () => {
+      shouldUpdateState = false;
+    };
+  }, []);
+
   const artistsById = Object.fromEntries(
     artists.map((artist) => [artist.id, artist]),
   );
@@ -16,6 +50,7 @@ const LearnPage = () => {
   );
   const tutorialsWithDetails = tutorials.map((tutorial) => ({
     ...tutorial,
+    image: tutorialImageMap[tutorial.imageKey] || "",
     category: categoriesById[tutorial.categoryId]?.name || "Uncategorized",
     authorName: artistsById[tutorial.authorId]?.name || "Unknown artist",
     authorAvatar: artistsById[tutorial.authorId]?.avatar,
@@ -49,17 +84,34 @@ const LearnPage = () => {
         selectedCategory={selectedCategory}
         onSelectCategory={setSelectedCategory}
       />
-      <TutorialsSection
-        key={`tutorials-${selectedCategory}`}
-        tutorials={visibleTutorials}
-        initialVisibleCount={4}
-      />
-      {featuredTutorials.length > 0 && (
-        <FeaturedTutorialsSection
-          key={`featured-tutorials-${selectedCategory}`}
-          tutorials={featuredTutorials}
-          initialVisibleCount={3}
-        />
+
+      {isLoading ? (
+        <section className="section" aria-live="polite">
+          <div className="container">
+            <p>Loading tutorials...</p>
+          </div>
+        </section>
+      ) : errorMessage ? (
+        <section className="section" aria-live="polite">
+          <div className="container">
+            <p role="alert">{errorMessage}</p>
+          </div>
+        </section>
+      ) : (
+        <>
+          <TutorialsSection
+            key={`tutorials-${selectedCategory}`}
+            tutorials={visibleTutorials}
+            initialVisibleCount={4}
+          />
+          {featuredTutorials.length > 0 && (
+            <FeaturedTutorialsSection
+              key={`featured-tutorials-${selectedCategory}`}
+              tutorials={featuredTutorials}
+              initialVisibleCount={3}
+            />
+          )}
+        </>
       )}
     </>
   );

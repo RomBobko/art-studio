@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styles from "./FeaturedArtistCard.module.css";
 
@@ -16,6 +17,12 @@ const FeaturedArtistCard = ({ avatar, name, slug }) => {
       </div>
     </article>
   );
+};
+
+FeaturedArtistCard.propTypes = {
+  avatar: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
 };
 
 export default FeaturedArtistCard;

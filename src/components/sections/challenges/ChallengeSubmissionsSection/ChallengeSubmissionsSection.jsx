@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import styles from "./ChallengeSubmissionsSection.module.css";
 
 const parseDateString = (value) => {
@@ -68,6 +69,20 @@ const ChallengeSubmissionsSection = ({ submissions }) => {
       </div>
     </section>
   );
+};
+
+const challengeSubmissionShape = PropTypes.shape({
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  image: PropTypes.string.isRequired,
+  artworkTitle: PropTypes.string.isRequired,
+  artistName: PropTypes.string.isRequired,
+  medium: PropTypes.string.isRequired,
+  submittedAt: PropTypes.string.isRequired,
+  note: PropTypes.string,
+});
+
+ChallengeSubmissionsSection.propTypes = {
+  submissions: PropTypes.arrayOf(challengeSubmissionShape).isRequired,
 };
 
 export default ChallengeSubmissionsSection;

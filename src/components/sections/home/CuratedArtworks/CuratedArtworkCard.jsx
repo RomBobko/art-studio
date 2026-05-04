@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styles from "./CuratedArtworkCard.module.css";
 
@@ -19,6 +20,14 @@ const CuratedArtworkCard = ({ slug, image, title, artistName, artistSlug }) => {
       </Link>
     </article>
   );
+};
+
+CuratedArtworkCard.propTypes = {
+  slug: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  artistName: PropTypes.string.isRequired,
+  artistSlug: PropTypes.string.isRequired,
 };
 
 export default CuratedArtworkCard;

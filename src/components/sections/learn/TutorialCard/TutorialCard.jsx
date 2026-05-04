@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { BsPlayFill } from "react-icons/bs";
 import styles from "./TutorialCard.module.css";
 
@@ -47,6 +48,18 @@ const TutorialCard = ({
       </div>
     </article>
   );
+};
+
+TutorialCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  level: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  authorName: PropTypes.string.isRequired,
+  authorAvatar: PropTypes.string.isRequired,
+  duration: PropTypes.string.isRequired,
+  lessonsCount: PropTypes.number.isRequired,
 };
 
 export default TutorialCard;
