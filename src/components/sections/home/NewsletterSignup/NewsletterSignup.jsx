@@ -4,9 +4,8 @@ import styles from "./NewsletterSignup.module.css";
 
 const NewsletterSignup = () => {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState("idle"); // idle | submitting | success
+  const [status, setStatus] = useState("idle");
   const validationToastId = "newsletter-validation-error";
-  const submitToastId = "newsletter-submit-error";
 
   const validateEmail = (value) => {
     const trimmedValue = value.trim();
@@ -45,16 +44,8 @@ const NewsletterSignup = () => {
       return;
     }
 
-    try {
-      setStatus("submitting");
-      setStatus("success");
-      setEmail("");
-    } catch {
-      setStatus("idle");
-      toast.error("Something went wrong. Please try again.", {
-        toastId: submitToastId,
-      });
-    }
+    setStatus("success");
+    setEmail("");
   };
 
   return (
@@ -71,7 +62,6 @@ const NewsletterSignup = () => {
             className={styles.form}
             onSubmit={handleSubmit}
             noValidate
-            aria-busy={status === "submitting"}
           >
             <input
               className={styles.input}
@@ -87,9 +77,9 @@ const NewsletterSignup = () => {
             <button
               className={styles.button}
               type="submit"
-              disabled={!email.trim() || status === "submitting"}
+              disabled={!email.trim()}
             >
-              {status === "submitting" ? "Submitting..." : "Subscribe"}
+              Subscribe
             </button>
           </form>
 
