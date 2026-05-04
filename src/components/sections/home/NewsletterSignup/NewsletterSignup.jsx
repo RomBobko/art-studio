@@ -47,8 +47,6 @@ const NewsletterSignup = () => {
 
     try {
       setStatus("submitting");
-      console.log("Submitted email:", trimmedEmail);
-
       setStatus("success");
       setEmail("");
     } catch {

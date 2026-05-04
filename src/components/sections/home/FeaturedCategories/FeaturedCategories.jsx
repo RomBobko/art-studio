@@ -1,8 +1,8 @@
 import styles from "./Featured.module.css";
-import featuredCategories from "../../../../data/FeaturedCategories.js"
-import FeaturedCard from "./FeaturedCard.jsx";
+import featuredCategories from "../../../../data/FeaturedCategories";
+import FeaturedCard from "./FeaturedCard";
 
-const Featured = () => {
+const FeaturedCategories = () => {
   return (
     <section className={styles.section}>
       <div className="container">
@@ -24,4 +24,4 @@ const Featured = () => {
   );
 };
 
-export default Featured;
+export default FeaturedCategories;
