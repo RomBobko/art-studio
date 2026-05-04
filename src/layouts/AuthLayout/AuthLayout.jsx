@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import styles from "./AuthLayout.module.css";
 
 const AuthLayout = ({ headingId, title, description, children }) => {
@@ -17,6 +18,13 @@ const AuthLayout = ({ headingId, title, description, children }) => {
       </section>
     </div>
   );
+};
+
+AuthLayout.propTypes = {
+  headingId: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default AuthLayout;

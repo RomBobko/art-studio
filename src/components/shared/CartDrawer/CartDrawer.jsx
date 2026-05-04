@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import { HiOutlineXMark } from "react-icons/hi2";
 import styles from "./CartDrawer.module.css";
 import { useCart } from "../../../context/CartContext";
@@ -266,6 +267,10 @@ const CartDrawer = ({ onClose }) => {
       </aside>
     </div>
   );
+};
+
+CartDrawer.propTypes = {
+  onClose: PropTypes.func.isRequired,
 };
 
 export default CartDrawer;

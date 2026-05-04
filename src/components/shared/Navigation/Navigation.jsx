@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
 import styles from "./Navigation.module.css";
 import { primarySiteLinks } from "../../../data/siteLinks";
 
@@ -31,6 +32,12 @@ const Navigation = ({ variant = "desktop", className = "", onLinkClick }) => {
       </ul>
     </nav>
   );
+};
+
+Navigation.propTypes = {
+  variant: PropTypes.oneOf(["desktop", "mobile"]),
+  className: PropTypes.string,
+  onLinkClick: PropTypes.func,
 };
 
 export default Navigation;

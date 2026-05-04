@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import styles from "./Header.module.css";
 import {
   BsList,
@@ -144,6 +145,12 @@ const Header = ({ theme, onThemeToggle, onCartOpen }) => {
       </div>
     </header>
   );
+};
+
+Header.propTypes = {
+  theme: PropTypes.oneOf(["light", "dark"]).isRequired,
+  onThemeToggle: PropTypes.func.isRequired,
+  onCartOpen: PropTypes.func.isRequired,
 };
 
 export default Header;

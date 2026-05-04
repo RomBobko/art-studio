@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import { Outlet } from "react-router-dom";
+import PropTypes from "prop-types";
 import Header from "../components/shared/Header";
 import CartDrawer from "../components/shared/CartDrawer/CartDrawer";
 import Footer from "../components/shared/Footer";
@@ -35,6 +36,11 @@ const MainLayout = ({ theme, onThemeToggle }) => {
       </div>
     </CartProvider>
   );
+};
+
+MainLayout.propTypes = {
+  theme: PropTypes.oneOf(["light", "dark"]).isRequired,
+  onThemeToggle: PropTypes.func.isRequired,
 };
 
 export default MainLayout;

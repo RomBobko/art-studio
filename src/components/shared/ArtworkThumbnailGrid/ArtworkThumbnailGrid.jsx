@@ -1,5 +1,13 @@
 import styles from "./ArtworkThumbnailGrid.module.css";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+
+const artworkThumbnailShape = PropTypes.shape({
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  slug: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+});
 
 const ArtworkThumbnailGrid = ({
   title,
@@ -44,6 +52,15 @@ const ArtworkThumbnailGrid = ({
       </div>
     </section>
   );
+};
+
+ArtworkThumbnailGrid.propTypes = {
+  title: PropTypes.node.isRequired,
+  titleId: PropTypes.string.isRequired,
+  artworks: PropTypes.arrayOf(artworkThumbnailShape).isRequired,
+  headerAction: PropTypes.node,
+  footerAction: PropTypes.node,
+  emptyMessage: PropTypes.string,
 };
 
 export default ArtworkThumbnailGrid;
