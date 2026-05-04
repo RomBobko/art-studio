@@ -111,13 +111,34 @@
 }
 
 @media (max-width: 720px) {
+  .footer {
+    text-align: center;
+  }
+
   .top {
     grid-template-columns: minmax(0, 1fr);
     gap: 32px;
+    justify-items: center;
+  }
+
+  .brandCol,
+  .col {
+    display: grid;
+    justify-items: center;
+  }
+
+  .brand {
+    justify-content: center;
+  }
+
+  .desc {
+    max-width: 34ch;
+    margin-inline: auto;
   }
 
   .contact a,
   .list a {
+    justify-content: center;
     min-height: 40px;
   }
 

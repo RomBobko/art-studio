@@ -212,7 +212,7 @@
   line-height: var(--lh-160);
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1080px) {
   .section {
     padding-top: var(--space-64);
     padding-bottom: var(--space-32);
@@ -229,12 +229,29 @@
     max-width: none;
   }
 
+  .actions {
+    align-items: flex-start;
+  }
+
+  .actionNote {
+    max-width: 40ch;
+  }
+
+  .metaGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .metaCard:last-child {
+    grid-column: 1 / -1;
+  }
+
   .visual {
-    justify-items: stretch;
+    justify-items: center;
   }
 
   .visualFrame {
     width: 100%;
+    max-width: 620px;
   }
 
   .overlayCard {
@@ -266,6 +283,10 @@
 
   .metaGrid {
     grid-template-columns: 1fr;
+  }
+
+  .metaCard:last-child {
+    grid-column: auto;
   }
 
   .card {

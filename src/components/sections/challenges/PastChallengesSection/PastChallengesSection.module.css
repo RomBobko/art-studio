@@ -35,6 +35,8 @@
   display: grid;
   gap: var(--space-20);
   max-width: 1360px;
+  width: 100%;
+  margin-inline: auto;
 }
 
 .item {
@@ -198,6 +200,16 @@
     padding-bottom: var(--space-56);
   }
 
+  .sectionInner,
+  .sectionHeader {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .list {
+    max-width: 420px;
+  }
+
   .sectionTitle {
     font-size: clamp(34px, 10vw, 46px);
   }
@@ -213,9 +225,18 @@
     border-radius: 24px;
   }
 
+  .content {
+    justify-items: center;
+  }
+
+  .contentMeta {
+    justify-content: center;
+  }
+
   .thumbnailWrap {
     width: 100%;
     max-width: 180px;
+    margin-inline: auto;
   }
 
   .theme {
