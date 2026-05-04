@@ -1,18 +1,70 @@
 import { useEffect, useRef } from "react";
+import { useFormik } from "formik";
 import { HiOutlineXMark } from "react-icons/hi2";
+import * as Yup from "yup";
 import styles from "./ChallengeSubmissionForm.module.css";
 
+const INITIAL_FORM_VALUES = {
+  artworkTitle: "",
+  artistName: "",
+  medium: "",
+  note: "",
+  imageFileName: "",
+};
+
+const challengeSubmissionSchema = Yup.object({
+  artworkTitle: Yup.string()
+    .trim()
+    .required("Please enter your artwork title."),
+  artistName: Yup.string().trim().required("Please enter your name."),
+  medium: Yup.string()
+    .trim()
+    .required("Please enter the medium used for your artwork."),
+});
+
 const ChallengeSubmissionForm = ({
-  values,
-  errors,
   previewImage,
-  onChange,
-  onFileChange,
+  onPreviewChange,
   onSubmit,
   onClose,
 }) => {
   const modalRef = useRef(null);
   const closeButtonRef = useRef(null);
+  const formik = useFormik({
+    initialValues: INITIAL_FORM_VALUES,
+    validationSchema: challengeSubmissionSchema,
+    onSubmit: (values, formikHelpers) => {
+      onSubmit(values);
+      formikHelpers.resetForm();
+      formikHelpers.setSubmitting(false);
+    },
+  });
+
+  const getFieldError = (fieldName) =>
+    formik.touched[fieldName] && formik.errors[fieldName];
+
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files?.[0];
+
+    formik.setFieldValue(
+      "imageFileName",
+      selectedFile ? selectedFile.name : "",
+      false,
+    );
+
+    if (!selectedFile || !selectedFile.type.startsWith("image/")) {
+      onPreviewChange("");
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      onPreviewChange(typeof reader.result === "string" ? reader.result : "");
+    };
+
+    reader.readAsDataURL(selectedFile);
+  };
 
   useEffect(() => {
     const previousBodyOverflow = document.body.style.overflow;
@@ -112,8 +164,8 @@ const ChallengeSubmissionForm = ({
                       className={styles.previewImage}
                       src={previewImage}
                       alt={
-                        values.artworkTitle ||
-                        values.imageFileName ||
+                        formik.values.artworkTitle ||
+                        formik.values.imageFileName ||
                         "Selected artwork preview"
                       }
                     />
@@ -131,7 +183,7 @@ const ChallengeSubmissionForm = ({
               </div>
             </div>
 
-            <form className={styles.form} onSubmit={onSubmit} noValidate>
+            <form className={styles.form} onSubmit={formik.handleSubmit} noValidate>
               <div className={styles.grid}>
                 <div className={styles.field}>
                   <label className={styles.label} htmlFor="artwork-title">
@@ -139,26 +191,29 @@ const ChallengeSubmissionForm = ({
                   </label>
                   <input
                     className={`${styles.input} ${
-                      errors.artworkTitle ? styles.inputError : ""
+                      getFieldError("artworkTitle") ? styles.inputError : ""
                     }`}
                     id="artwork-title"
                     name="artworkTitle"
                     type="text"
                     placeholder="Enter your artwork title"
-                    value={values.artworkTitle}
-                    onChange={onChange}
-                    aria-invalid={Boolean(errors.artworkTitle)}
+                    value={formik.values.artworkTitle}
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    aria-invalid={Boolean(getFieldError("artworkTitle"))}
                     aria-describedby={
-                      errors.artworkTitle ? "artwork-title-error" : undefined
+                      getFieldError("artworkTitle")
+                        ? "artwork-title-error"
+                        : undefined
                     }
                   />
-                  {errors.artworkTitle && (
+                  {getFieldError("artworkTitle") && (
                     <p
                       className={styles.errorText}
                       id="artwork-title-error"
                       role="alert"
                     >
-                      {errors.artworkTitle}
+                      {getFieldError("artworkTitle")}
                     </p>
                   )}
                 </div>
@@ -169,26 +224,27 @@ const ChallengeSubmissionForm = ({
                   </label>
                   <input
                     className={`${styles.input} ${
-                      errors.artistName ? styles.inputError : ""
+                      getFieldError("artistName") ? styles.inputError : ""
                     }`}
                     id="artist-name"
                     name="artistName"
                     type="text"
                     placeholder="Enter your name"
-                    value={values.artistName}
-                    onChange={onChange}
-                    aria-invalid={Boolean(errors.artistName)}
+                    value={formik.values.artistName}
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    aria-invalid={Boolean(getFieldError("artistName"))}
                     aria-describedby={
-                      errors.artistName ? "artist-name-error" : undefined
+                      getFieldError("artistName") ? "artist-name-error" : undefined
                     }
                   />
-                  {errors.artistName && (
+                  {getFieldError("artistName") && (
                     <p
                       className={styles.errorText}
                       id="artist-name-error"
                       role="alert"
                     >
-                      {errors.artistName}
+                      {getFieldError("artistName")}
                     </p>
                   )}
                 </div>
@@ -200,24 +256,27 @@ const ChallengeSubmissionForm = ({
                 </label>
                 <input
                   className={`${styles.input} ${
-                    errors.medium ? styles.inputError : ""
+                    getFieldError("medium") ? styles.inputError : ""
                   }`}
                   id="artwork-medium"
                   name="medium"
                   type="text"
                   placeholder="Example: Acrylic on canvas"
-                  value={values.medium}
-                  onChange={onChange}
-                  aria-invalid={Boolean(errors.medium)}
-                  aria-describedby={errors.medium ? "artwork-medium-error" : undefined}
+                  value={formik.values.medium}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  aria-invalid={Boolean(getFieldError("medium"))}
+                  aria-describedby={
+                    getFieldError("medium") ? "artwork-medium-error" : undefined
+                  }
                 />
-                {errors.medium && (
+                {getFieldError("medium") && (
                   <p
                     className={styles.errorText}
                     id="artwork-medium-error"
                     role="alert"
                   >
-                    {errors.medium}
+                    {getFieldError("medium")}
                   </p>
                 )}
               </div>
@@ -232,8 +291,9 @@ const ChallengeSubmissionForm = ({
                   name="note"
                   placeholder="Tell a little about your artwork"
                   rows="5"
-                  value={values.note}
-                  onChange={onChange}
+                  value={formik.values.note}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
                 />
               </div>
 
@@ -244,8 +304,8 @@ const ChallengeSubmissionForm = ({
                     Select an image for your submission
                   </span>
                   <span className={styles.uploadText}>
-                    {values.imageFileName
-                      ? `Selected file: ${values.imageFileName}`
+                    {formik.values.imageFileName
+                      ? `Selected file: ${formik.values.imageFileName}`
                       : "PNG, JPG, or WEBP works well here."}
                   </span>
                   <input
@@ -254,7 +314,7 @@ const ChallengeSubmissionForm = ({
                     name="artworkFile"
                     type="file"
                     accept="image/png,image/jpeg,image/webp"
-                    onChange={onFileChange}
+                    onChange={handleFileChange}
                   />
                 </label>
               </div>

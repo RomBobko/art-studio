@@ -8,45 +8,15 @@ import PastChallengesSection from "../../components/sections/challenges/PastChal
 import { currentChallenge, pastChallenges } from "../../data/challenges";
 import initialChallengeSubmissions from "../../data/challengeSubmissions";
 
-const INITIAL_FORM_VALUES = {
-  artworkTitle: "",
-  artistName: "",
-  medium: "",
-  note: "",
-  imageFileName: "",
-};
-
-const validateFormValues = (values) => {
-  const errors = {};
-
-  if (!values.artworkTitle.trim()) {
-    errors.artworkTitle = "Please enter your artwork title.";
-  }
-
-  if (!values.artistName.trim()) {
-    errors.artistName = "Please enter your name.";
-  }
-
-  if (!values.medium.trim()) {
-    errors.medium = "Please enter the medium used for your artwork.";
-  }
-
-  return errors;
-};
-
 const ChallengesPage = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [submissions, setSubmissions] = useState(initialChallengeSubmissions);
-  const [formValues, setFormValues] = useState(INITIAL_FORM_VALUES);
-  const [formErrors, setFormErrors] = useState({});
   const [imagePreview, setImagePreview] = useState("");
   const currentChallengeSubmissions = submissions.filter(
     (submission) => submission.challengeId === currentChallenge.id,
   );
 
   const resetFormState = () => {
-    setFormValues(INITIAL_FORM_VALUES);
-    setFormErrors({});
     setImagePreview("");
   };
 
@@ -59,54 +29,7 @@ const ChallengesPage = () => {
     resetFormState();
   };
 
-  const handleFormChange = (event) => {
-    const { name, value } = event.target;
-
-    setFormValues((prevFormValues) => ({
-      ...prevFormValues,
-      [name]: value,
-    }));
-
-    if (formErrors[name]) {
-      setFormErrors((prevFormErrors) => ({
-        ...prevFormErrors,
-        [name]: "",
-      }));
-    }
-  };
-
-  const handleFileChange = (event) => {
-    const selectedFile = event.target.files?.[0];
-
-    setFormValues((prevFormValues) => ({
-      ...prevFormValues,
-      imageFileName: selectedFile ? selectedFile.name : "",
-    }));
-
-    if (!selectedFile || !selectedFile.type.startsWith("image/")) {
-      setImagePreview("");
-      return;
-    }
-
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      setImagePreview(typeof reader.result === "string" ? reader.result : "");
-    };
-
-    reader.readAsDataURL(selectedFile);
-  };
-
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
-
-    const nextErrors = validateFormValues(formValues);
-
-    if (Object.keys(nextErrors).length > 0) {
-      setFormErrors(nextErrors);
-      return;
-    }
-
+  const handleFormSubmit = (formValues) => {
     const trimmedArtworkTitle = formValues.artworkTitle.trim();
     const trimmedArtistName = formValues.artistName.trim();
     const trimmedMedium = formValues.medium.trim();
@@ -151,11 +74,8 @@ const ChallengesPage = () => {
       />
       {isFormOpen && (
         <ChallengeSubmissionForm
-          values={formValues}
-          errors={formErrors}
           previewImage={imagePreview}
-          onChange={handleFormChange}
-          onFileChange={handleFileChange}
+          onPreviewChange={setImagePreview}
           onSubmit={handleFormSubmit}
           onClose={handleCloseForm}
         />

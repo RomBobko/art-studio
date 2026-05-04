@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
+import { useFormik } from "formik";
 import { Link } from "react-router-dom";
+import * as Yup from "yup";
 import { BsImage } from "react-icons/bs";
 import styles from "./DashboardPage.module.css";
 import currentUser from "../../data/currentUser";
@@ -13,6 +15,37 @@ const INITIAL_UPLOAD_VALUES = {
   artworkFileName: "",
 };
 
+const uploadValidationSchema = Yup.object({
+  artworkTitle: Yup.string()
+    .trim()
+    .required("Please enter an artwork title."),
+  artworkMedium: Yup.string()
+    .trim()
+    .required("Please enter the artwork medium."),
+  artworkPrice: Yup.number()
+    .transform((value, originalValue) =>
+      originalValue === "" ? undefined : value,
+    )
+    .typeError("Please enter a price greater than 0.")
+    .required("Please enter the artwork price.")
+    .positive("Please enter a price greater than 0."),
+  artworkFileName: Yup.string().required(
+    "Please choose an image for your artwork.",
+  ),
+});
+
+const profileValidationSchema = Yup.object({
+  profileBio: Yup.string().trim().required("Please enter a short bio."),
+  profileWebsite: Yup.string()
+    .trim()
+    .test(
+      "valid-website",
+      "Please enter a valid website.",
+      (value) => !value || (!value.includes(" ") && value.includes(".")),
+    ),
+  profileInstagram: Yup.string(),
+});
+
 const formatPrice = (value) => `$${new Intl.NumberFormat("en-US").format(value)}`;
 
 const DashboardPage = () => {
@@ -24,17 +57,9 @@ const DashboardPage = () => {
   );
   const dashboardArtistName = dashboardArtist?.name || currentUser.displayName;
   const artworkFileInputRef = useRef(null);
-  const [uploadValues, setUploadValues] = useState(INITIAL_UPLOAD_VALUES);
-  const [uploadErrors, setUploadErrors] = useState({});
   const [uploadPreview, setUploadPreview] = useState("");
   const [uploadSuccessMessage, setUploadSuccessMessage] = useState("");
   const [draftArtworks, setDraftArtworks] = useState([]);
-  const [profileValues, setProfileValues] = useState(() => ({
-    profileBio: currentUser.bio || dashboardArtist?.bio || "",
-    profileWebsite: currentUser.website || "",
-    profileInstagram: currentUser.socialLinks?.instagram || "",
-  }));
-  const [profileErrors, setProfileErrors] = useState({});
   const [profileSuccessMessage, setProfileSuccessMessage] = useState("");
   const recentArtworks = [...dashboardArtworks]
     .sort(
@@ -53,170 +78,111 @@ const DashboardPage = () => {
     0,
   );
 
+  const uploadFormik = useFormik({
+    initialValues: INITIAL_UPLOAD_VALUES,
+    validationSchema: uploadValidationSchema,
+    onSubmit: (values, formikHelpers) => {
+      const trimmedTitle = values.artworkTitle.trim();
+      const trimmedMedium = values.artworkMedium.trim();
+      const draftPrice = Number(values.artworkPrice);
+
+      const newDraftArtwork = {
+        id: `draft-${Date.now()}`,
+        title: trimmedTitle,
+        medium: trimmedMedium,
+        price: draftPrice,
+        image: uploadPreview,
+      };
+
+      setDraftArtworks((prevDraftArtworks) => [
+        newDraftArtwork,
+        ...prevDraftArtworks,
+      ]);
+      setUploadPreview("");
+      setUploadSuccessMessage(`${trimmedTitle} was added as a local draft.`);
+      formikHelpers.resetForm();
+      formikHelpers.setSubmitting(false);
+
+      if (artworkFileInputRef.current) {
+        artworkFileInputRef.current.value = "";
+      }
+    },
+  });
+
+  const getUploadFieldError = (fieldName) =>
+    uploadFormik.touched[fieldName] && uploadFormik.errors[fieldName];
+
   const handleUploadChange = (event) => {
-    const { name, value } = event.target;
-
-    setUploadValues((prevUploadValues) => ({
-      ...prevUploadValues,
-      [name]: value,
-    }));
-
     setUploadSuccessMessage("");
-
-    if (uploadErrors[name]) {
-      setUploadErrors((prevUploadErrors) => ({
-        ...prevUploadErrors,
-        [name]: "",
-      }));
-    }
+    uploadFormik.handleChange(event);
   };
 
   const handleArtworkImageChange = (event) => {
     const selectedFile = event.target.files?.[0];
 
     setUploadSuccessMessage("");
+    uploadFormik.setFieldTouched("artworkFileName", true, false);
 
     if (!selectedFile) {
-      setUploadValues((prevUploadValues) => ({
-        ...prevUploadValues,
-        artworkFileName: "",
-      }));
+      uploadFormik.setFieldValue("artworkFileName", "", true);
       setUploadPreview("");
       return;
     }
 
     if (!selectedFile.type.startsWith("image/")) {
-      setUploadValues((prevUploadValues) => ({
-        ...prevUploadValues,
-        artworkFileName: "",
-      }));
+      uploadFormik.setFieldValue("artworkFileName", "", false);
+      uploadFormik.setFieldError(
+        "artworkFileName",
+        "Please choose a valid image file.",
+      );
       setUploadPreview("");
       if (artworkFileInputRef.current) {
         artworkFileInputRef.current.value = "";
       }
-      setUploadErrors((prevUploadErrors) => ({
-        ...prevUploadErrors,
-        artworkImage: "Please choose a valid image file.",
-      }));
       return;
     }
-
-    setUploadValues((prevUploadValues) => ({
-      ...prevUploadValues,
-      artworkFileName: selectedFile.name,
-    }));
-
-    setUploadErrors((prevUploadErrors) => ({
-      ...prevUploadErrors,
-      artworkImage: "",
-    }));
 
     const reader = new FileReader();
 
     reader.onload = () => {
-      setUploadPreview(typeof reader.result === "string" ? reader.result : "");
+      if (typeof reader.result === "string") {
+        setUploadPreview(reader.result);
+        uploadFormik.setFieldValue("artworkFileName", selectedFile.name, true);
+      }
     };
 
     reader.readAsDataURL(selectedFile);
   };
 
   const handleUploadSubmit = (event) => {
-    event.preventDefault();
-
-    const nextErrors = {};
-    const trimmedTitle = uploadValues.artworkTitle.trim();
-    const trimmedMedium = uploadValues.artworkMedium.trim();
-    const trimmedPrice = uploadValues.artworkPrice.trim();
-    const draftPrice = Number(trimmedPrice);
-
-    if (!trimmedTitle) {
-      nextErrors.artworkTitle = "Please enter an artwork title.";
-    }
-
-    if (!trimmedMedium) {
-      nextErrors.artworkMedium = "Please enter the artwork medium.";
-    }
-
-    if (!trimmedPrice) {
-      nextErrors.artworkPrice = "Please enter the artwork price.";
-    } else if (Number.isNaN(draftPrice) || draftPrice <= 0) {
-      nextErrors.artworkPrice = "Please enter a price greater than 0.";
-    }
-
-    if (!uploadPreview) {
-      nextErrors.artworkImage = "Please choose an image for your artwork.";
-    }
-
-    if (Object.keys(nextErrors).length > 0) {
-      setUploadErrors(nextErrors);
-      setUploadSuccessMessage("");
-      return;
-    }
-
-    const newDraftArtwork = {
-      id: `draft-${Date.now()}`,
-      title: trimmedTitle,
-      medium: trimmedMedium,
-      price: draftPrice,
-      image: uploadPreview,
-    };
-
-    setDraftArtworks((prevDraftArtworks) => [
-      newDraftArtwork,
-      ...prevDraftArtworks,
-    ]);
-    setUploadValues(INITIAL_UPLOAD_VALUES);
-    setUploadErrors({});
-    setUploadPreview("");
-    setUploadSuccessMessage(`${trimmedTitle} was added as a local draft.`);
-    if (artworkFileInputRef.current) {
-      artworkFileInputRef.current.value = "";
-    }
+    setUploadSuccessMessage("");
+    uploadFormik.handleSubmit(event);
   };
 
+  const profileFormik = useFormik({
+    initialValues: {
+      profileBio: currentUser.bio || dashboardArtist?.bio || "",
+      profileWebsite: currentUser.website || "",
+      profileInstagram: currentUser.socialLinks?.instagram || "",
+    },
+    validationSchema: profileValidationSchema,
+    onSubmit: (values, formikHelpers) => {
+      setProfileSuccessMessage("Profile updated locally.");
+      formikHelpers.setSubmitting(false);
+    },
+  });
+
+  const getProfileFieldError = (fieldName) =>
+    profileFormik.touched[fieldName] && profileFormik.errors[fieldName];
+
   const handleProfileChange = (event) => {
-    const { name, value } = event.target;
-
-    setProfileValues((prevProfileValues) => ({
-      ...prevProfileValues,
-      [name]: value,
-    }));
-
     setProfileSuccessMessage("");
-
-    if (profileErrors[name]) {
-      setProfileErrors((prevProfileErrors) => ({
-        ...prevProfileErrors,
-        [name]: "",
-      }));
-    }
+    profileFormik.handleChange(event);
   };
 
   const handleProfileSubmit = (event) => {
-    event.preventDefault();
-
-    const nextErrors = {};
-    const trimmedWebsite = profileValues.profileWebsite.trim();
-
-    if (!profileValues.profileBio.trim()) {
-      nextErrors.profileBio = "Please enter a short bio.";
-    }
-
-    if (
-      trimmedWebsite &&
-      (trimmedWebsite.includes(" ") || !trimmedWebsite.includes("."))
-    ) {
-      nextErrors.profileWebsite = "Please enter a valid website.";
-    }
-
-    if (Object.keys(nextErrors).length > 0) {
-      setProfileErrors(nextErrors);
-      setProfileSuccessMessage("");
-      return;
-    }
-
-    setProfileErrors({});
-    setProfileSuccessMessage("Profile updated locally.");
+    setProfileSuccessMessage("");
+    profileFormik.handleSubmit(event);
   };
 
   return (
@@ -248,7 +214,11 @@ const DashboardPage = () => {
                   {draftArtworksCount === 1 ? "" : "s"} pending review.
                 </p>
 
-                <form className={styles.uploadForm} onSubmit={handleUploadSubmit}>
+                <form
+                  className={styles.uploadForm}
+                  onSubmit={handleUploadSubmit}
+                  noValidate
+                >
                   <label
                     className={styles.uploadPreview}
                     htmlFor="dashboard-art-image"
@@ -258,8 +228,8 @@ const DashboardPage = () => {
                         className={styles.uploadPreviewImage}
                         src={uploadPreview}
                         alt={
-                          uploadValues.artworkTitle ||
-                          uploadValues.artworkFileName ||
+                          uploadFormik.values.artworkTitle ||
+                          uploadFormik.values.artworkFileName ||
                           "Selected artwork preview"
                         }
                       />
@@ -283,14 +253,14 @@ const DashboardPage = () => {
                   />
 
                   <p className={styles.fileName}>
-                    {uploadValues.artworkFileName
-                      ? `Selected file: ${uploadValues.artworkFileName}`
+                    {uploadFormik.values.artworkFileName
+                      ? `Selected file: ${uploadFormik.values.artworkFileName}`
                       : "PNG, JPG, or WEBP"}
                   </p>
 
-                  {uploadErrors.artworkImage && (
+                  {getUploadFieldError("artworkFileName") && (
                     <p className={styles.errorText} role="alert">
-                      {uploadErrors.artworkImage}
+                      {getUploadFieldError("artworkFileName")}
                     </p>
                   )}
 
@@ -300,18 +270,21 @@ const DashboardPage = () => {
                     </label>
                     <input
                       className={`${styles.input} ${
-                        uploadErrors.artworkTitle ? styles.inputError : ""
+                        getUploadFieldError("artworkTitle")
+                          ? styles.inputError
+                          : ""
                       }`}
                       id="dashboard-art-title"
                       name="artworkTitle"
                       type="text"
                       placeholder="Artwork title"
-                      value={uploadValues.artworkTitle}
+                      value={uploadFormik.values.artworkTitle}
+                      onBlur={uploadFormik.handleBlur}
                       onChange={handleUploadChange}
                     />
-                    {uploadErrors.artworkTitle && (
+                    {getUploadFieldError("artworkTitle") && (
                       <p className={styles.errorText} role="alert">
-                        {uploadErrors.artworkTitle}
+                        {getUploadFieldError("artworkTitle")}
                       </p>
                     )}
                   </div>
@@ -325,18 +298,21 @@ const DashboardPage = () => {
                     </label>
                     <input
                       className={`${styles.input} ${
-                        uploadErrors.artworkMedium ? styles.inputError : ""
+                        getUploadFieldError("artworkMedium")
+                          ? styles.inputError
+                          : ""
                       }`}
                       id="dashboard-art-medium"
                       name="artworkMedium"
                       type="text"
                       placeholder="Example: Acrylic on canvas"
-                      value={uploadValues.artworkMedium}
+                      value={uploadFormik.values.artworkMedium}
+                      onBlur={uploadFormik.handleBlur}
                       onChange={handleUploadChange}
                     />
-                    {uploadErrors.artworkMedium && (
+                    {getUploadFieldError("artworkMedium") && (
                       <p className={styles.errorText} role="alert">
-                        {uploadErrors.artworkMedium}
+                        {getUploadFieldError("artworkMedium")}
                       </p>
                     )}
                   </div>
@@ -347,7 +323,9 @@ const DashboardPage = () => {
                     </label>
                     <input
                       className={`${styles.input} ${
-                        uploadErrors.artworkPrice ? styles.inputError : ""
+                        getUploadFieldError("artworkPrice")
+                          ? styles.inputError
+                          : ""
                       }`}
                       id="dashboard-art-price"
                       name="artworkPrice"
@@ -355,12 +333,13 @@ const DashboardPage = () => {
                       min="1"
                       step="1"
                       placeholder="Price in USD"
-                      value={uploadValues.artworkPrice}
+                      value={uploadFormik.values.artworkPrice}
+                      onBlur={uploadFormik.handleBlur}
                       onChange={handleUploadChange}
                     />
-                    {uploadErrors.artworkPrice && (
+                    {getUploadFieldError("artworkPrice") && (
                       <p className={styles.errorText} role="alert">
-                        {uploadErrors.artworkPrice}
+                        {getUploadFieldError("artworkPrice")}
                       </p>
                     )}
                   </div>
@@ -494,25 +473,32 @@ const DashboardPage = () => {
                   </div>
                 </div>
 
-                <form className={styles.profileForm} onSubmit={handleProfileSubmit}>
+                <form
+                  className={styles.profileForm}
+                  onSubmit={handleProfileSubmit}
+                  noValidate
+                >
                   <div className={styles.field}>
                     <label className={styles.label} htmlFor="dashboard-bio">
                       Bio
                     </label>
                     <input
                       className={`${styles.input} ${
-                        profileErrors.profileBio ? styles.inputError : ""
+                        getProfileFieldError("profileBio")
+                          ? styles.inputError
+                          : ""
                       }`}
                       id="dashboard-bio"
                       name="profileBio"
                       type="text"
                       placeholder="Write a short artist bio"
-                      value={profileValues.profileBio}
+                      value={profileFormik.values.profileBio}
+                      onBlur={profileFormik.handleBlur}
                       onChange={handleProfileChange}
                     />
-                    {profileErrors.profileBio && (
+                    {getProfileFieldError("profileBio") && (
                       <p className={styles.errorText} role="alert">
-                        {profileErrors.profileBio}
+                        {getProfileFieldError("profileBio")}
                       </p>
                     )}
                   </div>
@@ -525,13 +511,16 @@ const DashboardPage = () => {
                     <div className={styles.socialGrid}>
                       <input
                         className={`${styles.input} ${
-                          profileErrors.profileWebsite ? styles.inputError : ""
+                          getProfileFieldError("profileWebsite")
+                            ? styles.inputError
+                            : ""
                         }`}
                         id="dashboard-website"
                         name="profileWebsite"
                         type="text"
                         placeholder="Website"
-                        value={profileValues.profileWebsite}
+                        value={profileFormik.values.profileWebsite}
+                        onBlur={profileFormik.handleBlur}
                         onChange={handleProfileChange}
                       />
                       <input
@@ -540,14 +529,15 @@ const DashboardPage = () => {
                         name="profileInstagram"
                         type="text"
                         placeholder="Instagram"
-                        value={profileValues.profileInstagram}
+                        value={profileFormik.values.profileInstagram}
+                        onBlur={profileFormik.handleBlur}
                         onChange={handleProfileChange}
                       />
                     </div>
 
-                    {profileErrors.profileWebsite && (
+                    {getProfileFieldError("profileWebsite") && (
                       <p className={styles.errorText} role="alert">
-                        {profileErrors.profileWebsite}
+                        {getProfileFieldError("profileWebsite")}
                       </p>
                     )}
                   </div>
