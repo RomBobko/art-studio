@@ -11,7 +11,7 @@ const currentChallenge = {
   brief:
     "Create an artwork inspired by the feeling of early spring light using any medium you enjoy.",
   coverImage: blossomImage,
-  deadline: "2026-05-10",
+  deadline: "2026-06-21",
   status: "active",
   allowedMedia: "Open medium",
   prize: "Featured on the Challenges page",

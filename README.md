@@ -89,17 +89,17 @@ npm.cmd run test:e2e
 
 ## Demo-only Behavior
 
-This project does not include a backend, real accounts, real payments, or persisted server data.
+This project does not include a backend, real accounts, real payments, uploaded file storage, email delivery, or persisted server data.
 
 The following features are local/demo-only:
 
-- Login and sign-up forms validate locally and do not authenticate real users.
-- Checkout validates locally and does not process real payments.
+- Login and sign-up forms validate locally and do not create or authenticate real users.
+- Checkout and payment fields validate locally and do not process real payments or store card details.
 - Cart state is local to the running app session.
-- Dashboard uploads create local draft artworks only.
-- Dashboard profile updates are local only.
-- Artist follow/unfollow actions are local only.
-- Newsletter signup validates locally and does not send emails.
-- Challenge submissions are added locally and are not saved to a server.
+- Dashboard uploads create local draft artworks only; selected files are used for the current preview/session only.
+- Dashboard profile saves update local UI state only.
+- Artist follow/unfollow actions are local UI state only.
+- Newsletter signup validates locally and does not send emails or join a mailing list.
+- Challenge submissions are added locally for the current session and are not saved to a server.
 
 These choices are intentional for a first serious React portfolio project. The goal is to demonstrate frontend structure, routing, UI state, forms, validation, async loading, responsive styling, accessibility basics, and e2e testing.

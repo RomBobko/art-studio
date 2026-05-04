@@ -13,11 +13,19 @@ const FeaturedCategories = () => {
         </div>
 
         <ul className={styles.list}>
-          {featuredCategories.map(({ id, image, alt, title }) => (
-            <li className={styles.item} key={id}>
-              <FeaturedCard image={image} alt={alt} title={title} />
-            </li>
-          ))}
+          {featuredCategories.map(
+            ({ id, image, alt, title, to, linkLabel }) => (
+              <li className={styles.item} key={id}>
+                <FeaturedCard
+                  image={image}
+                  alt={alt}
+                  title={title}
+                  to={to}
+                  linkLabel={linkLabel}
+                />
+              </li>
+            ),
+          )}
         </ul>
       </div>
     </section>

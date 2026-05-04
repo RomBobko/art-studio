@@ -384,6 +384,65 @@ test("home page call-to-action links navigate to the right pages", async ({
   ).toBeVisible();
 });
 
+test("home featured category cards navigate to the right pages", async ({
+  page,
+}) => {
+  const cardLinks = [
+    {
+      name: "Learn a skill",
+      expectedUrl: /\/learn$/,
+      heading: "Learn & Create",
+    },
+    {
+      name: "Join a Challenge",
+      expectedUrl: /\/challenges$/,
+      heading: "Spring Light Study",
+    },
+    {
+      name: "Shop Artworks",
+      expectedUrl: /\/discover$/,
+      heading: "Explore & Discover",
+    },
+    {
+      name: "Meet Artists on Discover",
+      expectedUrl: /\/discover$/,
+      heading: "Explore & Discover",
+    },
+  ];
+
+  for (const { name, expectedUrl, heading } of cardLinks) {
+    await page.goto("/");
+
+    const featuredCategories = page.locator("section").filter({
+      has: page.getByRole("heading", { name: "Featured Categories" }),
+    });
+
+    await featuredCategories.getByRole("link", { name }).click();
+    await expect(page).toHaveURL(expectedUrl);
+    await expect(page.getByRole("heading", { name: heading })).toBeVisible();
+  }
+});
+
+test("unknown routes show the 404 page with a recovery link", async ({
+  page,
+}) => {
+  await page.goto("/not-a-real-page");
+
+  await expect(
+    page.getByRole("heading", { name: "Page not found" }),
+  ).toBeVisible();
+
+  const notFoundSection = page.locator("section").filter({
+    has: page.getByRole("heading", { name: "Page not found" }),
+  });
+
+  await notFoundSection.getByRole("link", { name: "Explore Art" }).click();
+  await expect(page).toHaveURL(/\/discover$/);
+  await expect(
+    page.getByRole("heading", { name: "Explore & Discover" }),
+  ).toBeVisible();
+});
+
 test("discover search and category links work", async ({ page }) => {
   await page.goto("/discover");
 
