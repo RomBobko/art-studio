@@ -50,6 +50,9 @@ const DashboardProfileForm = ({
     profileFormik.handleSubmit(event);
   };
 
+  const profileBioError = getProfileFieldError("profileBio");
+  const profileWebsiteError = getProfileFieldError("profileWebsite");
+
   return (
     <section className={styles.profileBlock}>
       <h2 className={styles.blockTitle}>Profile Management</h2>
@@ -89,7 +92,7 @@ const DashboardProfileForm = ({
           </label>
           <input
             className={`${styles.input} ${
-              getProfileFieldError("profileBio") ? styles.inputError : ""
+              profileBioError ? styles.inputError : ""
             }`}
             id="dashboard-bio"
             name="profileBio"
@@ -98,10 +101,18 @@ const DashboardProfileForm = ({
             value={profileFormik.values.profileBio}
             onBlur={profileFormik.handleBlur}
             onChange={handleProfileChange}
+            aria-invalid={Boolean(profileBioError)}
+            aria-describedby={
+              profileBioError ? "dashboard-bio-error" : undefined
+            }
           />
-          {getProfileFieldError("profileBio") && (
-            <p className={styles.errorText} role="alert">
-              {getProfileFieldError("profileBio")}
+          {profileBioError && (
+            <p
+              className={styles.errorText}
+              id="dashboard-bio-error"
+              role="alert"
+            >
+              {profileBioError}
             </p>
           )}
         </div>
@@ -114,9 +125,7 @@ const DashboardProfileForm = ({
           <div className={styles.socialGrid}>
             <input
               className={`${styles.input} ${
-                getProfileFieldError("profileWebsite")
-                  ? styles.inputError
-                  : ""
+                profileWebsiteError ? styles.inputError : ""
               }`}
               id="dashboard-website"
               name="profileWebsite"
@@ -125,6 +134,10 @@ const DashboardProfileForm = ({
               value={profileFormik.values.profileWebsite}
               onBlur={profileFormik.handleBlur}
               onChange={handleProfileChange}
+              aria-invalid={Boolean(profileWebsiteError)}
+              aria-describedby={
+                profileWebsiteError ? "dashboard-website-error" : undefined
+              }
             />
             <input
               className={styles.input}
@@ -135,12 +148,17 @@ const DashboardProfileForm = ({
               value={profileFormik.values.profileInstagram}
               onBlur={profileFormik.handleBlur}
               onChange={handleProfileChange}
+              aria-label="Instagram profile"
             />
           </div>
 
-          {getProfileFieldError("profileWebsite") && (
-            <p className={styles.errorText} role="alert">
-              {getProfileFieldError("profileWebsite")}
+          {profileWebsiteError && (
+            <p
+              className={styles.errorText}
+              id="dashboard-website-error"
+              role="alert"
+            >
+              {profileWebsiteError}
             </p>
           )}
         </div>
@@ -151,7 +169,9 @@ const DashboardProfileForm = ({
           </button>
 
           {profileSuccessMessage && (
-            <p className={styles.successText}>{profileSuccessMessage}</p>
+            <p className={styles.successText} role="status" aria-live="polite">
+              {profileSuccessMessage}
+            </p>
           )}
         </div>
       </form>

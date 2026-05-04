@@ -81,6 +81,11 @@
   box-shadow: 0 0 0 4px rgba(154, 122, 80, 0.14);
 }
 
+.input[aria-invalid="true"] {
+  border-radius: 14px;
+  box-shadow: 0 0 0 4px rgba(179, 64, 64, 0.18);
+}
+
 .button {
   flex-shrink: 0;
   width: 100%;
@@ -131,6 +136,16 @@
   line-height: 1.5;
 }
 
+.errorMessage {
+  margin: -40px 0 0;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background-color: rgba(255, 250, 242, 0.94);
+  color: #b34040;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
 @media (max-width: 900px) {
   .inner {
     gap: 40px;
@@ -144,6 +159,10 @@
 
   .button {
     max-width: none;
+  }
+
+  .errorMessage {
+    margin-top: -24px;
   }
 }
 

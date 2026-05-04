@@ -8,9 +8,11 @@ const ShippingFields = ({ values, getFieldError, handleBlur, handleChange }) => 
 
       <div className={styles.formGrid}>
         <div className={`${styles.field} ${styles.fieldFull}`}>
+          <label className={styles.fieldLabel} htmlFor="checkout-full-name">
+            Full name
+          </label>
           <input
             aria-invalid={Boolean(getFieldError("fullName"))}
-            aria-label="Full name"
             aria-describedby={
               getFieldError("fullName")
                 ? "checkout-full-name-error"
@@ -38,9 +40,11 @@ const ShippingFields = ({ values, getFieldError, handleBlur, handleChange }) => 
         </div>
 
         <div className={`${styles.field} ${styles.fieldFull}`}>
+          <label className={styles.fieldLabel} htmlFor="checkout-email">
+            Email address
+          </label>
           <input
             aria-invalid={Boolean(getFieldError("email"))}
-            aria-label="Email address"
             aria-describedby={
               getFieldError("email") ? "checkout-email-error" : undefined
             }
@@ -66,9 +70,11 @@ const ShippingFields = ({ values, getFieldError, handleBlur, handleChange }) => 
         </div>
 
         <div className={`${styles.field} ${styles.fieldFull}`}>
+          <label className={styles.fieldLabel} htmlFor="checkout-address">
+            Address
+          </label>
           <input
             aria-invalid={Boolean(getFieldError("address"))}
-            aria-label="Address"
             aria-describedby={
               getFieldError("address") ? "checkout-address-error" : undefined
             }
@@ -94,9 +100,11 @@ const ShippingFields = ({ values, getFieldError, handleBlur, handleChange }) => 
         </div>
 
         <div className={styles.field}>
+          <label className={styles.fieldLabel} htmlFor="checkout-city">
+            City
+          </label>
           <input
             aria-invalid={Boolean(getFieldError("city"))}
-            aria-label="City"
             aria-describedby={
               getFieldError("city") ? "checkout-city-error" : undefined
             }
@@ -122,9 +130,11 @@ const ShippingFields = ({ values, getFieldError, handleBlur, handleChange }) => 
         </div>
 
         <div className={styles.field}>
+          <label className={styles.fieldLabel} htmlFor="checkout-state">
+            State
+          </label>
           <select
             aria-invalid={Boolean(getFieldError("state"))}
-            aria-label="State"
             aria-describedby={
               getFieldError("state") ? "checkout-state-error" : undefined
             }
@@ -152,9 +162,11 @@ const ShippingFields = ({ values, getFieldError, handleBlur, handleChange }) => 
         </div>
 
         <div className={`${styles.field} ${styles.fieldFull}`}>
+          <label className={styles.fieldLabel} htmlFor="checkout-zip">
+            ZIP code
+          </label>
           <input
             aria-invalid={Boolean(getFieldError("zipCode"))}
-            aria-label="ZIP code"
             aria-describedby={
               getFieldError("zipCode") ? "checkout-zip-error" : undefined
             }

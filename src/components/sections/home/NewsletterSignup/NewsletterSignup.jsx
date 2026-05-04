@@ -4,6 +4,7 @@ import styles from "./NewsletterSignup.module.css";
 
 const NewsletterSignup = () => {
   const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [status, setStatus] = useState("idle");
   const validationToastId = "newsletter-validation-error";
 
@@ -25,6 +26,7 @@ const NewsletterSignup = () => {
 
   const handleChange = (evt) => {
     setEmail(evt.target.value);
+    setEmailError("");
 
     if (status === "success") {
       setStatus("idle");
@@ -38,6 +40,7 @@ const NewsletterSignup = () => {
     const validationError = validateEmail(trimmedEmail);
 
     if (validationError) {
+      setEmailError(validationError);
       toast.error(validationError, {
         toastId: validationToastId,
       });
@@ -45,6 +48,7 @@ const NewsletterSignup = () => {
     }
 
     setStatus("success");
+    setEmailError("");
     setEmail("");
   };
 
@@ -69,6 +73,10 @@ const NewsletterSignup = () => {
               name="email"
               placeholder="Email..."
               aria-label="Email address"
+              aria-invalid={Boolean(emailError)}
+              aria-describedby={
+                emailError ? "newsletter-email-error" : undefined
+              }
               autoComplete="email"
               value={email}
               onChange={handleChange}
@@ -82,6 +90,16 @@ const NewsletterSignup = () => {
               Subscribe
             </button>
           </form>
+
+          {emailError && (
+            <p
+              className={styles.errorMessage}
+              id="newsletter-email-error"
+              role="alert"
+            >
+              {emailError}
+            </p>
+          )}
 
           {status === "success" && (
             <p

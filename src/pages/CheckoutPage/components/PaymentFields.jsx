@@ -52,9 +52,11 @@ const PaymentFields = ({
       {isCardPayment ? (
         <div className={styles.formGrid}>
           <div className={`${styles.field} ${styles.fieldFull}`}>
+            <label className={styles.fieldLabel} htmlFor="checkout-card-number">
+              Card number
+            </label>
             <input
               aria-invalid={Boolean(getFieldError("cardNumber"))}
-              aria-label="Card number"
               aria-describedby={
                 getFieldError("cardNumber")
                   ? "checkout-card-number-error"
@@ -83,9 +85,11 @@ const PaymentFields = ({
           </div>
 
           <div className={styles.field}>
+            <label className={styles.fieldLabel} htmlFor="checkout-expiry">
+              Card expiry date
+            </label>
             <input
               aria-invalid={Boolean(getFieldError("expiry"))}
-              aria-label="Card expiry date"
               aria-describedby={
                 getFieldError("expiry") ? "checkout-expiry-error" : undefined
               }
@@ -111,9 +115,11 @@ const PaymentFields = ({
           </div>
 
           <div className={styles.field}>
+            <label className={styles.fieldLabel} htmlFor="checkout-cvc">
+              CVC
+            </label>
             <input
               aria-invalid={Boolean(getFieldError("cvc"))}
-              aria-label="CVC"
               aria-describedby={
                 getFieldError("cvc") ? "checkout-cvc-error" : undefined
               }

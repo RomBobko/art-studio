@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import styles from "./Header.module.css";
@@ -18,6 +18,8 @@ import { useCart } from "../../../context/CartContext";
 const Header = ({ theme, onThemeToggle, onCartOpen }) => {
   const { itemCount } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const headerInnerRef = useRef(null);
+  const menuButtonRef = useRef(null);
   const isDarkTheme = theme === "dark";
   const mobileMenuId = "mobile-navigation";
 
@@ -28,18 +30,48 @@ const Header = ({ theme, onThemeToggle, onCartOpen }) => {
     }
 
     document.body.classList.add("mobile-menu-open");
+    menuButtonRef.current?.focus();
 
-    const handleEscapeKey = (event) => {
+    const handleKeyDown = (event) => {
       if (event.key === "Escape") {
         setIsMenuOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab" || !headerInnerRef.current) {
+        return;
+      }
+
+      const focusableElements = [
+        ...headerInnerRef.current.querySelectorAll(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      ].filter((element) => element.getClientRects().length > 0);
+
+      if (focusableElements.length === 0) {
+        return;
+      }
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (!headerInnerRef.current.contains(document.activeElement)) {
+        event.preventDefault();
+        firstElement.focus();
+      } else if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
       }
     };
 
-    window.addEventListener("keydown", handleEscapeKey);
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
       document.body.classList.remove("mobile-menu-open");
-      window.removeEventListener("keydown", handleEscapeKey);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [isMenuOpen]);
 
@@ -53,7 +85,7 @@ const Header = ({ theme, onThemeToggle, onCartOpen }) => {
       className={`${styles.header} ${isMenuOpen ? styles.headerMenuOpen : ""}`}
     >
       <div className="container-main">
-        <div className={styles.inner}>
+        <div className={styles.inner} ref={headerInnerRef}>
           <div className={styles.logoArea}>
             <Logo onClick={() => setIsMenuOpen(false)} />
           </div>
@@ -67,6 +99,7 @@ const Header = ({ theme, onThemeToggle, onCartOpen }) => {
           >
             <button
               className={`${styles.iconBtn} ${styles.menuButton}`}
+              ref={menuButtonRef}
               type="button"
               aria-label={
                 isMenuOpen ? "Close navigation menu" : "Open navigation menu"

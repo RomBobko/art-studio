@@ -156,6 +156,13 @@
   gap: 7px;
 }
 
+.fieldLabel {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  font-weight: var(--fw-medium);
+  line-height: 1.4;
+}
+
 .fieldFull {
   grid-column: 1 / -1;
 }

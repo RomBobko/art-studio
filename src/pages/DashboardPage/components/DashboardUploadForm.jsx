@@ -118,6 +118,11 @@ const DashboardUploadForm = ({
     uploadFormik.handleSubmit(event);
   };
 
+  const artworkFileError = getUploadFieldError("artworkFileName");
+  const artworkTitleError = getUploadFieldError("artworkTitle");
+  const artworkMediumError = getUploadFieldError("artworkMedium");
+  const artworkPriceError = getUploadFieldError("artworkPrice");
+
   return (
     <section className={styles.uploadBlock}>
       <h2 className={styles.blockTitle}>Upload Art</h2>
@@ -157,17 +162,27 @@ const DashboardUploadForm = ({
           type="file"
           accept="image/png,image/jpeg,image/webp"
           onChange={handleArtworkImageChange}
+          aria-invalid={Boolean(artworkFileError)}
+          aria-describedby={
+            artworkFileError
+              ? "dashboard-art-image-help dashboard-art-image-error"
+              : "dashboard-art-image-help"
+          }
         />
 
-        <p className={styles.fileName}>
+        <p className={styles.fileName} id="dashboard-art-image-help">
           {uploadFormik.values.artworkFileName
             ? `Selected file: ${uploadFormik.values.artworkFileName}`
             : "PNG, JPG, or WEBP"}
         </p>
 
-        {getUploadFieldError("artworkFileName") && (
-          <p className={styles.errorText} role="alert">
-            {getUploadFieldError("artworkFileName")}
+        {artworkFileError && (
+          <p
+            className={styles.errorText}
+            id="dashboard-art-image-error"
+            role="alert"
+          >
+            {artworkFileError}
           </p>
         )}
 
@@ -177,7 +192,7 @@ const DashboardUploadForm = ({
           </label>
           <input
             className={`${styles.input} ${
-              getUploadFieldError("artworkTitle") ? styles.inputError : ""
+              artworkTitleError ? styles.inputError : ""
             }`}
             id="dashboard-art-title"
             name="artworkTitle"
@@ -186,10 +201,18 @@ const DashboardUploadForm = ({
             value={uploadFormik.values.artworkTitle}
             onBlur={uploadFormik.handleBlur}
             onChange={handleUploadChange}
+            aria-invalid={Boolean(artworkTitleError)}
+            aria-describedby={
+              artworkTitleError ? "dashboard-art-title-error" : undefined
+            }
           />
-          {getUploadFieldError("artworkTitle") && (
-            <p className={styles.errorText} role="alert">
-              {getUploadFieldError("artworkTitle")}
+          {artworkTitleError && (
+            <p
+              className={styles.errorText}
+              id="dashboard-art-title-error"
+              role="alert"
+            >
+              {artworkTitleError}
             </p>
           )}
         </div>
@@ -200,7 +223,7 @@ const DashboardUploadForm = ({
           </label>
           <input
             className={`${styles.input} ${
-              getUploadFieldError("artworkMedium") ? styles.inputError : ""
+              artworkMediumError ? styles.inputError : ""
             }`}
             id="dashboard-art-medium"
             name="artworkMedium"
@@ -209,10 +232,18 @@ const DashboardUploadForm = ({
             value={uploadFormik.values.artworkMedium}
             onBlur={uploadFormik.handleBlur}
             onChange={handleUploadChange}
+            aria-invalid={Boolean(artworkMediumError)}
+            aria-describedby={
+              artworkMediumError ? "dashboard-art-medium-error" : undefined
+            }
           />
-          {getUploadFieldError("artworkMedium") && (
-            <p className={styles.errorText} role="alert">
-              {getUploadFieldError("artworkMedium")}
+          {artworkMediumError && (
+            <p
+              className={styles.errorText}
+              id="dashboard-art-medium-error"
+              role="alert"
+            >
+              {artworkMediumError}
             </p>
           )}
         </div>
@@ -223,7 +254,7 @@ const DashboardUploadForm = ({
           </label>
           <input
             className={`${styles.input} ${
-              getUploadFieldError("artworkPrice") ? styles.inputError : ""
+              artworkPriceError ? styles.inputError : ""
             }`}
             id="dashboard-art-price"
             name="artworkPrice"
@@ -234,10 +265,18 @@ const DashboardUploadForm = ({
             value={uploadFormik.values.artworkPrice}
             onBlur={uploadFormik.handleBlur}
             onChange={handleUploadChange}
+            aria-invalid={Boolean(artworkPriceError)}
+            aria-describedby={
+              artworkPriceError ? "dashboard-art-price-error" : undefined
+            }
           />
-          {getUploadFieldError("artworkPrice") && (
-            <p className={styles.errorText} role="alert">
-              {getUploadFieldError("artworkPrice")}
+          {artworkPriceError && (
+            <p
+              className={styles.errorText}
+              id="dashboard-art-price-error"
+              role="alert"
+            >
+              {artworkPriceError}
             </p>
           )}
         </div>
@@ -247,7 +286,9 @@ const DashboardUploadForm = ({
         </button>
 
         {uploadSuccessMessage && (
-          <p className={styles.successText}>{uploadSuccessMessage}</p>
+          <p className={styles.successText} role="status" aria-live="polite">
+            {uploadSuccessMessage}
+          </p>
         )}
       </form>
     </section>
